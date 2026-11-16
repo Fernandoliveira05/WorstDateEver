@@ -1,0 +1,10 @@
+# Endereço de exemplo; troque :443 pelo IP da máquina quando necessário.
+# https://192.168.0.10
+:443 {
+	# Emite certificados HTTPS locais.
+	tls internal
+	# Define public/ como raiz do site.
+	root * public
+	# Serve os arquivos da raiz configurada.
+	file_server
+}
