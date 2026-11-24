@@ -1,0 +1,25 @@
+{
+  "name": "worst-date-ever-vr-bedroom",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "VR-first A-Frame bedroom vertical slice for Worst Date Ever",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.mjs",
+    "date:voice": "node server/start.mjs"
+  },
+  "dependencies": {
+    "aframe": "1.8.0",
+    "ajv": "^8.20.0",
+    "ws": "^8.23.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
