@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "events": [
+    {
+      "id": "water_spill",
+      "category": "major",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 3,
+      "cooldownSeconds": 45,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "help",
+          "label": "Ajudar o garçom",
+          "relationshipDelta": {
+            "interest": 2,
+            "awkwardness": -1
+          },
+          "contextSummary": "ajudou a limpar"
+        },
+        {
+          "id": "laugh",
+          "label": "Rir do acidente",
+          "relationshipDelta": {
+            "awkwardness": 2
+          },
+          "contextSummary": "riu do acidente"
+        },
+        {
+          "id": "ignore",
+          "label": "Fingir que não viu",
+          "relationshipDelta": {},
+          "contextSummary": "ignorou a situação"
+        }
+      ],
+      "summaryTemplate": "O garçom derrubou água perto da mesa, e o jogador {choice}."
+    },
+    {
+      "id": "wrong_order",
+      "category": "minor",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 2,
+      "cooldownSeconds": 20,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "clarify",
+          "label": "Avisar com educação",
+          "relationshipDelta": {
+            "interest": 1
+          },
+          "contextSummary": "corrigiu o pedido gentilmente"
+        },
+        {
+          "id": "accept",
+          "label": "Aceitar o pedido errado",
+          "relationshipDelta": {
+            "awkwardness": 1
+          },
+          "contextSummary": "aceitou o pedido errado"
+        }
+      ],
+      "summaryTemplate": "O pedido veio errado e o jogador {choice}."
+    },
+    {
+      "id": "loud_guest",
+      "category": "minor",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 2,
+      "cooldownSeconds": 20,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "joke",
+          "label": "Fazer piada",
+          "relationshipDelta": {
+            "interest": 1
+          },
+          "contextSummary": "fez uma piada sobre o barulho"
+        },
+        {
+          "id": "ignore",
+          "label": "Continuar conversando",
+          "relationshipDelta": {},
+          "contextSummary": "continuou a conversa"
+        }
+      ],
+      "summaryTemplate": "Um cliente falou alto e o jogador {choice}."
+    },
+    {
+      "id": "bathroom_mishap",
+      "category": "minor",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 2,
+      "cooldownSeconds": 20,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "help",
+          "label": "Segurar a porta",
+          "relationshipDelta": {
+            "interest": 1
+          },
+          "contextSummary": "segurou a porta do banheiro"
+        },
+        {
+          "id": "ignore",
+          "label": "Não se envolver",
+          "relationshipDelta": {},
+          "contextSummary": "não se envolveu"
+        }
+      ],
+      "summaryTemplate": "Houve uma confusão na porta do banheiro; jogador {choice}."
+    },
+    {
+      "id": "dropped_menu",
+      "category": "minor",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 2,
+      "cooldownSeconds": 20,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "grab",
+          "label": "Pegar o cardápio",
+          "relationshipDelta": {
+            "interest": 1
+          },
+          "contextSummary": "pegou o cardápio"
+        },
+        {
+          "id": "ignore",
+          "label": "Deixar cair",
+          "relationshipDelta": {
+            "awkwardness": 1
+          },
+          "contextSummary": "deixou o cardápio no chão"
+        }
+      ],
+      "summaryTemplate": "Um cardápio caiu e o jogador {choice}."
+    },
+    {
+      "id": "awkward_friend",
+      "category": "major",
+      "venueIds": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ],
+      "weight": 1,
+      "cooldownSeconds": 45,
+      "prerequisites": [
+        "date_seated"
+      ],
+      "choices": [
+        {
+          "id": "introduce",
+          "label": "Apresentar a pessoa",
+          "relationshipDelta": {
+            "interest": 1
+          },
+          "contextSummary": "apresentou a pessoa"
+        },
+        {
+          "id": "change_topic",
+          "label": "Mudar de assunto",
+          "relationshipDelta": {
+            "awkwardness": 2
+          },
+          "contextSummary": "mudou de assunto"
+        }
+      ],
+      "summaryTemplate": "Uma pessoa conhecida interrompeu o encontro, e o jogador {choice}."
+    }
+  ]
+}

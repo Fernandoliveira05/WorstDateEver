@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DateSession",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sessionId",
+    "matchId",
+    "venueId",
+    "phase",
+    "arrivalState",
+    "eventSeed",
+    "turnSequence",
+    "relationship"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "matchId": {
+      "enum": [
+        "caio",
+        "rafa",
+        "bia",
+        "luiza"
+      ]
+    },
+    "venueId": {
+      "enum": [
+        "cafe",
+        "sushi",
+        "bistro",
+        "bar"
+      ]
+    },
+    "phase": {
+      "enum": [
+        "waiting",
+        "arriving",
+        "greeting",
+        "seating",
+        "dialogue",
+        "ending",
+        "completed"
+      ]
+    },
+    "arrivalState": {
+      "enum": [
+        "not_started",
+        "approaching",
+        "greeting",
+        "sitting",
+        "seated"
+      ]
+    },
+    "eventSeed": {
+      "type": "integer"
+    },
+    "turnSequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "activeEventId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "completedEventIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interest",
+        "awkwardness",
+        "patience",
+        "safety"
+      ],
+      "properties": {
+        "interest": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "awkwardness": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "patience": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "safety": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}

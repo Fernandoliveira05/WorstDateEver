@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/worst-date-ever/bedroom/state-v1",
+  "title": "Worst Date Ever VR Bedroom GameState v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "phase", "avatarGender", "preference", "profileIndex", "matchId", "substance"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "phase": { "enum": ["intro", "identity", "preference", "browse", "match", "wait", "prep", "exit", "aftermath"] },
+    "avatarGender": { "enum": [null, "male", "female"] },
+    "preference": { "enum": [null, "men", "women", "all"] },
+    "profileIndex": { "type": "integer", "minimum": 0 },
+    "matchId": { "enum": [null, "caio", "rafa", "bia", "luiza"] },
+    "substance": { "enum": [null, "none", "weed", "lsd", "alcohol", "dmt"] }
+  }
+}

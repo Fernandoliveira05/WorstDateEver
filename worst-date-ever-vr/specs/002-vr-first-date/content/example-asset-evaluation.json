@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assetId": "restaurant_cup_example",
+  "assetHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "assetRole": "common_prop",
+  "baselineVersion": "PENDING_ACTUAL_PROJECT_INVENTORY",
+  "baselineComplete": false,
+  "rubricVersion": "v1",
+  "views": [
+    "front",
+    "back",
+    "left",
+    "right",
+    "top",
+    "three_quarter",
+    "in_scene"
+  ],
+  "visualJudge": {
+    "modelId": "not-run",
+    "modelVersion": "not-run",
+    "confidence": 0.0,
+    "scores": {
+      "baselineFidelity": 0,
+      "vrReadability": 0,
+      "materialCoherence": 0,
+      "semanticFit": 0,
+      "defectFree": 0
+    },
+    "observations": [
+      {
+        "aspect": "reference evidence",
+        "evidence": "Example only; no approved asset baseline or model invocation occurred.",
+        "severity": "blocking"
+      }
+    ]
+  },
+  "staticChecks": {
+    "provenance": "pending",
+    "meshHealth": "pending",
+    "scale": "pending",
+    "colliderAndGrip": "pending",
+    "rigIfRequired": "pending",
+    "exportCompatibility": "pending",
+    "questWeb": "pending",
+    "questUnity": "pending"
+  },
+  "humanReview": {
+    "approved": false,
+    "reviewer": null,
+    "reviewedAt": null,
+    "reason": null
+  },
+  "notes": "Illustrative JSON; does not certify an actual asset or represent a finished visual evaluation."
+}

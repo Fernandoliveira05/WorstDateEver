@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FirstDateSceneHandoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "phase",
+    "avatarGender",
+    "preference",
+    "matchId",
+    "substance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "phase": {
+      "const": "exit"
+    },
+    "avatarGender": {
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "preference": {
+      "enum": [
+        "men",
+        "women",
+        "all"
+      ]
+    },
+    "matchId": {
+      "enum": [
+        "caio",
+        "rafa",
+        "bia",
+        "luiza"
+      ]
+    },
+    "substance": {
+      "enum": [
+        "none",
+        "weed",
+        "lsd",
+        "alcohol"
+      ]
+    },
+    "profileIndex": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

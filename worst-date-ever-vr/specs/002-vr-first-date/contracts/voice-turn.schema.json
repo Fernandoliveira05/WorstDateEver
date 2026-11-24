@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VoiceTurnControl",
+  "description": "JSON control messages; PCM audio payloads are separate bounded binary WSS frames",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sessionId",
+        "turnId",
+        "format"
+      ],
+      "properties": {
+        "type": {
+          "const": "audio.start"
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "turnId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "format": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "encoding",
+            "sampleRateHz",
+            "channels"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "pcm_s16le"
+            },
+            "sampleRateHz": {
+              "type": "integer",
+              "minimum": 8000,
+              "maximum": 48000
+            },
+            "channels": {
+              "const": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sessionId",
+        "turnId"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "audio.end",
+            "audio.cancel"
+          ]
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "turnId": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "sessionId",
+        "turnId",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "transcript.final"
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "turnId": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "text": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "language": {
+          "const": "pt-BR"
+        }
+      }
+    }
+  ]
+}
