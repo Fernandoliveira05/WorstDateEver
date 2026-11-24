@@ -1,6 +1,6 @@
 # Relatório de testes de interação
 
-Os testes foram executados no A-Frame com Chromium e no Unity em modo Play. Os testes de pegar e soltar usaram entrada simulada. A suíte automatizada do A-Frame registrou **66 testes aprovados** no total.
+Os testes foram executados no A-Frame com Chromium e no Unity em modo Play. Os testes de pegar e soltar usaram entrada simulada. A suíte automatizada do A-Frame registrou **69 testes aprovados** no total.
 
 | Teste | Onde e como foi executado | Resultado observado |
 | --- | --- | --- |
@@ -10,6 +10,7 @@ Os testes foram executados no A-Frame com Chromium e no Unity em modo Play. Os t
 | Empunhadura do celular | A-Frame e Unity. No Chromium, um comando de empunhadura simulado pegou e soltou o aparelho. Foram conferidas capturas com a mão direita e a esquerda. No Unity, a captura em modo Play usou um comando simulado de seleção. | O aparelho ficou na vertical nas capturas, com a tela voltada para o jogador. No Unity, também foi verificado o limite de um ponto de empunhadura. |
 | Ajuste dos dedos ao objeto | A-Frame. Um teste usou um objeto com colisores de caixa e esfera. A revisão visual usou o celular, uma bolinha e uma caneca. | O segmento do dedo foi reposicionado por rotação, conservou seu comprimento e terminou fora do colisor no cenário automatizado. |
 | Direção do fechamento das mãos | A-Frame. Foram simulados o aperto dos controles e o rastreamento das duas mãos. O teste usou os ossos dos avatares do jogo. | Os dedos fecharam em direção à palma. O ajuste a um objeto preservou a flexão, e um colisor atrás dos dedos não os forçou a dobrar para trás. |
+| Perda breve de rastreamento | A-Frame. Os testes interromperam as amostras de uma mão e voltaram a enviá-las. | Uma falha curta preservou a última pose desenhada. A soltura foi reconhecida na retomada. Uma falha prolongada retirou a mão da cena ou deu lugar ao controle. |
 | Colisão com objeto na mão | A-Frame. Um teste moveu um objeto rapidamente contra obstáculos fixos e móveis. Outro tentou girar a borda longa do objeto através de uma mesa. | O deslocamento parou antes dos obstáculos e a rotação foi limitada pelo tampo. |
 | Queda, soltura e transferência de movimento | A-Frame. Testes aplicaram gravidade, soltaram um objeto após movimento da mão e colocaram dois corpos físicos em colisão. | A superfície sustentou o objeto, a soltura produziu velocidade e a colisão transferiu movimento. |
 | Quebrar a caneca e o prato | A-Frame no Chromium. Um script posicionou os objetos do quarto sobre o piso, simulou primeiro uma queda curta com velocidade inicial de 0,25 m/s e depois um impacto com velocidade inicial de 6,2 m/s para baixo. | **2 de 2 passaram.** A queda leve deixou os dois intactos. No impacto forte, a caneca gerou **6 fragmentos** e o prato gerou **5**. Os fragmentos continuaram visíveis e com corpos físicos após a colisão e não entraram na lista de objetos que podem ser pegos. |

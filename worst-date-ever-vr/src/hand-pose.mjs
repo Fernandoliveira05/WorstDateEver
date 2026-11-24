@@ -52,6 +52,28 @@ export function pinchThresholds(thumbRadius, indexRadius) {
   return { start: contact, end: contact * 1.3 };
 }
 
+export const HAND_TRACKING_GRACE = .18;
+
+// Only the rendered pose is retained. Input continues to require fresh XR data.
+export function createHandVisibility() {
+  const last = new Map();
+  return {
+    pose(side, current, now) {
+      const previous = last.get(side);
+      if (previous?.pose.tracked && !current?.tracked && now - previous.at <= HAND_TRACKING_GRACE)
+        return previous.pose;
+      if (current) {
+        last.set(side, { pose: current, at: now });
+        return current;
+      }
+      if (previous && now - previous.at <= HAND_TRACKING_GRACE) return previous.pose;
+      last.delete(side);
+      return null;
+    },
+    clear() { last.clear(); }
+  };
+}
+
 function createHandState(name) {
   return {
     name,
@@ -131,6 +153,11 @@ export class HandPosePipeline {
     this._radiusScale = new THREE.Vector3();
   }
 
+  resetPinch(name) {
+    const hand = this.hands[name];
+    hand.pinched = hand.wasPinched = hand.justPinched = hand.justReleased = false;
+  }
+
   getHand(name) {
     return this.hands[name];
   }
@@ -158,7 +185,6 @@ export class HandPosePipeline {
       this.referenceSpace = null;
       for (const state of Object.values(this.hands)) {
         state.wasPinched = state.pinched;
-        state.pinched = false;
         state.justPinched = false;
         state.justReleased = false;
         state.active = false;
@@ -184,7 +210,7 @@ export class HandPosePipeline {
       this.rigWorld.identity();
     }
 
-    const session = sceneEl.xrSession;
+    const session = frame.session ?? sceneEl.xrSession ?? renderer?.xr?.getSession?.();
     const inputSources = session?.inputSources ?? [];
 
     for (const state of Object.values(this.hands)) {
@@ -206,7 +232,6 @@ export class HandPosePipeline {
       if (!source) {
         state.source = null;
         state.hand = null;
-        state.pinched = false;
         continue;
       }
 
@@ -215,28 +240,24 @@ export class HandPosePipeline {
       if (!hasNamedJoints) {
         state.source = null;
         state.hand = null;
-        state.pinched = false;
         continue;
       }
 
       // fillPoses/fillJointRadii preserve the order of the supplied joint
       // spaces, so both the pose and radius buffers map to HAND_JOINTS.
-      const hasPoses = frame.fillPoses?.(state.jointSpaces, referenceSpace, state.jointPoses) ??
-        state.jointSpaces.every((joint, i) => {
+      const batched = frame.fillPoses?.(state.jointSpaces, referenceSpace, state.jointPoses) &&
+        state.jointPoses.every(Number.isFinite);
+      if (batched) {
+        if (!frame.fillJointRadii?.(state.jointSpaces, state.jointRadii)) state.jointRadii.fill(.008);
+      } else {
+        const sampled = state.jointSpaces.every((joint, i) => {
           const pose = frame.getJointPose?.(joint, referenceSpace);
-          if (!pose) return false;
+          if (!pose?.transform.matrix.every(Number.isFinite)) return false;
           state.jointPoses.set(pose.transform.matrix, i * 16);
           state.jointRadii[i] = pose.radius ?? .008;
           return true;
         });
-      if (frame.fillJointRadii) {
-        if (!frame.fillJointRadii(state.jointSpaces, state.jointRadii)) state.jointRadii.fill(.008);
-      } else if (frame.fillPoses) {
-        state.jointRadii.fill(.008);
-      }
-      if (!hasPoses) {
-        state.pinched = false;
-        continue;
+        if (!sampled) continue;
       }
 
       state.source = source;

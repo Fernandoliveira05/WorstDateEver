@@ -26,11 +26,6 @@ export function createAvatar(THREE, root, load) {
     const key = (outfits[identity] ?? outfits.male)[outfit] ?? outfits.male[0];
     if (activeKey === key) return;
     activeKey = key;
-    if (current) {
-      current.group.visible = false;
-      for (const hand of current.hands) hand?.update(null, false);
-    }
-    current = null;
     if (!models.has(key)) {
       const pending = load(`Characters/${key}.glb`).then(({ scene: model, animations }) => {
         const group = new THREE.Group();
@@ -59,7 +54,11 @@ export function createAvatar(THREE, root, load) {
       models.set(key, pending);
     }
     models.get(key).then(model => {
-      if (activeKey !== key) return;
+      if (activeKey !== key || current === model) return;
+      if (current) {
+        current.group.visible = false;
+        for (const hand of current.hands) hand?.update(null, false);
+      }
       current = model;
       model.group.visible = true;
       model.clips.idle?.reset().play();

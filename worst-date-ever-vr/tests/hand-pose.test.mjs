@@ -5,6 +5,7 @@ import {
   HAND_JOINTS,
   HandPosePipeline,
   WRIST_INDEX,
+  createHandVisibility,
   pinchThresholds
 } from '../src/hand-pose.mjs';
 
@@ -198,4 +199,44 @@ test('hands remain usable when the browser only provides per-joint poses', () =>
   assert.ok(hand.justPinched);
   assert.ok(Math.abs(hand.wristPosition.x - 1.1) < 1e-6);
   assert.ok(Math.abs(hand.jointRadii[WRIST_INDEX] - .009) < 1e-6);
+});
+
+test('a missing joint frame does not lose the next pinch release', () => {
+  const mock = makeFakeScene(new THREE.Vector3());
+  const pipeline = new HandPosePipeline(mock.sceneEl);
+  assert.ok(pipeline.update().right.justPinched);
+  mock.nextFrame().fillPoses = () => false;
+  assert.equal(pipeline.update().right.active, false);
+  mock.nextFrame({ pinched: false });
+  const hand = pipeline.update().right;
+  assert.ok(hand.active && hand.justReleased);
+  assert.equal(hand.justPinched, false);
+});
+
+test('individual joint sampling recovers when the batch sample fails', () => {
+  const mock = makeFakeScene(new THREE.Vector3());
+  const pipeline = new HandPosePipeline(mock.sceneEl);
+  const frame = mock.nextFrame();
+  frame.fillPoses = () => false;
+  frame.getJointPose = joint => ({
+    transform: { matrix: new THREE.Matrix4().makeTranslation(joint.position.x, joint.position.y, joint.position.z).elements },
+    radius: .01
+  });
+  assert.ok(pipeline.update().right.active);
+  assert.equal(pipeline.getHand('right').jointCount, 25);
+});
+
+test('the hand visual survives a brief dropout and yields to the controller after a sustained loss', () => {
+  const display = createHandVisibility();
+  const hand = { tracked: {} };
+  const controller = {};
+  assert.equal(display.pose('right', hand, 1), hand);
+  assert.equal(display.pose('right', null, 1.05), hand);
+  assert.equal(display.pose('right', controller, 1.10), hand);
+  assert.equal(display.pose('left', null, 1.10), null);
+  assert.equal(display.pose('right', controller, 1.20), controller);
+  assert.equal(display.pose('right', null, 1.40), null);
+  display.pose('right', hand, 2);
+  display.clear();
+  assert.equal(display.pose('right', null, 2.01), null);
 });

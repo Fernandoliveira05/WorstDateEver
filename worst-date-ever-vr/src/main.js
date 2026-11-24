@@ -2,7 +2,7 @@ import { controllerSpaces, nativeControllerButtons, pointRay, sampleSpace, track
 import { wireVrEntry } from './vr-entry.js';
 import AFRAME from 'aframe';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { getHandPosePipeline } from './hand-pose.mjs';
+import { createHandVisibility, getHandPosePipeline, HAND_TRACKING_GRACE } from './hand-pose.mjs';
 import { createBedroomPhysics } from './bedroom-physics.js';
 import { createPhone } from './bedroom-phone.js';
 import { createScenery } from './bedroom-scenery.js';
@@ -75,6 +75,7 @@ function setup(scene, root, data) {
   const handPokes = new Map();
   const controllerTouches = new Map();
   const trackedHands = new Map();
+  const handVisibility = createHandVisibility();
   const controls = {};
   const inputs = new Map();
   const previous = new Map();
@@ -574,13 +575,14 @@ function setup(scene, root, data) {
       grips[side] = controllerInput(side);
       if (!webHand.active) {
         const seen = trackedHands.get(side);
-        if (seen !== undefined && elapsed - seen > .12) {
+        if (seen !== undefined && elapsed - seen > HAND_TRACKING_GRACE) {
           if (inputs.has(side) || controllerTouches.has(side)) finish(side, false, false);
           scenePhysics.release(side, false);
           control.landing = null;
           if (handPokes.has(side)) phone.release(side, handPokes.get(side), false);
           handPokes.delete(side);
           trackedHands.delete(side);
+          handPose.resetPinch(side);
           previous.delete(side);
         }
         continue;
@@ -695,7 +697,18 @@ function setup(scene, root, data) {
       const hand = handPose.getHand(side);
       const control = controls[side];
       control.marker.visible = false;
-      if (!hand.active) { stage.release(side, false); stage.handContact(side, null); dateKeys.delete(side); continue; }
+      if (!hand.active) {
+        const seen = trackedHands.get(side);
+        if (seen !== undefined && elapsed - seen > HAND_TRACKING_GRACE) {
+          stage.release(side, false);
+          trackedHands.delete(side);
+          handPose.resetPinch(side);
+          dateKeys.delete(side);
+        }
+        stage.handContact(side, null);
+        continue;
+      }
+      trackedHands.set(side, elapsed);
       const rotation = new THREE.Quaternion().setFromRotationMatrix(hand.wristWorld);
       control.avatarPose = { position: hand.wristPosition, orientation: rotation, tracked: hand };
       const aim = sampleSpace(THREE, scene, rig.object3D, hand.source.targetRaySpace);
@@ -810,7 +823,7 @@ function setup(scene, root, data) {
     const venue = date.active();
     const poses = {};
     for (const side of ['left', 'right']) {
-      const pose = controls[side].avatarPose;
+      const pose = handVisibility.pose(side, controls[side].avatarPose, elapsed);
       if (!pose) continue;
       const id = pose.tracked ? side : 'controller-' + side;
       const heldBody = venue ? venue.heldBody(id) : scenePhysics.hand.get(id)?.prop.body;
@@ -845,8 +858,11 @@ function setup(scene, root, data) {
     controllerButtons?.dispose();
     controllerButtons = null;
     xrConnections.clear();
+    trackedHands.clear();
+    handVisibility.clear();
     for (const side of ['left','right']) {
       const control = controls[side];
+      handPose.resetPinch(side);
       control.avatarPose = control.lastPose = null;
       control.line.visible = control.marker.visible = false;
       control.landing = control.action = null;

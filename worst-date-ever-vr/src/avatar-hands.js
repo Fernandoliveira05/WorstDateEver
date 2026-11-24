@@ -20,7 +20,16 @@ export function handBasis(THREE, wrist, index, little) {
 export function trackedHandBasis(THREE, hand) {
   const index = new THREE.Vector3().setFromMatrixPosition(hand.worldMatrices[6]);
   const pinky = new THREE.Vector3().setFromMatrixPosition(hand.worldMatrices[21]);
-  return index.distanceToSquared(pinky) > .0004 ? handBasis(THREE, hand.wristPosition, index, pinky) : null;
+  if (index.distanceToSquared(pinky) > .0004) {
+    const basis = handBasis(THREE, hand.wristPosition, index, pinky);
+    if (basis) return basis;
+  }
+  // The XR wrist pose still provides a palm frame when knuckle positions bunch up.
+  if (!hand.wristWorld) return null;
+  const basis = new THREE.Quaternion().setFromRotationMatrix(
+    new THREE.Matrix4().extractRotation(hand.wristWorld));
+  if (hand.name === 'right') basis.multiply(new THREE.Quaternion(0, 0, 1, 0));
+  return basis;
 }
 
 function belongsToHand(bone, wrist) {
