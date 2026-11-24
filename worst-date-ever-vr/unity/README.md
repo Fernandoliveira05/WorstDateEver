@@ -1,7 +1,7 @@
 # Worst Date Ever VR for Unity — Prototype
 
 This project targets Unity 6000.0.85f2. The full-length mirror reflects your avatar and outfit. The phone and preparation props are physical objects. The first playable
-scene leads to the selected first date or the bedroom aftermath. The [relatório de testes de interação](../docs/interaction-tests.md) records the object interaction checks run in Unity Play Mode.
+scene leads to the selected first date or the bedroom aftermath. The [relatório de testes de interação](../../TESTES-DE-INTERACAO.md) records the object interaction checks run in Unity Play Mode.
 
 ## Desktop preview
 

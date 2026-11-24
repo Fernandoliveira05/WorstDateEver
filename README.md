@@ -21,7 +21,11 @@ Antes de sair, você pode apelar para algo que "ajude" a relaxar. Ninguém é ob
 
 > **Aviso:** o jogo contém referências a álcool e outras drogas, com representação exagerada para fins educativos. Os efeitos reais variam muito de pessoa para pessoa. Pode causar desconforto em VR, e a experiência pode ser interrompida a qualquer momento.
 
-## Como rodar
+## Protótipo
+
+O protótipo jogável está em [worst-date-ever-vr](worst-date-ever-vr/README.md), com versões para [navegador](worst-date-ever-vr/README.md#run-the-browser-edition) e [Unity](worst-date-ever-vr/unity/README.md). O [relatório de testes de interação](TESTES-DE-INTERACAO.md) registra os testes físicos executados, seus resultados e o que falta validar no Quest.
+
+## Como rodar a versão inicial
 Na raiz do projeto, execute:
 
 ```sh
