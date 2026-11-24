@@ -1,0 +1,26 @@
+# Relatório de testes de interação
+
+Os testes foram executados no A-Frame com Chromium e no Unity em modo Play. Os testes de pegar e soltar usaram entrada simulada. A suíte automatizada do A-Frame registrou **66 testes aprovados** no total.
+
+| Teste | Onde e como foi executado | Resultado observado |
+| --- | --- | --- |
+| Pegar, mover e soltar objetos do quarto | A-Frame. Um script selecionou cada objeto, tentou uma segunda seleção sobre o mesmo objeto, enviou um comando de movimento e soltou. | **67 de 67 passaram.** Cada objeto aceitou a primeira seleção, recusou a segunda enquanto estava ocupado e ficou livre ao soltar. |
+| Pegar, mover e soltar objetos do quarto | Unity. Foram enviados eventos de seleção, movimento e soltura aos componentes de interação da cena `BedroomQuest` em modo Play. | **67 de 67 passaram.** Os componentes registraram a seleção e a soltura, e a posição permaneceu válida após os comandos. |
+| Pegar objetos sobre a mesa | A-Frame e Unity. No Chromium, foram usados raios sobre os modelos renderizados. No Unity, foi usada a rotina de interação da cena Desktop em modo Play. | **3 de 3 passaram em cada versão.** A caneca, o prato e o cardápio puderam ser pegos e soltos. |
+| Empunhadura do celular | A-Frame e Unity. No Chromium, um comando de empunhadura simulado pegou e soltou o aparelho. Foram conferidas capturas com a mão direita e a esquerda. No Unity, a captura em modo Play usou um comando simulado de seleção. | O aparelho ficou na vertical nas capturas, com a tela voltada para o jogador. No Unity, também foi verificado o limite de um ponto de empunhadura. |
+| Ajuste dos dedos ao objeto | A-Frame. Um teste usou um objeto com colisores de caixa e esfera. A revisão visual usou o celular, uma bolinha e uma caneca. | O segmento do dedo foi reposicionado por rotação, conservou seu comprimento e terminou fora do colisor no cenário automatizado. |
+| Direção do fechamento das mãos | A-Frame. Foram simulados o aperto dos controles e o rastreamento das duas mãos. O teste usou os ossos dos avatares do jogo. | Os dedos fecharam em direção à palma. O ajuste a um objeto preservou a flexão, e um colisor atrás dos dedos não os forçou a dobrar para trás. |
+| Colisão com objeto na mão | A-Frame. Um teste moveu um objeto rapidamente contra obstáculos fixos e móveis. Outro tentou girar a borda longa do objeto através de uma mesa. | O deslocamento parou antes dos obstáculos e a rotação foi limitada pelo tampo. |
+| Queda, soltura e transferência de movimento | A-Frame. Testes aplicaram gravidade, soltaram um objeto após movimento da mão e colocaram dois corpos físicos em colisão. | A superfície sustentou o objeto, a soltura produziu velocidade e a colisão transferiu movimento. |
+| Quebrar a caneca e o prato | A-Frame no Chromium. Um script posicionou os objetos do quarto sobre o piso, simulou primeiro uma queda curta com velocidade inicial de 0,25 m/s e depois um impacto com velocidade inicial de 6,2 m/s para baixo. | **2 de 2 passaram.** A queda leve deixou os dois intactos. No impacto forte, a caneca gerou **6 fragmentos** e o prato gerou **5**. Os fragmentos continuaram visíveis e com corpos físicos após a colisão e não entraram na lista de objetos que podem ser pegos. |
+| Abrir e fechar gaveta | A-Frame. Após quatro segundos parada, uma gaveta de teste foi aberta por comando e fechada ao deslocar o puxador. | A frente, a caixa física e o puxador acompanharam o movimento. Esse teste mediu o deslocamento das peças da gaveta. |
+| Levantar materiais flexíveis pela borda | A-Frame. O teste levantou objetos apoiados com perfis de linho preenchido, malha pesada, malha de algodão e borracha flexível. | Os segmentos permaneceram unidos. A malha de algodão cedeu mais que a malha pesada e a borracha flexível. A malha pesada cedeu mais que o linho preenchido. |
+| Tocar no tecido | A-Frame. Foram aplicados contatos repetidos na cortina e avaliado o caimento de um tecido preso em um suporte. | A cortina manteve a malha regular e os pontos de fixação. O tecido de teste cedeu sem passar pelo plano de apoio. |
+| Reconhecimento de toque no celular | A-Frame. Foram simulados toques dentro e fora da tela, contato contínuo com pequenas oscilações e um novo toque após afastar o dedo. | O contato válido registrou um toque. A oscilação não repetiu a ação. O novo toque voltou a ser aceito após o afastamento. |
+
+## Como repetir
+
+- Rode `npm test` na raiz do repositório. Consulte os testes do [celular](../tests/phone-interaction.test.mjs), da [empunhadura](../tests/grip-pose.test.mjs), das [colisões com objetos na mão](../tests/bedroom-solid-contact.test.mjs), da [física dos objetos](../tests/physics-world.test.mjs), das [gavetas](../tests/bedroom-drawers.test.mjs) e dos [materiais flexíveis](../tests/bedroom-soft-materials.test.mjs).
+- No Unity, entre em modo Play em `BedroomQuest` e execute **Worst Date Ever > Verify Bedroom Grabs in Play Mode**. No restaurante de `BedroomDesktop`, aguarde o carregamento da cena e execute **Worst Date Ever > Verify Restaurant Grabs in Play Mode**.
+
+Ainda falta uma rodada com o Quest 3 físico para verificar alinhamento das mãos, conforto da empunhadura e arremessos com gestos reais. Ainda falta confirmar a quebra da cerâmica no Unity e testar se todo o conteúdo das gavetas permanece dentro delas durante aberturas rápidas.
