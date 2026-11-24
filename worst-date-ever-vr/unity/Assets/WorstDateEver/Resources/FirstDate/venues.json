@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "venues": [
+    {
+      "id": "cafe",
+      "matchId": "caio",
+      "daypart": "morning",
+      "sceneVariant": "cafe",
+      "ambientTheme": "coffee_shop",
+      "entranceStation": "door_main",
+      "bathroomStation": "restroom",
+      "seatAnchor": "player_seat",
+      "dateSeatAnchor": "date_seat"
+    },
+    {
+      "id": "sushi",
+      "matchId": "rafa",
+      "daypart": "evening",
+      "sceneVariant": "sushi",
+      "ambientTheme": "restaurant",
+      "entranceStation": "door_main",
+      "bathroomStation": "restroom",
+      "seatAnchor": "player_seat",
+      "dateSeatAnchor": "date_seat"
+    },
+    {
+      "id": "bistro",
+      "matchId": "bia",
+      "daypart": "evening",
+      "sceneVariant": "bistro",
+      "ambientTheme": "dining",
+      "entranceStation": "door_main",
+      "bathroomStation": "restroom",
+      "seatAnchor": "player_seat",
+      "dateSeatAnchor": "date_seat"
+    },
+    {
+      "id": "bar",
+      "matchId": "luiza",
+      "daypart": "evening",
+      "sceneVariant": "bar",
+      "ambientTheme": "casual_bar",
+      "entranceStation": "door_main",
+      "bathroomStation": "restroom",
+      "seatAnchor": "player_seat",
+      "dateSeatAnchor": "date_seat"
+    }
+  ]
+}

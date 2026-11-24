@@ -1,0 +1,26 @@
+{
+  "choices": [
+    {"id":"honest","label":"Confessar o nervosismo","delta":[6,-4,3,0],"gesture":"nod"},
+    {"id":"joke","label":"Fazer uma piada","delta":[3,1,1,0],"gesture":"laugh"},
+    {"id":"brag","label":"Tentar impressionar","delta":[-5,8,-7,0],"gesture":"look_away"}
+  ],
+  "lines": [
+    {"id":"caio","honest":"Ainda bem. Eu trouxe um livro pra parecer ocupado.","joke":"Vou citar essa piada como se fosse do Sartre.","brag":"Interessante. Você sempre fala de si na terceira pessoa?"},
+    {"id":"rafa","honest":"Eu também. Dei três voltas no quarteirão antes de entrar.","joke":"Essa foi boa. Vou contar no grupo e dizer que foi minha.","brag":"Putz. Por um segundo achei que eu tinha entrado numa reunião de vendas."},
+    {"id":"bia","honest":"Obrigada por falar. Eu ensaiei até o meu jeito de sentar.","joke":"Pronto. Agora eu tenho uma história boa pra contar amanhã.","brag":"Vou te dar uns segundos pra ouvir o que você acabou de dizer."},
+    {"id":"luiza","honest":"Relaxa. No primeiro rodeio eu também quase desisti na porteira.","joke":"Essa eu vou contar no churrasco. Com crédito, talvez.","brag":"Bonito o discurso. Você ensaiou ou saiu no susto?"}
+  ],
+  "beats": [
+    {"id":"water_spill","line":"O garçom tentou servir água sem largar a bandeja.","cue":"Opa. A mesa também estava com sede.","prop":"cup","action":"help"},
+    {"id":"wrong_order","line":"O garçom trouxe algo que ninguém pediu.","cue":"Tenho quase certeza de que esse prato pertence a outra mesa.","prop":"plate","action":"clarify"},
+    {"id":"loud_guest","line":"Um cliente dá uma gargalhada que atravessa o salão.","cue":"Dá pra ouvir a fofoca inteira daqui.","prop":"","action":""},
+    {"id":"bathroom_mishap","line":"A porta do banheiro emperra com alguém do lado de dentro.","cue":"Você ouviu um pedido de socorro ou foi a descarga?","prop":"","action":""},
+    {"id":"dropped_menu","line":"O cardápio escorrega para o chão.","cue":"Agora é torcer pra que o chão não peça sobremesa.","prop":"menu","action":"grab"},
+    {"id":"awkward_friend","line":"Uma pessoa acena para vocês da mesa ao lado.","cue":"Conhece essa pessoa? Tá acenando há um tempo.","prop":"","action":""}
+  ],
+  "outcomes": [
+    {"id":"good","line":"Deu certo. Até sobrou assunto para outro encontro."},
+    {"id":"awkward","line":"Foi estranho. Mas agora vocês têm uma boa história."},
+    {"id":"disaster","line":"Deu ruim. Pelo menos ninguém pediu para dividir a sobremesa."}
+  ]
+}
