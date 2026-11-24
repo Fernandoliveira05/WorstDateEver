@@ -24,7 +24,7 @@ Vite serves the development edition at `http://localhost:5173`. For Quest Browse
 
 The iClona launcher opens **Deu Ruim**. Matching, the time skip, outfit selection, and the ending use browser-local saves. The original game’s dialogue, props, and scenery are in Portuguese.
 
-When you finish preparing, **Partir** opens the first date. The [relatório de testes de interação](../TESTES-DE-INTERACAO.md) records the checks for grabbing, releasing and colliding with objects. See the [First Date preview guide](specs/002-vr-first-date/implementation.md) for the voice service.
+When you finish preparing, **Partir** opens the first date. The [relatório de testes de interação](../docs/testes-de-interacao.md) records the checks for grabbing, releasing and colliding with objects. See the [First Date preview guide](specs/002-vr-first-date/implementation.md) for the voice service.
 
 ## Browser scene assets
 

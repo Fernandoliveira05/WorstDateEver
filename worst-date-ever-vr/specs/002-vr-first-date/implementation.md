@@ -43,6 +43,6 @@ The vision runner accepts a manifest containing `assetId`, `assetRole`, `assetPa
 
 ## Verification
 
-See the [relatório de testes de interação](../../../TESTES-DE-INTERACAO.md) for the completed checks on picking up and releasing the table props.
+See the [relatório de testes de interação](../../../docs/testes-de-interacao.md) for the completed checks on picking up and releasing the table props.
 
 The browser preview accepts **?venueMetrics** and exposes `firstDateMetrics()` while the venue is active. It reports observed frame intervals and render counts. The Unity venue contains **FirstDateFrameMetrics**. Enable its **Sample** field with Unity Frame Timing Stats enabled to inspect CPU and GPU timing through the component. Quest standalone perf, hardware recording and art-owner approval remain open in the physical acceptance checklist.

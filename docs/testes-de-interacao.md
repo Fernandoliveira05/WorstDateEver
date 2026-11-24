@@ -21,7 +21,7 @@ Os testes foram executados no A-Frame com Chromium e no Unity em modo Play. Os t
 
 ## Como repetir
 
-- Rode `npm test` na raiz do repositório. Consulte os testes do [celular](worst-date-ever-vr/tests/phone-interaction.test.mjs), da [empunhadura](worst-date-ever-vr/tests/grip-pose.test.mjs), das [colisões com objetos na mão](worst-date-ever-vr/tests/bedroom-solid-contact.test.mjs), da [física dos objetos](worst-date-ever-vr/tests/physics-world.test.mjs), das [gavetas](worst-date-ever-vr/tests/bedroom-drawers.test.mjs) e dos [materiais flexíveis](worst-date-ever-vr/tests/bedroom-soft-materials.test.mjs).
+- Rode `npm test` na raiz do repositório. Consulte os testes do [celular](../worst-date-ever-vr/tests/phone-interaction.test.mjs), da [empunhadura](../worst-date-ever-vr/tests/grip-pose.test.mjs), das [colisões com objetos na mão](../worst-date-ever-vr/tests/bedroom-solid-contact.test.mjs), da [física dos objetos](../worst-date-ever-vr/tests/physics-world.test.mjs), das [gavetas](../worst-date-ever-vr/tests/bedroom-drawers.test.mjs) e dos [materiais flexíveis](../worst-date-ever-vr/tests/bedroom-soft-materials.test.mjs).
 - No Unity, entre em modo Play em `BedroomQuest` e execute **Worst Date Ever > Verify Bedroom Grabs in Play Mode**. No restaurante de `BedroomDesktop`, aguarde o carregamento da cena e execute **Worst Date Ever > Verify Restaurant Grabs in Play Mode**.
 
 Ainda falta uma rodada com o Quest 3 físico para verificar alinhamento das mãos, conforto da empunhadura e arremessos com gestos reais. Ainda falta confirmar a quebra da cerâmica no Unity e testar se todo o conteúdo das gavetas permanece dentro delas durante aberturas rápidas.
