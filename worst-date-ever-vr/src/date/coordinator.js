@@ -112,6 +112,10 @@ export function createDateCoordinator(THREE, io) {
       director.tick(dt, !voice.state().busy);
       const view = director.view();
       if (!view.canSpeak && voice.state().busy) voice.cancel();
+      if (view.wantsInitiative && voice.state().ready && !voice.state().busy) {
+        director.deferInitiative(10);
+        voice.initiate();
+      }
       stage.tick(dt, view);
       const key = [view.session.phase, view.session.turnSequence, view.beat?.phase, view.session.activeEventId,
         view.session.completedEventIds.length, view.revision].join(':');

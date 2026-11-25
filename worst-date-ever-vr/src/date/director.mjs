@@ -1,7 +1,9 @@
 import { advanceDatePhase, applyApprovedDelta, createDateSession } from './session-core.mjs';
-import { chooseEligibleEvent, resolveEvent, seededRandom } from './event-core.mjs';
+import { DEFAULT_EVENT_CONFIG, evaluateEventOpportunity, nextEventCheck, resolveEvent, seededRandom } from './event-core.mjs';
 
 const dimensions = ['interest', 'awkwardness', 'patience', 'safety'];
+const RESPONSE_HOLD = 5.5;
+const EVENT_RESOLUTION_HOLD = 2.5;
 const arrival = [
   [1, 'DATE_ENTERS'], [5, 'DATE_REACHES_TABLE'], [6.5, 'DATE_STARTS_SITTING'], [7.4, 'DATE_SEATED']
 ];
@@ -12,12 +14,22 @@ export function dateOutcome({ interest, awkwardness, patience, safety }) {
   return 'awkward';
 }
 
-export function createDateDirector(handoff, { sessionId, seed, catalog, persona, dialogue, reactions = [], checkpoint }) {
+export function createDateDirector(handoff, { sessionId, seed, catalog, persona, dialogue, reactions = [], checkpoint,
+  eventConfig: eventOverrides = {} }) {
   let session = createDateSession(handoff, sessionId, seed);
-  const rand = seededRandom(seed);
-  const lines = dialogue.lines.find(line => line.id === persona.id);
+  const eventRandomSource = seededRandom(seed ^ 0x6d2b79f5);
+  let eventRolls = 0;
+  const eventRand = () => { eventRolls++; return eventRandomSource(); };
+  const eventConfig = { ...DEFAULT_EVENT_CONFIG, ...eventOverrides };
+  const conversation = dialogue.conversations?.find(item => item.id === persona.id);
+  const presentationFor = id => dialogue.beats.find(item => item.id === id && item.personaId === persona.id) ??
+    dialogue.beats.find(item => item.id === id && !item.personaId);
   let time = 0;
-  let nextBeat = 10;
+  let nextBeat = nextEventCheck(eventRand, eventConfig, true);
+  let lastEventAt = -Infinity;
+  let suggestedEventId;
+  let conversationReadyAt = 0;
+  let nextInitiativeAt = 22;
   let arrivalCursor = 0;
   let beat;
   let result;
@@ -47,6 +59,11 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
       time = checkpoint.time;
       arrivalCursor = arrival.filter(([at]) => at <= time).length;
       nextBeat = Number.isFinite(checkpoint.nextBeat) ? checkpoint.nextBeat : time;
+      lastEventAt = Number.isFinite(checkpoint.lastEventAt) ? checkpoint.lastEventAt : -Infinity;
+      suggestedEventId = typeof checkpoint.suggestedEventId === 'string' ? checkpoint.suggestedEventId : undefined;
+      while (eventRolls < (Number.isInteger(checkpoint.eventRolls) ? checkpoint.eventRolls : 1)) eventRand();
+      conversationReadyAt = Number.isFinite(checkpoint.conversationReadyAt) ? checkpoint.conversationReadyAt : time;
+      nextInitiativeAt = Number.isFinite(checkpoint.nextInitiativeAt) ? checkpoint.nextInitiativeAt : time + 20;
       endingAt = Number.isFinite(checkpoint.endingAt) ? checkpoint.endingAt : time;
       result = checkpoint.result;
       caption = typeof checkpoint.caption === 'string' ? checkpoint.caption.slice(0,500) : caption;
@@ -54,11 +71,10 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
       talkTurns = checkpoint.talkTurns;
       summary = typeof checkpoint.summary === 'string' ? checkpoint.summary.slice(0,500) : '';
       actions.push(...checkpoint.actions);
-      if (event) beat = { definition: event, presentation: dialogue.beats.find(item => item.id === event.id),
+      if (event) beat = { definition: event, presentation: presentationFor(event.id),
         phase: checkpoint.beatPhase, at: checkpoint.beatAt, resolvedAt: checkpoint.resolvedAt,
-        closesAt: checkpoint.closesAt ?? checkpoint.beatAt + 18 };
-      // Completed events account for their original scheduler draws. An active event has consumed one more.
-      for (let i = 0; i < saved.completedEventIds.length + Number(Boolean(saved.activeEventId)); i++) rand();
+        closesAt: checkpoint.closesAt ?? checkpoint.beatAt + 25,
+        cooldownUntil: checkpoint.cooldownUntil ?? checkpoint.resolvedAt + EVENT_RESOLUTION_HOLD + 2 };
     }
   }
 
@@ -75,65 +91,77 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
     if (session.phase === 'ending' && time >= endingAt) session = advanceDatePhase(session, 'END_COMPLETE');
     if (session.phase !== 'dialogue') return;
 
-    if (beat?.phase === 'announce' && time >= beat.at + .6) beat.phase = 'animate';
-    if (beat?.phase === 'animate' && time >= beat.at + 1.45) {
+    if (beat?.phase === 'announce' && time >= beat.at + 1.2) beat.phase = 'animate';
+    if (beat?.phase === 'animate' && time >= beat.at + 3.2) {
       beat.phase = 'choice_window';
-      beat.closesAt = time + (beat.definition.category === 'major' ? 19 : 13);
+      // Brief reaction window: the date continues, but the player must choose
+      // how to react (including the authored ignore/no-action consequence).
+      beat.closesAt = time + (beat.definition.category === 'major' ? 12 : 9);
     }
     if (beat?.phase === 'choice_window') {
       if (!allowBeat) beat.closesAt += seconds;
-      if (time >= beat.closesAt) choose(beat.definition.choices.find(choice => choice.id === 'ignore')?.id ??
-        beat.definition.choices.at(-1).id);
+      else if (time >= beat.closesAt) {
+        const noAction = beat.definition.choices.find(choice => choice.id === 'ignore') ??
+          beat.definition.choices.find(choice => choice.id === 'continue') ?? beat.definition.choices.at(-1);
+        choose(noAction.id);
+      }
     }
-    if (beat?.phase === 'resolve' && time >= beat.resolvedAt + 1.4) beat.phase = 'cooldown';
-    if (beat?.phase === 'cooldown' && time >= nextBeat) beat = undefined;
-    if (beat || time < nextBeat || !allowBeat) return;
-    const definition = chooseEligibleEvent({ catalog, venueId: session.venueId,
-      completed: session.completedEventIds, phase: session.phase, rand });
-    if (!definition) { nextBeat = 86400; return; }
-    const presentation = dialogue.beats.find(entry => entry.id === definition.id);
+    if (beat?.phase === 'resolve' && time >= beat.resolvedAt + EVENT_RESOLUTION_HOLD) beat.phase = 'cooldown';
+    if (beat?.phase === 'cooldown' && time >= beat.cooldownUntil) beat = undefined;
+    if (beat || time < nextBeat || talkTurns < 1 || time < conversationReadyAt || !allowBeat) return;
+    nextBeat = time + nextEventCheck(eventRand, eventConfig);
+    const definition = evaluateEventOpportunity({ catalog, venueId: session.venueId, personaId: session.matchId,
+      completed: session.completedEventIds, phase: session.phase, time, talkTurns,
+      relationship: session.relationship, recentActions: actions, lastEventAt, suggestedEventId,
+      rand: eventRand, config: eventConfig });
+    if (!definition) return;
+    const presentation = presentationFor(definition.id);
     beat = { definition, presentation, phase: 'announce', at: time };
     session = { ...session, activeEventId: definition.id };
     speechRef = null;
-    caption = presentation.line;
     gesture = 'look_away';
   }
 
   function choose(id) {
     if (session.phase !== 'dialogue') return false;
     if (id === 'middle_finger') return react(id);
-    if (beat?.phase === 'choice_window') {
-      if (!beat.definition.choices.some(choice => choice.id === id)) return false;
+    if (beat?.phase === 'choice_window' && beat.definition.choices.some(choice => choice.id === id)) {
       const resolved = resolveEvent(session, beat.definition, id);
       session = resolved.session;
       summary = resolved.contextSummary;
       if (actions.length < 64) actions.push({ eventId: beat.definition.id, choiceId: id });
       beat.phase = 'resolve';
       beat.resolvedAt = time;
-      nextBeat = time + beat.definition.cooldownSeconds;
+      beat.cooldownUntil = time + EVENT_RESOLUTION_HOLD + 2;
+      lastEventAt = time;
+      nextBeat = Math.max(nextBeat, time + beat.definition.cooldownSeconds);
+      suggestedEventId = undefined;
       speechRef = null;
-      caption = beat.presentation.cue;
-      gesture = 'shrug';
       return true;
     }
     if (beat && beat.phase !== 'cooldown') return false;
-    if (id === 'finish' && talkTurns >= 3 && session.completedEventIds.length) {
+    if (id === 'finish' && time >= conversationReadyAt && talkTurns >= 3 && session.completedEventIds.length) {
       result = dateOutcome(session.relationship);
       speechRef = null;
       caption = dialogue.outcomes.find(outcome => outcome.id === result).line;
       session = advanceDatePhase(session, 'DATE_FINISHES');
-      endingAt = time + 1.2;
+      endingAt = time + 4.5;
       return true;
     }
+    if (time < conversationReadyAt) return false;
     const choice = dialogue.choices.find(choice => choice.id === id);
-    if (!choice) return false;
+    const turn = conversation?.turns[Math.min(talkTurns, conversation.turns.length - 1)];
+    const option = turn?.options.find(item => item.id === id);
+    if (!choice || !option) return false;
     const delta = Object.fromEntries(dimensions.map((key, i) => [key, choice.delta[i]]));
     session = { ...applyApprovedDelta(session, delta), turnSequence: session.turnSequence + 1 };
     talkTurns++;
     if (actions.length < 64) actions.push({ eventId: '', choiceId: id });
     speechRef = null;
-    caption = lines[id];
+    caption = option.reply;
     gesture = choice.gesture;
+    conversationReadyAt = time + RESPONSE_HOLD;
+    nextInitiativeAt = conversationReadyAt + 18 + eventRand() * 14;
     return true;
   }
 
@@ -150,6 +178,8 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
     caption = item.line;
     gesture = item.gesture;
     summary = item.context;
+    conversationReadyAt = time + RESPONSE_HOLD;
+    nextInitiativeAt = conversationReadyAt + 18 + eventRand() * 14;
     if (session.relationship.safety <= 40) {
       result = 'disaster';
       caption = 'Chega. Eu vou embora.';
@@ -162,37 +192,62 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
   function remote(turn, reply) {
     if (session.phase !== 'dialogue' ||
       turn !== session.turnSequence || typeof reply?.text !== 'string' ||
-      !persona.allowedGestures.includes(reply.gesture)) return false;
+      time < conversationReadyAt || !persona.allowedGestures.includes(reply.gesture)) return false;
     const line = reply.text.trim().slice(0, 500);
     if (!line) return false;
+    if (reply.eventActionId && beat?.phase === 'choice_window' &&
+      beat.definition.choices.some(choice => choice.id === reply.eventActionId)) {
+      const resolved = resolveEvent(session, beat.definition, reply.eventActionId);
+      session = resolved.session;
+      summary = resolved.contextSummary;
+      if (actions.length < 64) actions.push({ eventId: beat.definition.id, choiceId: reply.eventActionId });
+      beat.phase = 'resolve';
+      beat.resolvedAt = time;
+      beat.cooldownUntil = time + EVENT_RESOLUTION_HOLD + 2;
+      lastEventAt = time;
+      nextBeat = Math.max(nextBeat, time + beat.definition.cooldownSeconds);
+    }
+    if (reply.relationshipDelta) session = applyApprovedDelta(session, reply.relationshipDelta);
     caption = line;
     speechRef = reply.ttsRef ?? null;
     gesture = reply.gesture;
     session = { ...session, turnSequence: turn + 1 };
     talkTurns++;
+    conversationReadyAt = time + RESPONSE_HOLD;
+    nextInitiativeAt = conversationReadyAt + 18 + eventRand() * 14;
+    if (typeof reply.suggestedEventId === 'string') suggestedEventId = reply.suggestedEventId;
     return true;
   }
 
   function view() {
     let choices = [];
+    let fallbackChoices = [];
     if (session.phase === 'dialogue') {
       if (beat?.phase === 'choice_window') choices = beat.definition.choices;
-      else if (!beat || beat.phase === 'cooldown') {
-        choices = dialogue.choices;
+      else if ((!beat || beat.phase === 'cooldown') && time >= conversationReadyAt) {
+        const turn = conversation?.turns[Math.min(talkTurns, conversation.turns.length - 1)];
         if (talkTurns >= 3 && session.completedEventIds.length)
-          choices = [...choices, { id: 'finish', label: 'Encerrar o encontro' }];
+          choices = [{ id: 'finish', label: 'Pedir a conta' }];
+        fallbackChoices = turn?.options.map(option => ({ ...option,
+          gesture: dialogue.choices.find(choice => choice.id === option.id)?.gesture })) ?? dialogue.choices;
       }
     }
-    if (session.phase === 'dialogue' && reactions.some(item => item.id === 'middle_finger'))
-      choices = [...choices, reactions.find(item => item.id === 'middle_finger')];
     return { session, time, beat, caption, gesture, result, summary, choices, actions: actions.slice(),
-      canSpeak: session.phase === 'dialogue', reaction, revision, speechRef };
+      fallbackChoices,
+      canSpeak: session.phase === 'dialogue' && time >= conversationReadyAt,
+      reflecting: session.phase === 'dialogue' && time < conversationReadyAt,
+      wantsInitiative: session.phase === 'dialogue' && !beat && time >= conversationReadyAt && time >= nextInitiativeAt,
+      reaction, revision, speechRef };
   }
+
+  function deferInitiative(seconds = 8) { nextInitiativeAt = Math.max(nextInitiativeAt, time + seconds); }
 
   function snapshot() {
-    return { session, time, nextBeat, endingAt, result, caption, gesture, talkTurns, summary, actions: actions.slice(),
-      beatId: beat?.definition.id, beatPhase: beat?.phase, beatAt: beat?.at, resolvedAt: beat?.resolvedAt, closesAt: beat?.closesAt };
+    return { session, time, nextBeat, lastEventAt, suggestedEventId, eventRolls, conversationReadyAt, nextInitiativeAt,
+      endingAt, result, caption, gesture, talkTurns, summary, actions: actions.slice(),
+      beatId: beat?.definition.id, beatPhase: beat?.phase, beatAt: beat?.at, resolvedAt: beat?.resolvedAt,
+      closesAt: beat?.closesAt, cooldownUntil: beat?.cooldownUntil };
   }
 
-  return { tick, choose, react, remote, view, snapshot };
+  return { tick, choose, react, remote, view, snapshot, deferInitiative };
 }

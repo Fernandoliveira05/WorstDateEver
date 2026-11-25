@@ -105,6 +105,10 @@
         "null"
       ]
     },
+    "eventActionId": {
+      "type": ["string", "null"],
+      "maxLength": 64
+    },
     "ttsRef": {
       "type": [
         "string",

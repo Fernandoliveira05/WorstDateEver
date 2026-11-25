@@ -5,8 +5,9 @@ export function createDateSpeech({ base, personas, dialogue, reactions }) {
   const shared = [...dialogue.beats.map(beat => beat.cue), ...dialogue.outcomes.map(item => item.line),
     ...reactions.map(item => item.line), 'Chega. Eu vou embora.'];
   const authored = new Map(personas.map(person => {
-    const lines = dialogue.lines.find(item => item.id === person.id);
-    return [person.id, new Set([person.openingLine, ...Object.values(lines ?? {}).filter(text => text !== person.id), ...shared])];
+    const conversation = dialogue.conversations.find(item => item.id === person.id);
+    const replies = conversation?.turns.flatMap(turn => turn.options.map(option => option.reply)) ?? [];
+    return [person.id, new Set([person.openingLine, ...replies, ...shared])];
   }));
   const replies = new Map();
   const cache = new Map();

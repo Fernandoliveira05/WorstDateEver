@@ -1,4 +1,4 @@
-import * as CANNON from '../vendor/cannon-es/dist/cannon-es.js';
+import * as CANNON from 'cannon-es';
 import { createPhysicsWorld, makeKinematic, releaseDynamic } from './physics-world.mjs';
 import { softMaterial } from './bedroom-soft-materials.js';
 import { createSolidContact } from './bedroom-solid-contact.js';

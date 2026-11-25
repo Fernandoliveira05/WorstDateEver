@@ -5,26 +5,39 @@ import * as THREE from 'three';
 import { createDateDirector } from '../src/date/director.mjs';
 import { createNpcClocks } from '../src/date/npc-clock.js';
 import { impactClass, sweptContact } from '../src/date/impact.js';
+import { eligibleEvents, evaluateEventOpportunity } from '../src/date/event-core.mjs';
 const content = file => JSON.parse(readFileSync(new URL('../content/shared/' + file + '.json', import.meta.url)));
+const fastEvents = { firstEventMinSeconds: 0, firstEventMaxSeconds: 0, checkMinSeconds: 1,
+  checkMaxSeconds: 1, opportunityChance: 1, minimumGapSeconds: 0, maximumEvents: 6 };
 function setup() {
   return createDateDirector({ schemaVersion:1, phase:'exit', avatarGender:'female',
     preference:'all', matchId:'rafa', substance:'none' }, {
     sessionId:'test', seed:1, catalog:content('events').events,
     persona:content('personas').personas.find(person=>person.id==='rafa'),
-    dialogue:content('dialogue'), reactions:content('date-reactions')
+    dialogue:content('dialogue'), reactions:content('date-reactions'), eventConfig: fastEvents
   });
 }
 
 test('event clock pauses for speech and times out into a bounded response', () => {
   const date = setup();
-  date.tick(10);
-  date.tick(1.5);
+  date.tick(7.5);
+  assert.ok(date.choose('honest'));
+  const response = date.view().caption;
+  assert.equal(date.view().choices.length, 0);
+  date.tick(5.4);
+  assert.equal(date.view().caption, response);
+  assert.equal(date.view().beat, undefined);
+  date.tick(.2);
+  assert.ok(date.choose('joke'));
+  date.tick(55);
+  assert.equal(date.view().beat.phase, 'announce');
+  date.tick(3.3);
   const before = date.view();
   assert.equal(before.beat.phase,'choice_window');
-  assert.ok(before.canSpeak);
+  assert.equal(before.canSpeak, true);
   date.tick(20,false);
   assert.equal(date.view().beat.phase,'choice_window');
-  date.tick(20);
+  date.tick(30);
   assert.ok(date.view().session.completedEventIds.length);
 });
 test('impact strength, cooldown and boundaries affect the date result', () => {
@@ -55,4 +68,39 @@ test('NPC needs and clocks vary by role and stay reproducible', () => {
     assert.ok(a.every(x=>x.level>=0&&x.level<=1&&x.remaining>=0));
   }
   assert.notDeepEqual(createNpcClocks(1)(8),createNpcClocks(2)(8));
+});
+
+test('free conversation is primary and can resolve a concrete event action', () => {
+  const date = setup();
+  date.tick(7.5);
+  assert.equal(date.view().choices.length, 0);
+  assert.equal(date.view().fallbackChoices.length, 3);
+  assert.ok(date.remote(0, { text: 'Também fiquei nervoso. E você?', gesture: 'nod',
+    relationshipDelta: { interest: 2, awkwardness: -1, patience: 0, safety: 0 } }));
+  assert.equal(date.view().session.relationship.interest, 52);
+  date.tick(65);
+  date.tick(3.3);
+  const event = date.view().beat;
+  assert.equal(event.phase, 'choice_window');
+  assert.ok(date.view().canSpeak);
+  assert.ok(date.remote(1, { text: 'Boa, você ajudou sem fazer cena.', gesture: 'nod',
+    eventActionId: event.definition.choices[0].id,
+    relationshipDelta: { interest: 1, awkwardness: 0, patience: 0, safety: 0 } }));
+  assert.deepEqual(date.view().session.completedEventIds, [event.definition.id]);
+});
+
+test('event opportunities respect context, rarity gates and repetition prevention', () => {
+  const catalog = content('events').events;
+  const rafa = eligibleEvents({ catalog, venueId: 'sushi', personaId: 'rafa', time: 90, talkTurns: 2,
+    relationship: { interest: 50, awkwardness: 20, patience: 70, safety: 100 } });
+  assert.ok(rafa.some(event => event.id === 'wrong_order'));
+  assert.ok(!rafa.some(event => event.id === 'bathroom_mishap'));
+  const config = { ...fastEvents, minimumGapSeconds: 90, opportunityChance: 1 };
+  assert.equal(evaluateEventOpportunity({ catalog, venueId: 'sushi', personaId: 'rafa', time: 100,
+    talkTurns: 3, relationship: {}, lastEventAt: 40, rand: () => 0, config }), null);
+  const only = catalog.filter(event => event.id === 'dropped_menu');
+  assert.equal(evaluateEventOpportunity({ catalog: only, venueId: 'sushi', personaId: 'rafa', time: 160,
+    talkTurns: 3, relationship: {}, completed: [], lastEventAt: 40, rand: () => 0, config }).id, 'dropped_menu');
+  assert.equal(evaluateEventOpportunity({ catalog: only, venueId: 'sushi', personaId: 'rafa', time: 300,
+    talkTurns: 4, relationship: {}, completed: ['dropped_menu'], lastEventAt: 100, rand: () => 0, config }), null);
 });

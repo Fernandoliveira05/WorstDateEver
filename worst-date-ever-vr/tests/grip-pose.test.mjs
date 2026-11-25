@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import { Body, Box, Sphere, Vec3 } from '../vendor/cannon-es/dist/cannon-es.js';
+import { Body, Box, Sphere, Vec3 } from 'cannon-es';
 import { phoneGrip, gripSurface, conformJoint } from '../src/grip-pose.mjs';
 import { createAvatarHand, handBasis } from '../src/avatar-hands.js';
 

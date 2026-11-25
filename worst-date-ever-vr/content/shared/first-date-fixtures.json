@@ -19,7 +19,7 @@
       "seed": 963817,
       "choice": "brag",
       "expectedVenue": "sushi",
-      "expectedEvent": "dropped_menu",
+      "expectedEvent": "wrong_order",
       "expectedOutcome": "disaster",
       "expectedRelationship": {
         "interest": 36,
@@ -47,7 +47,7 @@
       "seed": 331193,
       "choice": "honest",
       "expectedVenue": "bar",
-      "expectedEvent": "bathroom_mishap",
+      "expectedEvent": "dropped_menu",
       "expectedOutcome": "good",
       "expectedRelationship": {
         "interest": 69,

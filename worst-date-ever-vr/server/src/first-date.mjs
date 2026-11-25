@@ -4,7 +4,7 @@ import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
 import { WebSocketServer } from 'ws';
 import { contract } from './contracts.mjs';
 import { createDateSpeech } from './date-speech.mjs';
-import { createDeepSeekProviders, createGemmaProviders, createOpenAIProviders } from './providers.mjs';
+import { createDeepSeekProviders, createGeminiProviders, createGemmaProviders, createOpenAIProviders } from './providers.mjs';
 import { resolveEvent } from '../../src/date/event-core.mjs';
 import { applyApprovedDelta, createDateSession } from '../../src/date/session-core.mjs';
 
@@ -24,7 +24,7 @@ const voicePacket = contract('voice-turn');
 const contextPacket = contract('date-context');
 const replyPacket = contract('npc-reply');
 
-export function createFirstDateServer({ providers = createDeepSeekProviders() ?? createGemmaProviders() ?? createOpenAIProviders(), allowedOrigins = [], speech = createDateSpeech({ base: process.env.DATE_TTS_URL, personas, dialogue, reactions: physicalActions }) } = {}) {
+export function createFirstDateServer({ providers = createGeminiProviders() ?? createDeepSeekProviders() ?? createGemmaProviders() ?? createOpenAIProviders(), allowedOrigins = [], speech = createDateSpeech({ base: process.env.DATE_TTS_URL, personas, dialogue, reactions: physicalActions }) } = {}) {
   const sessions = new Map();
   const rate = new Map();
   const ws = new WebSocketServer({ noServer: true, maxPayload: 16_384 });
@@ -42,6 +42,10 @@ export function createFirstDateServer({ providers = createDeepSeekProviders() ??
     }
     if (speech && req.method === 'GET' && req.url.startsWith('/v1/date/speech/')) {
       await speech.serve(req, res, new URL(req.url, 'http://localhost'));
+      return;
+    }
+    if (req.method === 'GET' && req.url === '/health') {
+      respond(res, providers ? 200 : 503, { ok: Boolean(providers), voiceProvider: Boolean(providers), tts: Boolean(speech) });
       return;
     }
     if (req.method === 'OPTIONS') {
@@ -68,7 +72,8 @@ export function createFirstDateServer({ providers = createDeepSeekProviders() ??
       const id = randomUUID();
       const token = randomBytes(24).toString('base64url');
       const session = createDateSession(handoff, id);
-      sessions.set(id, { token, session: { ...session, phase: 'dialogue', arrivalState: 'seated' }, actions: [], history: [], until: now + idle, next: 1 });
+      sessions.set(id, { token, session: { ...session, phase: 'dialogue', arrivalState: 'seated' }, actions: [],
+        history: [], eventDecisions: [], memory: { facts: [], contradictions: [], topics: [] }, until: now + idle, next: 1 });
       respond(res, 201, { sessionId: id, token, socketPath: '/v1/voice/session/' + id });
     } catch { respond(res, 400, { error: 'bad_request' }); }
   });
@@ -114,6 +119,10 @@ function syncContext(owner, actions) {
         const resolved = resolveEvent(snapshot, event, entry.choiceId);
         snapshot = resolved.session;
         summary = resolved.contextSummary;
+        const selected = event.choices.find(choice => choice.id === entry.choiceId);
+        owner.eventDecisions ??= [];
+        owner.eventDecisions.push({ event: resolved.contextSummary, playerChoice: selected.label });
+        owner.eventDecisions = owner.eventDecisions.slice(-8);
       } else {
         const choice = [...choices, ...physicalActions].find(item => item.id === entry.choiceId);
         if (!choice) return false;
@@ -133,6 +142,7 @@ function bindTurn(client, owner, providers, speech) {
   const turnId = owner.next;
   let turn;
   let rejected = false;
+  let contextReady = false;
   const deadline = setTimeout(() => client.close(1008, 'timeout'), 26000);
   const send = (type, payload = {}) => {
     if (client.readyState === 1) client.send(JSON.stringify({ type, sessionId: id, turnId, ...payload }));
@@ -143,6 +153,39 @@ function bindTurn(client, owner, providers, speech) {
     turn?.abort.abort();
     send('voice.error', { reason });
     client.close(1008, reason);
+  };
+  const respond = async (text, signal, initiative = false) => {
+    const persona = personas.find(person => person.id === owner.session.matchId);
+    const venue = venues.find(item => item.id === owner.session.venueId);
+    const activeEvent = events.find(item => item.id === owner.world?.event?.id);
+    const validEventSuggestions = events.filter(item => item.venueIds.includes(venue.id) &&
+      (!item.personaIds?.length || item.personaIds.includes(persona.id))).map(item => item.id);
+    const fields = await providers.reply({ persona, venue, text, initiative, history: owner.history,
+      eventDecisions: owner.eventDecisions ?? [],
+      memory: owner.memory, relationship: owner.session.relationship, eventSummary: owner.summary ?? '',
+      event: activeEvent ? { id: activeEvent.id, choices: activeEvent.choices.map(({ id, label }) => ({ id, label })) } : null,
+      validEventSuggestions, world: owner.world, signal });
+    if (signal.aborted) return;
+    const rawDelta = fields.relationshipDelta ?? {};
+    const relationshipDelta = Object.fromEntries(keys.map(key => [key,
+      Math.max(-10, Math.min(10, Number.isInteger(rawDelta[key]) ? rawDelta[key] : 0))]));
+    const suggestedEventId = validEventSuggestions.includes(fields.suggestedEventId) ? fields.suggestedEventId : null;
+    const eventActionId = activeEvent?.choices.some(choice => choice.id === fields.eventActionId) ? fields.eventActionId : null;
+    const reply = { sessionId: id, turnId, personaId: persona.id,
+      text: fields.text, emotion: fields.emotion, gesture: fields.gesture, intent: fields.intent,
+      relationshipDelta, suggestedEventId, eventActionId };
+    if (!replyPacket(reply) || !persona.allowedGestures.includes(reply.gesture)) { fail('reply'); return; }
+    owner.session = applyApprovedDelta(owner.session, relationshipDelta);
+    const memory = fields.memory ?? {};
+    const merge = (current, incoming, max) => [...new Set([...current, ...(Array.isArray(incoming) ? incoming : [])]
+      .map(value => String(value).trim().slice(0, 160)).filter(Boolean))].slice(-max);
+    owner.memory = { facts: merge(owner.memory.facts, memory.facts, 10),
+      contradictions: merge(owner.memory.contradictions, memory.contradictions, 6),
+      topics: merge(owner.memory.topics, memory.topics, 8) };
+    owner.history = [...owner.history, { player: initiative ? '' : text, npc: reply.text }].slice(-8);
+    if (speech) reply.ttsRef = speech.register(persona.id, reply.text);
+    send('npc.reply', { reply });
+    client.close(1000, 'complete');
   };
 
   client.on('close', () => {
@@ -166,9 +209,20 @@ function bindTurn(client, owner, providers, speech) {
     if (packet?.type === 'date.context' && !turn && packet.sessionId === id && packet.turnId === turnId) {
       if (!contextPacket(packet) || !syncContext(owner, packet.actions)) { fail('context'); return; }
       owner.world = packet.world ?? null;
+      contextReady = true;
       return;
     }
     if (!voicePacket(packet) || packet.sessionId !== id || packet.turnId !== turnId) { fail('sequence'); return; }
+    if (packet.type === 'npc.initiate' && !turn && contextReady) {
+      owner.next++;
+      owner.session.turnSequence = turnId;
+      const controller = new AbortController();
+      turn = { frames: [], abort: controller, ended: true };
+      const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(14500)]);
+      try { await respond('', signal, true); }
+      catch { if (!signal.aborted) fail('provider'); }
+      return;
+    }
     if (packet.type === 'audio.start' && !turn) {
       turn = { rate: packet.format.sampleRateHz, frames: [], bytes: 0, abort: new AbortController(), ended: false };
       return;
@@ -190,19 +244,7 @@ function bindTurn(client, owner, providers, speech) {
       if (turn.abort.signal.aborted) return;
       if (!text) { fail('silence'); return; }
       send('transcript.final', { text, language: 'pt-BR' });
-      const persona = personas.find(person => person.id === owner.session.matchId);
-      const venue = venues.find(item => item.id === owner.session.venueId);
-      const fields = await providers.reply({ persona, venue, text, history: owner.history,
-        relationship: owner.session.relationship, eventSummary: owner.summary ?? '', world: owner.world, signal });
-      if (turn.abort.signal.aborted) return;
-      const reply = { sessionId: id, turnId, personaId: persona.id,
-        text: fields.text, emotion: fields.emotion, gesture: fields.gesture, intent: fields.intent,
-        relationshipDelta: { interest: 0, awkwardness: 0, patience: 0, safety: 0 } };
-      if (!replyPacket(reply) || !persona.allowedGestures.includes(reply.gesture)) { fail('reply'); return; }
-      owner.history = [...owner.history, { player: text, npc: reply.text }].slice(-4);
-      if (speech) reply.ttsRef = speech.register(persona.id, reply.text);
-      send('npc.reply', { reply });
-      client.close(1000, 'complete');
+      await respond(text, signal);
     } catch {
       if (!turn.abort.signal.aborted) fail('provider');
     }

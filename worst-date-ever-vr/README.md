@@ -26,6 +26,18 @@ The iClona launcher opens **Deu Ruim**. Matching, the time skip, outfit selectio
 
 When you finish preparing, **Partir** opens the first date. The [relatório de testes de interação](../docs/testes-de-interacao.md) records the checks for grabbing, releasing and colliding with objects. See the [First Date preview guide](specs/002-vr-first-date/implementation.md) for the voice service.
 
+During the date, free pt-BR voice conversation is the primary interaction. The server keeps a bounded summary of facts, topics and contradictions, and the character can initiate a short conversational move after a natural pause. Authored choices remain available for concrete world actions and as an offline microphone fallback. The Event Director checks rare, contextual opportunities after the opening conversation; it validates persona, venue, elapsed time, cooldown, prior events and relationship state before starting any implemented scene event. Manual acceptance coverage is in [testes de conversa livre e eventos](../docs/testes-conversa-livre-eventos.md).
+
+### Local voice setup
+
+```sh
+cp .env.example .env
+# Edit .env and replace GEMINI_API_KEY with the key from Google AI Studio.
+npm run date:voice
+```
+
+Keep that terminal open, then run `npm run dev` in a second terminal. Vite proxies `/v1` and its WebSocket upgrade to the date service on port `8787`. Check `http://localhost:5173/health`: `{"ok":true}` means the provider is configured. The first press of **Falar livremente** records consent; press it again to start and once more to send. The key must stay server-side and must never use a `VITE_` prefix.
+
 ## Browser scene assets
 
 - `public/assets/bedroom/scene.glb.gz` and `scene.json` contain the exported models, materials, colliders, and motion paths. Artwork and character models are included locally beside them.

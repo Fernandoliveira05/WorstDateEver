@@ -3,11 +3,28 @@ import { impactClass, sweptContact } from './impact.js';
 import { createNpcClocks } from './npc-clock.js';
 import { createNpcAnimation } from './npc-animation.js';
 import { createSeatPose } from './seat-ik.js';
-import * as CANNON from '../../vendor/cannon-es/dist/cannon-es.js';
+import * as CANNON from 'cannon-es';
 import { fitCharacter } from '../bedroom-scenery.js';
 import { createPhysicsWorld, makeKinematic, releaseDynamic } from '../physics-world.mjs';
 import layout from '../../content/shared/venue-layout.json';
+import dialogue from '../../content/shared/dialogue.json';
 import { objectGroup } from '../scene-objects.js';
+import { INTERACTION_STYLE, arcSlots, cardWidth, cardCorners, gazeShowsMenu } from './interaction-arc.mjs';
+
+const dialogueChoiceLabels = new Map(dialogue.choices.map(choice => [choice.id, choice.label]));
+const dialogueChoiceLabel = id => dialogueChoiceLabels.get(id);
+const hudFont = '"WDE DM Sans", "Avenir Next", Arial, sans-serif';
+let hudFontReady;
+function loadHudFont() {
+  hudFontReady ??= (async () => {
+    if (typeof FontFace === 'undefined') return;
+    try {
+      const face = new FontFace('WDE DM Sans', 'url(/assets/fonts/DMSans-Variable.ttf)', { weight: '100 1000' });
+      document.fonts.add(await face.load());
+    } catch { /* The fallback font keeps the date usable offline. */ }
+  })();
+  return hudFontReady;
+}
 
 const themes = {
   cafe: { wall: 0xc69b79, seat: 0x637f6c, title: 'CAFÉ · FILTRO & PROSA', sky: 0xf2bea2 },
@@ -16,7 +33,8 @@ const themes = {
   bar: { wall: 0x817492, seat: 0x64557c, title: 'BAR · ÚLTIMO PEDIDO', sky: 0x3d4270 }
 };
 
-export async function createVenue(THREE, { venue, persona, load, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition }) {
+export async function createVenue(THREE, { venue, persona, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection }) {
+  await loadHudFont();
   const theme = themes[venue.id];
   const speech = createNpcSpeech(persona.id);
   const group = new THREE.Group();
@@ -263,27 +281,101 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
   wrongDish.visible = false;
 
   const panel = new THREE.Group();
-  panel.name = 'venue-conversation';
-  panel.position.set(.65, 1.61, -.58);
-  panel.rotation.x = -.10;
-  panel.rotation.y = -.15;
+  panel.name = 'venue-event-choices';
   interfaces.add(panel);
-  const heading = textPlane(THREE, .94, .20, '', 1200, 235);
+  const captionRig = new THREE.Group();
+  captionRig.name = 'venue-cinematic-caption';
+  camera?.add(captionRig);
+  captionRig.position.set(0, -.74, -1.48);
+  const panelSurface = textPlane(THREE, 1.30, .27, '', 1300, 270, { kind: 'surface', hud: true });
+  panelSurface.position.z = -.01;
+  captionRig.add(panelSurface);
+  const heading = textPlane(THREE, 1.23, .235, '', 1476, 282, { kind: 'caption', hud: true });
+  heading.position.z = .012;
   heading.userData.action = () => replaySpeech();
-  panel.add(heading);
-  const buttons = Array.from({ length: 8 }, (_, i) => {
-    const plane = textPlane(THREE, .451, .074, '', 605, 100, true);
-    plane.position.set(i % 2 ? .239 : -.239, -.148 - Math.floor(i / 2) * .081, 0.015);
-    plane.name = 'venue-choice-' + i;
-    plane.visible = false;
-    panel.add(plane);
-    return plane;
-  });
-  const status = textPlane(THREE, .93, .076, '', 1024, 84);
-  status.position.set(0, -.491, .04);
-  panel.add(status);
+  captionRig.add(heading);
+  const speakerTab = textPlane(THREE, .36, .073, persona.id.toUpperCase(), 720, 146,
+    { kind: 'speaker-tab', hud: true });
+  speakerTab.position.set(-.43, .148, .025);
+  captionRig.add(speakerTab);
+  const cards = new Map();
+  function makeCard(key) {
+    const card = new THREE.Group();
+    card.name = 'venue-interaction-' + key;
+    const background = new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshBasicMaterial({
+      color: 0xffffff, transparent: true, opacity: 0, depthWrite: false, depthTest: false,
+      side: THREE.DoubleSide, toneMapped: false
+    }));
+    background.renderOrder = 10010;
+    const label = textPlane(THREE, .82, INTERACTION_STYLE.cardHeight, '', 1000, 260, { kind: 'arc-label' });
+    label.material.depthTest = false;
+    label.renderOrder = 10011;
+    label.position.z = .002;
+    card.add(background, label);
+    card.userData = { key, background, label, action: null, target: new THREE.Vector3(),
+      opacity: 0, entering: true, width: 0, focused: false, flashUntil: 0 };
+    background.userData.card = card;
+    label.userData.card = card;
+    panel.add(card);
+    cards.set(key, card);
+    return card;
+  }
+  function drawCard(card, width) {
+    const { background, label } = card.userData;
+    const corners = cardCorners(card.userData.key, width);
+    const textureWidth = width + .10;
+    const textureHeight = INTERACTION_STYLE.cardHeight + .08;
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(corners.flatMap(([x, y]) => [x, y, 0]), 3));
+    geometry.setIndex([0, 2, 1, 0, 3, 2]);
+    geometry.setAttribute('uv', new THREE.Float32BufferAttribute(corners.flatMap(([x, y]) => [
+      x / textureWidth + .5, y / textureHeight + .5
+    ]), 2));
+    geometry.computeVertexNormals();
+    background.geometry.dispose();
+    background.geometry = geometry;
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024; canvas.height = 320;
+    const ctx = canvas.getContext('2d');
+    const sx = x => (x / textureWidth + .5) * canvas.width;
+    const sy = y => (.5 - y / textureHeight) * canvas.height;
+    ctx.beginPath();
+    corners.forEach(([x, y], i) => i ? ctx.lineTo(sx(x), sy(y)) : ctx.moveTo(sx(x), sy(y)));
+    ctx.closePath();
+    ctx.fillStyle = card.userData.focused || card.userData.selected ? '#51203F' : INTERACTION_STYLE.fill;
+    ctx.fill();
+    ctx.lineWidth = card.userData.focused || card.userData.selected ? 8 : 5;
+    ctx.strokeStyle = card.userData.focused || card.userData.selected ? INTERACTION_STYLE.text : INTERACTION_STYLE.outline;
+    ctx.stroke();
+    const marker = card.userData.focused || card.userData.selected ? 14 : 11;
+    ctx.fillStyle = card.userData.focused || card.userData.selected ? INTERACTION_STYLE.text : INTERACTION_STYLE.outline;
+    corners.forEach(([x, y]) => ctx.fillRect(sx(x) - marker / 2, sy(y) - marker / 2, marker, marker));
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    background.material.map?.dispose();
+    background.material.map = texture;
+    background.material.needsUpdate = true;
+    label.geometry.dispose();
+    label.geometry = new THREE.PlaneGeometry(width - .04, INTERACTION_STYLE.cardHeight);
+    label.userData.resizeTexture(Math.round((width - .04) / INTERACTION_STYLE.cardHeight * 260), 260);
+    label.userData.draw(card.userData.text ?? '');
+    card.userData.width = width;
+  }
+  const status = textPlane(THREE, .76, .046, '', 1140, 69, { kind: 'status', hud: true });
+  status.position.set(0, -.186, .02);
+  captionRig.add(status);
+  const optionCenter = new THREE.Vector3();
+  const playerPosition = new THREE.Vector3();
+  const dateRight = new THREE.Vector3();
+  const dateForward = new THREE.Vector3();
+  const gazeVector = new THREE.Vector3();
+  const worldUp = new THREE.Vector3(0, 1, 0);
+  let gazeVisible = true;
+  let gazeAwayFor = 0;
+  let menuPresence = 1;
   const feelingBars = createFeelingBars(THREE);
-  interfaces.add(feelingBars);
+  camera?.add(feelingBars);
+  feelingBars.position.set(.78, -.18, -1.48);
   const facePoint = new THREE.Vector3(0,-2,0);
   const face = new CANNON.Body({ mass: 0, type: CANNON.Body.KINEMATIC,
     shape: new CANNON.Sphere(.125), position: new CANNON.Vec3(0,-4,0) });
@@ -348,6 +440,7 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
     npcClock ??= createNpcClocks(view.session.eventSeed);
     const t = view.time;
     const beat = view.beat;
+    const eventVisual = beat?.definition.visual ?? beat?.definition.id;
     if (view.caption !== lastCaption || view.gesture !== lastGesture) {
       lastCaption = view.caption; lastGesture = view.gesture; gestureStart = t;
     }
@@ -381,13 +474,25 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
       head.getWorldPosition(facePoint);
       const forward = new THREE.Vector3(0, -.05, .085).applyQuaternion(date.actor.quaternion);
       facePoint.add(forward);
+      optionCenter.copy(facePoint);
+      if (viewerPosition) playerPosition.copy(viewerPosition());
+      dateForward.copy(playerPosition).sub(optionCenter).setY(0).normalize();
+      dateRight.crossVectors(worldUp, dateForward).normalize();
+      if (viewerDirection) {
+        const alignment = gazeVector.copy(optionCenter).sub(playerPosition).normalize().dot(viewerDirection());
+        if (gazeShowsMenu(alignment, gazeVisible)) {
+          gazeVisible = true;
+          gazeAwayFor = 0;
+        } else if (gazeVisible) {
+          gazeAwayFor += dt;
+          if (gazeAwayFor >= INTERACTION_STYLE.gazeAwaySeconds) gazeVisible = false;
+        }
+      }
       face.position.copy(facePoint);
       face.aabbNeedsUpdate = true;
       torso.position.copy(facePoint.clone().add(new THREE.Vector3(0,-.36,-.08)));
       torso.aabbNeedsUpdate = true;
       if (feelingBars.visible) {
-        feelingBars.position.copy(facePoint).add(new THREE.Vector3(0,.365,-.04));
-        if (viewerPosition) feelingBars.lookAt(viewerPosition());
         feelingBars.userData.draw(view.session.relationship);
       }
     } else {
@@ -405,7 +510,7 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
     entrance.rotation.y = moving && t < 2.3 ? -.9 * Math.sin(Math.PI * Math.min(1, (t - 1) / 1.3)) : 0;
 
     const bathroomTime = duties[0].active ? duties[0].age : 0;
-    const bathroomBeat = beat?.definition.id === 'bathroom_mishap' && ['animate','choice_window'].includes(beat.phase);
+    const bathroomBeat = eventVisual === 'bathroom_mishap' && ['animate','choice_window'].includes(beat.phase);
     restroom.rotation.y = Math.PI / 2 + (bathroomBeat ? Math.sin(t * 16) * .085 :
       (bathroomTime >= 9 && bathroomTime < 11 || bathroomTime >= 14 && bathroomTime < 16 ? -.75 : 0));
     const bath = bathroomTime < 6 ? 0 : bathroomTime < 11 ? (bathroomTime - 6) / 5 :
@@ -429,7 +534,7 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
       seats.entry_guest.yaw, entry > 12);
     const shift = duties[4].active ? duties[4].age + 3 : 0;
     const service = shift < 3 ? 0 : shift < 9 ? (shift - 3) / 6 : shift < 12 ? 1 : Math.max(0, 1 - (shift - 12) / 6);
-    const waiterAtDate = ['water_spill','wrong_order'].includes(beat?.definition.id) && beat.phase !== 'cooldown';
+    const waiterAtDate = ['water_spill','wrong_order'].includes(eventVisual) && beat.phase !== 'cooldown';
     const server = actors[5];
     const previousServer = server.actor.position.clone();
     const servingRoute = waiterAtDate ? [[-1.15,0,-.64]] : layout.waiterRoute;
@@ -439,28 +544,28 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
       const intended = server.actor.position.clone().sub(previousServer);
       if (intended.length() > dt * 2.05) server.actor.position.copy(previousServer.add(intended.clampLength(0, dt * 2.05)));
     }
-    wrongDish.visible = beat?.definition.id === 'wrong_order' && ['animate','choice_window','resolve'].includes(beat.phase);
+    wrongDish.visible = eventVisual === 'wrong_order' && ['animate','choice_window','resolve'].includes(beat.phase);
     if (beat?.phase === 'animate' || beat?.phase === 'choice_window') {
-      if (beat.definition.id === 'loud_guest' && actors[2].bones.Head) {
+      if (eventVisual === 'loud_guest' && actors[2].bones.Head) {
         actors[2].animation.gesture('laugh', Math.min(1.42, Math.max(0, t - beat.at - .55)));
       }
-      if (beat.definition.id === 'awkward_friend' && actors[4].bones.UpperArmR) {
+      if (eventVisual === 'awkward_friend' && actors[4].bones.UpperArmR) {
         actors[4].animation.gesture('wave', Math.min(1.42, Math.max(0, t - beat.at - .55)));
       }
     }
-    tray.rotation.z = beat?.definition.id === 'water_spill' && beat.phase === 'animate' ? .43 : 0;
+    tray.rotation.z = eventVisual === 'water_spill' && beat.phase === 'animate' ? .43 : 0;
     if (beat?.phase === 'animate' && lastBeat !== beat.definition.id) {
       lastBeat = beat.definition.id;
-      const emitter = beat.definition.id === 'loud_guest' ? actors[2].actor.position :
-        beat.definition.id === 'bathroom_mishap' ? restroom.position : actors[5].actor.position;
-      audioCue(beat.definition.id, emitter);
+      const emitter = eventVisual === 'loud_guest' ? actors[2].actor.position :
+        eventVisual === 'bathroom_mishap' ? restroom.position : actors[5].actor.position;
+      audioCue(eventVisual, emitter);
       if (beat.presentation.prop) {
         const prop = propsById[beat.presentation.prop];
         resetProp(prop);
-        if (!prop.owner && lastBeat === 'dropped_menu') prop.body.velocity.set(0, .17, 1.27);
+        if (!prop.owner && eventVisual === 'dropped_menu') prop.body.velocity.set(0, .17, 1.27);
       }
     }
-    const water = beat?.definition.id === 'water_spill' && ['choice_window','resolve'].includes(beat.phase);
+    const water = eventVisual === 'water_spill' && ['choice_window','resolve'].includes(beat.phase);
     for (let i = 0; i < splash.length; i++) {
       splash[i].visible = water;
       splash[i].position.set(-.32 + Math.cos(i * 2.4) * .12, .793, -.13 + Math.sin(i * 2.4) * .15);
@@ -495,31 +600,93 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
       lastSpoken = spoken;
       speech.say(view);
     }
-    const actions = view.choices.map(choice => [choice.label, () => {
+    const contextualChoices = beat?.phase === 'choice_window' ? [...view.choices] : [
+      ...view.choices,
+      ...view.fallbackChoices.map(choice => ({ ...choice,
+        label: dialogueChoiceLabel(choice.id) ?? choice.label }))
+    ];
+    const actions = contextualChoices.map(choice => ({
+      key: 'choice:' + choice.id,
+      label: choice.label,
+      tone: choice.id === 'middle_finger' ? 'danger' : 'default',
+      action: () => {
       if (choice.id === 'middle_finger') onGesture?.();
       voice.choose(choice.id);
-    }]);
-    if (view.session.phase === 'completed') actions.push(['Voltar ao quarto', restart]);
+      }
+    }));
+    const utilities = [];
+    if (view.session.phase === 'completed') utilities.push({ key: 'exit', label: 'Sair', action: restart });
     else if (view.session.phase === 'dialogue') {
       if (voiceState.ready && view.canSpeak)
-        actions.push([voiceState.recording ? 'Parar e enviar · A / V' : 'Falar · A / V', voice.toggle]);
-      if (voiceState.consented) actions.push(['Desativar microfone', voice.cancel]);
+        utilities.push({ key: 'speak', label: voiceState.recording ? 'Enviar' : 'Falar livremente',
+          action: voice.toggle, tone: voiceState.recording ? 'recording' : 'voice' });
+      if (voiceState.consented) utilities.push({ key: 'cancel-voice', label: 'Desligar voz', action: voice.cancel });
     }
-    if (actions.length < buttons.length) actions.push(['Centralizar assento', recenter]);
-    const remaining = beat?.phase === 'choice_window' ? Math.max(0, Math.ceil(beat.closesAt - t)) : null;
+    utilities.push({ key: 'recenter', label: 'Centralizar', action: recenter });
+    const remaining = beat?.phase === 'choice_window' && Number.isFinite(beat.closesAt) ?
+      Math.max(0, Math.ceil(beat.closesAt - t)) : null;
     const mic = voiceState.recording ? '  ' + '▰'.repeat(voiceState.level) + '▱'.repeat(5 - voiceState.level) : '';
-    const statusLine = [voiceState.ready ? voiceState.message + mic : 'Microfone exige HTTPS ou localhost.', remaining == null ? '' : remaining + ' s para decidir'].filter(Boolean).join('  ·  ');
-    const label = [view.caption, view.result, statusLine, ...actions.map(action => action[0])].join('|');
+    const statusLine = [view.reflecting ? 'Ouça a resposta antes de continuar' : '',
+      voiceState.message ? voiceState.message + mic : '',
+      remaining == null ? '' : remaining + ' s para decidir'].filter(Boolean).join('  ·  ');
+    const label = [view.caption, view.result, statusLine, ...actions.map(action => action.label),
+      ...utilities.map(action => action.label)].join('|');
     if (label !== lastView) {
       lastView = label;
-      heading.userData.draw(view.caption, theme.title);
+      heading.userData.draw(view.caption);
       status.visible = Boolean(statusLine);
       if (status.visible) status.userData.draw(statusLine);
-      buttons.forEach((button, i) => {
-        button.visible = Boolean(actions[i]);
-        button.userData.action = actions[i]?.[1];
-        if (actions[i]) button.userData.draw(actions[i][0]);
-      });
+      panelSurface.userData.draw();
+    }
+    const available = [...actions, ...utilities];
+    menuPresence = THREE.MathUtils.clamp(menuPresence + dt /
+      (gazeVisible ? INTERACTION_STYLE.gazeEnterSeconds : -INTERACTION_STYLE.gazeExitSeconds), 0, 1);
+    const slots = arcSlots(available.length);
+    const width = cardWidth(available.length);
+    const activeKeys = new Set();
+    available.forEach((option, index) => {
+      activeKeys.add(option.key);
+      const card = cards.get(option.key) ?? makeCard(option.key);
+      const data = card.userData;
+      data.action = option.action;
+      if (data.text !== option.label || data.width !== width) {
+        data.text = option.label;
+        drawCard(card, width);
+      }
+      const slot = slots[index];
+      data.target.copy(optionCenter)
+        .addScaledVector(dateRight, slot.x)
+        .addScaledVector(worldUp, slot.y)
+        .addScaledVector(dateForward, slot.depth)
+        .addScaledVector(worldUp, -INTERACTION_STYLE.gazeRise * (1 - menuPresence));
+      panel.worldToLocal(data.target);
+      if (data.entering) {
+        card.position.copy(data.target).addScaledVector(worldUp, -.075);
+        data.entering = false;
+      }
+      card.visible = menuPresence > .04;
+      card.position.lerp(data.target, Math.min(1, dt * INTERACTION_STYLE.moveSpeed));
+      card.lookAt(playerPosition);
+      card.rotateZ(slot.tilt);
+      data.opacity = Math.min(1, data.opacity + dt / INTERACTION_STYLE.enterSeconds);
+      const selected = data.focused || t < data.flashUntil;
+      if (data.selected !== (t < data.flashUntil)) {
+        data.selected = t < data.flashUntil;
+        drawCard(card, width);
+      }
+      data.background.material.opacity = data.opacity * menuPresence * (selected ? 1 : INTERACTION_STYLE.opacity);
+      data.label.material.opacity = data.opacity * menuPresence;
+      const scale = data.focused ? INTERACTION_STYLE.focusScale : 1;
+      card.scale.setScalar(THREE.MathUtils.lerp(card.scale.x, scale, Math.min(1, dt * 14)));
+    });
+    for (const [key, card] of cards) {
+      if (activeKeys.has(key)) continue;
+      const data = card.userData;
+      data.action = null;
+      data.opacity = Math.max(0, data.opacity - dt / INTERACTION_STYLE.enterSeconds);
+      data.background.material.opacity = data.opacity * menuPresence * INTERACTION_STYLE.opacity;
+      data.label.material.opacity = data.opacity * menuPresence;
+      if (data.opacity === 0) card.visible = false;
     }
   }
 
@@ -561,7 +728,19 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
   }
 
   function press(id, ray, rotation, directPoint, grab) {
-    const buttonHits = ray.intersectObjects([heading, ...buttons.filter(item => item.visible && item.userData.action)]);
+    const interactiveButtons = [...cards.values()].filter(card => card.visible && card.userData.action);
+    const buttonHits = ray.intersectObjects([heading, ...interactiveButtons.flatMap(card => card.children)]);
+    const button = buttonHits[0];
+    if (!grab && button) {
+      const card = button.object.userData.card;
+      if (card) {
+        card.userData.flashUntil = current.time + .18;
+        card.userData.selected = true;
+        drawCard(card, card.userData.width);
+        card.userData.action?.();
+      } else button.object.userData.action?.();
+      return true;
+    }
     const eligible = props.filter(prop => !prop.owner);
     if (directPoint) {
       let nearest, best = Infinity;
@@ -574,23 +753,36 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
       if (pickup(id, nearest, directPoint, rotation, 0)) return true;
     }
     const hit = ray.intersectObjects(eligible.map(prop => prop.mesh), true)[0];
-    const button = buttonHits[0];
-    if (!grab && button && (!hit || button.distance < hit.distance)) {
-      button.object.userData.action();
-      return true;
-    }
     if (!hit || hit.distance > 3.8) return false;
     let object = hit.object;
     while (object.parent !== tableProps) object = object.parent;
     return pickup(id, eligible.find(prop => prop.mesh === object), hit.point, rotation, hit.distance);
   }
 
+  function focus(ray) {
+    const hit = ray?.intersectObjects([...cards.values()].filter(card => card.visible && card.userData.action)
+      .flatMap(card => card.children))[0];
+    const next = hit?.object.userData.card ?? null;
+    for (const card of cards.values()) {
+      const focused = card === next;
+      if (focused === card.userData.focused) continue;
+      card.userData.focused = focused;
+      drawCard(card, card.userData.width);
+    }
+  }
+
   function pokeNear(point, activate = false) {
-    for (const item of buttons) {
-      if (!item.visible) continue;
+    for (const item of cards.values()) {
+      if (!item.visible || !item.userData.action) continue;
       item.worldToLocal(hitTarget.copy(point));
-      if (Math.abs(hitTarget.x) < .226 && Math.abs(hitTarget.y) < .037 && Math.abs(hitTarget.z) < .023) {
-        if (activate) item.userData.action();
+      const halfWidth = item.userData.width / 2, halfHeight = INTERACTION_STYLE.cardHeight / 2;
+      if (Math.abs(hitTarget.x) < halfWidth && Math.abs(hitTarget.y) < halfHeight && Math.abs(hitTarget.z) < .023) {
+        if (activate) {
+          item.userData.flashUntil = current.time + .18;
+          item.userData.selected = true;
+          drawCard(item, item.userData.width);
+          item.userData.action();
+        }
         return true;
       }
     }
@@ -671,10 +863,15 @@ export async function createVenue(THREE, { venue, persona, load, bedroomNode, be
     };
   }
 
-  return { group, tick, press, poke: point => pokeNear(point, true), pokeNear, move, release, handContact, beginSwipe, observe, replaySpeech, heldBody: id => holds.get(id)?.prop.body,
+  return { group, tick, press, focus, poke: point => pokeNear(point, true), pokeNear, move, release, handContact, beginSwipe, observe, replaySpeech, heldBody: id => holds.get(id)?.prop.body,
     player: new THREE.Vector3(...seats.player_seat.position),
     dispose() {
       speech.stop();
+      camera?.remove(captionRig);
+      camera?.remove(feelingBars);
+      feelingBars.geometry.dispose();
+      feelingBars.material.map?.dispose();
+      feelingBars.material.dispose();
       group.removeFromParent();
       const geometry = new Set();
       const materials = new Set();
@@ -709,37 +906,207 @@ function collectBones(scene) {
   return bones;
 }
 
-function textPlane(THREE, width, height, initial, w, h, button = false) {
+function textPlane(THREE, width, height, initial, w, h, options = {}) {
+  if (typeof options === 'boolean') options = { kind: options ? 'choice' : 'display' };
+  const kind = options.kind ?? 'display';
   const canvas = Object.assign(document.createElement('canvas'), { width: w, height: h });
   const context = canvas.getContext('2d');
   const map = new THREE.CanvasTexture(canvas);
   map.colorSpace = THREE.SRGBColorSpace;
   const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({
-    map, transparent: true, depthWrite: false, toneMapped: false
+    map, transparent: true, depthWrite: false, depthTest: !options.hud, toneMapped: false
   }));
-  mesh.userData.draw = (text, eyebrow) => {
+  if (options.hud) mesh.renderOrder = 10020;
+  mesh.userData.hitHalf = [width / 2, height / 2];
+  mesh.userData.resizeTexture = (nextWidth, nextHeight) => {
+    w = nextWidth;
+    h = nextHeight;
+    canvas.width = w;
+    canvas.height = h;
+    map.needsUpdate = true;
+  };
+  mesh.userData.draw = (text = '', eyebrow, tone = 'default') => {
     context.clearRect(0, 0, w, h);
-    context.beginPath();
-    context.roundRect(0, 0, w, h, 16);
-    context.fillStyle = button ? '#f6dfca' : '#34252deF';
-    context.fill();
-    let y = eyebrow ? 49 : h * .52;
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-    if (eyebrow) {
-      context.fillStyle = '#f1b786';
-      context.font = '700 32px system-ui';
-      context.fillText(eyebrow, w / 2, y, w - 64);
-      y = 112;
+    const round = (x, y, width, height, radius, fill, stroke) => {
+      context.beginPath();
+      context.roundRect(x, y, width, height, radius);
+      context.fillStyle = fill;
+      context.fill();
+      if (stroke) {
+        context.strokeStyle = stroke;
+        context.lineWidth = 2;
+        context.stroke();
+      }
+    };
+    if (kind === 'surface') {
+      context.shadowColor = '#ec489944';
+      context.shadowBlur = 20;
+      round(12, 15, w - 24, h - 30, 42, '#38162ddf', '#f9a8d4');
+      context.shadowColor = 'transparent';
+      map.needsUpdate = true;
+      return;
     }
-    const size = button ? 43 : h > 160 ? 52 : h * .48;
-    context.font = (button ? '700 ' : '650 ') + size + 'px system-ui';
-    context.fillStyle = button ? '#341f30' : '#fff1da';
+    context.textBaseline = 'middle';
+    const font = hudFont;
+    if (kind === 'arc-label') {
+      context.textAlign = 'center';
+      context.fillStyle = INTERACTION_STYLE.text;
+      context.font = `620 58px ${font}`;
+      const words = text.split(/\s+/);
+      const lines = [''];
+      for (const word of words) {
+        const candidate = lines.at(-1) ? lines.at(-1) + ' ' + word : word;
+        if (lines.at(-1) && context.measureText(candidate).width > w - 46 && lines.length < 2) lines.push(word);
+        else lines[lines.length - 1] = candidate;
+      }
+      if (lines.length === 1) context.fillText(lines[0], w / 2, h / 2);
+      else lines.forEach((line, index) => context.fillText(line, w / 2, h * (.37 + index * .28)));
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'speaker-tab') {
+      context.beginPath();
+      context.moveTo(35, 17);
+      context.lineTo(w - 75, 12);
+      context.quadraticCurveTo(w - 36, 12, w - 18, 42);
+      context.lineTo(w - 5, h - 34);
+      context.quadraticCurveTo(w - 1, h - 8, w - 45, h - 5);
+      context.lineTo(33, h - 3);
+      context.quadraticCurveTo(5, h - 4, 9, h - 42);
+      context.lineTo(12, 53);
+      context.quadraticCurveTo(15, 20, 35, 17);
+      context.closePath();
+      context.fillStyle = '#38162df2';
+      context.fill();
+      context.lineWidth = 5;
+      context.strokeStyle = '#f9a8d4';
+      context.stroke();
+      context.fillStyle = '#f472b6';
+      context.font = `700 56px ${font}`;
+      context.textAlign = 'left';
+      context.fillText('♡', 55, h / 2 + 4);
+      context.font = `650 61px ${font}`;
+      context.fillText(text, 137, h / 2 + 4);
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'label') {
+      context.textAlign = 'left';
+      context.fillStyle = '#cdaf9d';
+      context.font = `750 ${Math.round(h * .46)}px ${font}`;
+      context.fillText(text, 8, h * .53, w - 16);
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'choice') {
+      const danger = tone === 'danger';
+      const focused = tone === 'focused';
+      context.shadowColor = '#ec489944';
+      context.shadowBlur = focused ? 22 : 12;
+      round(2, 2, w - 4, h - 4, 13, focused ? '#51203feF' : danger ? '#38162de8' : '#241326e8',
+        focused ? '#fce7f3' : danger ? '#f9a8d4' : '#f9a8d488');
+      context.shadowColor = 'transparent';
+      context.textAlign = 'center';
+      context.fillStyle = '#fff5fa';
+      context.font = `650 31px ${font}`;
+      const words = text.split(/\s+/);
+      const lines = [''];
+      for (const word of words) {
+        const candidate = lines.at(-1) ? lines.at(-1) + ' ' + word : word;
+        if (lines.at(-1) && context.measureText(candidate).width > w - 36 && lines.length < 2) lines.push(word);
+        else lines[lines.length - 1] = candidate;
+      }
+      if (lines.length === 1) context.fillText(lines[0], w / 2, h * .52, w - 36);
+      else {
+        context.fillText(lines[0], w / 2, h * .36, w - 36);
+        context.fillText(lines[1], w / 2, h * .69, w - 36);
+      }
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'utility') {
+      const fill = tone === 'recording' ? '#6b3240' : tone === 'voice' ? '#294a43' : '#342a34';
+      const stroke = tone === 'recording' ? '#f29eaa' : tone === 'voice' ? '#7bc2ae' : '#ffffff35';
+      round(2, 2, w - 4, h - 4, 17, fill, stroke);
+      if (tone === 'recording') {
+        context.fillStyle = '#ff9ca8';
+        context.beginPath();
+        context.arc(28, h / 2, 7, 0, Math.PI * 2);
+        context.fill();
+      }
+      context.textAlign = 'center';
+      context.fillStyle = '#fff2e8';
+      context.font = `680 20px ${font}`;
+      context.fillText(text, tone === 'recording' ? w / 2 + 8 : w / 2, h * .52, w - 34);
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'status') {
+      round(2, 2, w - 4, h - 4, 16, '#38162dcc', '#f9a8d433');
+      context.textAlign = 'center';
+      context.fillStyle = '#dfcfc5';
+      context.font = `560 18px ${font}`;
+      if (context.measureText(text).width <= w - 38) context.fillText(text, w / 2, h * .52, w - 38);
+      else {
+        const words = text.split(/\s+/);
+        const lines = [''];
+        for (const word of words) {
+          const candidate = lines.at(-1) ? lines.at(-1) + ' ' + word : word;
+          if (lines.at(-1) && context.measureText(candidate).width > w - 54 && lines.length < 2) lines.push(word);
+          else lines[lines.length - 1] = candidate;
+        }
+        context.font = `560 17px ${font}`;
+        context.fillText(lines[0], w / 2, h * .34, w - 42);
+        context.fillText(lines[1] ?? '', w / 2, h * .70, w - 42);
+      }
+      map.needsUpdate = true;
+      return;
+    }
+    if (kind === 'caption') {
+      context.textAlign = 'left';
+      context.fillStyle = '#fff5fa';
+      let size = 48;
+      let lines;
+      const maxWidth = w - 120;
+      while (size >= 34) {
+        context.font = `520 ${size}px ${font}`;
+        lines = [''];
+        for (const word of text.split(/\s+/)) {
+          const candidate = lines.at(-1) ? lines.at(-1) + ' ' + word : word;
+          if (lines.at(-1) && context.measureText(candidate).width > maxWidth) lines.push(word);
+          else lines[lines.length - 1] = candidate;
+        }
+        if (lines.length <= 3) break;
+        size -= 2;
+      }
+      if (lines.length > 3) {
+        lines = lines.slice(0, 3);
+        while (context.measureText(lines[2] + '…').width > maxWidth) lines[2] = lines[2].slice(0, -1);
+        lines[2] += '…';
+      }
+      const spacing = size * 1.38;
+      const start = h / 2 - (lines.length - 1) * spacing / 2;
+      lines.forEach((line, i) => context.fillText(line, 60, start + i * spacing));
+      map.needsUpdate = true;
+      return;
+    }
+    round(2, 2, w - 4, h - 4, 22, kind === 'heading' ? '#33262ff5' : '#34252def', '#f2c4a52e');
+    let y = eyebrow ? 43 : h * .52;
+    context.textAlign = kind === 'heading' ? 'left' : 'center';
+    if (eyebrow) {
+      context.fillStyle = '#e3a77f';
+      context.font = `750 26px ${font}`;
+      context.fillText(eyebrow, kind === 'heading' ? 46 : w / 2, y, w - 92);
+      y = 116;
+    }
+    const size = kind === 'heading' ? 43 : h > 160 ? 52 : h * .48;
+    context.font = `650 ${size}px ${font}`;
+    context.fillStyle = '#fff4e8';
     const lines = [''];
     for (const word of text.split(/\s+/)) {
       const line = lines.at(-1);
       const candidate = line ? line + ' ' + word : word;
-      if (line && context.measureText(candidate).width > w - 54) lines.push(word);
+      if (line && context.measureText(candidate).width > w - (kind === 'heading' ? 92 : 54)) lines.push(word);
       else lines[lines.length - 1] = candidate;
     }
     const spacing = size * 1.10;
@@ -747,7 +1114,8 @@ function textPlane(THREE, width, height, initial, w, h, button = false) {
     context.save();
     context.translate(0, top);
     context.scale(1, Math.min(1, (h - top - size * .52) / Math.max(spacing, (lines.length - 1) * spacing)));
-    for (const [i, line] of lines.entries()) context.fillText(line, w / 2, i * spacing, w - 44);
+    for (const [i, line] of lines.entries())
+      context.fillText(line, kind === 'heading' ? 46 : w / 2, i * spacing, w - (kind === 'heading' ? 92 : 44));
     context.restore();
     map.needsUpdate = true;
   };
@@ -760,28 +1128,32 @@ function createFeelingBars(THREE) {
   const paint = canvas.getContext('2d');
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(.53, .174), new THREE.MeshBasicMaterial({
-    map: texture, transparent: true, toneMapped: false, depthWrite: false
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(.56, .184), new THREE.MeshBasicMaterial({
+    map: texture, transparent: true, toneMapped: false, depthWrite: false, depthTest: false
   }));
   mesh.name = 'Date feelings';
-  const rows = [['interest','Interesse','#90d7a4'],['awkwardness','Tensão','#f6b184'],
-    ['patience','Paciência','#94c6ec'],['safety','Conforto','#ecc0e1']];
+  mesh.renderOrder = 10021;
+  const rows = [['interest','Interesse','#f472b6'],['awkwardness','Tensão','#ec4899'],
+    ['patience','Paciência','#f9a8d4'],['safety','Conforto','#fbcfe8']];
   let previous;
   mesh.userData.draw = values => {
     const key = rows.map(([name]) => values[name]).join(',');
     if (previous === key) return;
     previous = key;
     paint.clearRect(0,0,720,236);
-    paint.fillStyle = '#271d2bea';
+    paint.fillStyle = '#38162de8';
     paint.beginPath();
-    paint.roundRect(0,0,720,236,20);
+    paint.roundRect(4,4,712,228,24);
     paint.fill();
-    paint.font = '700 35px system-ui';
+    paint.lineWidth = 4;
+    paint.strokeStyle = '#f9a8d4';
+    paint.stroke();
+    paint.font = `650 35px ${hudFont}`;
     rows.forEach(([name,label,color], index) => {
       const y = 25 + index * 53;
-      paint.fillStyle = '#fff2dd';
+      paint.fillStyle = '#fff5fa';
       paint.fillText(label, 28, y + 27);
-      paint.fillStyle = '#534257';
+      paint.fillStyle = '#693653';
       paint.fillRect(215, y, 470, 28);
       paint.fillStyle = color;
       paint.fillRect(215, y, 470 * values[name] / 100, 28);

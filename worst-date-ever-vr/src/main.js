@@ -385,8 +385,9 @@ function setup(scene, root, data) {
       if (look) look.mouseDown = false;
     });
     canvas.addEventListener('pointermove', event => {
-      if (desktopGesture !== event.pointerId) return;
       const orientation = setDesktopRay(event);
+      date?.active()?.focus(ray);
+      if (desktopGesture !== event.pointerId) return;
       if (date?.active()) { date.active().move('mouse', ray, orientation); return; }
       const held = inputs.get('mouse');
       if (held) scenePhysics.updateGrab('mouse', ray.ray.at(held.distance, new THREE.Vector3()), orientation);
@@ -486,6 +487,7 @@ function setup(scene, root, data) {
     control.stick.set(gamepad?.axes[2] ?? 0, gamepad?.axes[3] ?? 0);
     pointRay(THREE, ray, aim);
     ray.far = 4.7;
+    venue?.focus(ray);
     displayRay(control, aim, 2.2);
     const events = controllerButtons?.read(source) ?? [false,false];
     const pressed = [trigger > .55 || events[0], squeeze > .55 || events[1]];
@@ -923,6 +925,7 @@ function setup(scene, root, data) {
     reset: phone.reset,
     onGesture() { middleFingerUntil = elapsed + 1.25; },
     viewerPosition() { return viewer().getWorldPosition(new THREE.Vector3()); },
+    viewerDirection() { return new THREE.Vector3(0, 0, -1).applyQuaternion(viewer().getWorldQuaternion(new THREE.Quaternion())); },
     change(stage) {
       if (stage) {
         leavePhone();

@@ -6,6 +6,16 @@
     {
       "type": "object",
       "additionalProperties": false,
+      "required": ["type", "sessionId", "turnId"],
+      "properties": {
+        "type": { "const": "npc.initiate" },
+        "sessionId": { "type": "string", "minLength": 1 },
+        "turnId": { "type": "integer", "minimum": 1 }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
       "required": [
         "type",
         "sessionId",

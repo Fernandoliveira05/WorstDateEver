@@ -112,6 +112,14 @@ export function createDateVoice({ handoff, director, observe }) {
     });
     if (active !== turn) return;
     packet(turn, 'date.context', { actions: turn.actions, ...(turn.world ? { world: turn.world } : {}) });
+    if (turn.mode === 'initiative') {
+      packet(turn, 'npc.initiate');
+      turn.started = true;
+      turn.sentEnd = true;
+      clearTimeout(turn.timeout);
+      turn.replyTimer = setTimeout(() => endTurn(messages.network), 16000);
+      return;
+    }
     packet(turn, 'audio.start', { format: { encoding: 'pcm_s16le', sampleRateHz: 16000, channels: 1 } });
     turn.started = true;
     clearTimeout(turn.timeout);
@@ -126,7 +134,7 @@ export function createDateVoice({ handoff, director, observe }) {
       return;
     }
     const view = director.view();
-    const turn = { sequence: view.session.turnSequence, actions: view.actions, world: observe?.(), abort: new AbortController(),
+    const turn = { mode: 'audio', sequence: view.session.turnSequence, actions: view.actions, world: observe?.(), abort: new AbortController(),
       frames: [], samples: 0 };
     active = turn;
     message = 'Abrindo o microfone…';
@@ -175,10 +183,22 @@ export function createDateVoice({ handoff, director, observe }) {
     }
   }
 
+  function initiate() {
+    if (!ready || active || !director.view().wantsInitiative) return false;
+    const view = director.view();
+    const turn = { mode: 'initiative', sequence: view.session.turnSequence, actions: view.actions,
+      world: observe?.(), abort: new AbortController(), frames: [], samples: 0 };
+    active = turn;
+    message = '';
+    turn.timeout = setTimeout(() => { if (active === turn) endTurn(messages.network); }, 20000);
+    void connect(turn).catch(() => { if (active === turn) endTurn(messages.network); });
+    return true;
+  }
+
   return {
     state: () => ({ ready, recording, consented, message, level: Math.ceil(level), busy: Boolean(active) }),
     toggle: () => active ? stop() : void begin(),
-    begin, stop, cancel,
+    begin, stop, cancel, initiate,
     choose(id) {
       if (director.choose(id)) endTurn();
     }

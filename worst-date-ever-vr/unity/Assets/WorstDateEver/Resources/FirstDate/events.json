@@ -4,6 +4,9 @@
     {
       "id": "water_spill",
       "category": "major",
+      "visual": "water_spill",
+      "minElapsedSeconds": 70,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -11,7 +14,7 @@
         "bar"
       ],
       "weight": 3,
-      "cooldownSeconds": 45,
+      "cooldownSeconds": 120,
       "prerequisites": [
         "date_seated"
       ],
@@ -45,6 +48,10 @@
     {
       "id": "wrong_order",
       "category": "minor",
+      "visual": "wrong_order",
+      "personaIds": ["rafa", "bia"],
+      "minElapsedSeconds": 65,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -52,7 +59,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 105,
       "prerequisites": [
         "date_seated"
       ],
@@ -79,6 +86,11 @@
     {
       "id": "loud_guest",
       "category": "minor",
+      "visual": "loud_guest",
+      "personaIds": ["luiza", "rafa"],
+      "minElapsedSeconds": 75,
+      "minConversationTurns": 2,
+      "relationshipCondition": { "patience": { "min": 30 } },
       "venueIds": [
         "cafe",
         "sushi",
@@ -86,7 +98,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 100,
       "prerequisites": [
         "date_seated"
       ],
@@ -111,6 +123,10 @@
     {
       "id": "bathroom_mishap",
       "category": "minor",
+      "visual": "bathroom_mishap",
+      "personaIds": ["caio", "bia"],
+      "minElapsedSeconds": 80,
+      "minConversationTurns": 2,
       "venueIds": [
         "cafe",
         "sushi",
@@ -118,7 +134,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 110,
       "prerequisites": [
         "date_seated"
       ],
@@ -143,6 +159,9 @@
     {
       "id": "dropped_menu",
       "category": "minor",
+      "visual": "dropped_menu",
+      "minElapsedSeconds": 60,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -150,7 +169,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 95,
       "prerequisites": [
         "date_seated"
       ],
@@ -177,6 +196,11 @@
     {
       "id": "awkward_friend",
       "category": "major",
+      "visual": "awkward_friend",
+      "minElapsedSeconds": 85,
+      "minConversationTurns": 2,
+      "relationshipCondition": { "safety": { "min": 50 } },
+      "blockedAfterActions": ["impact_hard"],
       "venueIds": [
         "cafe",
         "sushi",
@@ -184,7 +208,7 @@
         "bar"
       ],
       "weight": 1,
-      "cooldownSeconds": 45,
+      "cooldownSeconds": 135,
       "prerequisites": [
         "date_seated"
       ],

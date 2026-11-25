@@ -42,9 +42,9 @@ namespace WorstDateEver
 
         [Serializable] public sealed class Event
         {
-            public string id;
-            public string[] venueIds;
-            public int weight, cooldownSeconds;
+            public string id, visual;
+            public string[] venueIds, personaIds;
+            public int weight, cooldownSeconds, minElapsedSeconds, minConversationTurns;
             public EventChoice[] choices;
             public string summaryTemplate;
         }
@@ -55,21 +55,19 @@ namespace WorstDateEver
             public string gesture;
         }
 
-        [Serializable] public sealed class Line
-        {
-            public string id, honest, joke, brag;
-            public string Get(string choice) => choice == "honest" ? honest : choice == "joke" ? joke : brag;
-        }
+        [Serializable] public sealed class ConversationOption : Choice { public string reply; }
+        [Serializable] public sealed class ConversationTurn { public ConversationOption[] options; }
+        [Serializable] public sealed class Conversation { public string id; public ConversationTurn[] turns; }
 
         [Serializable] public sealed class Presentation
         {
-            public string id, line, cue, prop, action;
+            public string id, personaId, line, cue, prop, action;
         }
 
         [Serializable] public sealed class Dialogue
         {
             public ReplyChoice[] choices;
-            public Line[] lines;
+            public Conversation[] conversations;
             public Presentation[] beats, outcomes;
         }
 
@@ -90,7 +88,7 @@ namespace WorstDateEver
         [Serializable] public sealed class Checkpoint
         {
             public string attempt, caption, gesture, outcome, beatId, beatPhase, summary;
-            public float time, nextBeat, endAt, beatAt, resolvedAt;
+            public float time, nextBeat, conversationReadyAt, endAt, beatAt, resolvedAt;
             public int talkTurns;
             public Session session;
             public ActionRecord[] actions;
@@ -113,8 +111,8 @@ namespace WorstDateEver
         private uint random;
         private readonly Event[] events;
         private readonly Dialogue dialogue;
-        private readonly Line lines;
-        private float beatAt, nextBeat = 10, resolvedAt, endAt;
+        private readonly Conversation conversation;
+        private float beatAt, nextBeat, conversationReadyAt, resolvedAt, endAt;
 
         public static Handoff Transfer(BedroomStory story)
         {
@@ -136,10 +134,12 @@ namespace WorstDateEver
         {
             Entry = handoff;
             random = unchecked((uint)seed);
+            var firstRoll = unchecked(1664525 * (random ^ 0x6d2b79f5u) + 1013904223) / 4294967296d;
+            nextBeat = 60f + (float)firstRoll * 30f;
             Person = Read<PersonaCatalog>("personas").personas.First(item => item.id == handoff.matchId);
             Venue = Read<VenueCatalog>("venues").venues.First(item => item.matchId == handoff.matchId);
             dialogue = Read<Dialogue>("dialogue");
-            lines = dialogue.lines.First(item => item.id == handoff.matchId);
+            conversation = dialogue.conversations.First(item => item.id == handoff.matchId);
             events = Read<EventCatalog>("events").events;
             State = new Session { sessionId = Guid.NewGuid().ToString(), matchId = Person.id, venueId = Venue.id, eventSeed = seed };
             Restore(checkpoint);
@@ -157,6 +157,7 @@ namespace WorstDateEver
             State = session;
             Time = saved.time;
             nextBeat = saved.nextBeat;
+            conversationReadyAt = saved.conversationReadyAt;
             endAt = saved.endAt;
             beatAt = saved.beatAt;
             resolvedAt = saved.resolvedAt;
@@ -168,7 +169,8 @@ namespace WorstDateEver
             Actions.AddRange(saved.actions);
             BeatPhase = saved.beatPhase;
             Beat = events.FirstOrDefault(item => item.id == saved.beatId);
-            BeatVisual = dialogue.beats.FirstOrDefault(item => item.id == saved.beatId);
+            BeatVisual = dialogue.beats.FirstOrDefault(item => item.id == saved.beatId && item.personaId == Person.id) ??
+                dialogue.beats.FirstOrDefault(item => item.id == saved.beatId && string.IsNullOrEmpty(item.personaId));
             for (var i = 0; i < session.completedEventIds.Length + (string.IsNullOrEmpty(session.activeEventId) ? 0 : 1); i++)
                 random = unchecked(1664525 * random + 1013904223);
         }
@@ -176,6 +178,7 @@ namespace WorstDateEver
         public Checkpoint Snapshot(string attempt) => new() {
             attempt = attempt, caption = Caption, gesture = Gesture, time = Time, talkTurns = TalkTurns,
             nextBeat = float.IsInfinity(nextBeat) ? 86400 : nextBeat,
+            conversationReadyAt = conversationReadyAt,
             endAt = endAt, beatAt = beatAt, resolvedAt = resolvedAt, summary = Summary,
             outcome = Outcome, beatId = Beat?.id, beatPhase = BeatPhase, session = State, actions = Actions.ToArray()
         };
@@ -194,17 +197,28 @@ namespace WorstDateEver
             if (State.phase == "seating" && Time >= 7.4f) SetPhase("dialogue", "seated");
             if (State.phase == "ending" && Time >= endAt) SetPhase("completed", "seated");
             if (State.phase != "dialogue") return;
-            if (BeatPhase == "announce" && Time >= beatAt + .6f) BeatPhase = "animate";
-            if (BeatPhase == "animate" && Time >= beatAt + 1.45f) BeatPhase = "choice_window";
-            if (BeatPhase == "resolve" && Time >= resolvedAt + 1.4f) BeatPhase = "cooldown";
+            if (BeatPhase == "announce" && Time >= beatAt + 1.2f) BeatPhase = "animate";
+            if (BeatPhase == "animate" && Time >= beatAt + 3.2f) BeatPhase = "choice_window";
+            if (BeatPhase == "resolve" && Time >= resolvedAt + 5f) BeatPhase = "cooldown";
             if (BeatPhase == "cooldown" && Time >= nextBeat) { Beat = null; BeatPhase = null; }
-            if (Beat != null || Time < nextBeat || !allowBeat) return;
-            var available = events.Where(item => item.venueIds.Contains(Venue.id) && !State.completedEventIds.Contains(item.id)).ToArray();
+            if (Beat != null || Time < nextBeat || TalkTurns < 1 || Time < conversationReadyAt || !allowBeat ||
+                State.completedEventIds.Length >= 4) return;
+            var available = events.Where(item => item.venueIds.Contains(Venue.id) && !State.completedEventIds.Contains(item.id) &&
+                (item.personaIds == null || item.personaIds.Length == 0 || item.personaIds.Contains(Person.id)) &&
+                Time >= item.minElapsedSeconds && TalkTurns >= item.minConversationTurns).ToArray();
             if (available.Length == 0) { nextBeat = float.PositiveInfinity; return; }
+            random = unchecked(1664525 * random + 1013904223);
+            if (random / 4294967296d > .34d)
+            {
+                random = unchecked(1664525 * random + 1013904223);
+                nextBeat = Time + 12f + (float)(random / 4294967296d) * 12f;
+                return;
+            }
             random = unchecked(1664525 * random + 1013904223);
             double sample = random / 4294967296d * available.Sum(item => item.weight);
             Beat = available.First(item => (sample -= item.weight) < 0);
-            BeatVisual = dialogue.beats.First(item => item.id == Beat.id);
+            BeatVisual = dialogue.beats.FirstOrDefault(item => item.id == Beat.id && item.personaId == Person.id) ??
+                dialogue.beats.First(item => item.id == Beat.id && string.IsNullOrEmpty(item.personaId));
             BeatPhase = "announce";
             beatAt = Time;
             State.activeEventId = Beat.id;
@@ -216,10 +230,11 @@ namespace WorstDateEver
         {
             if (State.phase != "dialogue") return Array.Empty<Choice>();
             if (BeatPhase == "choice_window") return Beat.choices;
-            if (Beat != null && BeatPhase != "cooldown") return Array.Empty<Choice>();
+            if (Beat != null && BeatPhase != "cooldown" || Time < conversationReadyAt) return Array.Empty<Choice>();
+            var turn = conversation.turns[Mathf.Min(TalkTurns, conversation.turns.Length - 1)];
             return TalkTurns >= 3 && State.completedEventIds.Length > 0 ?
-                dialogue.choices.Cast<Choice>().Append(new Choice { id = "finish", label = "Encerrar o encontro" }).ToArray() :
-                dialogue.choices;
+                turn.options.Cast<Choice>().Append(new Choice { id = "finish", label = "Pedir a conta" }).ToArray() :
+                turn.options;
         }
 
         public bool Choose(string id)
@@ -237,42 +252,48 @@ namespace WorstDateEver
                 BeatPhase = "resolve";
                 resolvedAt = Time;
                 nextBeat = Time + Beat.cooldownSeconds;
+                conversationReadyAt = Time + 5f;
                 Caption = BeatVisual.cue;
                 Gesture = "shrug";
                 return true;
             }
             if (Beat != null && BeatPhase != "cooldown") return false;
-            if (id == "finish" && TalkTurns >= 3 && State.completedEventIds.Length > 0)
+            if (id == "finish" && Time >= conversationReadyAt && TalkTurns >= 3 && State.completedEventIds.Length > 0)
             {
                 var relation = State.relationship;
                 Outcome = relation.interest <= 38 || relation.awkwardness >= 48 || relation.patience < 40 || relation.safety < 60 ? "disaster" :
                     relation.interest >= 63 && relation.awkwardness <= 26 ? "good" : "awkward";
                 Caption = dialogue.outcomes.First(outcome => outcome.id == Outcome).line;
                 SetPhase("ending", "seated");
-                endAt = Time + 1.2f;
+                endAt = Time + 4.5f;
                 return true;
             }
+            if (Time < conversationReadyAt) return false;
             var selected = dialogue.choices.FirstOrDefault(choice => choice.id == id);
-            if (selected == null) return false;
+            var turn = conversation.turns[Mathf.Min(TalkTurns, conversation.turns.Length - 1)];
+            var option = turn.options.FirstOrDefault(choice => choice.id == id);
+            if (selected == null || option == null) return false;
             var d = selected.delta;
             Adjust(new Delta { interest = d[0], awkwardness = d[1], patience = d[2], safety = d[3] });
             if (Actions.Count < 64) Actions.Add(new ActionRecord { eventId = "", choiceId = id });
-            Caption = lines.Get(id);
+            Caption = option.reply;
             Gesture = selected.gesture;
             TalkTurns++;
             State.turnSequence++;
+            conversationReadyAt = Time + 5.5f;
             return true;
         }
 
         public bool Remote(int sequence, string text, string gesture)
         {
-            if (sequence != State.turnSequence || State.phase != "dialogue" || Beat != null && BeatPhase != "cooldown" ||
+            if (sequence != State.turnSequence || State.phase != "dialogue" || Time < conversationReadyAt || Beat != null && BeatPhase != "cooldown" ||
                 string.IsNullOrWhiteSpace(text) || !Person.allowedGestures.Contains(gesture)) return false;
             var clean = text.Trim();
             Caption = clean.Substring(0, Mathf.Min(500, clean.Length));
             Gesture = gesture;
             TalkTurns++;
             State.turnSequence++;
+            conversationReadyAt = Time + 5.5f;
             return true;
         }
 
