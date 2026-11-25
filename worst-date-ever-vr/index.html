@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#211628">
+    <meta name="theme-color" content="#271836">
     <title>Worst Date Ever VR</title>
     <style>
       html, body { margin: 0; height: 100%; background: #211628; color: #fff4ea; font: 14px system-ui, sans-serif; }
@@ -13,6 +13,7 @@
       #loading strong { font-size: clamp(26px, 5vw, 48px); line-height: 1.1; }
       #loading span { margin-top: 14px; opacity: .8; }
       #narrator { left: 50%; bottom: 81px; transform: translateX(-50%); max-width: min(80vw, 620px); text-align: center; pointer-events: none; }
+      body.menu-open #narrator { bottom: 53px; }
       #narrator:empty { display: none; }
       #controls, #narrator { padding: 10px 13px; border-radius: 10px; background: #211628e8; }
       #controls { left: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 7px 12px; align-items: center; max-width: calc(100% - 105px); }
@@ -21,6 +22,7 @@
       #enter-vr { background: #f6dcdf; color: #271836; border: 0; border-radius: 9px; padding: 11px 18px; font: 750 15px system-ui, sans-serif; cursor: pointer; }
       #enter-vr:disabled { opacity: .75; cursor: default; }
       #vr-status { margin: 0; max-width: min(345px, 80vw); background: #211628f5; padding: 8px 12px; border-radius: 8px; }
+      .menu-accessibility { position: fixed; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; }
       body.immersive #controls, body.immersive #narrator, body.immersive #vr-entry { display: none; }
     </style>
   </head>
@@ -29,8 +31,10 @@
       <strong>Worst Date Ever VR</strong>
       <span>Carregando o quarto…</span>
     </div>
+    <div class="menu-accessibility" id="menu-status" aria-live="polite"></div>
     <div id="narrator" aria-live="polite"></div>
     <div id="controls" aria-label="Controles">
+      <button id="open-game-menu" type="button">Menu</button>
       <button id="readPhone" type="button">Ler celular</button>
       <button id="changeTime" type="button">Mudar horário</button>
       <span>WASD · andar | Arrastar · olhar | Clique direito · pegar/soltar</span>

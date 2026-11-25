@@ -31,8 +31,8 @@ export function wireVrEntry(scene, controls, browser = window) {
     let session;
     try {
       // Keep the request in this click so the browser can use its user activation.
-      const { optionalFeatures } = scene.systems.webxr.sessionConfiguration;
-      session = await xr.requestSession(mode, { optionalFeatures });
+      const { optionalFeatures = [] } = scene.systems.webxr.sessionConfiguration;
+      session = await xr.requestSession(mode, { optionalFeatures: [...new Set([...optionalFeatures, 'hand-tracking'])] });
       let floor;
       try { floor = await session.requestReferenceSpace('local-floor'); }
       catch { /* A standing-height offset is used with local tracking below. */ }

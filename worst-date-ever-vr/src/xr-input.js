@@ -1,8 +1,12 @@
-export function sampleSpace(THREE, scene, rig, space) {
+export function currentXrFrame(scene) {
+  return scene.renderer?.xr?.getFrame?.() ?? scene.frame;
+}
+
+export function sampleSpace(THREE, scene, rig, space, frame = currentXrFrame(scene)) {
   const reference = scene.renderer.xr.getReferenceSpace();
-  if (!space || !reference || !scene.frame) return null;
+  if (!space || !reference || !frame) return null;
   let pose;
-  try { pose = scene.frame.getPose(space, reference); }
+  try { pose = frame.getPose(space, reference); }
   catch { return null; }
   if (!pose) return null;
   const matrix = new THREE.Matrix4().fromArray(pose.transform.matrix);
@@ -46,7 +50,7 @@ export function nativeControllerButtons(session) {
   const types = {'selectstart':[0,true], 'selectend':[0,false], 'squeezestart':[1,true], 'squeezeend':[1,false]};
   const listeners = Object.entries(types).map(([type, [index, held]]) => {
     const listener = ({ inputSource }) => {
-      if (!inputSource || inputSource.hand) return;
+      if (!inputSource) return;
       let state = states.get(inputSource);
       if (!state) states.set(inputSource, state = { held: [false,false], pending: [false,false] });
       state.held[index] = held;

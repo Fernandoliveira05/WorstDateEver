@@ -1,5 +1,6 @@
 // Shared reference behavior for feature 002 (does NOT render the VR scene).
 // Unity implements the same transitions using the JSON contracts and test fixtures.
+import { candyById } from '../candies.mjs';
 import { eligibleProfiles } from '../profiles.mjs';
 
 const VENUES = Object.freeze({caio:'cafe', rafa:'sushi', bia:'bistro', luiza:'bar'});
@@ -11,6 +12,7 @@ export function validateSceneHandoff(state) {
     ['men','women','all'].includes(state.preference) &&
     Object.hasOwn(VENUES, state.matchId) && SUPPORTED_SUBSTANCES.has(state.substance) &&
     (state.profileIndex === undefined || (Number.isInteger(state.profileIndex) && state.profileIndex >= 0)) &&
+    (state.candy == null || candyById(state.candy)) &&
     eligibleProfiles(state.preference).some(p => p.id === state.matchId));
 }
 
@@ -20,6 +22,7 @@ export function createDateSession(handoff, sessionId, eventSeed = 1) {
   if (!Number.isInteger(eventSeed)) throw new Error('eventSeed must be integer');
   return {
     schemaVersion: 1, sessionId, matchId: handoff.matchId, venueId: VENUES[handoff.matchId],
+    ...(handoff.candy ? { candy: handoff.candy } : {}),
     phase: 'waiting', arrivalState: 'not_started', eventSeed,
     turnSequence: 0, activeEventId: null, completedEventIds: [],
     relationship: {interest:50,awkwardness:20,patience:70,safety:100}

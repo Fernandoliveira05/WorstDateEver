@@ -1,3 +1,4 @@
+import { candyById } from './candies.mjs';
 import { eligibleProfiles } from './profiles.mjs';
 
 export const STORAGE_KEY = 'worst-date-ever-vr-bedroom-v1';
@@ -11,7 +12,7 @@ const ALLOWED_SUBSTANCES = ['none', 'weed', 'lsd', 'alcohol', 'dmt'];
 export function initialState() {
   return {
     schemaVersion: 1, phase: PHASES.INTRO, avatarGender: null,
-    preference: null, profileIndex: 0, matchId: null, substance: null
+    preference: null, profileIndex: 0, matchId: null, substance: null, candy: null
   };
 }
 
@@ -61,6 +62,10 @@ export function transition(state, action) {
       next.substance = action.value;
       next.phase = action.value === 'dmt' ? PHASES.AFTERMATH : PHASES.EXIT;
       break;
+    case 'EAT_CANDY':
+      if (state.candy || state.phase === PHASES.AFTERMATH || !candyById(action.value)) return state;
+      next.candy = action.value;
+      break;
     case 'RESET':
       return initialState();
     default:
@@ -75,6 +80,7 @@ export function validateSave(value) {
   if (![null, 'male', 'female'].includes(value.avatarGender)) return false;
   if (![null, 'men', 'women', 'all'].includes(value.preference)) return false;
   if (!Number.isInteger(value.profileIndex) || value.profileIndex < 0) return false;
+  if (value.candy != null && !candyById(value.candy)) return false;
   if (![null, ...ALLOWED_SUBSTANCES].includes(value.substance)) return false;
   if (value.matchId !== null && !eligibleProfiles('all').some(p => p.id === value.matchId)) return false;
   if (value.phase === PHASES.BROWSE && value.profileIndex >= eligibleProfiles(value.preference).length) return false;

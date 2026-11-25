@@ -1,3 +1,4 @@
+import { candyAtmosphere } from '../candies.mjs';
 import { createNpcSpeech } from './npc-speech.js';
 import { impactClass, sweptContact } from './impact.js';
 import { createNpcClocks } from './npc-clock.js';
@@ -33,7 +34,7 @@ const themes = {
   bar: { wall: 0x817492, seat: 0x64557c, title: 'BAR · ÚLTIMO PEDIDO', sky: 0x3d4270 }
 };
 
-export async function createVenue(THREE, { venue, persona, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection }) {
+export async function createVenue(THREE, { venue, persona, candy, reducedEffects = () => false, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection }) {
   await loadHudFont();
   const theme = themes[venue.id];
   const speech = createNpcSpeech(persona.id);
@@ -127,11 +128,18 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     box([.16 + (i * .17) % .42, height, .04], [x, 1.02 + height / 2, -7.88],
       i % 2 ? mat(0x54485d) : mat(0x63536c));
   }
+  const lampFill = [];
   for (let x = -3.8; x <= 3.8; x += 3.8) {
     box([.035, .7, .035], [x, 2.93, -2.6], metal);
     cylinder([.39, .14, .39], [x, 2.55, -2.6], brass);
-    cylinder([.33, .015, .33], [x, 2.477, -2.6],
-      new THREE.MeshBasicMaterial({ color: 0xffd38e }));
+    const bulb = new THREE.MeshBasicMaterial({ color: 0xffd38e });
+    cylinder([.33, .015, .33], [x, 2.477, -2.6], bulb);
+    if (candy === 'morango') {
+      const spill = new THREE.PointLight(0xf48aa9, .64, 3.6, 2);
+      spill.position.set(x, 2.28, -2.6);
+      lights.add(spill);
+      lampFill.push({ bulb, spill });
+    }
   }
 
   const door = (x, z, color, rotation = 0) => {
@@ -417,7 +425,24 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   let renderedTime = 0;
   const hitTarget = new THREE.Vector3();
 
-  function audioCue(kind, source) { announce(kind, source); }
+  function audioCue(kind, source) { announce(kind, source, candyAtmosphere(candy, reducedEffects())); }
+
+  let previousEffects;
+  function updateCandyLighting() {
+    if (!candy) return;
+    const reduced = reducedEffects();
+    if (reduced === previousEffects) return;
+    previousEffects = reduced;
+    const effect = candyAtmosphere(candy, reduced);
+    light.color.setHex(0xffdcc0).lerp(new THREE.Color(0xffb765), .57 * effect.amber)
+      .lerp(new THREE.Color(0xfff4e7), .66 * effect.clarity);
+    light.intensity = 2.1 + .28 * effect.amber + .09 * effect.clarity;
+    for (const { bulb, spill } of lampFill) {
+      bulb.color.setHex(0xffd38e).lerp(new THREE.Color(0xff9bbd), .80 * effect.rose);
+      spill.intensity = .78 * effect.rose;
+    }
+  }
+  updateCandyLighting();
   function resetProp(prop) {
     if (prop.owner) return;
     prop.releasedAt = null;
@@ -435,6 +460,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   }
 
   function tick(dt, view) {
+    updateCandyLighting();
     current = view;
     tickSeconds = dt;
     npcClock ??= createNpcClocks(view.session.eventSeed);
@@ -570,7 +596,10 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       splash[i].visible = water;
       splash[i].position.set(-.32 + Math.cos(i * 2.4) * .12, .793, -.13 + Math.sin(i * 2.4) * .15);
     }
-    if (renderedTime < 1 && t >= 1) audioCue('entrance', date.actor.position);
+    if (renderedTime < 1 && t >= 1) {
+      audioCue('entrance', date.actor.position);
+      if (candy === 'hortela') audioCue('mint', date.actor.position);
+    }
     if (moving && Math.floor(t * 2) !== Math.floor(renderedTime * 2)) audioCue('step', date.actor.position);
     if (Math.floor(t / 6) > Math.floor(renderedTime / 6)) audioCue('ambience', actors[5].actor.position);
     renderedTime = t;

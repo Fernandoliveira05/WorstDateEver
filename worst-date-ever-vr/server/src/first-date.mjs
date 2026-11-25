@@ -1,3 +1,4 @@
+import { candyById, candyChoiceId, candyMoment, candyReply } from '../../src/candies.mjs';
 import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { randomBytes, randomUUID, timingSafeEqual } from 'node:crypto';
@@ -105,6 +106,7 @@ function syncContext(owner, actions) {
   if (!Array.isArray(actions) || actions.length > 64 || owner.actions.length > actions.length) return false;
   let snapshot = owner.session;
   let summary = owner.summary;
+  let memorable = owner.memorable;
   for (let i = 0; i < actions.length; i++) {
     const entry = actions[i];
     if (typeof entry?.choiceId !== 'string' || typeof entry.eventId !== 'string') return false;
@@ -123,6 +125,13 @@ function syncContext(owner, actions) {
         owner.eventDecisions ??= [];
         owner.eventDecisions.push({ event: resolved.contextSummary, playerChoice: selected.label });
         owner.eventDecisions = owner.eventDecisions.slice(-8);
+      } else if (entry.choiceId === candyChoiceId) {
+        const candy = candyById(snapshot.candy);
+        if (!candy || actions.slice(0, i).some(action => action.choiceId === candyChoiceId)) return false;
+        const reaction = candyReply(snapshot.candy, snapshot.matchId, snapshot.relationship);
+        snapshot = applyApprovedDelta(snapshot, reaction.delta);
+        summary = 'O jogador disse: ' + candy.choice + ' Resposta: ' + reaction.line;
+        memorable = candyMoment(snapshot.candy, candy.choice, reaction.line) ?? memorable;
       } else {
         const choice = [...choices, ...physicalActions].find(item => item.id === entry.choiceId);
         if (!choice) return false;
@@ -134,6 +143,7 @@ function syncContext(owner, actions) {
   owner.actions = actions.map(({ eventId, choiceId }) => ({ eventId, choiceId }));
   owner.session = snapshot;
   owner.summary = summary;
+  owner.memorable = memorable;
   return true;
 }
 
@@ -160,7 +170,9 @@ function bindTurn(client, owner, providers, speech) {
     const activeEvent = events.find(item => item.id === owner.world?.event?.id);
     const validEventSuggestions = events.filter(item => item.venueIds.includes(venue.id) &&
       (!item.personaIds?.length || item.personaIds.includes(persona.id))).map(item => item.id);
-    const fields = await providers.reply({ persona, venue, text, initiative, history: owner.history,
+    const candy = candyById(owner.session.candy);
+    const candyContext = candy ? { name: candy.name, direction: candy.direction, rememberedMoment: owner.memorable ?? null } : null;
+    const fields = await providers.reply({ persona, venue, text, initiative, candyContext, history: owner.history,
       eventDecisions: owner.eventDecisions ?? [],
       memory: owner.memory, relationship: owner.session.relationship, eventSummary: owner.summary ?? '',
       event: activeEvent ? { id: activeEvent.id, choices: activeEvent.choices.map(({ id, label }) => ({ id, label })) } : null,
@@ -182,6 +194,7 @@ function bindTurn(client, owner, providers, speech) {
     owner.memory = { facts: merge(owner.memory.facts, memory.facts, 10),
       contradictions: merge(owner.memory.contradictions, memory.contradictions, 6),
       topics: merge(owner.memory.topics, memory.topics, 8) };
+    if (!initiative) owner.memorable = candyMoment(owner.session.candy, text, reply.text) ?? owner.memorable;
     owner.history = [...owner.history, { player: initiative ? '' : text, npc: reply.text }].slice(-8);
     if (speech) reply.ttsRef = speech.register(persona.id, reply.text);
     send('npc.reply', { reply });

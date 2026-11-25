@@ -109,12 +109,12 @@ test('voice transport enforces session and turn order, derives context, and retu
     transcribe: async ({ pcm, sampleRate }) => {
       assert.ok(pcm.length >= 6400);
       assert.equal(sampleRate, 16000);
-      return 'Eu adorei o sushi.';
+      return contexts.length ? 'Eu prefiro ir com calma.' : 'Gostei de você. Tinha que dizer.';
     },
-    reply: async ({ persona, venue, initiative, history, memory, relationship, eventSummary }) => {
+    reply: async ({ persona, venue, initiative, history, memory, relationship, eventSummary, candyContext, text }) => {
       assert.equal(persona.id, 'rafa');
       assert.equal(venue.id, 'sushi');
-      contexts.push({ count: history.length, facts: memory.facts.slice(), initiative, interest: relationship.interest, eventSummary });
+      contexts.push({ count: history.length, facts: memory.facts.slice(), initiative, interest: relationship.interest, eventSummary, candyContext, text });
       return { text: initiative ? 'Você ficou quieta. Em que está pensando?' : 'Eu também. E quase pedi hambúrguer.',
         gesture: 'nod', intent: initiative ? 'ask_question' : 'smalltalk', emotion: 'warm',
         memory: { facts: initiative ? [] : ['jogadora gosta de sushi'], contradictions: [], topics: ['comida'] } };
@@ -129,7 +129,7 @@ test('voice transport enforces session and turn order, derives context, and retu
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state)
   });
   assert.equal((await issue({ ...entry, substance: 'dmt' })).status, 400);
-  const response = await issue(entry);
+  const response = await issue({ ...entry, candy: 'pacoca' });
   assert.equal(response.status, 201);
   const ticket = await response.json();
   const socket = token => new WebSocket(base.replace(/^http/, 'ws') + ticket.socketPath + '?token=' + token);
@@ -171,6 +171,11 @@ test('voice transport enforces session and turn order, derives context, and retu
   }
   assert.deepEqual(contexts.map(context => [context.count, context.interest]), [[0,58],[1,58]]);
   assert.match(contexts[1].eventSummary, /ajudou a limpar/);
+  assert.equal(contexts[0].candyContext.name, 'Paçoca');
+  assert.equal(contexts[0].candyContext.rememberedMoment, null);
+  assert.equal(contexts[0].text, 'Gostei de você. Tinha que dizer.');
+  assert.equal(contexts[1].text, 'Eu prefiro ir com calma.');
+  assert.equal(contexts[1].candyContext.rememberedMoment, 'aquele elogio direto');
   assert.equal((await run(2, []))[0].reason, 'sequence');
   assert.equal((await run(3, [Buffer.alloc(6400)]))[0].reason, 'silence');
   assert.equal((await run(4, [], [{eventId:'water_spill',choiceId:'invented'}]))[0].reason, 'context');

@@ -50,3 +50,25 @@ test('native select and squeeze events retain short taps between XR frames', asy
   assert.deepEqual(buttons.read(source), [false,false]);
   buttons.dispose();
 });
+
+test('XR pose sampling uses the active renderer frame when the scene frame has expired', () => {
+  const rig = new THREE.Group();
+  const transform = { matrix: new THREE.Matrix4().makeTranslation(.2, 1.2, -.3).elements };
+  const scene = {
+    renderer: { xr: { getReferenceSpace: () => ({}), getFrame: () => ({ getPose: () => ({ transform }) }) } },
+    frame: { getPose() { throw new Error('Expired frame'); } }
+  };
+  const hand = { handedness: 'left', hand: new Map(), targetRaySpace: {} };
+  assert.deepEqual(controllerSpaces(THREE, scene, rig, hand, 'left').aim.position.toArray(), [.2, 1.2, -.3]);
+});
+
+test('native hand select pulses survive missing or incomplete joint samples', async () => {
+  const { nativeControllerButtons } = await import('../src/xr-input.js');
+  const session = new EventTarget(), hand = { hand: new Map() };
+  const buttons = nativeControllerButtons(session);
+  for (const type of ['selectstart', 'selectend'])
+    session.dispatchEvent(Object.assign(new Event(type), { inputSource: hand }));
+  assert.deepEqual(buttons.read(hand), [true, false]);
+  assert.deepEqual(buttons.read(hand), [false, false]);
+  buttons.dispose();
+});

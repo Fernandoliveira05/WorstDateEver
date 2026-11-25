@@ -1,4 +1,6 @@
-import { conformJoint, flexionAngle, gripSurface, palmSign } from './grip-pose.mjs';
+import { conformJoint, flexionAngle, gripSurface, palmSign, gripCurls, phoneFingerTarget } from './grip-pose.mjs';
+
+const pointingCurls = [.31, 0, .77, .83, .89];
 
 const digits = [
   ['Thumb', [1, 2, 3, 4]],
@@ -112,6 +114,9 @@ export function createAvatarHand(THREE, model, named, side, wrist) {
     return bone && next ? [{ bone, next, joint, end: joints[i + 1], finger, i,
       restRotation: bone.quaternion.clone() }] : [];
   }));
+  const tip = fingers.findLast(segment => segment.finger === 1)?.next;
+  const pointAxis = tip ? getPosition(tip).sub(getPosition(index)).normalize().applyQuaternion(rest.clone().invert())
+    : new THREE.Vector3(0, 0, -1);
   const joints = [...new Set([wrist, ...fingers.flatMap(segment => [segment.bone, segment.next])])];
   const saved = joints.map(bone => ({ bone, position: new THREE.Vector3(), rotation: new THREE.Quaternion() }));
   let posed = false;
@@ -149,11 +154,19 @@ export function createAvatarHand(THREE, model, named, side, wrist) {
         else trackedBasis.slerp(candidate, .72);
       }
     } else trackedBasis = null;
-    if (native && !trackedBasis) {
+    if (native && !trackedBasis && !pose.preset) {
       for (const mesh of meshes) mesh.visible = false;
       return;
     }
-    const basis = native ? trackedBasis : pose.orientation;
+    const basis = (native && !pose.preset ? trackedBasis : pose.orientation).clone();
+    const aiming = (pose.rayHold || pose.phonePoint) && pose.pointDirection?.lengthSq() > .5 &&
+      !pose.preset && !pose.heldBody && !pose.gesture;
+    const rayTilt = new THREE.Quaternion();
+    if (aiming) {
+      const forward = pointAxis.clone().applyQuaternion(basis);
+      rayTilt.setFromUnitVectors(forward, pose.pointDirection);
+      basis.premultiply(rayTilt);
+    }
     wrist.position.copy(wrist.parent.worldToLocal(pose.position.clone()));
     rotateTo(wrist, basis.clone().multiply(offset));
     const flexionAxis = new THREE.Vector3(palmSign(side), 0, 0).applyQuaternion(basis);
@@ -166,19 +179,24 @@ export function createAvatarHand(THREE, model, named, side, wrist) {
       if (along.lengthSq() < .5) continue;
       const metacarpal = finger !== 0 && i === 0;
       const rotation = bone.getWorldQuaternion(new THREE.Quaternion());
-      if (native && (!pose.gesture || surface)) {
-        const desired = joint(segment.end).sub(joint(segment.joint)).normalize();
+      if (pose.preset === 'phone' && pose.heldBody) {
+        const desired = phoneFingerTarget(THREE, pose.heldBody, side, finger, i)
+          .sub(getPosition(bone)).normalize();
+        rotation.premultiply(new THREE.Quaternion().setFromUnitVectors(along, desired));
+      } else if (native && !pose.preset && !pose.phonePoint && (!pose.gesture || surface)) {
+        const desired = joint(segment.end).sub(joint(segment.joint)).normalize().applyQuaternion(rayTilt);
         if (desired.lengthSq() > .5)
           rotation.premultiply(new THREE.Quaternion().setFromUnitVectors(along, desired));
       } else if (!metacarpal) {
         const trigger = pose.trigger ?? 0, grip = pose.squeeze ?? 0;
         const curl = pose.gesture === 'middle_finger' && !surface ? (finger === 2 ? 0 : .94) :
-          finger === 1 ? .13 + Math.max(trigger, surface ? grip * .74 : 0) * .68 : .35 + grip * .47;
-        const angle = finger === 0 ? curl * .36 : curl;
+          (pose.phonePoint || aiming && grip < .16) ? pointingCurls[finger] :
+          finger === 1 ? Math.max(trigger, grip * .96) * .94 : grip * 1.04;
+        const angle = gripCurls[pose.preset]?.[finger] ?? (finger === 0 ? curl * .36 : curl);
         rotation.premultiply(new THREE.Quaternion().setFromAxisAngle(flexionAxis, angle));
       }
       rotateTo(bone, rotation);
-      if (surface && !metacarpal) {
+      if (surface && !metacarpal && pose.preset !== 'phone') {
         const origin = getPosition(bone), end = getPosition(next);
         const flexion = flexionAngle(along, end.clone().sub(origin), flexionAxis);
         // Open to fit a larger prop while keeping the adjusted joint in its flexion range.
@@ -188,6 +206,16 @@ export function createAvatarHand(THREE, model, named, side, wrist) {
         rotateTo(bone, rotation);
       }
     }
+    if (tip && pose.phoneTip) {
+      const fingerPoint = getPosition(tip);
+      const correction = pose.phoneTip.clone().sub(fingerPoint);
+      if (correction.lengthSq() < .105 ** 2) {
+        const target = getPosition(wrist).add(correction);
+        wrist.position.copy(wrist.parent.worldToLocal(target));
+        wrist.updateWorldMatrix(true, true);
+      }
+    }
+    return tip?.getWorldPosition(new THREE.Vector3());
   }
 
   return { update, reset };

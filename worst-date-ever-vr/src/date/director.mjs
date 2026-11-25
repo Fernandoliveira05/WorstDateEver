@@ -1,3 +1,4 @@
+import { candyById, candyChoiceId, candyMoment, candyReply } from '../candies.mjs';
 import { advanceDatePhase, applyApprovedDelta, createDateSession } from './session-core.mjs';
 import { DEFAULT_EVENT_CONFIG, evaluateEventOpportunity, nextEventCheck, resolveEvent, seededRandom } from './event-core.mjs';
 
@@ -38,6 +39,8 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
   let summary = '';
   let endingAt = 0;
   let talkTurns = 0;
+  let memorable = null;
+  let candyConversation = false;
   let reaction;
   let speechRef;
   let revision = 0;
@@ -48,6 +51,7 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
     const validPhase = ['waiting','arriving','greeting','seating','dialogue','ending','completed'].includes(saved?.phase);
     if (validPhase && saved.matchId === session.matchId && saved.venueId === session.venueId &&
       saved.schemaVersion === 1 && saved.eventSeed === seed &&
+      (saved.candy ?? null) === (session.candy ?? null) &&
       Number.isFinite(checkpoint.time) && checkpoint.time >= 0 && checkpoint.time < 86400 &&
       Array.isArray(saved.completedEventIds) && saved.completedEventIds.length <= catalog.length &&
       saved.completedEventIds.every(id => catalog.some(definition => definition.id === id)) &&
@@ -71,6 +75,8 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
       talkTurns = checkpoint.talkTurns;
       summary = typeof checkpoint.summary === 'string' ? checkpoint.summary.slice(0,500) : '';
       actions.push(...checkpoint.actions);
+      memorable = typeof checkpoint.memorable === 'string' ? checkpoint.memorable.slice(0, 160) : null;
+      candyConversation = Boolean(checkpoint.candyConversation);
       if (event) beat = { definition: event, presentation: presentationFor(event.id),
         phase: checkpoint.beatPhase, at: checkpoint.beatAt, resolvedAt: checkpoint.resolvedAt,
         closesAt: checkpoint.closesAt ?? checkpoint.beatAt + 25,
@@ -144,22 +150,31 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
       result = dateOutcome(session.relationship);
       speechRef = null;
       caption = dialogue.outcomes.find(outcome => outcome.id === result).line;
+      if (memorable) caption += ' Ainda vou lembrar ' + memorable + '.';
+      gesture = memorable && persona.allowedGestures.includes('nod') ? 'nod' : gesture;
       session = advanceDatePhase(session, 'DATE_FINISHES');
       endingAt = time + 4.5;
       return true;
     }
     if (time < conversationReadyAt) return false;
+    const extra = id === candyChoiceId && !candyConversation ? candyReply(session.candy, persona.id, session.relationship) : null;
     const choice = dialogue.choices.find(choice => choice.id === id);
     const turn = conversation?.turns[Math.min(talkTurns, conversation.turns.length - 1)];
     const option = turn?.options.find(item => item.id === id);
-    if (!choice || !option) return false;
-    const delta = Object.fromEntries(dimensions.map((key, i) => [key, choice.delta[i]]));
+    if (!extra && (!choice || !option)) return false;
+    const delta = extra?.delta ?? Object.fromEntries(dimensions.map((key, i) => [key, choice.delta[i]]));
     session = { ...applyApprovedDelta(session, delta), turnSequence: session.turnSequence + 1 };
+    if (extra) {
+      candyConversation = true;
+      const name = candyById(session.candy).name;
+      if (session.candy !== 'tamarindo' || extra.gesture === 'laugh')
+        memorable = candyMoment(session.candy, candyById(session.candy).choice, extra.line) ?? ('um assunto que ' + name + ' trouxe à mesa');
+    }
     talkTurns++;
     if (actions.length < 64) actions.push({ eventId: '', choiceId: id });
     speechRef = null;
-    caption = option.reply;
-    gesture = choice.gesture;
+    caption = extra?.line ?? option.reply;
+    gesture = extra?.gesture ?? choice.gesture;
     conversationReadyAt = time + RESPONSE_HOLD;
     nextInitiativeAt = conversationReadyAt + 18 + eventRand() * 14;
     return true;
@@ -189,7 +204,7 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
     return true;
   }
 
-  function remote(turn, reply) {
+  function remote(turn, reply, playerSaid) {
     if (session.phase !== 'dialogue' ||
       turn !== session.turnSequence || typeof reply?.text !== 'string' ||
       time < conversationReadyAt || !persona.allowedGestures.includes(reply.gesture)) return false;
@@ -208,6 +223,7 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
       nextBeat = Math.max(nextBeat, time + beat.definition.cooldownSeconds);
     }
     if (reply.relationshipDelta) session = applyApprovedDelta(session, reply.relationshipDelta);
+    memorable = candyMoment(session.candy, playerSaid, line) ?? memorable;
     caption = line;
     speechRef = reply.ttsRef ?? null;
     gesture = reply.gesture;
@@ -230,9 +246,11 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
           choices = [{ id: 'finish', label: 'Pedir a conta' }];
         fallbackChoices = turn?.options.map(option => ({ ...option,
           gesture: dialogue.choices.find(choice => choice.id === option.id)?.gesture })) ?? dialogue.choices;
+        const candy = candyById(session.candy);
+        if (candy && !candyConversation) fallbackChoices = [...fallbackChoices, { id: candyChoiceId, label: candy.choice }];
       }
     }
-    return { session, time, beat, caption, gesture, result, summary, choices, actions: actions.slice(),
+    return { session, time, beat, caption, gesture, result, summary, memorable, choices, actions: actions.slice(),
       fallbackChoices,
       canSpeak: session.phase === 'dialogue' && time >= conversationReadyAt,
       reflecting: session.phase === 'dialogue' && time < conversationReadyAt,
@@ -244,7 +262,7 @@ export function createDateDirector(handoff, { sessionId, seed, catalog, persona,
 
   function snapshot() {
     return { session, time, nextBeat, lastEventAt, suggestedEventId, eventRolls, conversationReadyAt, nextInitiativeAt,
-      endingAt, result, caption, gesture, talkTurns, summary, actions: actions.slice(),
+      endingAt, result, caption, gesture, talkTurns, summary, memorable, candyConversation, actions: actions.slice(),
       beatId: beat?.definition.id, beatPhase: beat?.phase, beatAt: beat?.at, resolvedAt: beat?.resolvedAt,
       closesAt: beat?.closesAt, cooldownUntil: beat?.cooldownUntil };
   }

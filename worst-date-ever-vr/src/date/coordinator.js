@@ -30,7 +30,8 @@ export function createDateCoordinator(THREE, io) {
 
   function handoff(state) {
     const { schemaVersion, phase, avatarGender, preference, matchId, substance, profileIndex } = state;
-    return { schemaVersion, phase, avatarGender, preference, matchId, substance, profileIndex };
+    return { schemaVersion, phase, avatarGender, preference, matchId, substance, profileIndex,
+      ...(state.candy ? { candy: state.candy } : {}) };
   }
 
   async function start(state) {
@@ -45,7 +46,8 @@ export function createDateCoordinator(THREE, io) {
     try {
       const persona = personas.personas.find(person => person.id === payload.matchId);
       const venue = venues.venues.find(item => item.matchId === payload.matchId);
-      attempt = [payload.matchId, payload.avatarGender, payload.preference, payload.substance].join(':');
+      const key = [payload.matchId, payload.avatarGender, payload.preference, payload.substance];
+      attempt = (payload.candy ? [...key, payload.candy] : key).join(':');
       let checkpoint;
       try {
         const draft = JSON.parse(localStorage.getItem(draftKey));
@@ -55,7 +57,7 @@ export function createDateCoordinator(THREE, io) {
         seed: checkpoint?.session.eventSeed ?? Math.floor(Math.random() * 0x7fffffff),
         catalog: events.events, persona, dialogue, reactions, checkpoint });
       voice = createDateVoice({ handoff: payload, director, observe: () => stage?.observe() });
-      const ready = await createVenue(THREE, { ...io, venue, persona, voice, restart, recenter, react: (...args) => director.react(...args) });
+      const ready = await createVenue(THREE, { ...io, venue, persona, voice, candy: payload.candy, restart, recenter, react: (...args) => director.react(...args) });
       if (pending !== operation) { ready.dispose(); return; }
       saved = false;
       previousCheckpoint = null;
