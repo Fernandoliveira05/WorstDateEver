@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NpcReply",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sessionId",
+    "turnId",
+    "personaId",
+    "text",
+    "emotion",
+    "gesture",
+    "intent",
+    "relationshipDelta"
+  ],
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "turnId": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "personaId": {
+      "enum": [
+        "caio",
+        "rafa",
+        "bia",
+        "luiza"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 650
+    },
+    "emotion": {
+      "enum": [
+        "neutral",
+        "curious",
+        "warm",
+        "awkward",
+        "surprised",
+        "annoyed",
+        "embarrassed"
+      ]
+    },
+    "gesture": {
+      "enum": [
+        "none",
+        "nod",
+        "shrug",
+        "laugh",
+        "look_away",
+        "wave",
+        "sip"
+      ]
+    },
+    "intent": {
+      "enum": [
+        "smalltalk",
+        "ask_question",
+        "comment_event",
+        "order_food",
+        "boundary",
+        "end_date"
+      ]
+    },
+    "relationshipDelta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interest",
+        "awkwardness",
+        "patience",
+        "safety"
+      ],
+      "properties": {
+        "interest": {
+          "type": "integer",
+          "minimum": -10,
+          "maximum": 10
+        },
+        "awkwardness": {
+          "type": "integer",
+          "minimum": -10,
+          "maximum": 10
+        },
+        "patience": {
+          "type": "integer",
+          "minimum": -10,
+          "maximum": 10
+        },
+        "safety": {
+          "type": "integer",
+          "minimum": -10,
+          "maximum": 10
+        }
+      }
+    },
+    "suggestedEventId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ttsRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Server-signed short-lived audio reference only"
+    }
+  }
+}

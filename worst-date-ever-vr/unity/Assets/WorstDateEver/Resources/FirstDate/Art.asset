@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0115a6f73731acc8aabd71beb028539, type: 3}
+  m_Name: Art
+  m_EditorClassIdentifier: 
+  Characters:
+  - {fileID: 2242888416370347441, guid: 93d65bfbf52713ebdb6c5ed0410d79fe, type: 3}
+  - {fileID: 2242888416370347441, guid: 9cb22702d1c5aee88ba82b39e49228a7, type: 3}
+  - {fileID: 2242888416370347441, guid: 0de746e2d156daa60a4c64582571a22b, type: 3}
+  - {fileID: 2242888416370347441, guid: d80b067024c51ff11bae458fc7582a8c, type: 3}
+  - {fileID: 2242888416370347441, guid: 6b473633f9dbadb7ab250df98a82c980, type: 3}
+  - {fileID: 2242888416370347441, guid: d30a44acb76e2cf509e8c900a5269ccd, type: 3}
+  - {fileID: 2242888416370347441, guid: c863f77664553220ab72d7e017e35399, type: 3}
+  - {fileID: 2242888416370347441, guid: 16241a4e37eca433890e45ba38fd3298, type: 3}
+  - {fileID: 2242888416370347441, guid: a74bf5bf4c289cece836c3ded891a7cb, type: 3}
+  Walk:
+  - {fileID: -6380279988717983294, guid: 93d65bfbf52713ebdb6c5ed0410d79fe, type: 3}
+  - {fileID: -6380279988717983294, guid: 9cb22702d1c5aee88ba82b39e49228a7, type: 3}
+  - {fileID: -6380279988717983294, guid: 0de746e2d156daa60a4c64582571a22b, type: 3}
+  - {fileID: -6380279988717983294, guid: d80b067024c51ff11bae458fc7582a8c, type: 3}
+  - {fileID: -6380279988717983294, guid: 6b473633f9dbadb7ab250df98a82c980, type: 3}
+  - {fileID: -6380279988717983294, guid: d30a44acb76e2cf509e8c900a5269ccd, type: 3}
+  - {fileID: -6380279988717983294, guid: c863f77664553220ab72d7e017e35399, type: 3}
+  - {fileID: -6380279988717983294, guid: 16241a4e37eca433890e45ba38fd3298, type: 3}
+  - {fileID: -6380279988717983294, guid: a74bf5bf4c289cece836c3ded891a7cb, type: 3}
+  Idle:
+  - {fileID: -6736537688726264772, guid: 93d65bfbf52713ebdb6c5ed0410d79fe, type: 3}
+  - {fileID: -6736537688726264772, guid: 9cb22702d1c5aee88ba82b39e49228a7, type: 3}
+  - {fileID: -6736537688726264772, guid: 0de746e2d156daa60a4c64582571a22b, type: 3}
+  - {fileID: -6736537688726264772, guid: d80b067024c51ff11bae458fc7582a8c, type: 3}
+  - {fileID: -6736537688726264772, guid: 6b473633f9dbadb7ab250df98a82c980, type: 3}
+  - {fileID: -6736537688726264772, guid: d30a44acb76e2cf509e8c900a5269ccd, type: 3}
+  - {fileID: -6736537688726264772, guid: c863f77664553220ab72d7e017e35399, type: 3}
+  - {fileID: -6736537688726264772, guid: 16241a4e37eca433890e45ba38fd3298, type: 3}
+  - {fileID: -6736537688726264772, guid: a74bf5bf4c289cece836c3ded891a7cb, type: 3}
+  Walnut: {fileID: 2800000, guid: 9880b967f3c5b6467a20c2b6d7b03de2, type: 3}
+  Floor: {fileID: 2800000, guid: 4e2e0684824bcf44c9220edc0c540aed, type: 3}
+  Surface: {fileID: 2100000, guid: 7bc5c203f7496c35f9ed8aa57654bd57, type: 2}
+  Unlit: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}

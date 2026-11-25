@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GeneratedAssetEvaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assetId",
+    "assetHash",
+    "assetRole",
+    "baselineVersion",
+    "baselineComplete",
+    "rubricVersion",
+    "views",
+    "visualJudge",
+    "staticChecks",
+    "humanReview"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "assetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "assetRole": {
+      "enum": [
+        "common_prop",
+        "hero_prop",
+        "npc",
+        "environment"
+      ]
+    },
+    "baselineVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baselineComplete": {
+      "type": "boolean"
+    },
+    "rubricVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "views": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "visualJudge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modelId",
+        "modelVersion",
+        "confidence",
+        "scores",
+        "observations"
+      ],
+      "properties": {
+        "modelId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modelVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scores": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baselineFidelity",
+            "vrReadability",
+            "materialCoherence",
+            "semanticFit",
+            "defectFree"
+          ],
+          "properties": {
+            "baselineFidelity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "vrReadability": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "materialCoherence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "semanticFit": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "defectFree": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            }
+          }
+        },
+        "observations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "aspect",
+              "evidence",
+              "severity"
+            ],
+            "properties": {
+              "aspect": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1
+              },
+              "severity": {
+                "enum": [
+                  "info",
+                  "minor",
+                  "major",
+                  "blocking"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "staticChecks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provenance",
+        "meshHealth",
+        "scale",
+        "colliderAndGrip",
+        "rigIfRequired",
+        "exportCompatibility",
+        "questWeb",
+        "questUnity"
+      ],
+      "properties": {
+        "provenance": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "meshHealth": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "scale": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "colliderAndGrip": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "rigIfRequired": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "exportCompatibility": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "questWeb": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        },
+        "questUnity": {
+          "enum": [
+            "pass",
+            "fail",
+            "pending",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "humanReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved"
+      ],
+      "properties": {
+        "approved": {
+          "type": "boolean"
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "candidateSource": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#211628">
+    <title>Worst Date Ever VR</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #211628; color: #fff4ea; font: 14px system-ui, sans-serif; }
+      #loading, #narrator, #controls { position: fixed; z-index: 3; }
+      #loading { inset: 0; display: grid; place-content: center; text-align: center; background: #211628; }
+      #loading[hidden] { display: none; }
+      #loading strong { font-size: clamp(26px, 5vw, 48px); line-height: 1.1; }
+      #loading span { margin-top: 14px; opacity: .8; }
+      #narrator { left: 50%; bottom: 81px; transform: translateX(-50%); max-width: min(80vw, 620px); text-align: center; pointer-events: none; }
+      #narrator:empty { display: none; }
+      #controls, #narrator { padding: 10px 13px; border-radius: 10px; background: #211628e8; }
+      #controls { left: 12px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 7px 12px; align-items: center; max-width: calc(100% - 105px); }
+      #controls button { cursor: pointer; border: 0; border-radius: 6px; color: #271836; background: #f6dcdf; padding: 5px 9px; font: 650 13px system-ui, sans-serif; }
+      #vr-entry { position: fixed; z-index: 4; top: 14px; right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+      #enter-vr { background: #f6dcdf; color: #271836; border: 0; border-radius: 9px; padding: 11px 18px; font: 750 15px system-ui, sans-serif; cursor: pointer; }
+      #enter-vr:disabled { opacity: .75; cursor: default; }
+      #vr-status { margin: 0; max-width: min(345px, 80vw); background: #211628f5; padding: 8px 12px; border-radius: 8px; }
+      body.immersive #controls, body.immersive #narrator, body.immersive #vr-entry { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="loading" role="status">
+      <strong>Worst Date Ever VR</strong>
+      <span>Carregando o quarto…</span>
+    </div>
+    <div id="narrator" aria-live="polite"></div>
+    <div id="controls" aria-label="Controles">
+      <button id="readPhone" type="button">Ler celular</button>
+      <button id="changeTime" type="button">Mudar horário</button>
+      <span>WASD · andar | Arrastar · olhar | Clique direito · pegar/soltar</span>
+    </div>
+    <div id="vr-entry">
+      <button id="enter-vr" type="button" disabled>Entrar em VR</button>
+      <p id="vr-status" role="status" hidden></p>
+    </div>
+    <a-scene id="scene"
+      renderer="colorManagement: true; antialias: true; toneMapping: ACESFilmic; foveationLevel: 1"
+      shadow="type: pcfsoft"
+      webxr="referenceSpaceType: local-floor; optionalFeatures: local-floor, hand-tracking, bounded-floor"
+      xr-mode-ui="enabled: false"
+      wde-bedroom>
+      <a-entity id="rig">
+        <a-entity id="camera" position="0 1.43 -1.1" camera="active: true; near: .025; far: 170" look-controls wasd-controls="acceleration: 13"></a-entity>
+      </a-entity>
+      <a-entity id="room"></a-entity>
+    </a-scene>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

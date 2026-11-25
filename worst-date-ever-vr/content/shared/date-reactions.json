@@ -1,0 +1,5 @@
+[
+  {"id":"middle_finger","label":"Mostrar o dedo do meio","delta":[-5,6,-7,-2],"line":"Sério? Eu achei que a gente ainda estava conversando.","gesture":"look_away","context":"O jogador mostrou o dedo do meio."},
+  {"id":"impact_light","delta":[-2,4,-4,-4],"line":"Ei. Cuidado aí.","gesture":"look_away","context":"O personagem levou um esbarrão durante o encontro."},
+  {"id":"impact_hard","delta":[-8,9,-10,-10],"line":"Para. Se continuar assim, eu vou embora.","gesture":"look_away","context":"O personagem levou uma pancada e pediu que o jogador parasse."}
+]

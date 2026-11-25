@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DateVoiceContext",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "sessionId",
+    "turnId",
+    "actions"
+  ],
+  "properties": {
+    "type": {
+      "const": "date.context"
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "turnId": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "eventId",
+          "choiceId"
+        ],
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "choiceId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      }
+    },
+    "world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event",
+        "actors",
+        "held"
+      ],
+      "properties": {
+        "event": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "phase",
+                "remaining"
+              ],
+              "properties": {
+                "id": {
+                  "enum": [
+                    "water_spill",
+                    "wrong_order",
+                    "loud_guest",
+                    "bathroom_mishap",
+                    "dropped_menu",
+                    "awkward_friend"
+                  ]
+                },
+                "phase": {
+                  "enum": [
+                    "announce",
+                    "animate",
+                    "choice_window",
+                    "resolve",
+                    "cooldown"
+                  ]
+                },
+                "remaining": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 90
+                }
+              }
+            }
+          ]
+        },
+        "actors": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "activity",
+              "need",
+              "level",
+              "remaining"
+            ],
+            "properties": {
+              "id": {
+                "enum": [
+                  "date",
+                  "bathroom_guest",
+                  "diner",
+                  "table_companion",
+                  "arriving_guest",
+                  "waiter"
+                ]
+              },
+              "activity": {
+                "enum": [
+                  "seated",
+                  "walking",
+                  "away",
+                  "restroom",
+                  "eating",
+                  "talking",
+                  "serving",
+                  "waiting",
+                  "recoiling"
+                ]
+              },
+              "need": {
+                "enum": [
+                  "conforto",
+                  "banheiro",
+                  "comida",
+                  "conversa",
+                  "espera",
+                  "pedidos"
+                ]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "remaining": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 90
+              }
+            }
+          }
+        },
+        "held": {
+          "type": "array",
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "cup",
+              "plate",
+              "menu"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

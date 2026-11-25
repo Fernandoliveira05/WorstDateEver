@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "version": "PENDING_ACTUAL_PROJECT_INVENTORY",
+  "status": "incomplete",
+  "sourceRepository": "INSERT CURRENT WORKING REPO HASH",
+  "approvedAssetRefs": [],
+  "approvedSceneImageRefs": [],
+  "shaderConventions": [],
+  "geometryConventions": [],
+  "materialAndTextureConventions": [],
+  "characterRigConventions": [],
+  "scaleUnit": "meters; verify actual project source",
+  "colliderAndGripConventions": [],
+  "note": "The original provided bedroom starter has primitive placeholders. Do not invent the real existing style or approve new models until the team supplies the actual approved project exemplars."
+}

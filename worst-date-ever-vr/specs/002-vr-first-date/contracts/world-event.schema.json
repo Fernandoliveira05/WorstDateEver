@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorldEventDefinition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "category",
+    "venueIds",
+    "weight",
+    "cooldownSeconds",
+    "prerequisites",
+    "choices",
+    "summaryTemplate"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z_]+$"
+    },
+    "category": {
+      "enum": [
+        "minor",
+        "major"
+      ]
+    },
+    "venueIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "cafe",
+          "sushi",
+          "bistro",
+          "bar"
+        ]
+      }
+    },
+    "weight": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "cooldownSeconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "relationshipDelta",
+          "contextSummary"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "relationshipDelta": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "interest": {
+                "type": "integer",
+                "minimum": -10,
+                "maximum": 10
+              },
+              "awkwardness": {
+                "type": "integer",
+                "minimum": -10,
+                "maximum": 10
+              },
+              "patience": {
+                "type": "integer",
+                "minimum": -10,
+                "maximum": 10
+              },
+              "safety": {
+                "type": "integer",
+                "minimum": -10,
+                "maximum": 10
+              }
+            }
+          },
+          "contextSummary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      }
+    },
+    "summaryTemplate": {
+      "type": "string",
+      "maxLength": 300
+    }
+  }
+}

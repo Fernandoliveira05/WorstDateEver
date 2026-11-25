@@ -1,0 +1,60 @@
+{
+  "triangleCount": 5776,
+  "vertexCount": 11660,
+  "degenerateTriangles": 0,
+  "boundsMeters": {
+    "min": [
+      -0.26286181807518005,
+      -0.4706035554409027,
+      -0.0015326169086620212
+    ],
+    "max": [
+      0.3295493423938751,
+      0.16759507358074188,
+      1.808815836906433
+    ],
+    "dimensions": [
+      0.5924111604690552,
+      0.6381986141204834,
+      1.8103485107421875
+    ]
+  },
+  "pivots": {
+    "Icosphere": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "RootNode": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "meshObjects": 4,
+  "materialSlots": 10,
+  "armatures": {
+    "CharacterArmature": 62
+  },
+  "collisionMarkers": [],
+  "gripMarkers": [],
+  "staticChecks": {
+    "provenance": "pending",
+    "meshHealth": "pass",
+    "scale": "pending",
+    "colliderAndGrip": "pending",
+    "rigIfRequired": "pending",
+    "exportCompatibility": "pending",
+    "questWeb": "pending",
+    "questUnity": "pending"
+  },
+  "assetHash": "1ca98e7f64837e44a967e2a3e042b2ca7d264416892a85d31692ea835c2f757a",
+  "views": [
+    "front",
+    "back",
+    "left",
+    "right",
+    "top",
+    "three_quarter"
+  ]
+}

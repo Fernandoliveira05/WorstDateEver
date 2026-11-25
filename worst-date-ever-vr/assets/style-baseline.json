@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "version": "bedroom-working-assets-v1",
+  "status": "review_required",
+  "sourceRepository": "Current working bedroom exported scene SHA-256 daa2a4802bf0d2dffeeb6539621461887ecbf4399afaf4906bc4e4ebc69e70e3",
+  "approvedAssetRefs": [],
+  "approvedSceneImageRefs": [],
+  "existingAssetRefs": [
+    "caio",
+    "rafa",
+    "bia",
+    "luiza",
+    "playerwoman",
+    "playerman",
+    "jacketwoman",
+    "jacketman",
+    "formalman",
+    "cup",
+    "plate",
+    "menu",
+    "walnut",
+    "floorboards",
+    "weave"
+  ],
+  "existingSceneImageRefs": [
+    "assets/evidence/bedroom-entry.webp",
+    "assets/evidence/bedroom-desk.webp",
+    "assets/evidence/bedroom-textiles.webp"
+  ],
+  "shaderConventions": [
+    "Unity textured surfaces and matte ceramics",
+    "Three.js port reuses embedded bedroom maps"
+  ],
+  "geometryConventions": [
+    "Ceramic lip and curved mug handle",
+    "Wooden furniture frames with visible edges and joints"
+  ],
+  "materialAndTextureConventions": [
+    "Walnut timber",
+    "Floorboards",
+    "Woven cushions",
+    "Matte glazed ceramics"
+  ],
+  "characterRigConventions": [
+    "Existing Quaternius armatures, bone names and walk/idle clips"
+  ],
+  "scaleUnit": "meters",
+  "colliderAndGripConventions": [
+    "Resting bodies use solid collision",
+    "Near grab and accessible controller ray"
+  ],
+  "note": "Evidence from the current game. Art owner approval has not been recorded."
+}
