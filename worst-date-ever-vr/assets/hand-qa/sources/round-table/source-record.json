@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "round-table",
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/08-round-table.png",
+  "provider": "3dassets.dev",
+  "title": "Round pedestal pub table, ebonised (Bar, Pub and Brewery Taproom)",
+  "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9",
+  "download": "https://cdn.3dassets.dev/assets/18394/v1/model.glb",
+  "pack": "bar-pub-and-brewery-taproom",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 45244,
+    "triangles": 892,
+    "vertices": 2676,
+    "meshes": 3,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.36800000071525574,
+        0,
+        -0.36800000071525574
+      ],
+      "max": [
+        0.36800000071525574,
+        0.7500065034230089,
+        0.36800000071525574
+      ]
+    },
+    "sizeMeters": [
+      0.736,
+      0.75,
+      0.736
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/round-table/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9.glb",
+    "sha256": "9680947848c64ecdc3cc990fb46578f1531abd62d42fe1e2c4cb5df311f68a66",
+    "bytes": 45244
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/round-table.glb",
+    "sha256": "9680947848c64ecdc3cc990fb46578f1531abd62d42fe1e2c4cb5df311f68a66",
+    "bytes": 45244
+  }
+}

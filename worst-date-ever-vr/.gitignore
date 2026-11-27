@@ -15,3 +15,10 @@ assets/hand-qa/sources/**/*.glb
 assets/tripo/generated/
 assets/tripo/preflight.json
 assets/tripo/qa/
+
+# Accidental root-level Unity caches
+/Library/
+/Logs/
+/UserSettings/
+/Packages/
+/ProjectSettings/

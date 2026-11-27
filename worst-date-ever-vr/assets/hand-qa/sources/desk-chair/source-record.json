@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "desk-chair",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/04-desk-chair.png",
+  "provider": "3dassets.dev",
+  "title": "Desk Task Chair (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-task-chair-e1320da0",
+  "download": "https://cdn.3dassets.dev/assets/38786/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 68252,
+    "triangles": 1648,
+    "vertices": 3518,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.2949919713792444,
+        0,
+        -0.3225574433977732
+      ],
+      "max": [
+        0.31199199092956786,
+        1.039657711982727,
+        0.3105301702657763
+      ]
+    },
+    "sizeMeters": [
+      0.607,
+      1.04,
+      0.633
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/desk-chair/bedroom-and-living-room-furniture-desk-task-chair-e1320da0.glb",
+    "sha256": "9a1efb2112523ab1757ec7eed96dbb44c6001b1246004ce64bcd66da403e2dc6",
+    "bytes": 68252
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/desk-chair.glb",
+    "sha256": "9a1efb2112523ab1757ec7eed96dbb44c6001b1246004ce64bcd66da403e2dc6",
+    "bytes": 68252
+  }
+}

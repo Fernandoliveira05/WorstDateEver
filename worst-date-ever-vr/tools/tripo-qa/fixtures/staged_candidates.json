@@ -19,12 +19,12 @@
       "source_page": "https://grab3d.com/models/props/picnic-blanket/"
     },
     "kombucha-bottle": {
-      "path": "assets/hand-qa/candidates/picnic_kombucha.glb",
-      "catalog_id": "picnic_kombucha",
-      "expected_sha256": "6f92ffbe6ba6ebf7f8fe16ea945ba9019ada567278c9c68bbf01d84c3731548a",
+      "path": "assets/hand-qa/candidates/kombucha-bottle.glb",
+      "catalog_id": "kombucha-bottle",
+      "expected_sha256": "725ba1e2174d74ea7782f83898246804b794c088a9ec588b569339e22f7eba37",
       "license": "CC0-1.0",
-      "license_source": "assets/hand-qa/sources/picnic_kombucha/LICENSE.txt",
-      "source_page": ""
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/fresh-produce-and-groceries-vinegar-bottle-5cefbeac"
     },
     "vegan-sandwich": {
       "path": "assets/hand-qa/candidates/picnic_sandwich.glb",
@@ -35,12 +35,420 @@
       "source_page": "https://grab3d.com/models/food/sandwich/"
     },
     "iclona": {
-      "path": "assets/hand-qa/evidence/PROP-013/webxr-rework-6/phone.glb",
-      "catalog_id": "PROP-013",
-      "expected_sha256": "bf30ff301b22795d3a05c76ad4be6bff6cba174213544f41d05a5882b61e19d4",
-      "license": "PENDING_DOWNLOADED_LICENSE",
+      "path": "assets/hand-qa/candidates/iclona.glb",
+      "catalog_id": "iclona",
+      "expected_sha256": "3a2e93445f551c56cea2eb029547fb40ae6430de051f7c0392ff5352d1a85f66",
+      "license": "CC0-1.0",
       "license_source": "",
-      "source_page": "https://grab3d.com/models/electronics/smartphone/"
+      "source_page": "https://3dassets.dev/assets/computers-and-desk-gadgets-smartphone-67-a83244e4"
+    },
+    "bed": {
+      "path": "assets/hand-qa/candidates/bed.glb",
+      "catalog_id": "bed",
+      "expected_sha256": "086be35da80ceffd6528af9490136ccf3f25c10e67160fd2e37d4bb0a9d9e367",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e"
+    },
+    "desk": {
+      "path": "assets/hand-qa/candidates/desk.glb",
+      "catalog_id": "desk",
+      "expected_sha256": "29678a25099beed66d4b225b439e0c5fe05ecced4362791d130a15eeb7386146",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-writing-2f6be817"
+    },
+    "desk-chair": {
+      "path": "assets/hand-qa/candidates/desk-chair.glb",
+      "catalog_id": "desk-chair",
+      "expected_sha256": "9a1efb2112523ab1757ec7eed96dbb44c6001b1246004ce64bcd66da403e2dc6",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-task-chair-e1320da0"
+    },
+    "curtains": {
+      "path": "assets/hand-qa/candidates/curtains.glb",
+      "catalog_id": "curtains",
+      "expected_sha256": "0d079a1e57dc76dfa3881a7a0c027c8ae3c7ae29c7c8dd557bcbc3ecd49f6245",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984"
+    },
+    "rug": {
+      "path": "assets/hand-qa/candidates/rug.glb",
+      "catalog_id": "rug",
+      "expected_sha256": "1cfedde6cb3f06c495c533a1ae16bacab8e1ccf19ff1d32a5f11af6f550f41a4",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-rug-round-jute-1be22f81"
+    },
+    "floor-cushion": {
+      "path": "assets/hand-qa/candidates/floor-cushion.glb",
+      "catalog_id": "floor-cushion",
+      "expected_sha256": "d95eb5dbe77d7b86cb3d5db631b8bccac947086a306b51d665e7c798d845a9f1",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24"
+    },
+    "fruit-bowl": {
+      "path": "assets/hand-qa/candidates/fruit-bowl.glb",
+      "catalog_id": "fruit-bowl",
+      "expected_sha256": "f73d5aa56e867c376bb041e529a1ef14f38308e68dc9ba4e858670dc2724b1ea",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/fresh-produce-and-groceries-wooden-market-bowl-24ec8579"
+    },
+    "park-bench": {
+      "path": "assets/hand-qa/candidates/park-bench.glb",
+      "catalog_id": "park-bench",
+      "expected_sha256": "0b3f3c23d1dfc6dde2a961a8c39096639be901d90551b493c1d36b16240a486e",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-park-bench-dfa5e953"
+    },
+    "green-canopy-tree": {
+      "path": "assets/hand-qa/candidates/green-canopy-tree.glb",
+      "catalog_id": "green-canopy-tree",
+      "expected_sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2"
+    },
+    "pink-flowering-tree": {
+      "path": "assets/hand-qa/candidates/pink-flowering-tree.glb",
+      "catalog_id": "pink-flowering-tree",
+      "expected_sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2"
+    },
+    "shoyu-dish": {
+      "path": "assets/hand-qa/candidates/shoyu-dish.glb",
+      "catalog_id": "shoyu-dish",
+      "expected_sha256": "865ebdf3057ff579e92980f7c9ac78f96769b302119a3baf8bf9b447b0e9097c",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bakery-and-cafe-side-plate-58555773"
+    },
+    "chopsticks": {
+      "path": "assets/hand-qa/candidates/chopsticks.glb",
+      "catalog_id": "chopsticks",
+      "expected_sha256": "add8c10daec9d7ee34b4048bfdce5900f10402a3a8a9dd437c026dec7e3e6fbc",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a"
+    },
+    "sake-flask": {
+      "path": "assets/hand-qa/candidates/sake-flask.glb",
+      "catalog_id": "sake-flask",
+      "expected_sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc"
+    },
+    "sake-cup": {
+      "path": "assets/hand-qa/candidates/sake-cup.glb",
+      "catalog_id": "sake-cup",
+      "expected_sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc"
+    },
+    "dining-table": {
+      "path": "assets/hand-qa/candidates/dining-table.glb",
+      "catalog_id": "dining-table",
+      "expected_sha256": "efa7d14d15e583ddeded2b625af874696e24bbb8e98af71a1ab73aaedb55b6b0",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bakery-and-cafe-cafe-table-2-person-038f8dc8"
+    },
+    "dining-chair": {
+      "path": "assets/hand-qa/candidates/dining-chair.glb",
+      "catalog_id": "dining-chair",
+      "expected_sha256": "45766c24dde067967cfd888da44ee57897b9810d168300ab9217e319b60e24ea",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-upholstered-9dc9a416"
+    },
+    "paper-lantern": {
+      "path": "assets/hand-qa/candidates/paper-lantern.glb",
+      "catalog_id": "paper-lantern",
+      "expected_sha256": "73761ce4a33bd444a5a1bf3633b87176a0a53a60b55dbea8c38aa591f09bb20e",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298"
+    },
+    "bistro-table": {
+      "path": "assets/hand-qa/candidates/bistro-table.glb",
+      "catalog_id": "bistro-table",
+      "expected_sha256": "253218e4f50ab43dbb47a193bcafb4d30faa1368198dd43dc80cd89723e0db7f",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bakery-and-cafe-bistro-table-outdoor-813deda1"
+    },
+    "upholstered-chair": {
+      "path": "assets/hand-qa/candidates/upholstered-chair.glb",
+      "catalog_id": "upholstered-chair",
+      "expected_sha256": "420f701d28c091d215a50fb8a26a2758012dbaca7cc5184d75fe494abc69c603",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-accent-40f75aa7"
+    },
+    "booth": {
+      "path": "assets/hand-qa/candidates/booth.glb",
+      "catalog_id": "booth",
+      "expected_sha256": "23758fe4921ec27a36a1c8abb1461f72e44c90c4261b5ba8ad3760bb4ae94def",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-booth-2-cover-4581f965"
+    },
+    "menu": {
+      "path": "assets/hand-qa/candidates/menu.glb",
+      "catalog_id": "menu",
+      "expected_sha256": "e8294a2bb62d1eb2ea38088094834ca37e1c1754a236f3408ffa10251d8dc189",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-menu-holder-54030b60"
+    },
+    "candle": {
+      "path": "assets/hand-qa/candidates/candle.glb",
+      "catalog_id": "candle",
+      "expected_sha256": "3c48e6edaf1f2201b21520ec2a8eeca8da8693d9c03dd9f75761a4ea641b661e",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-candle-holder-c0294da5"
+    },
+    "wine-glass": {
+      "path": "assets/hand-qa/candidates/wine-glass.glb",
+      "catalog_id": "wine-glass",
+      "expected_sha256": "e2521155d065403519451334b2ea977afbf79a7864ebd079baf3919a3b2af146",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-wine-glass-5d9eb720"
+    },
+    "water-glass": {
+      "path": "assets/hand-qa/candidates/water-glass.glb",
+      "catalog_id": "water-glass",
+      "expected_sha256": "89bf1ef8e18b59d7629988e6094bb60683cbd0fbac93035c9112fdccbe2ced0c",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-water-glass-c25f2efa"
+    },
+    "coffee-cup": {
+      "path": "assets/hand-qa/candidates/coffee-cup.glb",
+      "catalog_id": "coffee-cup",
+      "expected_sha256": "aa8b1b67618073a149927aff18f4ed4ddbdff42a590e94d4d823f31dc3abb4be",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bakery-and-cafe-cup-and-saucer-01dd63c2"
+    },
+    "cake-slice": {
+      "path": "assets/hand-qa/candidates/cake-slice.glb",
+      "catalog_id": "cake-slice",
+      "expected_sha256": "beff9f617e595a97349392184813bff09e88e956f7a84d011f2b8de3bf4cea6d",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bakery-and-cafe-cake-slice-c96344d0"
+    },
+    "flower-vase": {
+      "path": "assets/hand-qa/candidates/flower-vase.glb",
+      "catalog_id": "flower-vase",
+      "expected_sha256": "1b1f1b54b12f941379bee087f36043461d629fb6a3de57a676f0cfeef6f8d0cf",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-table-vase-3e7cd6a3"
+    },
+    "beer-mug": {
+      "path": "assets/hand-qa/candidates/beer-mug.glb",
+      "catalog_id": "beer-mug",
+      "expected_sha256": "92c789b1101f976aea515b6361ad71e4dc66d9eeb686359754b16b6652bcc1be",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-dimpled-tankard-41bdeada"
+    },
+    "beer-bucket": {
+      "path": "assets/hand-qa/candidates/beer-bucket.glb",
+      "catalog_id": "beer-bucket",
+      "expected_sha256": "ede9b541f05753feec0910497323916f44533ccf9164b26dbb1913c3eedb2038",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-ice-bucket-0122721e"
+    },
+    "petiscos-bowl": {
+      "path": "assets/hand-qa/candidates/petiscos-bowl.glb",
+      "catalog_id": "petiscos-bowl",
+      "expected_sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569"
+    },
+    "peanuts-bowl": {
+      "path": "assets/hand-qa/candidates/peanuts-bowl.glb",
+      "catalog_id": "peanuts-bowl",
+      "expected_sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569"
+    },
+    "hot-sauce": {
+      "path": "assets/hand-qa/candidates/hot-sauce.glb",
+      "catalog_id": "hot-sauce",
+      "expected_sha256": "f23f1959a319eeb33edac91e52486c5e7f331cd50a52b08da01e12ec449a4eb5",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/fresh-produce-and-groceries-ketchup-bottle-f4d88235"
+    },
+    "bar-stool": {
+      "path": "assets/hand-qa/candidates/bar-stool.glb",
+      "catalog_id": "bar-stool",
+      "expected_sha256": "601f1dae821077eeea97795906e314d8aec9b01db0995355d11367988c2c2604",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64"
+    },
+    "round-table": {
+      "path": "assets/hand-qa/candidates/round-table.glb",
+      "catalog_id": "round-table",
+      "expected_sha256": "9680947848c64ecdc3cc990fb46578f1531abd62d42fe1e2c4cb5df311f68a66",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9"
+    },
+    "bar-counter": {
+      "path": "assets/hand-qa/candidates/bar-counter.glb",
+      "catalog_id": "bar-counter",
+      "expected_sha256": "6872fe59b1af5389a379eb53aa1003767d8c899af988b79ebcf92ba1f8b4364a",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc"
+    },
+    "jukebox": {
+      "path": "assets/hand-qa/candidates/jukebox.glb",
+      "catalog_id": "jukebox",
+      "expected_sha256": "49267702aa64c7fc4fa994d9ed1ad8c44d9f4273b150eca01198e6a66b7f54dc",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-jukebox-b6da908d"
+    },
+    "bush": {
+      "path": "assets/hand-qa/candidates/bush.glb",
+      "catalog_id": "bush",
+      "expected_sha256": "a2c964526532ade335b4f8fda4b0efc4554d86ff8bd471173c85e09fd860d430",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-bush-round-b06cf36c"
+    },
+    "hedge": {
+      "path": "assets/hand-qa/candidates/hedge.glb",
+      "catalog_id": "hedge",
+      "expected_sha256": "913d006747838a4ff2a16554010bcb55bdce016c8ad4d60031b7186bf95c1161",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-hedge-block-dcfe3855"
+    },
+    "grass-clump": {
+      "path": "assets/hand-qa/candidates/grass-clump.glb",
+      "catalog_id": "grass-clump",
+      "expected_sha256": "f81ebcbdb242aff1a4e6244c2f03f320d1091293e62c8d8d7d86634d1c17260b",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773"
+    },
+    "flower-patch": {
+      "path": "assets/hand-qa/candidates/flower-patch.glb",
+      "catalog_id": "flower-patch",
+      "expected_sha256": "f96ccc7547c243fdad46dd93e82b6a61016e749e7eadb836202b713476dde16b",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8"
+    },
+    "street-lamp": {
+      "path": "assets/hand-qa/candidates/street-lamp.glb",
+      "catalog_id": "street-lamp",
+      "expected_sha256": "7bf3904e5ce27e2c50a23fc310da197ed8cac994b9f8c6287ddef47eeb43e962",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-park-lamp-post-6771a338"
+    },
+    "kiosk": {
+      "path": "assets/hand-qa/candidates/kiosk.glb",
+      "catalog_id": "kiosk",
+      "expected_sha256": "1208ed85f3b38de581aa327b2458bd8c0b50f3bb42c7befda167a7c18a2fafa1",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-park-kiosk-9fa1bc4e"
+    },
+    "trash-bin": {
+      "path": "assets/hand-qa/candidates/trash-bin.glb",
+      "catalog_id": "trash-bin",
+      "expected_sha256": "85d695b738d8a90bdcc746f4aa47a5336190048a419313660787acbdbc40185c",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-park-litter-bin-ec076777"
+    },
+    "bike-rack": {
+      "path": "assets/hand-qa/candidates/bike-rack.glb",
+      "catalog_id": "bike-rack",
+      "expected_sha256": "0c64c4fd97f8d7c268bc98bcda01420292b0ec10acccb4c44c8be522cb68bc1f",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-bike-rack-c73abcbf"
+    },
+    "curb": {
+      "path": "assets/hand-qa/candidates/curb.glb",
+      "catalog_id": "curb",
+      "expected_sha256": "d1deb2edf784f79d42e008b1025085d92afe7d00f12e0373a2eb8dfa2a475562",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e"
+    },
+    "tree-planter": {
+      "path": "assets/hand-qa/candidates/tree-planter.glb",
+      "catalog_id": "tree-planter",
+      "expected_sha256": "5ff09e626c231efe65a4c163caea4b5fd84d002da304749161e472c666454f20",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e"
+    },
+    "park-sign": {
+      "path": "assets/hand-qa/candidates/park-sign.glb",
+      "catalog_id": "park-sign",
+      "expected_sha256": "78ff7b8613bc31552d72935a648f488b7cd6e36427d6911224bc876fa05981fd",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/city-park-and-playground-park-notice-board-9df1f5c3"
+    },
+    "mushrooms": {
+      "path": "assets/hand-qa/candidates/mushrooms.glb",
+      "catalog_id": "mushrooms",
+      "expected_sha256": "0325094beae8f0471de4fd6ca799ebb1fb7854b155cc4b4f405c1751c9b652cd",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-mushroom-group-55ee1945"
+    },
+    "bedside-lamp": {
+      "path": "assets/hand-qa/candidates/bedside-lamp.glb",
+      "catalog_id": "bedside-lamp",
+      "expected_sha256": "f66836ccb5e1bc62dadc20fae5803d4c4f4233194aec4be5bc4eaa4537b62a98",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-table-lamp-dome-0c974308"
+    },
+    "string-lights": {
+      "path": "assets/hand-qa/candidates/string-lights.glb",
+      "catalog_id": "string-lights",
+      "expected_sha256": "5ad0ff8787b0591c63566ac855d19f7d56b13f26c2dc4fa4d557ccfc8d254d12",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0"
+    },
+    "neon-sign": {
+      "path": "assets/hand-qa/candidates/neon-sign.glb",
+      "catalog_id": "neon-sign",
+      "expected_sha256": "8b99fd4d17a1a75f547cec773fa23123802e5a78d55de6dfcbb949e0940e9d5f",
+      "license": "CC0-1.0",
+      "license_source": "",
+      "source_page": "https://3dassets.dev/assets/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a"
     }
   }
 }

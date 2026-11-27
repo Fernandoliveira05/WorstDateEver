@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import * as THREE from 'three';
 import { createSeatPose, cushionTop } from '../src/date/seat-ik.js';
 
-test('the seat solver moves the hips onto the cushion with feet down and knees forward', () => {
+function standingLegs() {
   const actor = new THREE.Group();
   const bones = {};
   for (const [side, x] of [['L',-.10],['R',.10]]) {
@@ -15,6 +15,11 @@ test('the seat solver moves the hips onto the cushion with feet down and knees f
     actor.add(thigh); thigh.add(shin); shin.add(foot);
     Object.assign(bones, { ['UpperLeg'+side]: thigh, ['LowerLeg'+side]: shin, ['Foot'+side]: foot });
   }
+  return { actor, bones };
+}
+
+test('the seat solver moves the hips onto the cushion with feet down and knees forward', () => {
+  const { actor, bones } = standingLegs();
   const pose = createSeatPose(THREE, actor, bones);
   for (const yaw of [0, Math.PI/2, Math.PI]) {
     pose.reset();
@@ -32,6 +37,21 @@ test('the seat solver moves the hips onto the cushion with feet down and knees f
       assert.ok(Math.abs(hip.distanceTo(knee) - .4) < 1e-7);
       assert.ok(Math.abs(foot.distanceTo(knee) - .4) < 1e-7);
     }
+  }
+});
+
+test('a floor seat spreads the knees outside the cushion and rests the feet ahead of it', () => {
+  const { actor, bones } = standingLegs();
+  const pose = createSeatPose(THREE, actor, bones, { seatTop: .16, floorSeat: true });
+  pose.apply(1);
+  for (const side of ['L', 'R']) {
+    const hip = bones['UpperLeg' + side].getWorldPosition(new THREE.Vector3());
+    const knee = bones['LowerLeg' + side].getWorldPosition(new THREE.Vector3());
+    const ankle = bones['Foot' + side].getWorldPosition(new THREE.Vector3());
+    assert.ok(knee.y < hip.y + .05);
+    assert.ok((side === 'L' ? -1 : 1) * knee.x > .34);
+    assert.ok(Math.abs(ankle.y - .08) < 1e-7);
+    assert.ok(ankle.z > .40);
   }
 });
 

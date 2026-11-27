@@ -63,6 +63,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reviews", type=Path,
                         help="Directory of <asset-id>.json manual/vision reviews")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--skip-probe", action="store_true",
+                        help="Skip the second Blender geometry pass (faster visual batch)")
     return parser.parse_args()
 
 
@@ -205,6 +207,8 @@ def main() -> int:
             "--output", str(asset_dir),
             "--resolution", str(args.resolution),
         ]
+        if args.skip_probe:
+            command.append("--skip-probe")
         reference = entry["reference"]
         if reference:
             command += ["--reference", reference["path"]]
@@ -293,6 +297,7 @@ def main() -> int:
         "manifest": file_record(manifest_path),
         "parameters": {
             "resolution": args.resolution,
+            "geometry_probe": not args.skip_probe,
             "used_staged_candidates": not args.no_candidates,
             "candidates_file": (file_record(args.candidates.resolve())
                                 if not args.no_candidates and args.candidates.is_file()

@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "rug",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/10-rug.png",
+  "provider": "3dassets.dev",
+  "title": "Rug Round Jute (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-rug-round-jute-1be22f81",
+  "download": "https://cdn.3dassets.dev/assets/38812/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 36008,
+    "triangles": 848,
+    "vertices": 1757,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.800000011920929,
+        3.875813508303315e-05,
+        -0.800000011920929
+      ],
+      "max": [
+        0.800000011920929,
+        0.034015320703559726,
+        0.800000011920929
+      ]
+    },
+    "sizeMeters": [
+      1.6,
+      0.034,
+      1.6
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/rug/bedroom-and-living-room-furniture-rug-round-jute-1be22f81.glb",
+    "sha256": "1cfedde6cb3f06c495c533a1ae16bacab8e1ccf19ff1d32a5f11af6f550f41a4",
+    "bytes": 36008
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/rug.glb",
+    "sha256": "1cfedde6cb3f06c495c533a1ae16bacab8e1ccf19ff1d32a5f11af6f550f41a4",
+    "bytes": 36008
+  }
+}

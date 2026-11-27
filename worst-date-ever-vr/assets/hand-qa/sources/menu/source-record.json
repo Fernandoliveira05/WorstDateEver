@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "menu",
-  "manifest_reference": "assets/tripo/references/wde-04-bistro-candidates/04-menu.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/props/open-book/",
-    "slug": "open-book",
-    "category": "props",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/open-book/open-book.glb",
-    "license_url": "https://grab3d.com/dl/open-book/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/open-book/manifest.json"
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/04-menu.png",
+  "provider": "3dassets.dev",
+  "title": "Table menu holder (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-menu-holder-54030b60",
+  "download": "https://cdn.3dassets.dev/assets/16522/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/menu/open-book.glb",
-      "sha256": "bdc58862a51302a4487d338d81f83cddb4812975acee1dc0225915d92a548e8b",
-      "bytes": 752784
+  "stats": {
+    "fileSize": 27308,
+    "triangles": 532,
+    "vertices": 1596,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.06399503293822005,
+        0,
+        -0.04242937873259255
+      ],
+      "max": [
+        0.06399503293822005,
+        0.19144757091999054,
+        0.04242937873259255
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/menu/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/menu/publisher-manifest.json",
-      "sha256": "114645a437e5d0a3400d184a433c9fe1a708fd6e629661647ce49aa2b9284f89",
-      "bytes": 1336
-    }
+    "sizeMeters": [
+      0.128,
+      0.191,
+      0.085
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/menu/restaurant-kitchen-and-dining-menu-holder-54030b60.glb",
+    "sha256": "e8294a2bb62d1eb2ea38088094834ca37e1c1754a236f3408ffa10251d8dc189",
+    "bytes": 27308
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/menu.glb",
-    "sha256": "bdc58862a51302a4487d338d81f83cddb4812975acee1dc0225915d92a548e8b",
-    "bytes": 752784,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 5376,
-    "texture_px": 2048,
-    "dimensions_m": "0.302 x 0.242 x 0.021",
-    "real_size": "open hardcover book, 30 x 22 cm",
-    "notes": "lies open and flat, curved page blocks, abstract ink line bars instead of text, small landscape illustration, gold corner caps, bookmark ribbon hanging over the front edge; no text"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "e8294a2bb62d1eb2ea38088094834ca37e1c1754a236f3408ffa10251d8dc189",
+    "bytes": 27308
+  }
 }

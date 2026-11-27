@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "candle",
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/05-candle.png",
+  "provider": "3dassets.dev",
+  "title": "Candle holder (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-candle-holder-c0294da5",
+  "download": "https://cdn.3dassets.dev/assets/16536/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 23816,
+    "triangles": 444,
+    "vertices": 1332,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.0539996322240654,
+        0,
+        -0.052647296071078015
+      ],
+      "max": [
+        0.0539996322240654,
+        0.2280000001192093,
+        0.052647296071078015
+      ]
+    },
+    "sizeMeters": [
+      0.108,
+      0.228,
+      0.105
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/candle/restaurant-kitchen-and-dining-candle-holder-c0294da5.glb",
+    "sha256": "3c48e6edaf1f2201b21520ec2a8eeca8da8693d9c03dd9f75761a4ea641b661e",
+    "bytes": 23816
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/candle.glb",
+    "sha256": "3c48e6edaf1f2201b21520ec2a8eeca8da8693d9c03dd9f75761a4ea641b661e",
+    "bytes": 23816
+  }
+}

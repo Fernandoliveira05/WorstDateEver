@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bike-rack",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/10-bike-rack.png",
+  "provider": "3dassets.dev",
+  "title": "Five Hoop Bike Rack (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-bike-rack-c73abcbf",
+  "download": "https://cdn.3dassets.dev/assets/33679/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 20200,
+    "triangles": 384,
+    "vertices": 1152,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -1.100000023841858,
+        5.5237182564074616e-05,
+        -0.3600421233467796
+      ],
+      "max": [
+        1.100000023841858,
+        0.7242142578547315,
+        0.3600421233467796
+      ]
+    },
+    "sizeMeters": [
+      2.2,
+      0.724,
+      0.72
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bike-rack/city-park-and-playground-bike-rack-c73abcbf.glb",
+    "sha256": "0c64c4fd97f8d7c268bc98bcda01420292b0ec10acccb4c44c8be522cb68bc1f",
+    "bytes": 20200
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bike-rack.glb",
+    "sha256": "0c64c4fd97f8d7c268bc98bcda01420292b0ec10acccb4c44c8be522cb68bc1f",
+    "bytes": 20200
+  }
+}

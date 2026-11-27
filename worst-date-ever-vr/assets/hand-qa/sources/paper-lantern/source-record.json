@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "paper-lantern",
+  "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/07-paper-lantern.png",
+  "provider": "3dassets.dev",
+  "title": "Round Paper Lantern (Izakaya Alley and Ramen Shop)",
+  "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298",
+  "download": "https://cdn.3dassets.dev/assets/36453/v1/model.glb",
+  "pack": "izakaya-alley-and-ramen-shop",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 22472,
+    "triangles": 476,
+    "vertices": 1044,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.21209999918937683,
+        0,
+        -0.20679215900457845
+      ],
+      "max": [
+        0.21209999918937683,
+        0.7799999713897705,
+        0.20679215900457845
+      ]
+    },
+    "sizeMeters": [
+      0.424,
+      0.78,
+      0.414
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/paper-lantern/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298.glb",
+    "sha256": "73761ce4a33bd444a5a1bf3633b87176a0a53a60b55dbea8c38aa591f09bb20e",
+    "bytes": 22472
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/paper-lantern.glb",
+    "sha256": "73761ce4a33bd444a5a1bf3633b87176a0a53a60b55dbea8c38aa591f09bb20e",
+    "bytes": 22472
+  }
+}

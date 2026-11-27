@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "green-canopy-tree",
+  "reference": "assets/tripo/references/wde-02-picnic-core/09-green-canopy-tree.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized Oak Tree Mature (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2",
+  "download": "https://cdn.3dassets.dev/assets/38720/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 38304,
+    "triangles": 531,
+    "vertices": 932,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 1,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -2.225665807723999,
+        0,
+        -1.7132471287643796
+      ],
+      "max": [
+        2.225665807723999,
+        5.075941709984312,
+        1.7132471287643796
+      ]
+    },
+    "sizeMeters": [
+      4.451,
+      5.076,
+      3.426
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/green-canopy-tree/stylized-trees-and-rocks-kit-oak-mature-658d06b2.glb",
+    "sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be",
+    "bytes": 38304
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/green-canopy-tree.glb",
+    "sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be",
+    "bytes": 38304
+  }
+}

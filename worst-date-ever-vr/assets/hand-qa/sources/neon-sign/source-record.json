@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "neon-sign",
+  "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/10-neon-sign.png",
+  "provider": "3dassets.dev",
+  "title": "Neon Sign Frame with Blank Face (Cyberpunk Apartment and Neon Block)",
+  "page": "https://3dassets.dev/assets/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a",
+  "download": "https://cdn.3dassets.dev/assets/37838/v1/model.glb",
+  "pack": "cyberpunk-apartment-and-neon-block",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 67800,
+    "triangles": 1536,
+    "vertices": 3326,
+    "meshes": 6,
+    "materials": 6,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.75,
+        -3.0518509475996325e-05,
+        -0.45998855847767
+      ],
+      "max": [
+        0.75,
+        1.000030518509476,
+        0.20000000298023224
+      ]
+    },
+    "sizeMeters": [
+      1.5,
+      1,
+      0.66
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/neon-sign/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a.glb",
+    "sha256": "8b99fd4d17a1a75f547cec773fa23123802e5a78d55de6dfcbb949e0940e9d5f",
+    "bytes": 67800
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/neon-sign.glb",
+    "sha256": "8b99fd4d17a1a75f547cec773fa23123802e5a78d55de6dfcbb949e0940e9d5f",
+    "bytes": 67800
+  }
+}

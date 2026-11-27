@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bed",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/01-bed.png",
+  "provider": "3dassets.dev",
+  "title": "Double Bed Upholstered (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e",
+  "download": "https://cdn.3dassets.dev/assets/38770/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 81620,
+    "triangles": 1944,
+    "vertices": 4086,
+    "meshes": 5,
+    "materials": 5,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.8550681655693706,
+        1.1902434270655293e-05,
+        -1.1150000095367432
+      ],
+      "max": [
+        0.8550681655693706,
+        1.1050502672040214,
+        1.0750000476837158
+      ]
+    },
+    "sizeMeters": [
+      1.71,
+      1.105,
+      2.19
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bed/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e.glb",
+    "sha256": "086be35da80ceffd6528af9490136ccf3f25c10e67160fd2e37d4bb0a9d9e367",
+    "bytes": 81620
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bed.glb",
+    "sha256": "086be35da80ceffd6528af9490136ccf3f25c10e67160fd2e37d4bb0a9d9e367",
+    "bytes": 81620
+  }
+}

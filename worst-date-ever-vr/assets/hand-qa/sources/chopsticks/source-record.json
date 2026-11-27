@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "chopsticks",
+  "reference": "assets/tripo/references/wde-03-sushi-candidates/05-chopsticks.png",
+  "provider": "3dassets.dev",
+  "title": "Chopstick and Condiment Caddy (Izakaya Alley and Ramen Shop)",
+  "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a",
+  "download": "https://cdn.3dassets.dev/assets/36436/v1/model.glb",
+  "pack": "izakaya-alley-and-ramen-shop",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 42744,
+    "triangles": 480,
+    "vertices": 1077,
+    "meshes": 5,
+    "materials": 5,
+    "textures": 1,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.17000000178813934,
+        -3.2057583370104226e-06,
+        -0.0800064097285347
+      ],
+      "max": [
+        0.21500274821014012,
+        0.38999998569488525,
+        0.0800064097285347
+      ]
+    },
+    "sizeMeters": [
+      0.385,
+      0.39,
+      0.16
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/chopsticks/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a.glb",
+    "sha256": "add8c10daec9d7ee34b4048bfdce5900f10402a3a8a9dd437c026dec7e3e6fbc",
+    "bytes": 42744
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/chopsticks.glb",
+    "sha256": "add8c10daec9d7ee34b4048bfdce5900f10402a3a8a9dd437c026dec7e3e6fbc",
+    "bytes": 42744
+  }
+}

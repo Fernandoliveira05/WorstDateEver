@@ -1,0 +1,61 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "desk",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/03-desk.png",
+  "provider": "3dassets.dev",
+  "title": "Desk Writing (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-writing-2f6be817",
+  "download": "https://cdn.3dassets.dev/assets/38795/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 47052,
+    "triangles": 1168,
+    "vertices": 2646,
+    "meshes": 9,
+    "materials": 3,
+    "textures": 0,
+    "animations": [
+      "open",
+      "close"
+    ],
+    "boundingBox": {
+      "min": [
+        -0.699999988079071,
+        -2.7229041420440137e-05,
+        -0.35005340143020897
+      ],
+      "max": [
+        0.699999988079071,
+        0.7450272338097921,
+        0.35005340143020897
+      ]
+    },
+    "sizeMeters": [
+      1.4,
+      0.745,
+      0.7
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/desk/bedroom-and-living-room-furniture-desk-writing-2f6be817.glb",
+    "sha256": "29678a25099beed66d4b225b439e0c5fe05ecced4362791d130a15eeb7386146",
+    "bytes": 47052
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/desk.glb",
+    "sha256": "29678a25099beed66d4b225b439e0c5fe05ecced4362791d130a15eeb7386146",
+    "bytes": 47052
+  }
+}

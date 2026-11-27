@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "park-bench",
+  "reference": "assets/tripo/references/wde-02-picnic-core/08-park-bench.png",
+  "provider": "3dassets.dev",
+  "title": "Slatted Park Bench (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-park-bench-dfa5e953",
+  "download": "https://cdn.3dassets.dev/assets/33673/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 14748,
+    "triangles": 144,
+    "vertices": 432,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 1,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.8999999761581421,
+        -2.173473721700514e-05,
+        -0.42001341738946657
+      ],
+      "max": [
+        0.8999999761581421,
+        0.9731083430203622,
+        0.2800134316945813
+      ]
+    },
+    "sizeMeters": [
+      1.8,
+      0.973,
+      0.7
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/park-bench/city-park-and-playground-park-bench-dfa5e953.glb",
+    "sha256": "0b3f3c23d1dfc6dde2a961a8c39096639be901d90551b493c1d36b16240a486e",
+    "bytes": 14748
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/park-bench.glb",
+    "sha256": "0b3f3c23d1dfc6dde2a961a8c39096639be901d90551b493c1d36b16240a486e",
+    "bytes": 14748
+  }
+}

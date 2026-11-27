@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "peanuts-bowl",
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/04-peanuts-bowl.png",
+  "provider": "3dassets.dev",
+  "title": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+  "download": "https://cdn.3dassets.dev/assets/16530/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 16416,
+    "triangles": 320,
+    "vertices": 960,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.11500000208616257,
+        -1.4502771029795136e-06,
+        -0.11500000208616257
+      ],
+      "max": [
+        0.11500000208616257,
+        0.055001449979079756,
+        0.11500000208616257
+      ]
+    },
+    "sizeMeters": [
+      0.23,
+      0.055,
+      0.23
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/peanuts-bowl/restaurant-kitchen-and-dining-pasta-bowl-4d030569.glb",
+    "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+    "bytes": 16416
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/peanuts-bowl.glb",
+    "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+    "bytes": 16416
+  }
+}

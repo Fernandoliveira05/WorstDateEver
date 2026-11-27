@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "hedge",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/02-hedge.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized Hedge Block (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-hedge-block-dcfe3855",
+  "download": "https://cdn.3dassets.dev/assets/38742/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 2492,
+    "triangles": 24,
+    "vertices": 56,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -1.0299999713897705,
+        2.976746766802929e-05,
+        -0.4300494280399014
+      ],
+      "max": [
+        1.0299999713897705,
+        0.9499761795915399,
+        0.4300494280399014
+      ]
+    },
+    "sizeMeters": [
+      2.06,
+      0.95,
+      0.86
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/hedge/stylized-trees-and-rocks-kit-hedge-block-dcfe3855.glb",
+    "sha256": "913d006747838a4ff2a16554010bcb55bdce016c8ad4d60031b7186bf95c1161",
+    "bytes": 2492
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/hedge.glb",
+    "sha256": "913d006747838a4ff2a16554010bcb55bdce016c8ad4d60031b7186bf95c1161",
+    "bytes": 2492
+  }
+}

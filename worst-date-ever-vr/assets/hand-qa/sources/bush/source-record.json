@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bush",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/01-bush.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized Round Bush (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-bush-round-b06cf36c",
+  "download": "https://cdn.3dassets.dev/assets/38735/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 4936,
+    "triangles": 180,
+    "vertices": 165,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.6183771888075463,
+        -1.6876543925625764e-05,
+        -0.6386473774909973
+      ],
+      "max": [
+        0.6183771888075463,
+        0.9405978406323656,
+        0.6386473774909973
+      ]
+    },
+    "sizeMeters": [
+      1.237,
+      0.941,
+      1.277
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bush/stylized-trees-and-rocks-kit-bush-round-b06cf36c.glb",
+    "sha256": "a2c964526532ade335b4f8fda4b0efc4554d86ff8bd471173c85e09fd860d430",
+    "bytes": 4936
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bush.glb",
+    "sha256": "a2c964526532ade335b4f8fda4b0efc4554d86ff8bd471173c85e09fd860d430",
+    "bytes": 4936
+  }
+}

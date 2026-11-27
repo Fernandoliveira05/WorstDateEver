@@ -6,6 +6,14 @@ export const bedroomPalette = Object.freeze({
   rose: 0xbc7584, brass: 0xb59058, clay: 0xba7356, olive: 0x647b40
 });
 
+function bedroomTextures(root) {
+  return {
+    wood: root.getObjectByName('room_Surface-Walnut-FADEBA-10-13-062-024-Projected')?.material.map,
+    weave: root.getObjectByName('room_Surface-Weave-95ADC5-60-60-039-012-Projected')?.material.map,
+    powdercoat: root.getObjectByName('room_Surface-Powdercoat-A3969E-14-14-025-010-Projected')?.material.map
+  };
+}
+
 export function applySurfaceTexture(material, texture, strength) {
   if (!texture) return;
   material.map = texture;
@@ -20,11 +28,7 @@ export function applySurfaceTexture(material, texture, strength) {
 
 export function styleBedroom(THREE, root, data, node) {
   const p = bedroomPalette;
-  const surfaces = {
-    wood: root.getObjectByName('room_Surface-Walnut-FADEBA-10-13-062-024-Projected')?.material.map,
-    weave: root.getObjectByName('room_Surface-Weave-95ADC5-60-60-039-012-Projected')?.material.map,
-    powdercoat: root.getObjectByName('room_Surface-Powdercoat-A3969E-14-14-025-010-Projected')?.material.map
-  };
+  const surfaces = bedroomTextures(root);
   const finishes = new Map();
   function tint(mesh, color, roughness = .82, terrain = '') {
     if (!mesh?.isMesh || Array.isArray(mesh.material)) return;
@@ -105,7 +109,9 @@ export function styleBedroom(THREE, root, data, node) {
   });
   for (const id of data.curtains) node(id)?.traverse(mesh => {
     if (!mesh.isMesh) return;
-    tint(mesh, 0xffeacc, .98, 'weave');
+    // The approved concept uses muted plum curtains, not the neutral cream
+    // linen of the source room.
+    tint(mesh, 0x9b7aa8, .98, 'weave');
   });
 
   // Retain separate upholstery, stitches and outfit parts for the existing soft bodies.
@@ -124,11 +130,12 @@ export function styleBedroom(THREE, root, data, node) {
     else if (mesh.name.includes('Elástico')) tint(mesh, p.plum);
   });
   node('wde_78')?.traverse(mesh => tint(mesh, 0xe9d5b3, .44));
-
-  addBedAndShelf(THREE, root, p, surfaces);
 }
 
-function addBedAndShelf(THREE, root, p, surfaces) {
+export function addBedAndShelf(THREE, root, data) {
+  const p = bedroomPalette;
+  const surfaces = bedroomTextures(root);
+  const objects = [];
   const dressing = new THREE.Group();
   dressing.name = 'Acabamentos do quarto';
   root.add(dressing);
@@ -203,6 +210,15 @@ function addBedAndShelf(THREE, root, p, surfaces) {
   }
 
   rounded(shelf, [.79, .055, .253], [0, 0, 0], p.honey);
+  const collider = (size, position = [0, 0, 0]) =>
+    ({ size, position, rotation: [0, 0, 0, 1], friction: .64, bounce: .04 });
+  data.colliders.push({ position: shelf.position.toArray(), rotation: [0, 0, 0, 1],
+    shape: collider([.79, .055, .253]) });
+  function loose(object, id, name, mass, shape) {
+    object.name = id;
+    objects.push([id, object]);
+    data.props.push({ id, name, mass, shapes: [shape] });
+  }
   for (const x of [-.28, .28]) rounded(shelf, [.040, .115, .112], [x, -.08, -.055], p.oak);
   [p.plum, p.rose, p.teal, p.flax, p.clay].forEach((color, i) => {
     const w = .04 + (i % 2) * .008, h = .134 + (i % 3) * .035;
@@ -213,11 +229,13 @@ function addBedAndShelf(THREE, root, p, surfaces) {
     rounded(book, [w, h, .105], [0, 0, 0], color, .005);
     rounded(book, [w * .67, h * .86, .016], [0, 0, .052], p.cream, .003);
     for (const y of [-.032, .041]) rounded(book, [w * .64, .004, .002], [0, y, -.053], p.brass, .001);
+    loose(book, 'shelf-book-' + (i + 1), 'Livro da prateleira', .14 + .025 * i, collider([w, h, .111], [0, 0, .003]));
   });
 
   const plant = new THREE.Group();
   plant.position.set(.265, .028, .014);
   shelf.add(plant);
+  loose(plant, 'shelf-plant', 'Vaso de planta', .37, collider([.133, .109, .133], [0, .0545, 0]));
   add(plant, new THREE.CylinderGeometry(.072, .053, .104, 20), [0, .052, 0], p.clay);
   const rim = add(plant, new THREE.TorusGeometry(.068, .006, 6, 20), [0, .102, 0], 0xce8d67);
   rim.rotation.x = Math.PI / 2;
@@ -242,4 +260,5 @@ function addBedAndShelf(THREE, root, p, surfaces) {
       leaf.scale.setScalar(1.04 - i * .095);
     }
   }
+  return objects;
 }

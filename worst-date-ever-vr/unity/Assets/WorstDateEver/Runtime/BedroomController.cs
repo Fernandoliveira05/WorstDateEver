@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,6 +43,29 @@ namespace WorstDateEver
             Speech.Heard += OnSpeech;
             Speech.Status += ShowStatus;
             Show();
+            var args = Environment.GetCommandLineArgs();
+            if (Array.IndexOf(args, "-look") >= 0)
+            {
+                var wardrobe = FindFirstObjectByType<BedroomWardrobe>();
+                var camera = Camera.main;
+                if (wardrobe && camera)
+                {
+                    var bounds = wardrobe.GetComponentInChildren<Renderer>().bounds;
+                    camera.transform.LookAt(bounds.center);
+                }
+            }
+            var venueArg = Array.IndexOf(args, "-venue");
+            if (venueArg >= 0 && venueArg + 1 < args.Length)
+            {
+                var match = Array.IndexOf(new[] { "caio", "rafa", "bia", "luiza" }, args[venueArg + 1].ToLowerInvariant());
+                if (match >= 0)
+                {
+                    var handoff = new FirstDateStory.Handoff { avatarGender = "male", preference = "all",
+                        matchId = new[] { "caio", "rafa", "bia", "luiza" }[match], substance = "none" };
+                    activeDate = FirstDateVenue.Enter(handoff, ResetStory);
+                    return;
+                }
+            }
             if (story.phase == BedroomPhase.Exit) TryDate();
             else FirstDateVenue.ClearProgress();
             if (story.phase == BedroomPhase.Intro)

@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "petiscos-bowl",
-  "manifest_reference": "assets/tripo/references/wde-05-barzinho-candidates/03-petiscos-bowl.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/food/mixing-bowl/",
-    "slug": "mixing-bowl",
-    "category": "food",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/mixing-bowl/mixing-bowl.glb",
-    "license_url": "https://grab3d.com/dl/mixing-bowl/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/mixing-bowl/manifest.json"
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/03-petiscos-bowl.png",
+  "provider": "3dassets.dev",
+  "title": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+  "download": "https://cdn.3dassets.dev/assets/16530/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/petiscos-bowl/mixing-bowl.glb",
-      "sha256": "c15ebaa289c9d1fddff90830183f4b42e4e42cce7d844bcb7abb0311e5d347f2",
-      "bytes": 476304
+  "stats": {
+    "fileSize": 16416,
+    "triangles": 320,
+    "vertices": 960,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.11500000208616257,
+        -1.4502771029795136e-06,
+        -0.11500000208616257
+      ],
+      "max": [
+        0.11500000208616257,
+        0.055001449979079756,
+        0.11500000208616257
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/petiscos-bowl/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/petiscos-bowl/publisher-manifest.json",
-      "sha256": "7744c2bd5669a0455444db6d84e2f0928272b76462ae54c0996463e0fa78a200",
-      "bytes": 1305
-    }
+    "sizeMeters": [
+      0.23,
+      0.055,
+      0.23
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/petiscos-bowl/restaurant-kitchen-and-dining-pasta-bowl-4d030569.glb",
+    "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+    "bytes": 16416
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/petiscos-bowl.glb",
-    "sha256": "c15ebaa289c9d1fddff90830183f4b42e4e42cce7d844bcb7abb0311e5d347f2",
-    "bytes": 476304,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 6912,
-    "texture_px": 2048,
-    "dimensions_m": "0.277 x 0.260 x 0.118",
-    "real_size": "mixing bowl, 26 cm diameter, 12 cm high, approx. 3.5 l",
-    "notes": "stoneware bowl, lavender glaze with a white band, cream glaze inside, foot ring, small pouring lip at +X; no text"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b",
+    "bytes": 16416
+  }
 }

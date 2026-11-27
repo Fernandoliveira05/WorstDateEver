@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "tree-planter",
+  "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/08-tree-planter.png",
+  "provider": "3dassets.dev",
+  "title": "Planter with Shrub (Street Food Market and Food Trucks)",
+  "page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e",
+  "download": "https://cdn.3dassets.dev/assets/34303/v1/model.glb",
+  "pack": "street-food-market-and-food-trucks",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 15832,
+    "triangles": 276,
+    "vertices": 828,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.4699999988079071,
+        -2.608666757014655e-05,
+        -0.45000839081462707
+      ],
+      "max": [
+        0.4699999988079071,
+        1.307003818173817,
+        0.48000839200671996
+      ]
+    },
+    "sizeMeters": [
+      0.94,
+      1.307,
+      0.93
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/tree-planter/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e.glb",
+    "sha256": "5ff09e626c231efe65a4c163caea4b5fd84d002da304749161e472c666454f20",
+    "bytes": 15832
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/tree-planter.glb",
+    "sha256": "5ff09e626c231efe65a4c163caea4b5fd84d002da304749161e472c666454f20",
+    "bytes": 15832
+  }
+}

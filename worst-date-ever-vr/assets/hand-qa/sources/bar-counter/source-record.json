@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bar-counter",
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/09-bar-counter.png",
+  "provider": "3dassets.dev",
+  "title": "Bar counter module 1200 (Bar, Pub and Brewery Taproom)",
+  "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc",
+  "download": "https://cdn.3dassets.dev/assets/18319/v1/model.glb",
+  "pack": "bar-pub-and-brewery-taproom",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 86080,
+    "triangles": 1726,
+    "vertices": 5178,
+    "meshes": 4,
+    "materials": 4,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.6000000238418579,
+        4.052008046373512e-06,
+        -0.3699942161854482
+      ],
+      "max": [
+        0.6000000238418579,
+        1.0500450105812702,
+        0.3699942161854482
+      ]
+    },
+    "sizeMeters": [
+      1.2,
+      1.05,
+      0.74
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bar-counter/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc.glb",
+    "sha256": "6872fe59b1af5389a379eb53aa1003767d8c899af988b79ebcf92ba1f8b4364a",
+    "bytes": 86080
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bar-counter.glb",
+    "sha256": "6872fe59b1af5389a379eb53aa1003767d8c899af988b79ebcf92ba1f8b4364a",
+    "bytes": 86080
+  }
+}

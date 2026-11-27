@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "string-lights",
+  "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/09-string-lights.png",
+  "provider": "3dassets.dev",
+  "title": "String Light Run on Poles (Street Food Market and Food Trucks)",
+  "page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0",
+  "download": "https://cdn.3dassets.dev/assets/34293/v1/model.glb",
+  "pack": "street-food-market-and-food-trucks",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 46788,
+    "triangles": 920,
+    "vertices": 2760,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -3.2100000381469727,
+        -0.00012361196034293975,
+        -0.21008465772989626
+      ],
+      "max": [
+        3.0028555393218994,
+        3.760083069751707,
+        0.21008465772989626
+      ]
+    },
+    "sizeMeters": [
+      6.213,
+      3.76,
+      0.42
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/string-lights/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0.glb",
+    "sha256": "5ad0ff8787b0591c63566ac855d19f7d56b13f26c2dc4fa4d557ccfc8d254d12",
+    "bytes": 46788
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/string-lights.glb",
+    "sha256": "5ad0ff8787b0591c63566ac855d19f7d56b13f26c2dc4fa4d557ccfc8d254d12",
+    "bytes": 46788
+  }
+}

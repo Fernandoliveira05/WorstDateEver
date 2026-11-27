@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "mushrooms",
+  "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/10-mushrooms.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized Mushroom Group (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-mushroom-group-55ee1945",
+  "download": "https://cdn.3dassets.dev/assets/38752/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 40544,
+    "triangles": 1177,
+    "vertices": 1912,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.675000011920929,
+        3.2807329279235103e-05,
+        -0.675000011920929
+      ],
+      "max": [
+        0.675000011920929,
+        0.34794505691843564,
+        0.675000011920929
+      ]
+    },
+    "sizeMeters": [
+      1.35,
+      0.348,
+      1.35
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/mushrooms/stylized-trees-and-rocks-kit-mushroom-group-55ee1945.glb",
+    "sha256": "0325094beae8f0471de4fd6ca799ebb1fb7854b155cc4b4f405c1751c9b652cd",
+    "bytes": 40544
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/mushrooms.glb",
+    "sha256": "0325094beae8f0471de4fd6ca799ebb1fb7854b155cc4b4f405c1751c9b652cd",
+    "bytes": 40544
+  }
+}

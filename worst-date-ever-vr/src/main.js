@@ -4,7 +4,8 @@ import { wireVrEntry } from './vr-entry.js';
 import AFRAME from 'aframe';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { createHandVisibility, getHandPosePipeline, HAND_TRACKING_GRACE } from './hand-pose.mjs';
-import { styleBedroom } from './bedroom-style.js';
+import { addBedAndShelf, styleBedroom } from './bedroom-style.js';
+import { createWardrobe } from './bedroom-wardrobe.js';
 import { upgradeBedroom } from './bedroom-upgrade.js';
 import { createBedroomPhysics } from './bedroom-physics.js';
 import { createPhone, stylePhoneCase } from './bedroom-phone.js';
@@ -50,12 +51,13 @@ AFRAME.registerComponent('wde-bedroom', {
     const loading = document.getElementById('loading');
     const status = loading.querySelector('span');
     try {
-      const [metadata, model] = await Promise.all([
+      const [metadata, model, wardrobe] = await Promise.all([
         fetch(assets('scene.json')).then(response => {
           if (!response.ok) throw new Error('Bedroom scene metadata ' + response.status);
           return response.json();
         }),
-        loadScene()
+        loadScene(),
+        loader.loadAsync(assets('wardrobe_2door.glb'))
       ]);
       let benchmark;
       if (import.meta.env.DEV) {
@@ -65,7 +67,7 @@ AFRAME.registerComponent('wde-bedroom', {
           benchmark = await prepareBenchmark(loader, model.scene, metadata, asset);
         }
       }
-      this.bedroom = setup(scene, model.scene, metadata, benchmark);
+      this.bedroom = setup(scene, model.scene, metadata, benchmark, wardrobe);
       loading.hidden = true;
       scene.emit('bedroom-ready');
     } catch (error) {
@@ -81,7 +83,7 @@ AFRAME.registerComponent('wde-bedroom', {
   }
 });
 
-function setup(scene, root, data, benchmark) {
+function setup(scene, root, data, benchmark, wardrobeGltf) {
   const room = document.getElementById('room');
   const camera = document.getElementById('camera');
   const rig = document.getElementById('rig');
@@ -94,6 +96,7 @@ function setup(scene, root, data, benchmark) {
   const handVisibility = createHandVisibility();
   const controls = {};
   const inputs = new Map();
+  let wardrobeDrag = null;
   const previous = new Map();
   const pickable = [];
   const curtainMeshes = [];
@@ -180,13 +183,17 @@ function setup(scene, root, data, benchmark) {
   const upgrade = upgradeBedroom(THREE, root, data, node);
   data = upgrade.data;
   for (const [id, object] of upgrade.objects) named.set(id, object);
+  for (const [id, object] of addBedAndShelf(THREE, root, data)) named.set(id, object);
+  const wardrobe = createWardrobe(THREE, root, data, wardrobeGltf);
 
   stylePhoneCase(THREE, node(data.phone.id), data.phone);
   const scenePhysics = createBedroomPhysics(THREE, root, data, node, propEvent,
     () => viewer().getWorldPosition(new THREE.Vector3()));
   styleBedroom(THREE, root, data, node);
   for (const prop of scenePhysics.props.values()) pickable.push(prop.object);
-  pickable.push(scenePhysics.doorObject, upgrade.bedside.switchMesh, ...upgrade.frames, ...upgrade.additions.switches, ...upgrade.shop.buttons);
+  pickable.push(...wardrobe.pickables);
+  pickable.push(scenePhysics.doorObject, upgrade.bedside.switchMesh, ...upgrade.frames,
+    ...upgrade.additions.switches, ...upgrade.shop.buttons, ...upgrade.lockedHandles);
 
   const scenery = createScenery(THREE, root, data, node, loaderModels);
   // A-Frame also injects a daylight fill. Mute it at night so the authored
@@ -206,6 +213,13 @@ function setup(scene, root, data, benchmark) {
   phone.screen.layers.enable(27);
 
   const captions = makeCaption(THREE, camera.object3D);
+  const mirror = node(data.mirror);
+  let mirrorBaseZ = 0, mirrorTilt = 0;
+  if (mirror) {
+    mirrorBaseZ = mirror.rotation.z;
+    mirror.traverse(mesh => { if (mesh.isMesh) mesh.userData.mirror = true; });
+    pickable.push(mirror);
+  }
   const monitor = node(data.monitor);
   const monitorTextures = new THREE.TextureLoader();
   const monitorTexture = monitorTextures.load(assets('Desktop.png'));
@@ -253,6 +267,14 @@ function setup(scene, root, data, benchmark) {
     lastLampTouch = elapsed;
     upgrade.bedside.toggleLamp();
     sound.play(false, .047);
+  }
+
+  let lastCorridorLatch = -Infinity;
+  function tryCorridorLatch(handle) {
+    if (elapsed - lastCorridorLatch < .35) return;
+    lastCorridorLatch = elapsed;
+    propEvent('latch', handle.getWorldPosition(new THREE.Vector3()));
+    show('Está trancada.', 2);
   }
 
   function propEvent(kind, value) {
@@ -538,7 +560,10 @@ function setup(scene, root, data, benchmark) {
       for (let item = hit.object; item; item = item.parent) if (!item.visible) return false;
       const frame = hit.object.userData.frame;
       return hit.object.userData.screen || hit.object.userData.curtain || hit.object.userData.monitor ||
-        hit.object.userData.lampSwitch || hit.object.userData.roomAction || hit.object.userData.shopAction ||
+        hit.object.userData.mirror || hit.object.userData.lampSwitch || hit.object.userData.wardrobeDoor ||
+        hit.object.userData.roomAction ||
+        hit.object.userData.shopAction ||
+        hit.object.userData.lockedDoorSide ||
         (frame && !frame.detached) ||
         hit.object.userData.prop?.active || hasParent(hit.object, scenePhysics.doorObject);
     });
@@ -563,10 +588,28 @@ function setup(scene, root, data, benchmark) {
       return pressPhoneRay(id, pointOnScreen());
     const hit = targets(4.7)[0];
     if (!hit) return false;
-    const { screen, curtain, monitor, frame, lampSwitch, roomAction, shopAction: action } = hit.object.userData;
+    const { screen, curtain, monitor, mirror: mirrorHit, frame, lampSwitch, roomAction,
+      lockedDoorSide, shopAction: action } = hit.object.userData;
     if (action) return shopAction(action);
+    if (hit.object.userData.wardrobeDoor) {
+      const door = hit.object.userData.wardrobeDoor;
+      door.begin(hit.point);
+      wardrobeDrag = { door, distance: hit.distance };
+      return true;
+    }
+    if (lockedDoorSide) {
+      const head = viewer().getWorldPosition(new THREE.Vector3());
+      if (!upgrade.corridorContains(head) || !scenePhysics.canReachPoint(ray.ray.origin, hit.point)) return false;
+      tryCorridorLatch(hit.object);
+      return true;
+    }
     if (roomAction) { roomAction(); return true; }
     if (lampSwitch) { toggleBedsideLamp(); return true; }
+    if (mirrorHit) {
+      mirrorTilt = .12 * Math.sign(hit.point.x - (mirror?.getWorldPosition(new THREE.Vector3()).x ?? 0) || 1);
+      show('O espelho balança. Ainda dá tempo de arrumar o cabelo.', 3);
+      return true;
+    }
     if (frame) {
       const normal = new THREE.Vector3(0, 0, 1).transformDirection(hit.object.matrixWorld);
       const before = hit.point.clone().addScaledVector(normal, isGrab ? .12 : .044);
@@ -608,6 +651,10 @@ function setup(scene, root, data, benchmark) {
   }
 
   function finish(id, useRay, commit = true) {
+    if (wardrobeDrag) {
+      wardrobeDrag.door.end();
+      wardrobeDrag = null;
+    }
     if (date?.active()) { date.active().release(id, commit); return; }
     const touch = phoneRays.get(id);
     if (phoneRays.delete(id)) {
@@ -650,6 +697,10 @@ function setup(scene, root, data, benchmark) {
       date?.active()?.focus(ray);
       if (desktopGesture !== event.pointerId && dispensed?.held !== 'mouse') return;
       if (date?.active()) { date.active().move('mouse', ray, orientation); return; }
+      if (wardrobeDrag) {
+        wardrobeDrag.door.drag(ray.ray.at(wardrobeDrag.distance, new THREE.Vector3()));
+        return;
+      }
       const held = inputs.get('mouse');
       if (held) scenePhysics.updateGrab('mouse', ray.ray.at(held.distance, new THREE.Vector3()), orientation);
       if (phoneRays.has('mouse')) movePhoneRay('mouse', pointOnScreen());
@@ -798,6 +849,7 @@ function setup(scene, root, data, benchmark) {
       control.pointerTarget = phone.screen.worldToLocal(screenHit.clone());
       control.avatarPose.pointDirection = aimAt;
     } else control.avatarPose.pointDirection = ray.ray.direction.clone();
+    if (wardrobeDrag) wardrobeDrag.door.drag(grip.contact ?? ray.ray.at(1.2, new THREE.Vector3()));
     const events = controllerButtons?.read(source) ?? [false,false];
     const pressed = [trigger > .55 || events[0], squeeze > .55 || events[1]];
     const previous = control.buttons ?? [false, false];
@@ -811,6 +863,9 @@ function setup(scene, root, data, benchmark) {
       let grabbed;
       if (pressed[1] && !previous[1]) {
         if (venue) grabbed = venue.press(id, ray, grip.orientation, grip.contact, true, grip.position);
+        else if (pressAt(id, true, grip.orientation)) {
+          grabbed = true;
+        }
         else if (scenePhysics.grab(id, grip.contact, grip.orientation, scenePhysics.nearest(grip.contact, .10, grip.position, id),
           { from: grip.position })) {
           inputs.set(id, { distance: 0 });
@@ -928,6 +983,8 @@ function setup(scene, root, data, benchmark) {
       upgrade.additions.touch(from, to, elapsed);
       const action = upgrade.shop.touch(from, to, elapsed);
       if (action) shopAction(action);
+      const handle = upgrade.touchLockedDoor(from, to);
+      if (handle) tryCorridorLatch(handle);
     }
     if (upgrade.bedside.touchesSwitch(from, to)) toggleBedsideLamp();
     const curtainForce = THREE.MathUtils.clamp((to.z - from.z) * 3.2, -.11, .11);
@@ -1246,6 +1303,11 @@ function setup(scene, root, data, benchmark) {
     if (scenery.time !== requestedTime && !upgrade.corridorContains(position)) applyRoomTime(position);
     if (upgrade.tick(delta, elapsed, phase === 'intro' && !scenePhysics.props.get(data.phone.id)?.held, position, scenePhysics.doorBlocks))
       sound.creatureSting(scenery.reduced);
+    wardrobe.tick(delta);
+    if (mirror) {
+      mirrorTilt = THREE.MathUtils.damp(mirrorTilt, 0, 6, delta);
+      mirror.rotation.z = mirrorBaseZ + mirrorTilt;
+    }
     const inCorridor = upgrade.corridorContains(position);
     scenery.setCorridor(inCorridor);
     sound.setCorridor(inCorridor);
@@ -1534,11 +1596,20 @@ function setup(scene, root, data, benchmark) {
       rigObject.position.add(goal.sub(rigObject.localToWorld(headLocal)));
     }
   });
+  if (import.meta.env.DEV) {
+    window.__wde = { wardrobe, scenePhysics, date, phone, scene, camera, rig, node, menu };
+  }
+  const debugVenue = new URLSearchParams(location.search).get('venue');
+  if (debugVenue) {
+    const matchId = ({ sushi: 'rafa', bistro: 'bia', bar: 'luiza', picnic: 'caio' })[debugVenue] ?? debugVenue;
+    queueMicrotask(() => date.start({ schemaVersion: 1, phase: 'exit', avatarGender: 'male',
+      preference: 'all', matchId, substance: 'none' }));
+  }
   updateStory(phone.getState());
   menu.show();
   menu.follow(viewer(), false);
   if (phone.getState().phase === 'intro') show('Preciso arrumar uma namorada. Deixa eu ver o que tem no meu celular.', 9);
-  return { tick, phone, scenery, scenePhysics, root, node, date, avatar, menu, benchmark };
+  return { tick, phone, scenery, scenePhysics, root, node, date, avatar, menu, benchmark, wardrobe };
 }
 
 function makeCaption(THREE, camera) {

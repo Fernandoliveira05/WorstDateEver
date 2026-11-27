@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "flower-patch",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/04-flower-patch.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized White Flower Patch (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8",
+  "download": "https://cdn.3dassets.dev/assets/38750/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 20608,
+    "triangles": 392,
+    "vertices": 959,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.8100000023841858,
+        -1.663228877032616e-05,
+        -0.8100000023841858
+      ],
+      "max": [
+        0.8100000023841858,
+        0.3422749702119411,
+        0.8100000023841858
+      ]
+    },
+    "sizeMeters": [
+      1.62,
+      0.342,
+      1.62
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/flower-patch/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8.glb",
+    "sha256": "f96ccc7547c243fdad46dd93e82b6a61016e749e7eadb836202b713476dde16b",
+    "bytes": 20608
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/flower-patch.glb",
+    "sha256": "f96ccc7547c243fdad46dd93e82b6a61016e749e7eadb836202b713476dde16b",
+    "bytes": 20608
+  }
+}

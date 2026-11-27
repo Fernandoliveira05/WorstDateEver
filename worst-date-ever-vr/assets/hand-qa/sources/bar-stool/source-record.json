@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bar-stool",
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/07-bar-stool.png",
+  "provider": "3dassets.dev",
+  "title": "Bar stool with back, ebonised (Bar, Pub and Brewery Taproom)",
+  "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64",
+  "download": "https://cdn.3dassets.dev/assets/18395/v1/model.glb",
+  "pack": "bar-pub-and-brewery-taproom",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 91468,
+    "triangles": 1852,
+    "vertices": 5556,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.23200434242488116,
+        0,
+        -0.22848901032531077
+      ],
+      "max": [
+        0.23200434242488116,
+        1.1299999952316284,
+        0.22848901032531077
+      ]
+    },
+    "sizeMeters": [
+      0.464,
+      1.13,
+      0.457
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bar-stool/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64.glb",
+    "sha256": "601f1dae821077eeea97795906e314d8aec9b01db0995355d11367988c2c2604",
+    "bytes": 91468
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bar-stool.glb",
+    "sha256": "601f1dae821077eeea97795906e314d8aec9b01db0995355d11367988c2c2604",
+    "bytes": 91468
+  }
+}

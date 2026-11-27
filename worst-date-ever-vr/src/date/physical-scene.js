@@ -8,7 +8,7 @@ import { createMenuFood } from './menu-food.js';
 const smooth = (THREE, x, a, b) => THREE.MathUtils.smoothstep(x, a, b);
 
 export function createPhysicalScene(THREE, { parent, camera, date, props, venueId, audio, complete,
-  isVr = () => false, storage = null }) {
+  isVr = () => false, storage = null, surfaceHeight = .787 }) {
   const root = new THREE.Group();
   root.name = 'Physical interaction props';
   parent.add(root);
@@ -33,8 +33,13 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
     return cup;
   }
   const dateCup = makeCup(), trickCup = makeCup();
-  dateCup.position.set(.17,.86,-.63);
-  trickCup.position.set(.36,.86,.02);
+  const cupRest = surfaceHeight + .073;
+  const fruitRest = surfaceHeight + .053;
+  const homeDateCup = new THREE.Vector3(.17, cupRest, -.63);
+  const homeTrickCup = new THREE.Vector3(.36, cupRest, .02);
+  dateCup.position.copy(homeDateCup);
+  trickCup.position.copy(homeTrickCup);
+  dateCup.visible = trickCup.visible = false;
   const liquid = new THREE.Mesh(new THREE.CylinderGeometry(.038,.038,.01,14),
     new THREE.MeshBasicMaterial({ color: 0xc8a3dd, transparent: true, opacity: .63,
       side: THREE.DoubleSide, depthWrite: false }));
@@ -53,7 +58,7 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
   let foodPieces = [];
   let incoming, plated, servedDrink;
   const deliveryTarget = new THREE.Vector3();
-  const drinkPlacement = new THREE.Vector3(-.13, .787, -.10);
+  const drinkPlacement = new THREE.Vector3(-.13, surfaceHeight, -.10);
   let foodRemaining = false;
   let dateEating = null;
   const fork = new THREE.Group();
@@ -96,8 +101,8 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
       }
     }
     root.add(group);
-    group.position.set((index - 1) * .14, .84, -.11);
-    group.visible = true;
+    group.position.set((index - 1) * .14, fruitRest, -.11);
+    group.visible = false;
     return { mesh: group, fallen: false, velocity: new THREE.Vector3(), rest: group.position.clone(),
       start: group.position.clone() };
   });
@@ -128,8 +133,7 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
   const target = new THREE.Vector3();
   const cameraPoint = new THREE.Vector3();
   const cameraQuat = new THREE.Quaternion();
-  const homeDateCup = new THREE.Vector3(.17,.86,-.63);
-  const sharedPoint = new THREE.Vector3(-.04,1.08,-.52);
+  const sharedPoint = new THREE.Vector3(-.04, surfaceHeight + .293, -.52);
   let active = null, lastUsed = {}, axisHeld = false, lastFeedback = null;
   const headAngles = new THREE.Euler(0, 0, 0, 'YXZ');
   const getStorage = () => { try { return storage ?? (typeof window !== 'undefined' ? window.localStorage : null); }
@@ -203,10 +207,16 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
       correction: null, headHome: null };
     if (id === 'juggle') for (const fruit of fruits) {
       fruit.fallen = false; fruit.velocity.set(0,0,0);
-      fruit.start.copy(fruit.mesh.position);
+      fruit.mesh.position.copy(fruit.rest);
+      fruit.mesh.rotation.set(0, 0, 0);
+      fruit.mesh.visible = true;
+      fruit.start.copy(fruit.rest);
     }
-    if (id === 'balance') trickCup.rotation.set(0,0,0);
-    if (id === 'balance') for (const drop of droplets) drop.mesh.visible = false;
+    if (id === 'balance') {
+      trickCup.rotation.set(0,0,0);
+      trickCup.visible = true;
+      for (const drop of droplets) drop.mesh.visible = false;
+    }
     if (['dance','juggle','balance'].includes(id))
       danceHands.forEach(hand => { hand.mesh.visible = true; });
     if (challenge.action.type !== 'instant') visuals.start(id);
@@ -251,11 +261,10 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
       bodyAt(prop, new THREE.Vector3(...prop.position));
       releaseDynamic(prop.body);
     }
-    if (active.challenge.action.id === 'balance' && active.challenge.state.result !== 'failure')
-      trickCup.position.set(.36,.86,.02);
+    trickCup.position.copy(homeTrickCup);
+    dateCup.visible = trickCup.visible = false;
     dateCup.position.copy(homeDateCup);
-    for (const fruit of fruits) if (fruit.mesh.position.y > .84 && active.challenge.state.result)
-      fruit.mesh.position.y = .84;
+    for (const fruit of fruits) fruit.mesh.visible = false;
     danceHands.forEach(hand => { hand.mesh.visible = false; });
     playerHand.visible = false;
     fork.visible = false;
@@ -330,7 +339,7 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
     const prop = props.plate;
     const accept = social !== 'refuse';
     const toward = smooth(THREE, age, .25, 1.15) * (1 - smooth(THREE, age, 2.5, 3.65));
-    target.fromArray(prop.position).lerp(new THREE.Vector3(.07,.83,-.53), toward);
+    target.fromArray(prop.position).lerp(new THREE.Vector3(.07,surfaceHeight + .043,-.53), toward);
     bodyAt(prop, target);
     playerHand.position.copy(target).add(new THREE.Vector3(.11,-.045,.06));
     playerHand.scale.setScalar(Math.min(1, smooth(THREE, age, 0, .35)) *
@@ -399,7 +408,7 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
       trickCup.rotation.z += dt * 4;
       const overTable = Math.abs(trickCup.position.x) < .61 &&
         trickCup.position.z > -.77 && trickCup.position.z < .22;
-      const surface = overTable ? .86 : .07;
+      const surface = overTable ? cupRest : .07;
       if (trickCup.position.y < surface) {
         trickCup.position.y = surface;
         drop.velocity.y = Math.abs(drop.velocity.y) * .28;
@@ -433,7 +442,10 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
     if (active.drop) for (const { mesh, velocity } of droplets) if (mesh.visible) {
       velocity.y -= 3.6 * dt;
       mesh.position.addScaledVector(velocity, dt);
-      if (mesh.position.y < .86) { mesh.position.y = .86; velocity.set(0,0,0); }
+      if (mesh.position.y < surfaceHeight + .006) {
+        mesh.position.y = surfaceHeight + .006;
+        velocity.set(0,0,0);
+      }
     }
     lookAt(trickCup.position);
     const risk = Math.min(1, Math.hypot(state.tilt, state.tiltY) / .68);
@@ -467,8 +479,8 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
         fruit.velocity.y -= 4.9 * dt;
         fruit.mesh.position.addScaledVector(fruit.velocity, dt);
         fruit.mesh.rotation.z += dt * 5;
-        if (fruit.mesh.position.y <= .84) {
-          fruit.mesh.position.y = .84;
+        if (fruit.mesh.position.y <= fruitRest) {
+          fruit.mesh.position.y = fruitRest;
           fruit.velocity.y = Math.abs(fruit.velocity.y) * .32;
           fruit.velocity.x *= .7;
           if (!active.sound.has('fruit' + index)) {
@@ -487,7 +499,7 @@ export function createPhysicalScene(THREE, { parent, camera, date, props, venueI
           const phase = THREE.MathUtils.clamp((state.elapsed - start) / Math.max(.1, next.at - start), 0, 1);
           if (state.elapsed < start) fruit.mesh.position.copy(fruit.rest);
           else fruit.mesh.position.set(THREE.MathUtils.lerp(from, to, phase),
-            .91 + Math.sin(Math.PI * phase) * (.30 + .06 * state.hits / 6),
+            fruitRest + .07 + Math.sin(Math.PI * phase) * (.30 + .06 * state.hits / 6),
             -.14 - Math.sin(Math.PI * phase) * .11);
           fruit.mesh.rotation.z = Math.sin(Math.PI * phase) * .34 + state.elapsed * .25;
         } else {

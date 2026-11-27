@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "iclona",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/05-iclona.png",
+  "provider": "3dassets.dev",
+  "title": "6.7 inch smartphone (Computers and Desk Gadgets)",
+  "page": "https://3dassets.dev/assets/computers-and-desk-gadgets-smartphone-67-a83244e4",
+  "download": "https://cdn.3dassets.dev/assets/38848/v1/model.glb",
+  "pack": "computers-and-desk-gadgets",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 22900,
+    "triangles": 466,
+    "vertices": 1023,
+    "meshes": 4,
+    "materials": 4,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.08349999785423279,
+        -5.776210220418201e-07,
+        -0.03900166225650907
+      ],
+      "max": [
+        0.08349999785423279,
+        0.02230051015010857,
+        0.03900166225650907
+      ]
+    },
+    "sizeMeters": [
+      0.167,
+      0.022,
+      0.078
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/iclona/computers-and-desk-gadgets-smartphone-67-a83244e4.glb",
+    "sha256": "3a2e93445f551c56cea2eb029547fb40ae6430de051f7c0392ff5352d1a85f66",
+    "bytes": 22900
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/iclona.glb",
+    "sha256": "3a2e93445f551c56cea2eb029547fb40ae6430de051f7c0392ff5352d1a85f66",
+    "bytes": 22900
+  }
+}

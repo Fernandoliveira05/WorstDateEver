@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "beer-bucket",
-  "manifest_reference": null,
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/props/bucket/",
-    "slug": "bucket",
-    "category": "props",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/bucket/bucket.glb",
-    "license_url": "https://grab3d.com/dl/bucket/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/bucket/manifest.json"
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/02-beer-bucket.png",
+  "provider": "3dassets.dev",
+  "title": "Ice bucket and tongs (Bar, Pub and Brewery Taproom)",
+  "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-ice-bucket-0122721e",
+  "download": "https://cdn.3dassets.dev/assets/18441/v1/model.glb",
+  "pack": "bar-pub-and-brewery-taproom",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/ice-bucket/bucket.glb",
-      "sha256": "664fe8441fc29402afe20d1f1ceb3762921ad7e75bb511af887bf58613ad36ee",
-      "bytes": 706544
+  "stats": {
+    "fileSize": 31012,
+    "triangles": 624,
+    "vertices": 1872,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.09979959219925157,
+        0,
+        -0.0931559177605849
+      ],
+      "max": [
+        0.09674853474132768,
+        0.309421181678772,
+        0.0931559177605849
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/ice-bucket/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/ice-bucket/publisher-manifest.json",
-      "sha256": "5e46ebaab8113c241e4e11466dcb4bb30e5af5b81b9d4da052593b30150080f5",
-      "bytes": 1523
-    }
+    "sizeMeters": [
+      0.197,
+      0.309,
+      0.186
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/beer-bucket/bar-pub-and-brewery-taproom-ice-bucket-0122721e.glb",
+    "sha256": "ede9b541f05753feec0910497323916f44533ccf9164b26dbb1913c3eedb2038",
+    "bytes": 31012
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/beer-bucket.glb",
-    "sha256": "664fe8441fc29402afe20d1f1ceb3762921ad7e75bb511af887bf58613ad36ee",
-    "bytes": 706544,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 13128,
-    "texture_px": 2048,
-    "dimensions_m": "0.323 x 0.372 x 0.320",
-    "real_size": "galvanised bucket, approx. 33 cm wide, 28 cm high (without handle), 10 litres",
-    "notes": "front faces -Y; zinc bucket with rolled rim, two beads, foot ring, riveted ears and a wire bail with a warm wooden grip resting on the rim, filled almost to the brim with clear sky blue water (separate transparent object 'bucket_water', not baked) and a small coral enamel dipper hooked over the back rim; no text; no movable parts"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "ede9b541f05753feec0910497323916f44533ccf9164b26dbb1913c3eedb2038",
+    "bytes": 31012
+  }
 }

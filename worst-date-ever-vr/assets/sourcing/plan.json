@@ -1,0 +1,1169 @@
+{
+  "schema_version": "wde-sourcing-plan/1",
+  "items": [
+    {
+      "id": "bed",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/01-bed.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Double Bed Upholstered (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e",
+      "download": "https://cdn.3dassets.dev/assets/38770/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1944,
+      "bytes": 81620,
+      "dimensions": [
+        1.71,
+        1.105,
+        2.19
+      ],
+      "candidate": "assets/hand-qa/candidates/bed.glb",
+      "sha256": "086be35da80ceffd6528af9490136ccf3f25c10e67160fd2e37d4bb0a9d9e367"
+    },
+    {
+      "id": "wardrobe",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/02-wardrobe.png",
+      "status": "KEEP",
+      "reason": "Integrated 3dassets Wardrobe 2 Door (see bedroom-wardrobe.js)"
+    },
+    {
+      "id": "desk",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/03-desk.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Desk Writing (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-writing-2f6be817",
+      "download": "https://cdn.3dassets.dev/assets/38795/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1168,
+      "bytes": 47052,
+      "dimensions": [
+        1.4,
+        0.745,
+        0.7
+      ],
+      "candidate": "assets/hand-qa/candidates/desk.glb",
+      "sha256": "29678a25099beed66d4b225b439e0c5fe05ecced4362791d130a15eeb7386146"
+    },
+    {
+      "id": "desk-chair",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/04-desk-chair.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Desk Task Chair (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-task-chair-e1320da0",
+      "download": "https://cdn.3dassets.dev/assets/38786/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1648,
+      "bytes": 68252,
+      "dimensions": [
+        0.607,
+        1.04,
+        0.633
+      ],
+      "candidate": "assets/hand-qa/candidates/desk-chair.glb",
+      "sha256": "9a1efb2112523ab1757ec7eed96dbb44c6001b1246004ce64bcd66da403e2dc6"
+    },
+    {
+      "id": "iclona",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/05-iclona.png",
+      "status": "DOWNLOADED",
+      "pack": "computers-and-desk-gadgets",
+      "title": "6.7 inch smartphone (Computers and Desk Gadgets)",
+      "page": "https://3dassets.dev/assets/computers-and-desk-gadgets-smartphone-67-a83244e4",
+      "download": "https://cdn.3dassets.dev/assets/38848/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 466,
+      "bytes": 22900,
+      "dimensions": [
+        0.167,
+        0.022,
+        0.078
+      ],
+      "candidate": "assets/hand-qa/candidates/iclona.glb",
+      "sha256": "3a2e93445f551c56cea2eb029547fb40ae6430de051f7c0392ff5352d1a85f66"
+    },
+    {
+      "id": "standing-fan",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/06-standing-fan.png",
+      "status": "KEEP",
+      "reason": "Existing stylized ceiling fan + cord; no matching CC0 standing fan found"
+    },
+    {
+      "id": "fan-pull-cord",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/07-fan-pull-cord.png",
+      "status": "KEEP",
+      "reason": "Existing authored pull cord"
+    },
+    {
+      "id": "window",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/08-window.png",
+      "status": "KEEP",
+      "reason": "Existing room window with live exterior and curtains"
+    },
+    {
+      "id": "curtains",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/09-curtains.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Curtains Linen Pair (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984",
+      "download": "https://cdn.3dassets.dev/assets/38813/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 832,
+      "bytes": 39192,
+      "dimensions": [
+        2.124,
+        2.012,
+        0.16
+      ],
+      "candidate": "assets/hand-qa/candidates/curtains.glb",
+      "sha256": "0d079a1e57dc76dfa3881a7a0c027c8ae3c7ae29c7c8dd557bcbc3ecd49f6245"
+    },
+    {
+      "id": "rug",
+      "scene": "bedroom",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/10-rug.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Rug Round Jute (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-rug-round-jute-1be22f81",
+      "download": "https://cdn.3dassets.dev/assets/38812/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 848,
+      "bytes": 36008,
+      "dimensions": [
+        1.6,
+        0.034,
+        1.6
+      ],
+      "candidate": "assets/hand-qa/candidates/rug.glb",
+      "sha256": "1cfedde6cb3f06c495c533a1ae16bacab8e1ccf19ff1d32a5f11af6f550f41a4"
+    },
+    {
+      "id": "woven-basket",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/01-woven-basket.png",
+      "status": "KEEP",
+      "reason": "Existing hand-QA Grab3D picnic basket (better match than a display basket)"
+    },
+    {
+      "id": "checked-blanket",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/02-checked-blanket.png",
+      "status": "KEEP",
+      "reason": "Existing hand-QA Grab3D picnic blanket (fold/pull rig already authored)"
+    },
+    {
+      "id": "floor-cushion",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/03-floor-cushion.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Pouffe Round (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24",
+      "download": "https://cdn.3dassets.dev/assets/38781/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 368,
+      "bytes": 15656,
+      "dimensions": [
+        0.69,
+        0.378,
+        0.69
+      ],
+      "candidate": "assets/hand-qa/candidates/floor-cushion.glb",
+      "sha256": "d95eb5dbe77d7b86cb3d5db631b8bccac947086a306b51d665e7c798d845a9f1"
+    },
+    {
+      "id": "kombucha-bottle",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/04-kombucha-bottle.png",
+      "status": "DOWNLOADED",
+      "pack": "fresh-produce-and-groceries",
+      "title": "Vinegar Bottle (Food, Fresh Produce and Groceries)",
+      "page": "https://3dassets.dev/assets/fresh-produce-and-groceries-vinegar-bottle-5cefbeac",
+      "download": "https://cdn.3dassets.dev/assets/24440/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 2152,
+      "bytes": 106496,
+      "dimensions": [
+        0.081,
+        0.189,
+        0.081
+      ],
+      "candidate": "assets/hand-qa/candidates/kombucha-bottle.glb",
+      "sha256": "725ba1e2174d74ea7782f83898246804b794c088a9ec588b569339e22f7eba37"
+    },
+    {
+      "id": "vegan-sandwich",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/05-vegan-sandwich.png",
+      "status": "KEEP",
+      "reason": "Existing hand-QA Grab3D sandwich"
+    },
+    {
+      "id": "fruit-bowl",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/06-fruit-bowl.png",
+      "status": "DOWNLOADED",
+      "pack": "fresh-produce-and-groceries",
+      "title": "Wooden Market Bowl (Food, Fresh Produce and Groceries)",
+      "page": "https://3dassets.dev/assets/fresh-produce-and-groceries-wooden-market-bowl-24ec8579",
+      "download": "https://cdn.3dassets.dev/assets/24454/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1728,
+      "bytes": 84744,
+      "dimensions": [
+        0.4,
+        0.112,
+        0.4
+      ],
+      "candidate": "assets/hand-qa/candidates/fruit-bowl.glb",
+      "sha256": "f73d5aa56e867c376bb041e529a1ef14f38308e68dc9ba4e858670dc2724b1ea"
+    },
+    {
+      "id": "hardcover-book",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/07-hardcover-book.png",
+      "status": "KEEP",
+      "reason": "Existing hand-QA Grab3D book"
+    },
+    {
+      "id": "park-bench",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/08-park-bench.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Slatted Park Bench (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-park-bench-dfa5e953",
+      "download": "https://cdn.3dassets.dev/assets/33673/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 144,
+      "bytes": 14748,
+      "dimensions": [
+        1.8,
+        0.973,
+        0.7
+      ],
+      "candidate": "assets/hand-qa/candidates/park-bench.glb",
+      "sha256": "0b3f3c23d1dfc6dde2a961a8c39096639be901d90551b493c1d36b16240a486e"
+    },
+    {
+      "id": "green-canopy-tree",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/09-green-canopy-tree.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Oak Tree Mature (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2",
+      "download": "https://cdn.3dassets.dev/assets/38720/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 531,
+      "bytes": 38304,
+      "dimensions": [
+        4.451,
+        5.076,
+        3.426
+      ],
+      "candidate": "assets/hand-qa/candidates/green-canopy-tree.glb",
+      "sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be"
+    },
+    {
+      "id": "pink-flowering-tree",
+      "scene": "picnic",
+      "reference": "assets/tripo/references/wde-02-picnic-core/10-pink-flowering-tree.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Oak Tree Mature (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2",
+      "download": "https://cdn.3dassets.dev/assets/38720/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 531,
+      "bytes": 38304,
+      "dimensions": [
+        4.451,
+        5.076,
+        3.426
+      ],
+      "candidate": "assets/hand-qa/candidates/pink-flowering-tree.glb",
+      "sha256": "a02c80e2956fcecb86129386774383ce39ef088095c2b2c33f1547d7408a96be"
+    },
+    {
+      "id": "sushi-platter",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/01-sushi-platter.png",
+      "status": "KEEP",
+      "reason": "Existing hand-QA Grab3D sushi set"
+    },
+    {
+      "id": "salmon-nigiri",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/02-salmon-nigiri.png",
+      "status": "KEEP",
+      "reason": "Extract from hand-QA Grab3D sushi set"
+    },
+    {
+      "id": "maki-rolls",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/03-maki-rolls.png",
+      "status": "KEEP",
+      "reason": "Extract from hand-QA Grab3D sushi set"
+    },
+    {
+      "id": "shoyu-dish",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/04-shoyu-dish.png",
+      "status": "DOWNLOADED",
+      "pack": "bakery-and-cafe",
+      "title": "Side plate (Cafe, Bakery and Coffee Bar)",
+      "page": "https://3dassets.dev/assets/bakery-and-cafe-side-plate-58555773",
+      "download": "https://cdn.3dassets.dev/assets/22235/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 288,
+      "bytes": 14880,
+      "dimensions": [
+        0.17,
+        0.018,
+        0.167
+      ],
+      "candidate": "assets/hand-qa/candidates/shoyu-dish.glb",
+      "sha256": "865ebdf3057ff579e92980f7c9ac78f96769b302119a3baf8bf9b447b0e9097c"
+    },
+    {
+      "id": "chopsticks",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/05-chopsticks.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Chopstick and Condiment Caddy (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a",
+      "download": "https://cdn.3dassets.dev/assets/36436/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 480,
+      "bytes": 42744,
+      "dimensions": [
+        0.385,
+        0.39,
+        0.16
+      ],
+      "candidate": "assets/hand-qa/candidates/chopsticks.glb",
+      "sha256": "add8c10daec9d7ee34b4048bfdce5900f10402a3a8a9dd437c026dec7e3e6fbc"
+    },
+    {
+      "id": "sake-flask",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/06-sake-flask.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Sake Bottle and Tokkuri Set (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc",
+      "download": "https://cdn.3dassets.dev/assets/36448/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 660,
+      "bytes": 45492,
+      "dimensions": [
+        0.62,
+        0.442,
+        0.26
+      ],
+      "candidate": "assets/hand-qa/candidates/sake-flask.glb",
+      "sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd"
+    },
+    {
+      "id": "sake-cup",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/07-sake-cup.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Sake Bottle and Tokkuri Set (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc",
+      "download": "https://cdn.3dassets.dev/assets/36448/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 660,
+      "bytes": 45492,
+      "dimensions": [
+        0.62,
+        0.442,
+        0.26
+      ],
+      "candidate": "assets/hand-qa/candidates/sake-cup.glb",
+      "sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd"
+    },
+    {
+      "id": "dining-table",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/08-dining-table.png",
+      "status": "DOWNLOADED",
+      "pack": "bakery-and-cafe",
+      "title": "Two person cafe table (Cafe, Bakery and Coffee Bar)",
+      "page": "https://3dassets.dev/assets/bakery-and-cafe-cafe-table-2-person-038f8dc8",
+      "download": "https://cdn.3dassets.dev/assets/22200/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 816,
+      "bytes": 41668,
+      "dimensions": [
+        0.604,
+        0.75,
+        0.604
+      ],
+      "candidate": "assets/hand-qa/candidates/dining-table.glb",
+      "sha256": "efa7d14d15e583ddeded2b625af874696e24bbb8e98af71a1ab73aaedb55b6b0"
+    },
+    {
+      "id": "dining-chair",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/09-dining-chair.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Upholstered dining chair (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-upholstered-9dc9a416",
+      "download": "https://cdn.3dassets.dev/assets/16500/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1388,
+      "bytes": 69244,
+      "dimensions": [
+        0.46,
+        0.925,
+        0.485
+      ],
+      "candidate": "assets/hand-qa/candidates/dining-chair.glb",
+      "sha256": "45766c24dde067967cfd888da44ee57897b9810d168300ab9217e319b60e24ea"
+    },
+    {
+      "id": "paper-lantern",
+      "scene": "sushi",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/10-paper-lantern.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Round Paper Lantern (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298",
+      "download": "https://cdn.3dassets.dev/assets/36453/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 476,
+      "bytes": 22472,
+      "dimensions": [
+        0.424,
+        0.78,
+        0.414
+      ],
+      "candidate": "assets/hand-qa/candidates/paper-lantern.glb",
+      "sha256": "73761ce4a33bd444a5a1bf3633b87176a0a53a60b55dbea8c38aa591f09bb20e"
+    },
+    {
+      "id": "bistro-table",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/01-bistro-table.png",
+      "status": "DOWNLOADED",
+      "pack": "bakery-and-cafe",
+      "title": "Outdoor bistro table (Cafe, Bakery and Coffee Bar)",
+      "page": "https://3dassets.dev/assets/bakery-and-cafe-bistro-table-outdoor-813deda1",
+      "download": "https://cdn.3dassets.dev/assets/22214/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1032,
+      "bytes": 51332,
+      "dimensions": [
+        0.6,
+        0.724,
+        0.594
+      ],
+      "candidate": "assets/hand-qa/candidates/bistro-table.glb",
+      "sha256": "253218e4f50ab43dbb47a193bcafb4d30faa1368198dd43dc80cd89723e0db7f"
+    },
+    {
+      "id": "upholstered-chair",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/02-upholstered-chair.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Upholstered dining chair, accent (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-accent-40f75aa7",
+      "download": "https://cdn.3dassets.dev/assets/16509/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1388,
+      "bytes": 69100,
+      "dimensions": [
+        0.46,
+        0.925,
+        0.485
+      ],
+      "candidate": "assets/hand-qa/candidates/upholstered-chair.glb",
+      "sha256": "420f701d28c091d215a50fb8a26a2758012dbaca7cc5184d75fe494abc69c603"
+    },
+    {
+      "id": "booth",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/03-booth.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Booth pair, two cover (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-booth-2-cover-4581f965",
+      "download": "https://cdn.3dassets.dev/assets/16501/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 5352,
+      "bytes": 260768,
+      "dimensions": [
+        1.12,
+        1.264,
+        1.59
+      ],
+      "candidate": "assets/hand-qa/candidates/booth.glb",
+      "sha256": "23758fe4921ec27a36a1c8abb1461f72e44c90c4261b5ba8ad3760bb4ae94def"
+    },
+    {
+      "id": "menu",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/04-menu.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Table menu holder (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-menu-holder-54030b60",
+      "download": "https://cdn.3dassets.dev/assets/16522/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 532,
+      "bytes": 27308,
+      "dimensions": [
+        0.128,
+        0.191,
+        0.085
+      ],
+      "candidate": "assets/hand-qa/candidates/menu.glb",
+      "sha256": "e8294a2bb62d1eb2ea38088094834ca37e1c1754a236f3408ffa10251d8dc189"
+    },
+    {
+      "id": "candle",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/05-candle.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Candle holder (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-candle-holder-c0294da5",
+      "download": "https://cdn.3dassets.dev/assets/16536/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 444,
+      "bytes": 23816,
+      "dimensions": [
+        0.108,
+        0.228,
+        0.105
+      ],
+      "candidate": "assets/hand-qa/candidates/candle.glb",
+      "sha256": "3c48e6edaf1f2201b21520ec2a8eeca8da8693d9c03dd9f75761a4ea641b661e"
+    },
+    {
+      "id": "wine-glass",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/06-wine-glass.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Wine glass (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-wine-glass-5d9eb720",
+      "download": "https://cdn.3dassets.dev/assets/16531/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 420,
+      "bytes": 21216,
+      "dimensions": [
+        0.09,
+        0.21,
+        0.088
+      ],
+      "candidate": "assets/hand-qa/candidates/wine-glass.glb",
+      "sha256": "e2521155d065403519451334b2ea977afbf79a7864ebd079baf3919a3b2af146"
+    },
+    {
+      "id": "water-glass",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/07-water-glass.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Water tumbler (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-water-glass-c25f2efa",
+      "download": "https://cdn.3dassets.dev/assets/16532/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 192,
+      "bytes": 10220,
+      "dimensions": [
+        0.074,
+        0.125,
+        0.074
+      ],
+      "candidate": "assets/hand-qa/candidates/water-glass.glb",
+      "sha256": "89bf1ef8e18b59d7629988e6094bb60683cbd0fbac93035c9112fdccbe2ced0c"
+    },
+    {
+      "id": "coffee-cup",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/08-coffee-cup.png",
+      "status": "DOWNLOADED",
+      "pack": "bakery-and-cafe",
+      "title": "Ceramic cup and saucer (Cafe, Bakery and Coffee Bar)",
+      "page": "https://3dassets.dev/assets/bakery-and-cafe-cup-and-saucer-01dd63c2",
+      "download": "https://cdn.3dassets.dev/assets/22230/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 550,
+      "bytes": 27480,
+      "dimensions": [
+        0.15,
+        0.088,
+        0.15
+      ],
+      "candidate": "assets/hand-qa/candidates/coffee-cup.glb",
+      "sha256": "aa8b1b67618073a149927aff18f4ed4ddbdff42a590e94d4d823f31dc3abb4be"
+    },
+    {
+      "id": "cake-slice",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/09-cake-slice.png",
+      "status": "DOWNLOADED",
+      "pack": "bakery-and-cafe",
+      "title": "Layer cake slice (Cafe, Bakery and Coffee Bar)",
+      "page": "https://3dassets.dev/assets/bakery-and-cafe-cake-slice-c96344d0",
+      "download": "https://cdn.3dassets.dev/assets/22244/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 468,
+      "bytes": 24960,
+      "dimensions": [
+        0.21,
+        0.108,
+        0.21
+      ],
+      "candidate": "assets/hand-qa/candidates/cake-slice.glb",
+      "sha256": "beff9f617e595a97349392184813bff09e88e956f7a84d011f2b8de3bf4cea6d"
+    },
+    {
+      "id": "flower-vase",
+      "scene": "bistro",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/10-flower-vase.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Table vase (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-table-vase-3e7cd6a3",
+      "download": "https://cdn.3dassets.dev/assets/16537/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 352,
+      "bytes": 17952,
+      "dimensions": [
+        0.104,
+        0.175,
+        0.104
+      ],
+      "candidate": "assets/hand-qa/candidates/flower-vase.glb",
+      "sha256": "1b1f1b54b12f941379bee087f36043461d629fb6a3de57a676f0cfeef6f8d0cf"
+    },
+    {
+      "id": "beer-mug",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/01-beer-mug.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Dimpled tankard (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-dimpled-tankard-41bdeada",
+      "download": "https://cdn.3dassets.dev/assets/18434/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 288,
+      "bytes": 14916,
+      "dimensions": [
+        0.1,
+        0.14,
+        0.127
+      ],
+      "candidate": "assets/hand-qa/candidates/beer-mug.glb",
+      "sha256": "92c789b1101f976aea515b6361ad71e4dc66d9eeb686359754b16b6652bcc1be"
+    },
+    {
+      "id": "beer-bucket",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/02-beer-bucket.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Ice bucket and tongs (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-ice-bucket-0122721e",
+      "download": "https://cdn.3dassets.dev/assets/18441/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 624,
+      "bytes": 31012,
+      "dimensions": [
+        0.197,
+        0.309,
+        0.186
+      ],
+      "candidate": "assets/hand-qa/candidates/beer-bucket.glb",
+      "sha256": "ede9b541f05753feec0910497323916f44533ccf9164b26dbb1913c3eedb2038"
+    },
+    {
+      "id": "petiscos-bowl",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/03-petiscos-bowl.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+      "download": "https://cdn.3dassets.dev/assets/16530/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 320,
+      "bytes": 16416,
+      "dimensions": [
+        0.23,
+        0.055,
+        0.23
+      ],
+      "candidate": "assets/hand-qa/candidates/petiscos-bowl.glb",
+      "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b"
+    },
+    {
+      "id": "peanuts-bowl",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/04-peanuts-bowl.png",
+      "status": "DOWNLOADED",
+      "pack": "restaurant-kitchen-and-dining",
+      "title": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+      "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+      "download": "https://cdn.3dassets.dev/assets/16530/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 320,
+      "bytes": 16416,
+      "dimensions": [
+        0.23,
+        0.055,
+        0.23
+      ],
+      "candidate": "assets/hand-qa/candidates/peanuts-bowl.glb",
+      "sha256": "8ccfecf51e1df0588acf9e5e0bf5c76e445687f541016acbe858ce86d46dde4b"
+    },
+    {
+      "id": "hot-sauce",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/05-hot-sauce.png",
+      "status": "DOWNLOADED",
+      "pack": "fresh-produce-and-groceries",
+      "title": "Squeezy Sauce Bottle (Food, Fresh Produce and Groceries)",
+      "page": "https://3dassets.dev/assets/fresh-produce-and-groceries-ketchup-bottle-f4d88235",
+      "download": "https://cdn.3dassets.dev/assets/24441/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1900,
+      "bytes": 93688,
+      "dimensions": [
+        0.066,
+        0.205,
+        0.066
+      ],
+      "candidate": "assets/hand-qa/candidates/hot-sauce.glb",
+      "sha256": "f23f1959a319eeb33edac91e52486c5e7f331cd50a52b08da01e12ec449a4eb5"
+    },
+    {
+      "id": "coaster",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/06-coaster.png",
+      "status": "KEEP",
+      "reason": "Existing small procedural coaster; no CC0 set found"
+    },
+    {
+      "id": "bar-stool",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/07-bar-stool.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Bar stool with back, ebonised (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64",
+      "download": "https://cdn.3dassets.dev/assets/18395/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1852,
+      "bytes": 91468,
+      "dimensions": [
+        0.464,
+        1.13,
+        0.457
+      ],
+      "candidate": "assets/hand-qa/candidates/bar-stool.glb",
+      "sha256": "601f1dae821077eeea97795906e314d8aec9b01db0995355d11367988c2c2604"
+    },
+    {
+      "id": "round-table",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/08-round-table.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Round pedestal pub table, ebonised (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9",
+      "download": "https://cdn.3dassets.dev/assets/18394/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 892,
+      "bytes": 45244,
+      "dimensions": [
+        0.736,
+        0.75,
+        0.736
+      ],
+      "candidate": "assets/hand-qa/candidates/round-table.glb",
+      "sha256": "9680947848c64ecdc3cc990fb46578f1531abd62d42fe1e2c4cb5df311f68a66"
+    },
+    {
+      "id": "bar-counter",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/09-bar-counter.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Bar counter module 1200 (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc",
+      "download": "https://cdn.3dassets.dev/assets/18319/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1726,
+      "bytes": 86080,
+      "dimensions": [
+        1.2,
+        1.05,
+        0.74
+      ],
+      "candidate": "assets/hand-qa/candidates/bar-counter.glb",
+      "sha256": "6872fe59b1af5389a379eb53aa1003767d8c899af988b79ebcf92ba1f8b4364a"
+    },
+    {
+      "id": "jukebox",
+      "scene": "bar",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/10-jukebox.png",
+      "status": "DOWNLOADED",
+      "pack": "bar-pub-and-brewery-taproom",
+      "title": "Pub jukebox (Bar, Pub and Brewery Taproom)",
+      "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-jukebox-b6da908d",
+      "download": "https://cdn.3dassets.dev/assets/18415/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 2268,
+      "bytes": 112696,
+      "dimensions": [
+        0.78,
+        1.353,
+        0.503
+      ],
+      "candidate": "assets/hand-qa/candidates/jukebox.glb",
+      "sha256": "49267702aa64c7fc4fa994d9ed1ad8c44d9f4273b150eca01198e6a66b7f54dc"
+    },
+    {
+      "id": "bush",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/01-bush.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Round Bush (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-bush-round-b06cf36c",
+      "download": "https://cdn.3dassets.dev/assets/38735/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 180,
+      "bytes": 4936,
+      "dimensions": [
+        1.237,
+        0.941,
+        1.277
+      ],
+      "candidate": "assets/hand-qa/candidates/bush.glb",
+      "sha256": "a2c964526532ade335b4f8fda4b0efc4554d86ff8bd471173c85e09fd860d430"
+    },
+    {
+      "id": "hedge",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/02-hedge.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Hedge Block (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-hedge-block-dcfe3855",
+      "download": "https://cdn.3dassets.dev/assets/38742/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 24,
+      "bytes": 2492,
+      "dimensions": [
+        2.06,
+        0.95,
+        0.86
+      ],
+      "candidate": "assets/hand-qa/candidates/hedge.glb",
+      "sha256": "913d006747838a4ff2a16554010bcb55bdce016c8ad4d60031b7186bf95c1161"
+    },
+    {
+      "id": "grass-clump",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/03-grass-clump.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Grass Tuft Tall (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773",
+      "download": "https://cdn.3dassets.dev/assets/38745/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 156,
+      "bytes": 7160,
+      "dimensions": [
+        1.074,
+        0.909,
+        0.957
+      ],
+      "candidate": "assets/hand-qa/candidates/grass-clump.glb",
+      "sha256": "f81ebcbdb242aff1a4e6244c2f03f320d1091293e62c8d8d7d86634d1c17260b"
+    },
+    {
+      "id": "flower-patch",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/04-flower-patch.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized White Flower Patch (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8",
+      "download": "https://cdn.3dassets.dev/assets/38750/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 392,
+      "bytes": 20608,
+      "dimensions": [
+        1.62,
+        0.342,
+        1.62
+      ],
+      "candidate": "assets/hand-qa/candidates/flower-patch.glb",
+      "sha256": "f96ccc7547c243fdad46dd93e82b6a61016e749e7eadb836202b713476dde16b"
+    },
+    {
+      "id": "street-lamp",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/06-street-lamp.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Park Lamp Post (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-park-lamp-post-6771a338",
+      "download": "https://cdn.3dassets.dev/assets/33677/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 188,
+      "bytes": 10816,
+      "dimensions": [
+        0.48,
+        4.97,
+        0.44
+      ],
+      "candidate": "assets/hand-qa/candidates/street-lamp.glb",
+      "sha256": "7bf3904e5ce27e2c50a23fc310da197ed8cac994b9f8c6287ddef47eeb43e962"
+    },
+    {
+      "id": "kiosk",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/08-kiosk.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Park Refreshment Kiosk (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-park-kiosk-9fa1bc4e",
+      "download": "https://cdn.3dassets.dev/assets/33688/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 168,
+      "bytes": 31528,
+      "dimensions": [
+        3.44,
+        2.92,
+        2.64
+      ],
+      "candidate": "assets/hand-qa/candidates/kiosk.glb",
+      "sha256": "1208ed85f3b38de581aa327b2458bd8c0b50f3bb42c7befda167a7c18a2fafa1"
+    },
+    {
+      "id": "trash-bin",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/09-trash-bin.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Timber Park Litter Bin (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-park-litter-bin-ec076777",
+      "download": "https://cdn.3dassets.dev/assets/33675/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 312,
+      "bytes": 25560,
+      "dimensions": [
+        0.64,
+        0.99,
+        0.609
+      ],
+      "candidate": "assets/hand-qa/candidates/trash-bin.glb",
+      "sha256": "85d695b738d8a90bdcc746f4aa47a5336190048a419313660787acbdbc40185c"
+    },
+    {
+      "id": "bike-rack",
+      "scene": "park",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/10-bike-rack.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Five Hoop Bike Rack (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-bike-rack-c73abcbf",
+      "download": "https://cdn.3dassets.dev/assets/33679/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 384,
+      "bytes": 20200,
+      "dimensions": [
+        2.2,
+        0.724,
+        0.72
+      ],
+      "candidate": "assets/hand-qa/candidates/bike-rack.glb",
+      "sha256": "0c64c4fd97f8d7c268bc98bcda01420292b0ec10acccb4c44c8be522cb68bc1f"
+    },
+    {
+      "id": "curb",
+      "scene": "environment",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/07-curb.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Alley Kerb and Drain Section (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e",
+      "download": "https://cdn.3dassets.dev/assets/36398/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 144,
+      "bytes": 56892,
+      "dimensions": [
+        4.001,
+        0.27,
+        0.9
+      ],
+      "candidate": "assets/hand-qa/candidates/curb.glb",
+      "sha256": "d1deb2edf784f79d42e008b1025085d92afe7d00f12e0373a2eb8dfa2a475562"
+    },
+    {
+      "id": "tree-planter",
+      "scene": "environment",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/08-tree-planter.png",
+      "status": "DOWNLOADED",
+      "pack": "street-food-market-and-food-trucks",
+      "title": "Planter with Shrub (Street Food Market and Food Trucks)",
+      "page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e",
+      "download": "https://cdn.3dassets.dev/assets/34303/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 276,
+      "bytes": 15832,
+      "dimensions": [
+        0.94,
+        1.307,
+        0.93
+      ],
+      "candidate": "assets/hand-qa/candidates/tree-planter.glb",
+      "sha256": "5ff09e626c231efe65a4c163caea4b5fd84d002da304749161e472c666454f20"
+    },
+    {
+      "id": "park-sign",
+      "scene": "environment",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/09-park-sign.png",
+      "status": "DOWNLOADED",
+      "pack": "city-park-and-playground",
+      "title": "Park Notice Board (City Park and Playground)",
+      "page": "https://3dassets.dev/assets/city-park-and-playground-park-notice-board-9df1f5c3",
+      "download": "https://cdn.3dassets.dev/assets/33678/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 148,
+      "bytes": 29824,
+      "dimensions": [
+        1.88,
+        1.92,
+        0.3
+      ],
+      "candidate": "assets/hand-qa/candidates/park-sign.glb",
+      "sha256": "78ff7b8613bc31552d72935a648f488b7cd6e36427d6911224bc876fa05981fd"
+    },
+    {
+      "id": "mushrooms",
+      "scene": "environment",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/10-mushrooms.png",
+      "status": "DOWNLOADED",
+      "pack": "stylized-trees-and-rocks-kit",
+      "title": "Stylized Mushroom Group (Stylized Trees and Rocks Kit)",
+      "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-mushroom-group-55ee1945",
+      "download": "https://cdn.3dassets.dev/assets/38752/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1177,
+      "bytes": 40544,
+      "dimensions": [
+        1.35,
+        0.348,
+        1.35
+      ],
+      "candidate": "assets/hand-qa/candidates/mushrooms.glb",
+      "sha256": "0325094beae8f0471de4fd6ca799ebb1fb7854b155cc4b4f405c1751c9b652cd"
+    },
+    {
+      "id": "paper-lantern",
+      "scene": "architecture",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/07-paper-lantern.png",
+      "status": "DOWNLOADED",
+      "pack": "izakaya-alley-and-ramen-shop",
+      "title": "Round Paper Lantern (Izakaya Alley and Ramen Shop)",
+      "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298",
+      "download": "https://cdn.3dassets.dev/assets/36453/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 476,
+      "bytes": 22472,
+      "dimensions": [
+        0.424,
+        0.78,
+        0.414
+      ],
+      "candidate": "assets/hand-qa/candidates/paper-lantern.glb",
+      "sha256": "73761ce4a33bd444a5a1bf3633b87176a0a53a60b55dbea8c38aa591f09bb20e"
+    },
+    {
+      "id": "bedside-lamp",
+      "scene": "architecture",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/08-bedside-lamp.png",
+      "status": "DOWNLOADED",
+      "pack": "bedroom-and-living-room-furniture",
+      "title": "Table Lamp Dome (Bedroom and Living Room Furniture)",
+      "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-table-lamp-dome-0c974308",
+      "download": "https://cdn.3dassets.dev/assets/38799/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 630,
+      "bytes": 28884,
+      "dimensions": [
+        0.326,
+        0.45,
+        0.323
+      ],
+      "candidate": "assets/hand-qa/candidates/bedside-lamp.glb",
+      "sha256": "f66836ccb5e1bc62dadc20fae5803d4c4f4233194aec4be5bc4eaa4537b62a98"
+    },
+    {
+      "id": "string-lights",
+      "scene": "architecture",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/09-string-lights.png",
+      "status": "DOWNLOADED",
+      "pack": "street-food-market-and-food-trucks",
+      "title": "String Light Run on Poles (Street Food Market and Food Trucks)",
+      "page": "https://3dassets.dev/assets/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0",
+      "download": "https://cdn.3dassets.dev/assets/34293/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 920,
+      "bytes": 46788,
+      "dimensions": [
+        6.213,
+        3.76,
+        0.42
+      ],
+      "candidate": "assets/hand-qa/candidates/string-lights.glb",
+      "sha256": "5ad0ff8787b0591c63566ac855d19f7d56b13f26c2dc4fa4d557ccfc8d254d12"
+    },
+    {
+      "id": "neon-sign",
+      "scene": "architecture",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/10-neon-sign.png",
+      "status": "DOWNLOADED",
+      "pack": "cyberpunk-apartment-and-neon-block",
+      "title": "Neon Sign Frame with Blank Face (Cyberpunk Apartment and Neon Block)",
+      "page": "https://3dassets.dev/assets/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a",
+      "download": "https://cdn.3dassets.dev/assets/37838/v1/model.glb",
+      "license": "CC0 1.0 Universal",
+      "triangles": 1536,
+      "bytes": 67800,
+      "dimensions": [
+        1.5,
+        1,
+        0.66
+      ],
+      "candidate": "assets/hand-qa/candidates/neon-sign.glb",
+      "sha256": "8b99fd4d17a1a75f547cec773fa23123802e5a78d55de6dfcbb949e0940e9d5f"
+    }
+  ]
+}

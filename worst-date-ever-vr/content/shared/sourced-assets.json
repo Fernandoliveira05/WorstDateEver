@@ -1,0 +1,1038 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-11-27",
+  "items": [
+    {
+      "id": "PROP-013",
+      "file": "assets/sourced/PROP-013.glb",
+      "scene": "venue",
+      "name": "Prop 013",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/PROP-013.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bar-counter",
+      "file": "assets/sourced/bar-counter.glb",
+      "scene": "venue",
+      "name": "Bar counter module 1200 (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bar-counter/bar-pub-and-brewery-taproom-bar-counter-module-4f0062bc.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bar-stool",
+      "file": "assets/sourced/bar-stool.glb",
+      "scene": "venue",
+      "name": "Bar stool with back, ebonised (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bar-stool/bar-pub-and-brewery-taproom-bar-stool-with-back-ebonis-575b3c64.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bed",
+      "file": "assets/sourced/bed.glb",
+      "scene": "venue",
+      "name": "Double Bed Upholstered (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bed/bedroom-and-living-room-furniture-double-bed-upholster-4c7d1e0e.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bedside-lamp",
+      "file": "assets/sourced/bedside-lamp.glb",
+      "scene": "venue",
+      "name": "Table Lamp Dome (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-table-lamp-dome-0c974308",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bedside-lamp/bedroom-and-living-room-furniture-table-lamp-dome-0c974308.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "beer-bucket",
+      "file": "assets/sourced/beer-bucket.glb",
+      "scene": "venue",
+      "name": "Ice bucket and tongs (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-ice-bucket-0122721e",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/beer-bucket/bar-pub-and-brewery-taproom-ice-bucket-0122721e.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "beer-mug",
+      "file": "assets/sourced/beer-mug.glb",
+      "scene": "venue",
+      "name": "Dimpled tankard (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-dimpled-tankard-41bdeada",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/beer-mug/bar-pub-and-brewery-taproom-dimpled-tankard-41bdeada.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bike-rack",
+      "file": "assets/sourced/bike-rack.glb",
+      "scene": "venue",
+      "name": "Five Hoop Bike Rack (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-bike-rack-c73abcbf",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bike-rack/city-park-and-playground-bike-rack-c73abcbf.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bistro-table",
+      "file": "assets/sourced/bistro-table.glb",
+      "scene": "venue",
+      "name": "Outdoor bistro table (Cafe, Bakery and Coffee Bar)",
+      "source": "https://3dassets.dev/assets/bakery-and-cafe-bistro-table-outdoor-813deda1",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bistro-table/bakery-and-cafe-bistro-table-outdoor-813deda1.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "booth",
+      "file": "assets/sourced/booth.glb",
+      "scene": "venue",
+      "name": "Booth pair, two cover (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-booth-2-cover-4581f965",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/booth/restaurant-kitchen-and-dining-booth-2-cover-4581f965.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "bush",
+      "file": "assets/sourced/bush.glb",
+      "scene": "venue",
+      "name": "Stylized Round Bush (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-bush-round-b06cf36c",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/bush/stylized-trees-and-rocks-kit-bush-round-b06cf36c.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "cake-slice",
+      "file": "assets/sourced/cake-slice.glb",
+      "scene": "venue",
+      "name": "Layer cake slice (Cafe, Bakery and Coffee Bar)",
+      "source": "https://3dassets.dev/assets/bakery-and-cafe-cake-slice-c96344d0",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/cake-slice/bakery-and-cafe-cake-slice-c96344d0.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "candle",
+      "file": "assets/sourced/candle.glb",
+      "scene": "venue",
+      "name": "Candle holder (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-candle-holder-c0294da5",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/candle/restaurant-kitchen-and-dining-candle-holder-c0294da5.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "chopsticks",
+      "file": "assets/sourced/chopsticks.glb",
+      "scene": "venue",
+      "name": "Chopstick and Condiment Caddy (Izakaya Alley and Ramen Shop)",
+      "source": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/chopsticks/izakaya-alley-and-ramen-shop-chopstick-and-condiment-c-90c4216a.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "coffee-cup",
+      "file": "assets/sourced/coffee-cup.glb",
+      "scene": "venue",
+      "name": "Ceramic cup and saucer (Cafe, Bakery and Coffee Bar)",
+      "source": "https://3dassets.dev/assets/bakery-and-cafe-cup-and-saucer-01dd63c2",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/coffee-cup/bakery-and-cafe-cup-and-saucer-01dd63c2.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "curb",
+      "file": "assets/sourced/curb.glb",
+      "scene": "venue",
+      "name": "Alley Kerb and Drain Section (Izakaya Alley and Ramen Shop)",
+      "source": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/curb/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "curtains",
+      "file": "assets/sourced/curtains.glb",
+      "scene": "venue",
+      "name": "Curtains Linen Pair (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/curtains/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "desk-chair",
+      "file": "assets/sourced/desk-chair.glb",
+      "scene": "venue",
+      "name": "Desk Task Chair (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-task-chair-e1320da0",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/desk-chair/bedroom-and-living-room-furniture-desk-task-chair-e1320da0.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "desk",
+      "file": "assets/sourced/desk.glb",
+      "scene": "venue",
+      "name": "Desk Writing (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-desk-writing-2f6be817",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/desk/bedroom-and-living-room-furniture-desk-writing-2f6be817.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "dining-chair",
+      "file": "assets/sourced/dining-chair.glb",
+      "scene": "venue",
+      "name": "Upholstered dining chair (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-upholstered-9dc9a416",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/dining-chair/restaurant-kitchen-and-dining-dining-chair-upholstered-9dc9a416.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "dining-table",
+      "file": "assets/sourced/dining-table.glb",
+      "scene": "venue",
+      "name": "Two person cafe table (Cafe, Bakery and Coffee Bar)",
+      "source": "https://3dassets.dev/assets/bakery-and-cafe-cafe-table-2-person-038f8dc8",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/dining-table/bakery-and-cafe-cafe-table-2-person-038f8dc8.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "floor-cushion",
+      "file": "assets/sourced/floor-cushion.glb",
+      "scene": "venue",
+      "name": "Pouffe Round (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/floor-cushion/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "flower-patch",
+      "file": "assets/sourced/flower-patch.glb",
+      "scene": "venue",
+      "name": "Stylized White Flower Patch (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/flower-patch/stylized-trees-and-rocks-kit-flower-white-patch-9ead5ba8.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "flower-vase",
+      "file": "assets/sourced/flower-vase.glb",
+      "scene": "venue",
+      "name": "Table vase (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-table-vase-3e7cd6a3",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/flower-vase/restaurant-kitchen-and-dining-table-vase-3e7cd6a3.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "fruit-bowl",
+      "file": "assets/sourced/fruit-bowl.glb",
+      "scene": "venue",
+      "name": "Wooden Market Bowl (Food, Fresh Produce and Groceries)",
+      "source": "https://3dassets.dev/assets/fresh-produce-and-groceries-wooden-market-bowl-24ec8579",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/fruit-bowl/fresh-produce-and-groceries-wooden-market-bowl-24ec8579.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "grass-clump",
+      "file": "assets/sourced/grass-clump.glb",
+      "scene": "venue",
+      "name": "Stylized Grass Tuft Tall (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/grass-clump/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "green-canopy-tree",
+      "file": "assets/sourced/green-canopy-tree.glb",
+      "scene": "venue",
+      "name": "Stylized Oak Tree Mature (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/green-canopy-tree/stylized-trees-and-rocks-kit-oak-mature-658d06b2.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "hardcover-book",
+      "file": "assets/sourced/hardcover-book.glb",
+      "scene": "venue",
+      "name": "Hardcover Book",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/hardcover-book.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "hedge",
+      "file": "assets/sourced/hedge.glb",
+      "scene": "venue",
+      "name": "Stylized Hedge Block (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-hedge-block-dcfe3855",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/hedge/stylized-trees-and-rocks-kit-hedge-block-dcfe3855.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "hot-sauce",
+      "file": "assets/sourced/hot-sauce.glb",
+      "scene": "venue",
+      "name": "Squeezy Sauce Bottle (Food, Fresh Produce and Groceries)",
+      "source": "https://3dassets.dev/assets/fresh-produce-and-groceries-ketchup-bottle-f4d88235",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/hot-sauce/fresh-produce-and-groceries-ketchup-bottle-f4d88235.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "iclona",
+      "file": "assets/sourced/iclona.glb",
+      "scene": "venue",
+      "name": "6.7 inch smartphone (Computers and Desk Gadgets)",
+      "source": "https://3dassets.dev/assets/computers-and-desk-gadgets-smartphone-67-a83244e4",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/iclona/computers-and-desk-gadgets-smartphone-67-a83244e4.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "jukebox",
+      "file": "assets/sourced/jukebox.glb",
+      "scene": "venue",
+      "name": "Pub jukebox (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-jukebox-b6da908d",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/jukebox/bar-pub-and-brewery-taproom-jukebox-b6da908d.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "kiosk",
+      "file": "assets/sourced/kiosk.glb",
+      "scene": "venue",
+      "name": "Park Refreshment Kiosk (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-park-kiosk-9fa1bc4e",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/kiosk/city-park-and-playground-park-kiosk-9fa1bc4e.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "kombucha-bottle",
+      "file": "assets/sourced/kombucha-bottle.glb",
+      "scene": "venue",
+      "name": "Vinegar Bottle (Food, Fresh Produce and Groceries)",
+      "source": "https://3dassets.dev/assets/fresh-produce-and-groceries-vinegar-bottle-5cefbeac",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/kombucha-bottle/fresh-produce-and-groceries-vinegar-bottle-5cefbeac.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "menu",
+      "file": "assets/sourced/menu.glb",
+      "scene": "venue",
+      "name": "Table menu holder (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-menu-holder-54030b60",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/menu/restaurant-kitchen-and-dining-menu-holder-54030b60.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "mushrooms",
+      "file": "assets/sourced/mushrooms.glb",
+      "scene": "venue",
+      "name": "Stylized Mushroom Group (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-mushroom-group-55ee1945",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/mushrooms/stylized-trees-and-rocks-kit-mushroom-group-55ee1945.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "neon-sign",
+      "file": "assets/sourced/neon-sign.glb",
+      "scene": "venue",
+      "name": "Neon Sign Frame with Blank Face (Cyberpunk Apartment and Neon Block)",
+      "source": "https://3dassets.dev/assets/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/neon-sign/cyberpunk-apartment-and-neon-block-neon-sign-frame-ea334e2a.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "paper-lantern",
+      "file": "assets/sourced/paper-lantern.glb",
+      "scene": "venue",
+      "name": "Round Paper Lantern (Izakaya Alley and Ramen Shop)",
+      "source": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/paper-lantern/izakaya-alley-and-ramen-shop-paper-lantern-round-c919f298.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "park-bench",
+      "file": "assets/sourced/park-bench.glb",
+      "scene": "venue",
+      "name": "Slatted Park Bench (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-park-bench-dfa5e953",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/park-bench/city-park-and-playground-park-bench-dfa5e953.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "park-sign",
+      "file": "assets/sourced/park-sign.glb",
+      "scene": "venue",
+      "name": "Park Notice Board (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-park-notice-board-9df1f5c3",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/park-sign/city-park-and-playground-park-notice-board-9df1f5c3.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "peanuts-bowl",
+      "file": "assets/sourced/peanuts-bowl.glb",
+      "scene": "venue",
+      "name": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/peanuts-bowl/restaurant-kitchen-and-dining-pasta-bowl-4d030569.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "petiscos-bowl",
+      "file": "assets/sourced/petiscos-bowl.glb",
+      "scene": "venue",
+      "name": "Pasta bowl (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-pasta-bowl-4d030569",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/petiscos-bowl/restaurant-kitchen-and-dining-pasta-bowl-4d030569.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "picnic_basket",
+      "file": "assets/sourced/picnic_basket.glb",
+      "scene": "venue",
+      "name": "Picnic_Basket",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/picnic_basket.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "picnic_blanket",
+      "file": "assets/sourced/picnic_blanket.glb",
+      "scene": "venue",
+      "name": "Picnic_Blanket",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/picnic_blanket.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "picnic_kombucha",
+      "file": "assets/sourced/picnic_kombucha.glb",
+      "scene": "venue",
+      "name": "Picnic_Kombucha",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/picnic_kombucha.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "picnic_sandwich",
+      "file": "assets/sourced/picnic_sandwich.glb",
+      "scene": "venue",
+      "name": "Picnic_Sandwich",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/picnic_sandwich.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "pink-flowering-tree",
+      "file": "assets/sourced/pink-flowering-tree.glb",
+      "scene": "venue",
+      "name": "Stylized Oak Tree Mature (Stylized Trees and Rocks Kit)",
+      "source": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-oak-mature-658d06b2",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/pink-flowering-tree/stylized-trees-and-rocks-kit-oak-mature-658d06b2.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "round-table",
+      "file": "assets/sourced/round-table.glb",
+      "scene": "venue",
+      "name": "Round pedestal pub table, ebonised (Bar, Pub and Brewery Taproom)",
+      "source": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/round-table/bar-pub-and-brewery-taproom-pub-table-round-ebonised-1e99e2b9.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "rug",
+      "file": "assets/sourced/rug.glb",
+      "scene": "venue",
+      "name": "Rug Round Jute (Bedroom and Living Room Furniture)",
+      "source": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-rug-round-jute-1be22f81",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/rug/bedroom-and-living-room-furniture-rug-round-jute-1be22f81.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "sake-cup",
+      "file": "assets/sourced/sake-cup.glb",
+      "scene": "venue",
+      "name": "Sake Bottle and Tokkuri Set (Izakaya Alley and Ramen Shop)",
+      "source": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/sake-cup/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "sake-flask",
+      "file": "assets/sourced/sake-flask.glb",
+      "scene": "venue",
+      "name": "Sake Bottle and Tokkuri Set (Izakaya Alley and Ramen Shop)",
+      "source": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/sake-flask/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "shoyu-dish",
+      "file": "assets/sourced/shoyu-dish.glb",
+      "scene": "venue",
+      "name": "Side plate (Cafe, Bakery and Coffee Bar)",
+      "source": "https://3dassets.dev/assets/bakery-and-cafe-side-plate-58555773",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/shoyu-dish/bakery-and-cafe-side-plate-58555773.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "street-lamp",
+      "file": "assets/sourced/street-lamp.glb",
+      "scene": "venue",
+      "name": "Park Lamp Post (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-park-lamp-post-6771a338",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/street-lamp/city-park-and-playground-park-lamp-post-6771a338.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "string-lights",
+      "file": "assets/sourced/string-lights.glb",
+      "scene": "venue",
+      "name": "String Light Run on Poles (Street Food Market and Food Trucks)",
+      "source": "https://3dassets.dev/assets/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/string-lights/street-food-market-and-food-trucks-string-light-run-on-44c8d9c0.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "sushi-platter",
+      "file": "assets/sourced/sushi-platter.glb",
+      "scene": "venue",
+      "name": "Sushi Platter",
+      "source": null,
+      "creator": "Grab3D / 3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "public/assets/sourced/sushi-platter.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "trash-bin",
+      "file": "assets/sourced/trash-bin.glb",
+      "scene": "venue",
+      "name": "Timber Park Litter Bin (City Park and Playground)",
+      "source": "https://3dassets.dev/assets/city-park-and-playground-park-litter-bin-ec076777",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/trash-bin/city-park-and-playground-park-litter-bin-ec076777.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "tree-planter",
+      "file": "assets/sourced/tree-planter.glb",
+      "scene": "venue",
+      "name": "Planter with Shrub (Street Food Market and Food Trucks)",
+      "source": "https://3dassets.dev/assets/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/tree-planter/street-food-market-and-food-trucks-planter-with-shrub-0eedba0e.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "upholstered-chair",
+      "file": "assets/sourced/upholstered-chair.glb",
+      "scene": "venue",
+      "name": "Upholstered dining chair, accent (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-dining-chair-accent-40f75aa7",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/upholstered-chair/restaurant-kitchen-and-dining-dining-chair-accent-40f75aa7.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "water-glass",
+      "file": "assets/sourced/water-glass.glb",
+      "scene": "venue",
+      "name": "Water tumbler (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-water-glass-c25f2efa",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/water-glass/restaurant-kitchen-and-dining-water-glass-c25f2efa.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "wine-glass",
+      "file": "assets/sourced/wine-glass.glb",
+      "scene": "venue",
+      "name": "Wine glass (Restaurant Kitchen and Dining Room)",
+      "source": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-wine-glass-5d9eb720",
+      "creator": "3dassets.dev",
+      "license": "cc0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "assets/hand-qa/sources/wine-glass/restaurant-kitchen-and-dining-wine-glass-5d9eb720.glb",
+      "modifications": [
+        "embedded WebP textures converted to PNG for Unity glTFast",
+        "scaled at runtime to scene dimensions"
+      ],
+      "usage": "Worst Date Ever bedroom/date props and venue furniture"
+    },
+    {
+      "id": "market-stand",
+      "file": "assets/sourced/market-stand.glb",
+      "scene": "picnic",
+      "name": "Market Stand",
+      "source": "https://poly.pizza/m/DGIM5HGISb",
+      "creator": "Quaternius",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "downloads/DGIM5HGISb.glb.br",
+      "modifications": [
+        "renamed to market-stand.glb"
+      ],
+      "usage": "picnic kiosk"
+    },
+    {
+      "id": "bar-bottle",
+      "file": "assets/sourced/bar-bottle.glb",
+      "scene": "bar",
+      "name": "Bottle",
+      "source": "https://poly.pizza/m/FAHsHFXfTf",
+      "creator": "Quaternius",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "downloads/FAHsHFXfTf.glb.br",
+      "modifications": [
+        "renamed to bar-bottle.glb"
+      ],
+      "usage": "bar shelf bottles"
+    },
+    {
+      "id": "wardrobe-closet",
+      "file": "unity/Assets/WorstDateEver/Models/Bedroom/Closet.glb",
+      "scene": "bedroom",
+      "name": "Closet",
+      "source": "https://poly.pizza/m/BHEVb1DIuH",
+      "creator": "Quaternius",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "downloads/BHEVb1DIuH.glb.br",
+      "modifications": [
+        "scale/orientation fitted to bedroom",
+        "rest rotations preserved for hinge doors"
+      ],
+      "usage": "Unity two-door wardrobe"
+    },
+    {
+      "id": "wardrobe-short-closet",
+      "file": "downloads/ND4Z53Ne4C.glb.br",
+      "scene": "bedroom",
+      "name": "Short Closet",
+      "source": "https://poly.pizza/m/ND4Z53Ne4C",
+      "creator": "Quaternius",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "downloads/ND4Z53Ne4C.glb.br",
+      "modifications": [],
+      "usage": "rejected candidate"
+    },
+    {
+      "id": "market-stalls-compact",
+      "file": "downloads/fmHUuX9AS3.glb.br",
+      "scene": "picnic",
+      "name": "Market Stalls Compact",
+      "source": "https://poly.pizza/m/fmHUuX9AS3",
+      "creator": "Quaternius",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "original": "downloads/fmHUuX9AS3.glb.br",
+      "modifications": [],
+      "usage": "rejected candidate"
+    }
+  ]
+}

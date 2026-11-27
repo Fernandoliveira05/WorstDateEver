@@ -10,9 +10,10 @@ export function kneePoint(THREE, hip, ankle, upper, lower, forward) {
   return hip.clone().addScaledVector(line, along).addScaledVector(pole, bend);
 }
 
-export function createSeatPose(THREE, actor, bones, seatTop = cushionTop) {
+export function createSeatPose(THREE, actor, bones, { seatTop = cushionTop, floorSeat = false } = {}) {
   const legs = ['L','R'].map(side => ({
-    thigh: bones['UpperLeg' + side], shin: bones['LowerLeg' + side], foot: bones['Foot' + side]
+    thigh: bones['UpperLeg' + side], shin: bones['LowerLeg' + side], foot: bones['Foot' + side],
+    side: side === 'L' ? -1 : 1
   })).filter(leg => leg.thigh && leg.shin && leg.foot);
   for (const leg of legs) {
     leg.end = leg.shin.children.find(child => child === leg.foot || /end$/i.test(child.name));
@@ -53,21 +54,30 @@ export function createSeatPose(THREE, actor, bones, seatTop = cushionTop) {
       position.copy(bone.position);
     }
     actor.updateWorldMatrix(true, true);
-    const forward = new THREE.Vector3(0,0,1).applyQuaternion(rotation(actor));
+    const facing = rotation(actor);
+    const forward = new THREE.Vector3(0,0,1).applyQuaternion(facing);
+    const right = new THREE.Vector3(1,0,0).applyQuaternion(facing);
+    const pelvis = position(actor);
     const hipY = legs.reduce((sum, leg) => sum + position(leg.thigh).y, 0) / legs.length;
     const ankleHeights = legs.map(leg => THREE.MathUtils.clamp(position(leg.foot).y, .05, .115));
     const lowerBy = (hipY - (seatTop + .075)) * amount;
     actor.position.y -= lowerBy;
     actor.updateWorldMatrix(true, true);
-    for (const [index, { thigh, shin, foot, end }] of legs.entries()) {
+    for (const [index, { thigh, shin, foot, end, side }] of legs.entries()) {
       const hip = position(thigh), standingAnkle = position(foot), shinEnd = position(end);
       const upper = hip.distanceTo(position(shin)), lower = position(shin).distanceTo(shinEnd);
       if (upper < .04 || lower < .04) continue;
-      const goal = hip.clone().addScaledVector(forward, .29);
+      const goal = hip.clone().addScaledVector(forward, floorSeat ? .51 : .29);
       goal.y = ankleHeights[index];
+      const hipSide = Math.sign(hip.clone().sub(pelvis).dot(right)) || side;
+      let pole = forward;
+      if (floorSeat) {
+        goal.addScaledVector(right, -.055 * hipSide);
+        pole = forward.clone().lerp(right.clone().multiplyScalar(hipSide).setY(.12), amount);
+      }
       const offset = end === foot ? new THREE.Vector3() : shinEnd.clone().sub(standingAnkle).clampLength(0, .05);
       const ankle = standingAnkle.clone().add(new THREE.Vector3(0, lowerBy, 0)).lerp(goal, amount).add(offset);
-      const knee = kneePoint(THREE, hip, ankle, upper, lower, forward);
+      const knee = kneePoint(THREE, hip, ankle, upper, lower, pole);
       const footRotation = rotation(foot);
       aim(thigh, shin, knee);
       aim(shin, end, ankle);

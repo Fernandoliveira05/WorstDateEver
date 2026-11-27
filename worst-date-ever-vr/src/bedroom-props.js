@@ -1,5 +1,6 @@
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { applySurfaceTexture, bedroomPalette } from './bedroom-style.js';
+import { crossesButtonFace } from './scene-objects.js';
 
 export function addBedroomProps(THREE, room, data, finishes) {
   const p = bedroomPalette;
@@ -77,7 +78,9 @@ export function addBedroomProps(THREE, room, data, finishes) {
     wax.emissiveIntensity = glowing ? .85 : 0;
   });
 
-  const laptop = root('Notebook dobrável', [-.43, .853, 2.795]);
+  // The desk top sits at y≈1.035. Keep the laptop and headphones on it
+  // instead of burying them inside the desk body.
+  const laptop = root('Notebook dobrável', [-.43, 1.035, 2.795]);
   box(laptop, [.318, .026, .213], [0, .013, 0], plum, .010);
   box(laptop, [.258, .005, .091], [0, .028, .018], dark, .006);
   for (let row = 0; row < 4; row++) {
@@ -117,32 +120,15 @@ export function addBedroomProps(THREE, room, data, finishes) {
     data.colliders.push({ position: object.position.toArray(), rotation: [0, 0, 0, 1], shape });
   }
 
-  const wardrobe = root('Portas do armário', [1.58, .08, -1.832]);
-  const doorPaint = material(p.deepTeal, .76);
-  const panels = material(p.teal, .87);
-  applySurfaceTexture(doorPaint, finishes.woodTexture, .55);
-  applySurfaceTexture(panels, finishes.woodTexture, .51);
-  const doors = [-1, 1].map(side => {
-    const hinge = new THREE.Group();
-    hinge.position.x = side * .394;
-    wardrobe.add(hinge);
-    box(hinge, [.389, 1.845, .042], [-side * .196, .928, 0], doorPaint, .015);
-    box(hinge, [.310, 1.675, .025], [-side * .196, .928, .021], panels, .016);
-    const door = { hinge, angle: 0 };
-    const handle = button(hinge, [.039, .187, .043], [-side * .324, .917, .055], () => {
-      door.angle = door.angle ? 0 : side * 1.27;
-    });
-    handle.rotation.y = Math.PI;
-    return door;
-  });
-  const topBoxes = root('Caixas sobre o armário', [1.57, 2.004, -1.998]);
-  for (const [x, height, finish] of [[-.18, .116, plum], [.16, .146, rose]]) {
-    box(topBoxes, [.257, height, .270], [x, height / 2, 0], finish, .012);
-    box(topBoxes, [.269, .028, .279], [x, height, 0], finish, .008);
-    box(topBoxes, [.064, .027, .008], [x, .057, .138], brass, .004);
+  for (const [id, x, height, finish] of [['plum', 1.39, .116, plum], ['rose', 1.73, .146, rose]]) {
+    const storage = root('wardrobe-box-' + id, [x, 2.226, -1.85]);
+    box(storage, [.257, height, .270], [0, height / 2, 0], finish, .012);
+    box(storage, [.269, .028, .279], [0, height, 0], finish, .008);
+    box(storage, [.064, .027, .008], [0, .057, .138], brass, .004);
+    loose(storage, 'Caixa de armazenamento', .35, [collider([.257, height + .014, .270], [0, (height + .014) / 2, 0])]);
   }
 
-  const basket = root('laundry-basket', [1.75, .016, -1.13]);
+  const basket = root('laundry-basket', [2.02, .016, -.72]);
   box(basket, [.33, .026, .258], [0, .014, 0], rose);
   for (const side of [-1, 1]) {
     box(basket, [.378, .035, .031], [0, .276, side * .153], rose);
@@ -171,7 +157,7 @@ export function addBedroomProps(THREE, room, data, finishes) {
     ])
   ]);
 
-  const headphones = root('desk-headphones', [1.431, .905, 3.160]);
+  const headphones = root('desk-headphones', [1.431, 1.035, 3.160]);
   const band = new THREE.TorusGeometry(.074, .009, 10, 32, Math.PI);
   add(headphones, band, plum, [0, .057, 0]);
   for (const side of [-1, 1]) {
@@ -192,16 +178,12 @@ export function addBedroomProps(THREE, room, data, finishes) {
   loose(bottle, 'Garrafa térmica', .29, [collider([.079, .216, .079], [0, .108, 0])]);
 
   let previousTouch = -1;
-  const axis = new THREE.Vector3();
   return {
     objects, switches,
     touch(from, to, time) {
       if (time - previousTouch < .29) return false;
       for (const mesh of switches) {
-        const before = mesh.worldToLocal(from.clone()), after = mesh.worldToLocal(to.clone());
-        if (before.z >= -.022 || after.z < -.022 || after.z > .053) continue;
-        axis.copy(before).lerp(after, (-.022 - before.z) / (after.z - before.z));
-        if (Math.abs(axis.x) > .037 || Math.abs(axis.y) > .028) continue;
+        if (!crossesButtonFace(mesh, from, to, -1)) continue;
         previousTouch = time;
         mesh.userData.roomAction();
         return true;
@@ -210,7 +192,6 @@ export function addBedroomProps(THREE, room, data, finishes) {
     },
     tick(delta, elapsed) {
       lid.rotation.x = THREE.MathUtils.damp(lid.rotation.x, lidTarget, 10, delta);
-      for (const door of doors) door.hinge.rotation.y = THREE.MathUtils.damp(door.hinge.rotation.y, door.angle, 8, delta);
       if (glowing) blobs.forEach((blob, i) => {
         const phase = elapsed * (1 + i * .17) + i * 2.4;
         blob.position.y = .13 + i * .052 + Math.sin(phase) * .033;

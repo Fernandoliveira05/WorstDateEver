@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "booth",
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/03-booth.png",
+  "provider": "3dassets.dev",
+  "title": "Booth pair, two cover (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-booth-2-cover-4581f965",
+  "download": "https://cdn.3dassets.dev/assets/16501/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 260768,
+    "triangles": 5352,
+    "vertices": 16056,
+    "meshes": 5,
+    "materials": 5,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.5600204591577634,
+        -5.494801712258024e-05,
+        -0.7950000166893005
+      ],
+      "max": [
+        0.5600204591577634,
+        1.2640550061912559,
+        0.7950000166893005
+      ]
+    },
+    "sizeMeters": [
+      1.12,
+      1.264,
+      1.59
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/booth/restaurant-kitchen-and-dining-booth-2-cover-4581f965.glb",
+    "sha256": "23758fe4921ec27a36a1c8abb1461f72e44c90c4261b5ba8ad3760bb4ae94def",
+    "bytes": 260768
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/booth.glb",
+    "sha256": "23758fe4921ec27a36a1c8abb1461f72e44c90c4261b5ba8ad3760bb4ae94def",
+    "bytes": 260768
+  }
+}

@@ -5,6 +5,21 @@ export function objectGroup(THREE, parent, name) {
   return group;
 }
 
+export function crossesButtonFace(mesh, from, to, side = 1, padding = .008) {
+  const geometry = mesh.geometry;
+  if (!geometry.boundingBox) geometry.computeBoundingBox();
+  const { min, max } = geometry.boundingBox;
+  const begin = mesh.worldToLocal(from.clone());
+  const end = mesh.worldToLocal(to.clone());
+  const face = (side > 0 ? max.z : min.z) + side * .006;
+  const approach = (begin.z - face) * side;
+  const depth = (end.z - face) * side;
+  if (approach <= 0 || depth > 0 || depth < -.07) return false;
+  const contact = begin.lerp(end, approach / (approach - depth));
+  return contact.x >= min.x - padding && contact.x <= max.x + padding &&
+    contact.y >= min.y - padding && contact.y <= max.y + padding;
+}
+
 export function organizeBedroomObjects(THREE, root, data) {
   const model = root.children.find(child => child.children.some(node => node.name === data.phone.id)) ?? root;
   const groups = Object.fromEntries([

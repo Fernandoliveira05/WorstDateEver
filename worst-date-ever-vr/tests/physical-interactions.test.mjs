@@ -186,6 +186,8 @@ test('all six 3D action scenes complete and return their movable table props', (
   complete: (id, mechanical) => { results.push([id, mechanical]); return { response: 'accept' }; } });
   const view = { session: { phase: 'dialogue', matchId: 'bia', relationship }, beat: null,
     canSpeak: true, actions: [], time: 12 };
+  const fruit = parent.getObjectByName('juggle-fruit-0');
+  assert.equal(fruit.visible, false);
   const tray = new THREE.Group();
   parent.add(tray);
   for (const id of PHYSICAL_ACTIONS.map(action => action.id)) {
@@ -195,6 +197,7 @@ test('all six 3D action scenes complete and return their movable table props', (
       assert.ok(scene.serveOrder(1));
     }
     assert.ok(scene.begin(id, view), id);
+    assert.equal(fruit.visible, id === 'juggle');
     if (scene.state()?.stage === 'tutorial') {
       scene.tick(.5, view);
       assert.equal(scene.state().elapsed, 0, `${id} waits for tutorial confirmation`);
@@ -221,6 +224,7 @@ test('all six 3D action scenes complete and return their movable table props', (
     }
     if (id === 'juggle') assert.ok(wrongCatch && sawSpecificDrop);
     assert.equal(scene.state(), null, id);
+    assert.equal(fruit.visible, false);
   }
   assert.deepEqual(results.map(([id]) => id), PHYSICAL_ACTIONS.map(action => action.id));
   assert.deepEqual(props.cup.mesh.position.toArray(), props.cup.position);

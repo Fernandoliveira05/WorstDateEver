@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "grass-clump",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/03-grass-clump.png",
+  "provider": "3dassets.dev",
+  "title": "Stylized Grass Tuft Tall (Stylized Trees and Rocks Kit)",
+  "page": "https://3dassets.dev/assets/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773",
+  "download": "https://cdn.3dassets.dev/assets/38745/v1/model.glb",
+  "pack": "stylized-trees-and-rocks-kit",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 7160,
+    "triangles": 156,
+    "vertices": 312,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.5369430184364319,
+        -2.6003460817602964e-05,
+        -0.47867191111626367
+      ],
+      "max": [
+        0.5369430184364319,
+        0.9092064658211997,
+        0.47867191111626367
+      ]
+    },
+    "sizeMeters": [
+      1.074,
+      0.909,
+      0.957
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/grass-clump/stylized-trees-and-rocks-kit-grass-tuft-tall-be191773.glb",
+    "sha256": "f81ebcbdb242aff1a4e6244c2f03f320d1091293e62c8d8d7d86634d1c17260b",
+    "bytes": 7160
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/grass-clump.glb",
+    "sha256": "f81ebcbdb242aff1a4e6244c2f03f320d1091293e62c8d8d7d86634d1c17260b",
+    "bytes": 7160
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "kiosk",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/08-kiosk.png",
+  "provider": "3dassets.dev",
+  "title": "Park Refreshment Kiosk (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-park-kiosk-9fa1bc4e",
+  "download": "https://cdn.3dassets.dev/assets/33688/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 31528,
+    "triangles": 168,
+    "vertices": 504,
+    "meshes": 7,
+    "materials": 7,
+    "textures": 2,
+    "animations": [
+      "open",
+      "close"
+    ],
+    "boundingBox": {
+      "min": [
+        -1.7200000286102295,
+        2.4432869241586275e-05,
+        -1.320012229360681
+      ],
+      "max": [
+        1.7200000286102295,
+        2.920009826016459,
+        1.320012229360681
+      ]
+    },
+    "sizeMeters": [
+      3.44,
+      2.92,
+      2.64
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/kiosk/city-park-and-playground-park-kiosk-9fa1bc4e.glb",
+    "sha256": "1208ed85f3b38de581aa327b2458bd8c0b50f3bb42c7befda167a7c18a2fafa1",
+    "bytes": 31528
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/kiosk.glb",
+    "sha256": "1208ed85f3b38de581aa327b2458bd8c0b50f3bb42c7befda167a7c18a2fafa1",
+    "bytes": 31528
+  }
+}

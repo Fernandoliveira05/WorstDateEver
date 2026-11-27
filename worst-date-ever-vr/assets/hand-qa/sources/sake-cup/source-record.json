@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "sake-cup",
+  "reference": "assets/tripo/references/wde-03-sushi-candidates/07-sake-cup.png",
+  "provider": "3dassets.dev",
+  "title": "Sake Bottle and Tokkuri Set (Izakaya Alley and Ramen Shop)",
+  "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc",
+  "download": "https://cdn.3dassets.dev/assets/36448/v1/model.glb",
+  "pack": "izakaya-alley-and-ramen-shop",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 45492,
+    "triangles": 660,
+    "vertices": 1461,
+    "meshes": 5,
+    "materials": 5,
+    "textures": 1,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.28999999165534973,
+        -1.7029322410044845e-05,
+        -0.13000000099981984
+      ],
+      "max": [
+        0.33000001311302185,
+        0.4420006677004024,
+        0.13000000099981984
+      ]
+    },
+    "sizeMeters": [
+      0.62,
+      0.442,
+      0.26
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/sake-cup/izakaya-alley-and-ramen-shop-sake-bottle-set-6417c7fc.glb",
+    "sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd",
+    "bytes": 45492
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/sake-cup.glb",
+    "sha256": "6916edfb55390ca25c46a17e8b0f4e00c1e4f9513a58f300b8614f0849efbddd",
+    "bytes": 45492
+  }
+}

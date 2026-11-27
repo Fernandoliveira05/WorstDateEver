@@ -366,10 +366,13 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
     return point.clone().sub(center).dot(prop.pull.axis) >= -.001;
   }
 
-  function canReach(prop, from, point) {
-    if (!outsideDrawer(prop, from)) return false;
-    const ignored = new Set(prop.soft?.parts.map(part => part.body) ?? [prop.body]);
+  function canReachPoint(from, point, ignored = new Set()) {
     return contacts.particle(from, point, ignored).distanceToSquared(point) <= .028 ** 2;
+  }
+
+  function canReach(prop, from, point) {
+    return outsideDrawer(prop, from) &&
+      canReachPoint(from, point, new Set(prop.soft?.parts.map(part => part.body) ?? [prop.body]));
   }
 
   function click(prop, from) {
@@ -1030,5 +1033,5 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
     return best;
   }
 
-  return { world, props, trays, fragments, hand, tick, grab, updateGrab, fixGrip, handOnObject, rayTarget, release, click, gripAt, nearest, recover, setPropActive, bumpProp, pushDoor, doorBlocks, setDoorAvailable, doorObject, playerObstacles, canReach, hitCord, dropFrame, pressKey, tapKeyboard };
+  return { world, props, trays, fragments, hand, tick, grab, updateGrab, fixGrip, handOnObject, rayTarget, release, click, gripAt, nearest, recover, setPropActive, bumpProp, pushDoor, doorBlocks, setDoorAvailable, doorObject, playerObstacles, canReach, canReachPoint, hitCord, dropFrame, pressKey, tapKeyboard };
 }

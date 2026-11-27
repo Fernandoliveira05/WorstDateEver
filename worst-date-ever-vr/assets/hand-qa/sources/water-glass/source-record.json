@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "water-glass",
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/07-water-glass.png",
+  "provider": "3dassets.dev",
+  "title": "Water tumbler (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-water-glass-c25f2efa",
+  "download": "https://cdn.3dassets.dev/assets/16532/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 10220,
+    "triangles": 192,
+    "vertices": 576,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.0369998779259621,
+        0,
+        -0.0369998779259621
+      ],
+      "max": [
+        0.0369998779259621,
+        0.125,
+        0.0369998779259621
+      ]
+    },
+    "sizeMeters": [
+      0.074,
+      0.125,
+      0.074
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/water-glass/restaurant-kitchen-and-dining-water-glass-c25f2efa.glb",
+    "sha256": "89bf1ef8e18b59d7629988e6094bb60683cbd0fbac93035c9112fdccbe2ced0c",
+    "bytes": 10220
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/water-glass.glb",
+    "sha256": "89bf1ef8e18b59d7629988e6094bb60683cbd0fbac93035c9112fdccbe2ced0c",
+    "bytes": 10220
+  }
+}

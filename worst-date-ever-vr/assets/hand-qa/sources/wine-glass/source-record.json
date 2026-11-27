@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "wine-glass",
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/06-wine-glass.png",
+  "provider": "3dassets.dev",
+  "title": "Wine glass (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-wine-glass-5d9eb720",
+  "download": "https://cdn.3dassets.dev/assets/16531/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 21216,
+    "triangles": 420,
+    "vertices": 1260,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.044993589708243506,
+        0,
+        -0.043865625633227365
+      ],
+      "max": [
+        0.044993589708243506,
+        0.20999999344348907,
+        0.043865625633227365
+      ]
+    },
+    "sizeMeters": [
+      0.09,
+      0.21,
+      0.088
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/wine-glass/restaurant-kitchen-and-dining-wine-glass-5d9eb720.glb",
+    "sha256": "e2521155d065403519451334b2ea977afbf79a7864ebd079baf3919a3b2af146",
+    "bytes": 21216
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/wine-glass.glb",
+    "sha256": "e2521155d065403519451334b2ea977afbf79a7864ebd079baf3919a3b2af146",
+    "bytes": 21216
+  }
+}

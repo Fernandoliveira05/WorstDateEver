@@ -1,5 +1,6 @@
 import { candyAtmosphere } from './candies.mjs';
 import { Reflector } from 'three/addons/objects/Reflector.js';
+import skyPalette from '../content/shared/sky.json' with { type: 'json' };
 
 function meshOf(object) {
   if (object?.isMesh) return object;
@@ -7,6 +8,8 @@ function meshOf(object) {
 }
 
 export function createScenery(THREE, root, data, node, loadModel) {
+  const rgb = hex => { const c = new THREE.Color(hex);
+    return `vec3(${c.r.toFixed(4)},${c.g.toFixed(4)},${c.b.toFixed(4)})`; };
   const afternoon = new THREE.Color('#d9bcac');
   const daylight = new THREE.Color('#dfebf1');
   const moonlight = new THREE.Color('#9facd2');
@@ -75,19 +78,19 @@ export function createScenery(THREE, root, data, node, loadModel) {
       float el=asin(clamp(direction.y,-1.,1.));
       vec2 p=vec2(az,el)*19.+vec2(0.,1.45);
       float v=smoothstep(1.4,8.8,p.y);
-      vec3 col=mix(vec3(.91,.62,.46),vec3(.34,.55,.72),v);
+      vec3 col=mix(${rgb(skyPalette.golden.horizon)},${rgb(skyPalette.golden.zenith)},v);
       if(hour>1.5){
-        col=mix(vec3(.16,.22,.36),vec3(.04,.065,.16),v);
+        col=mix(${rgb(skyPalette.night.horizon)},${rgb(skyPalette.night.zenith)},v);
         vec2 star=p*3.9;
         col+=.62*(1.-smoothstep(.027,.09,length(fract(star)-.5)))*step(.80,hash(floor(star)));
         vec2 moon=p-vec2(-4.63,6.32);
         float crescent=(1.-smoothstep(.29,.32,length(moon)))*smoothstep(.27,.31,length(moon-vec2(.14,.09)));
-        col=mix(col,vec3(.93,.92,.81),crescent);
-      } else if(hour>.5) col=mix(vec3(.70,.83,.90),vec3(.29,.60,.83),v);
+        col=mix(col,${rgb(skyPalette.day.star)},crescent);
+      } else if(hour>.5) col=mix(${rgb(skyPalette.day.horizon)},${rgb(skyPalette.day.zenith)},v);
       else {
         float sun=length((p-vec2(-6.05,4.15))*vec2(1.,1.07));
-        col=mix(col,vec3(1.,.71,.43),(1.-smoothstep(.3,2.8,sun))*.52);
-        col=mix(col,vec3(1.,.94,.70),1.-smoothstep(.41,.44,sun));
+        col=mix(col,${rgb(skyPalette.golden.sun)},(1.-smoothstep(.3,2.8,sun))*.52);
+        col=mix(col,${rgb(skyPalette.day.sun)},1.-smoothstep(.41,.44,sun));
       }
       gl_FragColor=vec4(col,1.);
     }`, { side: THREE.BackSide });

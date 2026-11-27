@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "park-sign",
+  "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/09-park-sign.png",
+  "provider": "3dassets.dev",
+  "title": "Park Notice Board (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-park-notice-board-9df1f5c3",
+  "download": "https://cdn.3dassets.dev/assets/33678/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 29824,
+    "triangles": 148,
+    "vertices": 444,
+    "meshes": 6,
+    "materials": 6,
+    "textures": 2,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.9399999976158142,
+        0,
+        -0.12997771782942838
+      ],
+      "max": [
+        0.9399999976158142,
+        1.9200448643140013,
+        0.1699777243859393
+      ]
+    },
+    "sizeMeters": [
+      1.88,
+      1.92,
+      0.3
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/park-sign/city-park-and-playground-park-notice-board-9df1f5c3.glb",
+    "sha256": "78ff7b8613bc31552d72935a648f488b7cd6e36427d6911224bc876fa05981fd",
+    "bytes": 29824
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/park-sign.glb",
+    "sha256": "78ff7b8613bc31552d72935a648f488b7cd6e36427d6911224bc876fa05981fd",
+    "bytes": 29824
+  }
+}

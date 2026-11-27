@@ -1,0 +1,62 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "trash-bin",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/09-trash-bin.png",
+  "provider": "3dassets.dev",
+  "title": "Timber Park Litter Bin (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-park-litter-bin-ec076777",
+  "download": "https://cdn.3dassets.dev/assets/33675/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 25560,
+    "triangles": 312,
+    "vertices": 936,
+    "meshes": 4,
+    "materials": 3,
+    "textures": 1,
+    "animations": [
+      "open",
+      "close"
+    ],
+    "boundingBox": {
+      "min": [
+        -0.3199999928474426,
+        0,
+        -0.30433544678640034
+      ],
+      "max": [
+        0.3199999928474426,
+        0.990003208056955,
+        0.3043354585210647
+      ]
+    },
+    "sizeMeters": [
+      0.64,
+      0.99,
+      0.609
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/trash-bin/city-park-and-playground-park-litter-bin-ec076777.glb",
+    "sha256": "85d695b738d8a90bdcc746f4aa47a5336190048a419313660787acbdbc40185c",
+    "bytes": 25560
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/trash-bin.glb",
+    "sha256": "85d695b738d8a90bdcc746f4aa47a5336190048a419313660787acbdbc40185c",
+    "bytes": 25560
+  }
+}

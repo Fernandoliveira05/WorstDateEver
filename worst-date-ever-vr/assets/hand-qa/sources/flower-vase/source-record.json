@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "flower-vase",
-  "manifest_reference": "assets/tripo/references/wde-04-bistro-candidates/10-flower-vase.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/furniture/vase/",
-    "slug": "vase",
-    "category": "furniture",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/vase/vase.glb",
-    "license_url": "https://grab3d.com/dl/vase/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/vase/manifest.json"
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/10-flower-vase.png",
+  "provider": "3dassets.dev",
+  "title": "Table vase (Restaurant Kitchen and Dining Room)",
+  "page": "https://3dassets.dev/assets/restaurant-kitchen-and-dining-table-vase-3e7cd6a3",
+  "download": "https://cdn.3dassets.dev/assets/16537/v1/model.glb",
+  "pack": "restaurant-kitchen-and-dining",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/flower-vase/vase.glb",
-      "sha256": "e18a24ed29d93ab61eb5f07682112c6987c806da2b41c89567a65ae4d402c06d",
-      "bytes": 2150132
+  "stats": {
+    "fileSize": 17952,
+    "triangles": 352,
+    "vertices": 1056,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.052002776298760295,
+        0,
+        -0.052002776298760295
+      ],
+      "max": [
+        0.052002776298760295,
+        0.17499999701976776,
+        0.052002776298760295
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/flower-vase/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/flower-vase/publisher-manifest.json",
-      "sha256": "aadc99f56506d209a2d4aa885d2d2608bbcd41a6cfa96c4e7f660ff7bbf79412",
-      "bytes": 1489
-    }
+    "sizeMeters": [
+      0.104,
+      0.175,
+      0.104
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/flower-vase/restaurant-kitchen-and-dining-table-vase-3e7cd6a3.glb",
+    "sha256": "1b1f1b54b12f941379bee087f36043461d629fb6a3de57a676f0cfeef6f8d0cf",
+    "bytes": 17952
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/flower-vase.glb",
-    "sha256": "e18a24ed29d93ab61eb5f07682112c6987c806da2b41c89567a65ae4d402c06d",
-    "bytes": 2150132,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 27704,
-    "texture_px": 2048,
-    "dimensions_m": "0.243 x 0.216 x 0.494",
-    "real_size": "ceramic vase 14.6 cm wide, 25 cm tall; with flowers about 45 cm tall",
-    "notes": "wheel-thrown vase shape with sky-blue glaze and unglazed foot ring; bouquet of 3 tulips and 2 daisies (merged with the vase into one baked mesh; stems end inside the hollow neck)"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "1b1f1b54b12f941379bee087f36043461d629fb6a3de57a676f0cfeef6f8d0cf",
+    "bytes": 17952
+  }
 }

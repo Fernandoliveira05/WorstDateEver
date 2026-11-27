@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "coffee-cup",
-  "manifest_reference": "assets/tripo/references/wde-04-bistro-candidates/08-coffee-cup.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/food/tea-cup/",
-    "slug": "tea-cup",
-    "category": "food",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/tea-cup/tea-cup.glb",
-    "license_url": "https://grab3d.com/dl/tea-cup/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/tea-cup/manifest.json"
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/08-coffee-cup.png",
+  "provider": "3dassets.dev",
+  "title": "Ceramic cup and saucer (Cafe, Bakery and Coffee Bar)",
+  "page": "https://3dassets.dev/assets/bakery-and-cafe-cup-and-saucer-01dd63c2",
+  "download": "https://cdn.3dassets.dev/assets/22230/v1/model.glb",
+  "pack": "bakery-and-cafe",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/coffee-cup/tea-cup.glb",
-      "sha256": "109d6e3ae0cc153573a2f4e9cd26e71677fdf8b80b198934fb3f426230a5e6a2",
-      "bytes": 1056556
+  "stats": {
+    "fileSize": 27480,
+    "triangles": 550,
+    "vertices": 1650,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.07500000298023224,
+        2.988827225998414e-06,
+        -0.07500000298023224
+      ],
+      "max": [
+        0.07500000298023224,
+        0.08799701069593685,
+        0.07500000298023224
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/coffee-cup/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/coffee-cup/publisher-manifest.json",
-      "sha256": "9746ff8ca380b5eb56de81b518a3253c9f899ee2de9fad120c76d90ec8d436ee",
-      "bytes": 1572
-    }
+    "sizeMeters": [
+      0.15,
+      0.088,
+      0.15
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/coffee-cup/bakery-and-cafe-cup-and-saucer-01dd63c2.glb",
+    "sha256": "aa8b1b67618073a149927aff18f4ed4ddbdff42a590e94d4d823f31dc3abb4be",
+    "bytes": 27480
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/coffee-cup.glb",
-    "sha256": "109d6e3ae0cc153573a2f4e9cd26e71677fdf8b80b198934fb3f426230a5e6a2",
-    "bytes": 1056556,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 11900,
-    "texture_px": 2048,
-    "dimensions_m": "0.147 x 0.147 x 0.069",
-    "real_size": "tea cup with saucer, cup 9 cm rim diameter, saucer 14.5 cm, approx. 15 x 15 x 7 cm",
-    "notes": "pink porcelain cup with white polka dots (matches the teapot), cream glaze inside, ear handle at +X, filled with black tea; tea bag inside with its string over the rim and a plain mint tag hanging outside (no text); pink saucer with white rim and dots; 'tea-cup_teacup' (cup with tea and bag) is a separate object with its origin at the centre of its foot (lift along +Z)"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "aa8b1b67618073a149927aff18f4ed4ddbdff42a590e94d4d823f31dc3abb4be",
+    "bytes": 27480
+  }
 }

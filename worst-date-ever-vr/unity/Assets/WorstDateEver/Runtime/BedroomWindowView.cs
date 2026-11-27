@@ -36,8 +36,8 @@ namespace WorstDateEver
             Sky.SetPropertyBlock(block);
             foreach (var mountain in Mountains) mountain.SetPropertyBlock(block);
             StreetLighting.SetActive(night);
-            var cloudColor = night ? new Color(.19f,.23f,.38f)
-                : day ? new Color(.93f,.94f,.9f) : new Color(.92f,.76f,.65f);
+            var cloudColor = night ? SkyPalette.NightCloud
+                : day ? SkyPalette.DayCloud : SkyPalette.GoldenCloud;
             foreach (var cloud in Clouds)
             {
                 foreach (var layer in cloud.GetComponentsInChildren<Renderer>())
@@ -46,13 +46,14 @@ namespace WorstDateEver
             foreach (var window in NeighborWindows)
                 Tint(window, night ? new Color(.95f,.55f,.24f) : new Color(.34f,.44f,.49f), block);
 
-            Sun.color = night ? new Color(.40f,.54f,1f) : day ? new Color(1f,.94f,.82f) : new Color(1f,.70f,.42f);
+            Sun.color = night ? new Color(.40f,.54f,1f) : day ? SkyPalette.DaySun : SkyPalette.GoldenSun;
             Sun.intensity = night ? .85f : day ? 3.25f : 4.9f;
             Beams.SetActive(time == WindowTime.GoldenHour);
             Fill.intensity = night ? .28f : .66f;
             Fill.color = night ? new Color(.59f,.70f,1f) : new Color(1f,.95f,.86f);
             Accent.intensity = night ? .38f : .55f;
-            RenderSettings.ambientLight = night ? new Color(.26f,.29f,.43f) : new Color(.49f,.46f,.50f);
+            RenderSettings.ambientLight = night ? new Color(.20f,.23f,.35f)
+                : day ? new Color(.50f,.54f,.56f) : new Color(.49f,.46f,.50f);
             foreach (var bird in Birds) bird.Body.gameObject.SetActive(!night);
         }
 

@@ -16,3 +16,15 @@ curtain panels were also adjusted to sit open at the ends of their pole.
 | rug.glb | [Rug Wool Large](https://cdn.3dassets.dev/assets/38814/v1/model.glb) |
 | curtains.glb | [Curtains Linen Pair](https://cdn.3dassets.dev/assets/38813/v1/model.glb) |
 | lamp.glb | [Table Lamp Dome](https://cdn.3dassets.dev/assets/38799/v1/model.glb) |
+
+## Wardrobe additions (CC0)
+
+The web bedroom uses one additional model from the same
+[Bedroom and Living Room Furniture](https://3dassets.dev/packs/bedroom-and-living-room-furniture)
+pack by 3D Assets, released under CC0 1.0:
+
+| Local file | Source | Use |
+| --- | --- | --- |
+| `wardrobe_2door.glb` | [Wardrobe 2 Door](https://3dassets.dev/assets/bedroom-and-living-room-furniture-wardrobe-2-door-de288b64) | Two-door wardrobe with named `door-left` / `door-right` pivots and open/close clips |
+
+It is metre-scale, CC0, and loads with a plain `GLTFLoader`.

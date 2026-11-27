@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "shoyu-dish",
+  "reference": "assets/tripo/references/wde-03-sushi-candidates/04-shoyu-dish.png",
+  "provider": "3dassets.dev",
+  "title": "Side plate (Cafe, Bakery and Coffee Bar)",
+  "page": "https://3dassets.dev/assets/bakery-and-cafe-side-plate-58555773",
+  "download": "https://cdn.3dassets.dev/assets/22235/v1/model.glb",
+  "pack": "bakery-and-cafe",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 14880,
+    "triangles": 288,
+    "vertices": 864,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.08500000089406967,
+        3.7532946086400037e-06,
+        -0.08371334052102794
+      ],
+      "max": [
+        0.08500000089406967,
+        0.01799624593053098,
+        0.08371334052102794
+      ]
+    },
+    "sizeMeters": [
+      0.17,
+      0.018,
+      0.167
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/shoyu-dish/bakery-and-cafe-side-plate-58555773.glb",
+    "sha256": "865ebdf3057ff579e92980f7c9ac78f96769b302119a3baf8bf9b447b0e9097c",
+    "bytes": 14880
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/shoyu-dish.glb",
+    "sha256": "865ebdf3057ff579e92980f7c9ac78f96769b302119a3baf8bf9b447b0e9097c",
+    "bytes": 14880
+  }
+}

@@ -6,6 +6,7 @@ import { buildCandyShop } from './corridor-candy-shop.js';
 import { buildCorridorCreature } from './corridor-creature-model.js';
 import { buildNightstandAccessories } from './bedroom-nightstand.js';
 import { creatureMotion } from './corridor-creature.mjs';
+import { crossesButtonFace } from './scene-objects.js';
 
 const corridorX = -1.55;
 const corridorEnd = -11.68;
@@ -16,7 +17,7 @@ const oldStand = /^room_Paint-(3B404A|80A694|24262B)/;
 
 function trimExport(THREE, root) {
   const patches = [
-    [[-.176, .927, -1.92], [.18, 1.5, -1.55], oldLamp],
+    [[-.181, .927, -1.92], [.18, 1.5, -1.55], oldLamp],
     [[.363, .929, -1.658], [.516, 1.016, -1.516], oldStand],
     [[.116, .927, -1.916], [.304, 1.104, -1.790], /^room_Paint-(3B404A|AB824A|F0E3CC|80A694|9C544A|24262B)/],
     [[-2.105, -.002, 4.28], [-.995, 2.74, 4.45], /^room_Paint-3B404A/],
@@ -198,6 +199,7 @@ export function upgradeBedroom(THREE, root, original, node) {
   box(corridor, [.021, .88, .011], [-2.23, .56, 5.67], interior(0x69533d, .29));
 
   const length = -2.29 - corridorEnd, center = (corridorEnd - 2.29) / 2;
+  const lockedHandles = [];
   solid([length, .15, 1.47], [center, -.075, hallZ], floor);
   solid([length, .13, 1.47], [center, 2.48, hallZ], ceiling);
   for (const side of [-1, 1]) {
@@ -213,7 +215,10 @@ export function upgradeBedroom(THREE, root, original, node) {
       if (index === 2 && side === 1) door.rotation.y = -.14;
       for (const y of [.57, 1.46])
         box(door, [.60, .63, .025], [0, y - 1.028, -side * .035], inset);
-      shape(door, new THREE.SphereGeometry(.025, 10, 8), iron, [.29, -.041, -side * .061]);
+      const handle = shape(door, new THREE.SphereGeometry(.025, 10, 8), iron, [.29, -.041, -side * .061]);
+      handle.name = 'Maçaneta do corredor';
+      handle.userData.lockedDoorSide = -side;
+      lockedHandles.push(handle);
     }
   }
   for (const x of [-3.08, -5.54, -8.01, -10.09]) {
@@ -283,7 +288,7 @@ export function upgradeBedroom(THREE, root, original, node) {
   glass.depthWrite = false;
   const pictures = [
     { position: [.48, 1.87, -2.212], subject: 'rio', size: [.44, .34], colors: [0x463349, 0xd29955, 0x7f5c66] },
-    { position: [2.206, 1.86, -1.03], subject: 'coast', yaw: -Math.PI / 2, size: [.34, .44], colors: [0x385453, 0xd1a15e, 0x768d75] },
+    { position: [2.206, 1.86, -.48], subject: 'coast', yaw: -Math.PI / 2, size: [.34, .44], colors: [0x385453, 0xd1a15e, 0x768d75] },
     { position: [-.13, 1.81, -2.212], subject: 'cat', size: [.32, .40], colors: [0x574445, 0xb47756, 0x896969] }
   ].map(({ position, yaw = 0, size: [w, h], colors, subject }) => {
     const mount = new THREE.Group();
@@ -349,7 +354,11 @@ export function upgradeBedroom(THREE, root, original, node) {
       shop.setReduced(reduced);
       shopLightStrength.value = reduced ? .50 : 1;
     },
-    data, strike, scare, bedside, additions, shop,
+    data, strike, scare, bedside, additions, shop, lockedHandles,
+    touchLockedDoor(from, to) {
+      if (!corridor.visible) return null;
+      return lockedHandles.find(handle => crossesButtonFace(handle, from, to, handle.userData.lockedDoorSide));
+    },
     objects: [[bedside.clock.name, bedside.clock], ...additions.objects, ...shop.objects],
     frames: pictures.map(item => item.pane),
     toggleFan() { running = !running; return running; },

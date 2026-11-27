@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "kombucha-bottle",
+  "reference": "assets/tripo/references/wde-02-picnic-core/04-kombucha-bottle.png",
+  "provider": "3dassets.dev",
+  "title": "Vinegar Bottle (Food, Fresh Produce and Groceries)",
+  "page": "https://3dassets.dev/assets/fresh-produce-and-groceries-vinegar-bottle-5cefbeac",
+  "download": "https://cdn.3dassets.dev/assets/24440/v1/model.glb",
+  "pack": "fresh-produce-and-groceries",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 106496,
+    "triangles": 2152,
+    "vertices": 6456,
+    "meshes": 4,
+    "materials": 4,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.04030100330535328,
+        0,
+        -0.04030100330535328
+      ],
+      "max": [
+        0.04030100330535328,
+        0.1889999955892563,
+        0.04030100330535328
+      ]
+    },
+    "sizeMeters": [
+      0.081,
+      0.189,
+      0.081
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/kombucha-bottle/fresh-produce-and-groceries-vinegar-bottle-5cefbeac.glb",
+    "sha256": "725ba1e2174d74ea7782f83898246804b794c088a9ec588b569339e22f7eba37",
+    "bytes": 106496
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/kombucha-bottle.glb",
+    "sha256": "725ba1e2174d74ea7782f83898246804b794c088a9ec588b569339e22f7eba37",
+    "bytes": 106496
+  }
+}

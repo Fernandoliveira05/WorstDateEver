@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "description": "Shared sky palette used by the bedroom window and the picnic park in Unity and A-Frame.",
+  "day": {
+    "zenith": "#5b9ed8",
+    "horizon": "#cfe6f2",
+    "ground": "#b8d6b0",
+    "sun": "#fff2c8",
+    "cloud": "#f7f7f2",
+    "star": "#ffffff"
+  },
+  "golden": {
+    "zenith": "#4a7fa8",
+    "horizon": "#e89f6b",
+    "ground": "#9f8d72",
+    "sun": "#ffd27a",
+    "cloud": "#f2c3a4",
+    "star": "#fff4d6"
+  },
+  "night": {
+    "zenith": "#0a1028",
+    "horizon": "#26324f",
+    "ground": "#1a2230",
+    "sun": "#9fb3e0",
+    "cloud": "#303a52",
+    "star": "#f7f3dd"
+  },
+  "clouds": [
+    { "position": [-6.0, 7.2, -21.0], "size": [4.6, 0.8, 2.4] },
+    { "position": [ 3.2, 7.8, -24.0], "size": [5.4, 0.9, 2.8] },
+    { "position": [ 9.5, 6.4, -18.0], "size": [3.4, 0.7, 2.0] }
+  ]
+}

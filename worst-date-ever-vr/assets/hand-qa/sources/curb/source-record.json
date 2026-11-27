@@ -1,0 +1,59 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "curb",
+  "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/07-curb.png",
+  "provider": "3dassets.dev",
+  "title": "Alley Kerb and Drain Section (Izakaya Alley and Ramen Shop)",
+  "page": "https://3dassets.dev/assets/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e",
+  "download": "https://cdn.3dassets.dev/assets/36398/v1/model.glb",
+  "pack": "izakaya-alley-and-ramen-shop",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 56892,
+    "triangles": 144,
+    "vertices": 336,
+    "meshes": 4,
+    "materials": 4,
+    "textures": 1,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -2.001199960708618,
+        -5.035479557733563e-05,
+        -0.4499649037141026
+      ],
+      "max": [
+        2,
+        0.2699635364906523,
+        0.4499649037141026
+      ]
+    },
+    "sizeMeters": [
+      4.001,
+      0.27,
+      0.9
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization",
+      "EXT_texture_webp"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/curb/izakaya-alley-and-ramen-shop-alley-kerb-and-drain-sect-bfcc714e.glb",
+    "sha256": "d1deb2edf784f79d42e008b1025085d92afe7d00f12e0373a2eb8dfa2a475562",
+    "bytes": 56892
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/curb.glb",
+    "sha256": "d1deb2edf784f79d42e008b1025085d92afe7d00f12e0373a2eb8dfa2a475562",
+    "bytes": 56892
+  }
+}

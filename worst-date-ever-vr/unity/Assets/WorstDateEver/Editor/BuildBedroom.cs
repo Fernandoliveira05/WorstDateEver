@@ -100,6 +100,7 @@ namespace WorstDateEver.Editor
             ArrangeRoots(scene,new Vector3(1.59f,0,-.15f),new Vector3(-.19f,0,-1.68f),180,() => BuildBedside(game));
             ArrangeRoots(scene,Vector3.zero,Vector3.forward*1.31f,0,() => BuildDeskSet(game));
             BuildCabinet(game,timber);
+            BuildWardrobe();
             BuildMirror(game);
             DressLeftWall();
 

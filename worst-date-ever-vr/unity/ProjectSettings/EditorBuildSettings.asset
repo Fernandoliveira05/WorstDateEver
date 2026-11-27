@@ -8,5 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/WorstDateEver/Scenes/BedroomQuest.unity
     guid: 7a2ced23d48df10db8ba6f661eda516b
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7de73adce2ce72726aad56df64764de9, type: 2}
   m_UseUCBPForAssetBundles: 0

@@ -94,8 +94,9 @@ namespace WorstDateEver
             body.angularDamping = .42f;
             body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             body.interpolation = RigidbodyInterpolation.Interpolate;
-            root.transform.localPosition = PointAt(spec.position);
+            root.transform.localPosition = IsPicnic ? PicnicProp(spec.id) : PointAt(spec.position);
             props.Add(spec.id, new DateProp { id = spec.id, body = body, size = target, start = root.transform.position });
+            BreakableProp.Attach(root, spec.id);
         }
 
         private Canvas Surface(string name, Vector3 position, float width, float height, Transform parent, int order = 0)
@@ -139,15 +140,17 @@ namespace WorstDateEver
         private void BuildControls()
         {
             var panel = Surface("Date conversation", new(.58f,1.18f,.53f), .94f, .92f, interfaceObjects);
-            panel.transform.localRotation = Quaternion.Euler(10, -9, 0);
+            panel.transform.localPosition = IsPicnic ? new Vector3(1.22f, 1.40f, 1.38f) : new Vector3(1.10f, 1.05f, .85f);
+            panel.transform.localRotation = Quaternion.Euler(IsPicnic ? 8 : 8, IsPicnic ? 205 : -22, 0);
+            if (IsPicnic) panel.transform.localScale *= .66f;
             var cream = new Color(.97f,.90f,.79f);
             var dark = new Color(.21f,.12f,.19f);
             var baseColor = new Color(.21f,.14f,.19f,.98f);
             var caption = Rect("Caption backing", panel.transform, Vector2.zero, new(940,200)).gameObject.AddComponent<Image>();
             caption.color = baseColor;
             var title = Label(panel.transform, new(0,67), new(915,42), 34, new Color(.95f,.68f,.46f));
-            title.text = story.Venue.id switch { "cafe" => "CAFÉ · FILTRO & PROSA", "sushi" => "SUSHI · KOI TORTO",
-                "bistro" => "BISTRÔ · A MESA É NOSSA", _ => "BAR · ÚLTIMO PEDIDO" };
+            title.text = IsPicnic ? "PIQUENIQUE · PARQUE" : story.Venue.id switch { "cafe" => "CAFÉ · FILTRO & PROSA",
+                "sushi" => "SUSHI · KOI TORTO", "bistro" => "BISTRÔ · A MESA É NOSSA", _ => "BAR · ÚLTIMO PEDIDO" };
             headline = Label(panel.transform, new(0,-17), new(890,124), 48, cream);
             message = Label(panel.transform, new(0,-450), new(930,80), 38, cream);
             message.gameObject.AddComponent<Outline>().effectColor = Color.black;

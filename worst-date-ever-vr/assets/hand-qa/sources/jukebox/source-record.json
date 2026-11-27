@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "jukebox",
+  "reference": "assets/tripo/references/wde-05-barzinho-candidates/10-jukebox.png",
+  "provider": "3dassets.dev",
+  "title": "Pub jukebox (Bar, Pub and Brewery Taproom)",
+  "page": "https://3dassets.dev/assets/bar-pub-and-brewery-taproom-jukebox-b6da908d",
+  "download": "https://cdn.3dassets.dev/assets/18415/v1/model.glb",
+  "pack": "bar-pub-and-brewery-taproom",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 112696,
+    "triangles": 2268,
+    "vertices": 6804,
+    "meshes": 5,
+    "materials": 5,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.38998743006295894,
+        0,
+        -0.24998339590716484
+      ],
+      "max": [
+        0.38998743006295894,
+        1.3526740074157715,
+        0.25300920032146457
+      ]
+    },
+    "sizeMeters": [
+      0.78,
+      1.353,
+      0.503
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/jukebox/bar-pub-and-brewery-taproom-jukebox-b6da908d.glb",
+    "sha256": "49267702aa64c7fc4fa994d9ed1ad8c44d9f4273b150eca01198e6a66b7f54dc",
+    "bytes": 112696
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/jukebox.glb",
+    "sha256": "49267702aa64c7fc4fa994d9ed1ad8c44d9f4273b150eca01198e6a66b7f54dc",
+    "bytes": 112696
+  }
+}

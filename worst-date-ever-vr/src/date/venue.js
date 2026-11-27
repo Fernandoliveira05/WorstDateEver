@@ -13,6 +13,7 @@ import { INTERACTION_STYLE, arcSlots, cardWidth, cardCorners, gazeShowsMenu } fr
 import { authoredGrip, heldGripPose, gripSurface } from '../grip-pose.mjs';
 import { blanketPull } from '../asset-registry.mjs';
 import { buildPicnicPark, loadPicnicSpread } from './picnic.js';
+import { fitSourced, loadSourced, loadSourcedSet, VENUE_MODELS, PARK_MODELS } from './sourced.js';
 import { EVENT_VISUAL_STYLE, eventArcPlacement, eventCueState } from './event-presentation.mjs';
 import { qteConfig, qteMenuAnchor, qteMenuSlots } from './qte.mjs';
 import { FRIEND_VISIT, friendVisitMotion } from './event-visitor.mjs';
@@ -37,9 +38,9 @@ function loadHudFont() {
 
 const themes = {
   picnic: { wall: 0xd0ac83, seat: 0xb26b83, title: 'PIQUENIQUE NO PARQUE', sky: 0xb8d8e3 },
-  sushi: { wall: 0x966d76, seat: 0x963d46, title: 'SUSHI · KOI TORTO', sky: 0x5b638a },
+  sushi: { wall: 0x5b3a2d, seat: 0x963d46, title: 'SUSHI · KOI TORTO', sky: 0x5b638a },
   bistro: { wall: 0x998276, seat: 0x6e803f, title: 'BISTRÔ · A MESA É NOSSA', sky: 0x54526e },
-  bar: { wall: 0x817492, seat: 0x64557c, title: 'BAR · ÚLTIMO PEDIDO', sky: 0x3d4270 }
+  bar: { wall: 0x3a281e, seat: 0x64557c, title: 'BAR · ÚLTIMO PEDIDO', sky: 0x3d4270 }
 };
 
 export async function createVenue(THREE, { venue, persona, candy, reducedEffects = () => false, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection, isVr = () => false }) {
@@ -47,6 +48,13 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   const picnic = venue.sceneVariant === 'picnic';
   const theme = themes[venue.sceneVariant] ?? themes[venue.id];
   const spread = picnic ? await loadPicnicSpread() : [];
+  const tableModel = picnic ? null : await loadSourced(VENUE_MODELS.table[venue.id]).catch(() => null);
+  const chairModel = picnic ? null : await loadSourced(VENUE_MODELS.chair[venue.id]).catch(() => null);
+  const foodModels = await loadSourcedSet(VENUE_MODELS.food[venue.id] ?? []);
+  const parkModels = picnic ? await loadSourcedSet(PARK_MODELS) : null;
+  const bottleModel = !picnic && venue.id === 'bar' ? await loadSourced('bar-bottle').catch(() => null) : null;
+  const plantModel = !picnic ? await loadSourced('flower-patch').catch(() => null) : null;
+  const jukeboxModel = !picnic && venue.id === 'bar' ? await loadSourced('jukebox').catch(() => null) : null;
   const speech = createNpcSpeech(persona.id);
   const group = new THREE.Group();
   group.name = 'date-' + venue.id;
@@ -64,7 +72,8 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   const brass = mat(0xc09059, .45);
   const metal = mat(0x39303a, .6);
   const ceramic = mat(0xf3e2c5, .37);
-  const floor = mat(picnic ? 0x7b9c55 : 0x92695b);
+  const floors = { picnic: 0x7b9c55, sushi: 0x5d3b2a, bistro: 0x8f6458, bar: 0x3b2820 };
+  const floor = mat(floors[venue.sceneVariant] ?? floors[venue.id] ?? 0x92695b);
   const boards = !picnic && bedroomMaterial('Surface-Floorboards-')?.map;
   if (boards) { floor.map = boards.clone(); floor.map.repeat.set(4, 5); floor.map.needsUpdate = true; }
   const upholstery = mat(theme.seat);
@@ -101,8 +110,15 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     return box(size, position, material);
   };
 
-  lights.add(new THREE.HemisphereLight(0xffe9d5, 0x7c728f, 2.15));
-  const light = new THREE.DirectionalLight(0xffdcc0, 2.1);
+  const atmosphere = picnic
+    ? { sky: 0xcfe6f2, ground: 0x718052, hemi: 2.8, key: 0xfff0d8, keyIntensity: 2.7, lamp: 0xffe3b4, pendant: 0 }
+    : venue.id === 'sushi'
+      ? { sky: 0xffd9a5, ground: 0x5b3a2d, hemi: 2.35, key: 0xffbe78, keyIntensity: 2.45, lamp: 0xffb45d, pendant: 1.55 }
+      : venue.id === 'bistro'
+        ? { sky: 0xffe1ce, ground: 0x6f555c, hemi: 2.25, key: 0xffcfaa, keyIntensity: 2.35, lamp: 0xffb676, pendant: 1.35 }
+        : { sky: 0xffc680, ground: 0x24171c, hemi: .95, key: 0xff9b5a, keyIntensity: 1.05, lamp: 0xff8d52, pendant: .85 };
+  lights.add(new THREE.HemisphereLight(atmosphere.sky, atmosphere.ground, atmosphere.hemi));
+  const light = new THREE.DirectionalLight(atmosphere.key, atmosphere.keyIntensity);
   light.position.set(-4, 5, 2);
   light.target.position.set(0, 0, -3);
   lights.add(light.target);
@@ -112,10 +128,18 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   light.shadow.normalBias = .026;
   light.shadow.bias = -.00014;
   lights.add(light);
+  if (!picnic && venue.id === 'bar') {
+    for (const [x, y, z, color] of [[-3.1, 2.1, -7.1, 0xff315f], [3.6, 1.7, -6.4, 0xff7a2f],
+      [0.1, 2.5, -5.0, 0xff4f86]]) {
+      const neon = new THREE.PointLight(color, 8.5, 4.5, 2);
+      neon.position.set(x, y, z);
+      lights.add(neon);
+    }
+  }
   const lampFill = [];
   if (picnic) {
     solidBox([22, .1, 22], [0, -.05, -3.15], floor);
-    buildPicnicPark(THREE, { box, cylinder, sphere, mat, architecture, upholstery, wood });
+    buildPicnicPark(THREE, { box, cylinder, sphere, mat, architecture, upholstery, wood, models: parkModels });
   } else {
     solidBox([11.5, .1, 10], [0, -.05, -3.15], floor);
     box([11.5, .12, 10], [0, 3.3, -3.15], mat(0x6f555c));
@@ -148,6 +172,11 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       cylinder([.39, .14, .39], [x, 2.55, -2.6], brass);
       const bulb = new THREE.MeshBasicMaterial({ color: 0xffd38e });
       cylinder([.33, .015, .33], [x, 2.477, -2.6], bulb);
+      if (atmosphere.pendant) {
+        const pendant = new THREE.PointLight(atmosphere.lamp, atmosphere.pendant, 4.8, 2);
+        pendant.position.set(x, 2.32, -2.6);
+        lights.add(pendant);
+      }
       if (candy === 'morango') {
         const spill = new THREE.PointLight(0xf48aa9, .64, 3.6, 2);
         spill.position.set(x, 2.28, -2.6);
@@ -179,7 +208,102 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   sign.position.set(...(picnic ? [4.75, 1.23, -6.10] : [-.15, 2.96, -7.76]));
   group.add(sign);
 
+  if (!picnic && venue.id === 'sushi') {
+    const wave = mat(0x264d78, .82);
+    box([7.4, 1.1, .05], [0, 1.98, -7.82], wave);
+    for (let row = 0; row < 3; row++) for (let i = 0; i < 14; i++) {
+      const x = -3.4 + i * .52;
+      const y = 1.62 + row * .26 + Math.sin(i * .85 + row) * .11;
+      const crest = sphere([.19, .045, .015], [x, y, -7.79], ceramic);
+      crest.rotation.z = Math.sin(i * .85 + row) * .3;
+    }
+    box([6.2, .9, .8], [0, .45, -7.0], wood);
+    box([6.35, .07, .9], [0, .935, -7.0], ceramic);
+    for (const x of [-3.0, 0, 3.0]) {
+      cylinder([.25, .29, .25], [x, 2.68, -4.35], mat(0xffe0a8, .72));
+      cylinder([.09, .03, .09], [x, 3.0, -4.35], brass);
+      const lantern = new THREE.PointLight(0xffb45d, 1.4, 4.2, 2);
+      lantern.position.set(x, 2.55, -4.35);
+      lights.add(lantern);
+    }
+  }
+  if (!picnic && venue.id === 'bistro') {
+    const curtain = mat(0xde7f92, .86);
+    for (const x of [-5.12, 5.12]) box([.56, 2.42, .1], [x, 1.86, -7.80], curtain);
+    box([11.1, .3, .12], [0, 2.94, -7.82], curtain);
+    for (let i = 0; i < 12; i++)
+      box([.19, .3, .13], [-5.05 + i * .92, 2.94, -7.81], ceramic);
+  }
+  if (!picnic && venue.id === 'bar') {
+    for (let level = 0; level < 2; level++) {
+      const y = 1.95 + level * .62;
+      box([4.6, .07, .34], [-1.2, y, -7.86], wood);
+      for (let i = 0; i < 9; i++) {
+        const at = [-3.2 + i * .5, y + .2, -7.82];
+        const bottle = bottleModel ? fitSourced(THREE, bottleModel, [.06, .24, .06], at,
+          [0, i * .65, 0]) : null;
+        if (bottle) furnishings.add(bottle);
+        else cylinder([.045, .15, .045], at, mat(i % 2 ? 0x4a7350 : 0x9b4f36, .74));
+      }
+    }
+    for (let row = 0; row < 2; row++) {
+      const z = row ? -5.1 : -2.55;
+      box([9.6, .025, .025], [0, 2.98, z], brass);
+      const colors = [0xe66f5c, 0xf0be4e, 0x5e9b9a, 0x8c6ba8];
+      for (let i = 0; i < 14; i++) {
+        const flag = box([.22, .22, .025], [-4.5 + i * .69, 2.84, z], mat(colors[i % 4], .8));
+        flag.rotation.z = Math.PI / 4;
+      }
+    }
+    box([1.94, .82, .07], [2.4, 2.55, -7.75], mat(0x2d1d24, .8));
+    box([1.62, .52, .04], [2.4, 2.55, -7.71], mat(0xff3b86, .45));
+    box([1.42, .34, .045], [2.4, 2.55, -7.70], mat(0x5a142c, .7));
+  }
   if (!picnic) {
+    const backZ = 1.80;
+    const frame = mat(venue.id === 'bar' ? 0x2a1b18 : 0x3d2a24, .82);
+    const art = mat(venue.id === 'sushi' ? 0x4c6b82 : 0x9a5e64, .8);
+    for (let i = 0; i < 3; i++) {
+      const x = -3.3 + i * 3.3;
+      box([1.05, .78, .05], [x, 1.95, backZ], frame);
+      box([.92, .65, .06], [x, 1.95, backZ - .02], art);
+    }
+    box([3.2, .07, .32], [2.9, 1.15, backZ - .18], wood);
+    if (bottleModel)
+      for (let i = 0; i < 6; i++)
+        furnishings.add(fitSourced(THREE, bottleModel, [.07, .26, .07],
+          [1.8 + i * .45, 1.32, backZ - .18], [0, i * .72, 0]));
+    box([1.5, .06, .06], [-4.55, 1.62, backZ - .07], brass);
+    for (let i = 0; i < 3; i++)
+      box([.035, .16, .035], [-5.0 + i * .45, 1.52, backZ - .08], brass);
+    for (const x of [-4.85, 4.85]) {
+      const plant = fitSourced(THREE, plantModel, [.95, .65, .95], [x, .35, .0]);
+      if (plant) furnishings.add(plant);
+    }
+    for (const side of [-1, 1]) {
+      box([.28, .34, .2], [side * 5.35, 2.02, 1.2], brass);
+      const sconce = new THREE.PointLight(venue.id === 'bar' ? 0xff9452 : 0xffc684,
+        venue.id === 'bar' ? .75 : .9, 2.8, 2);
+      sconce.position.set(side * 5.22, 2.02, 1.2);
+      lights.add(sconce);
+    }
+    if (jukeboxModel) {
+      const juke = fitSourced(THREE, jukeboxModel, [.8, 1.5, .4], [4.55, .75, -4.75],
+        [0, -Math.PI / 2, 0]);
+      if (juke) furnishings.add(juke);
+    }
+    if (venue.id === 'sushi') {
+      for (const x of [-1.8, 1.8]) {
+        const stool = fitSourced(THREE, chairModel, [.48, .9, .48], [x, .45, -6.35], [0, Math.PI, 0]);
+        if (stool) furnishings.add(stool);
+      }
+    }
+    if (venue.id === 'bistro') {
+      box([2.0, .82, .42], [4.55, .41, -1.75], wood);
+      const vase = fitSourced(THREE, await loadSourced('flower-vase').catch(() => null),
+        [.16, .28, .16], [-2.9, .88, -2.25]);
+      if (vase) furnishings.add(vase);
+    }
     solidBox([1.32, 1.1, 1.72], [4.76, .55, -3.57], wood);
     box([1.37, .055, 1.79], [4.76, 1.12, -3.57], ceramic);
     for (let i = 0; i < 5; i++) {
@@ -202,9 +326,20 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     }
   }
   for (const [x, , z] of picnic ? [] : layout.tables) {
-    solidBox([1.28, .07, 1.02], [x, .75, z], wood);
-    cylinder([.11, .72, .11], [x, .36, z], metal);
-    cylinder([.31, .035, .31], [x, .024, z], brass);
+    if (tableModel) {
+      const visual = fitSourced(THREE, tableModel, [1.28, .75, 1.02], [x, .375, z]);
+      if (visual) furnishings.add(visual);
+      physicsBox([1.28, .75, 1.02], [x, .375, z]);
+    } else {
+      solidBox([1.28, .07, 1.02], [x, .75, z], wood);
+      cylinder([.11, .72, .11], [x, .36, z], metal);
+      cylinder([.31, .035, .31], [x, .024, z], brass);
+    }
+    if (venue.id === 'bistro') {
+      const cloth = mat(0xe08b9b, .82);
+      cylinder([.68, .014, .68], [x, .79, z], cloth);
+      cylinder([.69, .16, .69], [x, .70, z], cloth);
+    }
     for (const shift of [-.38, .38]) {
       box([.29, .002, .35], [x + shift, .787, z], upholstery);
       if (x) cylinder([.13, .025, .13], [x + shift, .806, z], ceramic);
@@ -212,7 +347,13 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   }
 
   const seats = Object.fromEntries(layout.seats.map(seat => [seat.id, seat]));
-  if (!picnic) for (const { position: [x, , z], yaw, id } of layout.seats) chair(x, z, yaw + Math.PI, id);
+  if (!picnic) for (const { position: [x, , z], yaw, id } of layout.seats) {
+    if (chairModel && id !== 'player_seat') {
+      const visual = fitSourced(THREE, chairModel, [.49, .87, .51], [x, .435, z],
+        [0, yaw + Math.PI, 0]);
+      if (visual) furnishings.add(visual);
+    } else chair(x, z, yaw + Math.PI, id);
+  }
 
   if (venue.id === 'sushi') {
     for (let i = 0; i < 11; i++) {
@@ -278,6 +419,27 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     return { id, mesh, position, size, body: physicsBox(size, position, id === 'plate' ? .34 : .24) };
   });
 
+  const foodStations = {
+    sushi: [['sushi-platter', [-.12, .845, -.52], [.40, .10, .26], .55],
+      ['sake-flask', [.40, .87, -.58], [.10, .28, .10], .38],
+      ['shoyu-dish', [-.48, .845, -.30], [.18, .05, .18], .30]],
+    bistro: [['cake-slice', [-.14, .845, -.60], [.24, .16, .18], .34],
+      ['coffee-cup', [.30, .86, -.56], [.16, .16, .16], .30]],
+    bar: [['beer-mug', [-.30, .86, -.48], [.17, .25, .17], .62],
+      ['petiscos-bowl', [.38, .85, -.52], [.30, .06, .30], .42],
+      ['hot-sauce', [.40, .87, -.30], [.09, .21, .09], .28]],
+    cafe: [['cake-slice', [-.14, .845, -.60], [.24, .16, .18], .34],
+      ['coffee-cup', [.30, .86, -.56], [.16, .16, .16], .30]]
+  };
+  for (const [id, position, size, mass] of foodStations[venue.id] ?? []) {
+    const model = foodModels[id];
+    const mesh = new THREE.Group();
+    const visual = fitSourced(THREE, model, size, [0, 0, 0]);
+    if (visual) mesh.add(visual);
+    mesh.position.fromArray(position);
+    tableProps.add(mesh);
+    props.push({ id, mesh, position, size, body: physicsBox(size, position, mass) });
+  }
   for (const model of spread) {
     const cloth = model.cloth;
     const body = new CANNON.Body({ mass: cloth ? 0 : model.mass, position: new CANNON.Vec3(...model.position),
@@ -450,7 +612,8 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       if (clip) clips[key] = mixer.clipAction(clip);
     }
     const bones = Object.fromEntries(collectBones(scene).map(bone => [bone.name.replaceAll(/[^a-zA-Z]/g, ''), bone]));
-    return { actor, mixer, clips, bones, isWaiter: index === 5, seatPose: createSeatPose(THREE, actor, bones, picnic && index === 0 ? .12 : undefined),
+    const seat = picnic && index === 0 ? { seatTop: .16, floorSeat: true } : undefined;
+    return { actor, mixer, clips, bones, isWaiter: index === 5, seatPose: createSeatPose(THREE, actor, bones, seat),
       animation: createNpcAnimation(THREE, actor, bones) };
   };
   const actors = loaded.slice(0, characterNames.length).map(makeActor);
@@ -460,7 +623,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   eventVisitor.actor.visible = false;
   const date = actors[0];
   const physicalScene = createPhysicalScene(THREE, { parent: tableProps, camera, date, props: propsById,
-    venueId: venue.id, audio: audioCue, isVr,
+    venueId: venue.id, audio: audioCue, isVr, surfaceHeight: picnic ? .012 : .787,
     complete: (id, mechanical) => voice.physical(id, mechanical) });
   let interactionMenu = 'root';
   let interactionCategory = null;
@@ -648,7 +811,9 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
   interfaces.add(skillCancel);
   const qteCup = new THREE.Group();
   qteCup.name = 'water-spill-qte-cup';
-  qteCup.position.set(-.32, 1.11, -.20);
+  // The cup must rest on the cloth/table surface; the old fixed heights left
+  // it floating well above the picnic blanket and every restaurant table.
+  qteCup.position.set(-.32, (picnic ? .012 : .787) + .073, -.20);
   qteCup.visible = false;
   const qteGlass = new THREE.MeshBasicMaterial({ color: 0xb9e4f5, transparent: true,
     opacity: .56, side: THREE.DoubleSide, depthWrite: false, toneMapped: false });
@@ -693,6 +858,33 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     return { character, body };
   });
   const byBody = new Map(ambientTargets.map(({character,body}) => [body,character]));
+  const fragile = new Set(['cup', 'plate', 'cake', 'coffee', 'sushi-platter', 'sake-flask',
+    'shoyu-dish', 'beer-mug', 'petiscos-bowl', 'hot-sauce', 'wine-glass', 'water-glass', 'kombucha']);
+  const fragments = [];
+  function shatter(prop, speed) {
+    if (prop.broken) return;
+    prop.broken = true;
+    const at = prop.body.position;
+    let color = 0xd9c7ad;
+    prop.mesh.traverse(object => { if (object.isMesh) color = object.material?.color ?? color; });
+    prop.mesh.visible = false;
+    prop.body.collisionResponse = false;
+    prop.body.sleep();
+    world.removeBody(prop.body);
+    const material = mat(color, .72);
+    for (let i = 0; i < 7; i++) {
+      const size = [.026 + (i % 3) * .009, .012 + (i % 2) * .008, .026 + (i % 2) * .01];
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(...size), material);
+      mesh.castShadow = mesh.receiveShadow = true;
+      tableProps.add(mesh);
+      const body = physicsBox(size, [at.x, at.y, at.z], .022);
+      body.velocity.set((Math.random() - .5) * Math.min(speed, 4), .55 + Math.random() * .8,
+        (Math.random() - .5) * Math.min(speed, 4));
+      body.angularVelocity.set(Math.random() * 8 - 4, Math.random() * 8 - 4, Math.random() * 8 - 4);
+      fragments.push({ mesh, body, life: 4.5 + Math.random() * 1.5 });
+    }
+    audioCue('interaction_clink', new THREE.Vector3(speed ? at.x : 0, at.y, at.z));
+  }
   const handSteps = new Map();
   const swipes = new Map();
   let tickSeconds = 1 / 60;
@@ -702,6 +894,10 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     if ((!character && body !== face && body !== torso) || !current || prop.owner ||
       current.time - (prop.releasedAt ?? -20) > 2) return;
     const speed = Math.abs(contact.getImpactVelocityAlongNormal());
+    if (fragile.has(prop.id) && !prop.owner && speed > (prop.id === 'plate' || prop.id === 'cup' ? 2.7 : 2.25)) {
+      shatter(prop, speed);
+      return;
+    }
     const action = impactClass(speed, prop.body.mass);
     if (!action) return;
     const side = Math.sign(prop.body.velocity.x) || 1;
@@ -834,6 +1030,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       }
       qteFocusPoint.fromArray(qteSettings.focus);
       qteSourcePoint.copy(qteFocusPoint);
+      if (beat.definition.id === 'water_spill') qteSourcePoint.copy(qteCup.position).addScaledVector(worldUp, .07);
       if (beat.definition.id === 'dropped_menu')
         qteSourcePoint.copy(propsById.menu.mesh.position).addScaledVector(worldUp, .12);
     } else {
@@ -1022,6 +1219,13 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     actors[4].actor.visible = entryDuty.active;
     if (entryDuty.active) updateActor(actors[4], layout.entranceRoute, guest, guest > 0 && guest < 1, picnic ? 0 : guestSit, worldDt,
       seats.entry_guest.yaw, entry > 12);
+    if (!picnic && venue.id === 'sushi') {
+      actors[4].actor.visible = true;
+      updateActor(actors[4], [[-1.35, 0, -7.35]], 0, false, 0, worldDt, 0);
+    } else if (!picnic && venue.id === 'bar') {
+      actors[4].actor.visible = true;
+      updateActor(actors[4], [[4.70, 0, -4.35]], 0, false, 0, worldDt, 0);
+    }
     eventVisitor.actor.visible = visitorState.visible;
     if (visitorState.visible) {
       const route = visitorState.leaving ? [...FRIEND_VISIT.route].reverse() : FRIEND_VISIT.route;
@@ -1040,6 +1244,13 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
         t >= beat.at + FRIEND_VISIT.arrivalSeconds)
         audioCue('friend_arrival', eventVisitor.actor.position);
     }
+    if (picnic) {
+      actors[4].actor.visible = true;
+      updateActor(actors[4], [[4.15, 0, -5.25]], 0, false, 0, worldDt, 2.45);
+      actors[5].actor.visible = true;
+      updateActor(actors[5], [[-5.60, 0, -7.90]], 0, false, 0, worldDt, 0);
+      tray.visible = trayMount.visible = trayDish.visible = false;
+    }
     const shift = duties[4].active ? duties[4].age + 3 : 0;
     const waiterAtDate = ['water_spill','wrong_order'].includes(eventVisual) && beat.phase !== 'cooldown';
     const server = actors[5];
@@ -1047,8 +1258,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     const servingProgress = THREE.MathUtils.smoothstep(eventAge, .1, 2.7);
     const servingRoute = waiterAtDate ? [waiterEventStart.toArray(), [-1.15,0,-.64]] : layout.waiterRoute;
     const tableMotion = updateTableService(t, worldDt, view.orders);
-    server.actor.visible = !picnic || Boolean(tableMotion) || waiterAtDate;
-    server.actor.userData.activity = tableMotion || waiterAtDate ? 'serving' : server.actor.visible ? 'waiting' : 'away';
+    server.actor.visible = picnic ? true : Boolean(tableMotion) || waiterAtDate;
     const carryingOrder = tableMotion?.phase === 'returning' || tableMotion?.phase === 'presenting' && !tableMotion.delivered;
     const eventTray = waiterAtDate && eventVisual === 'water_spill';
     tray.visible = carryingOrder || eventTray;
@@ -1071,7 +1281,8 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     }
     server.actor.userData.activity = tableMotion ?
       (['approaching','departing','returning','leaving'].includes(tableMotion.phase) ? 'walking' :
-        tableMotion.phase === 'presenting' ? 'serving' : 'waiting') : waiterAtDate ? 'serving' : 'waiting';
+        tableMotion.phase === 'presenting' ? 'serving' : 'waiting') :
+      waiterAtDate ? 'serving' : server.actor.visible ? 'waiting' : 'away';
     if (renderedTime > 0) {
       const intended = server.actor.position.clone().sub(previousServer);
       const maxSpeed = tableMotion ? 1.08 : waiterAtDate ? 1.35 : 0;
@@ -1149,6 +1360,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     }
     world.step(1 / 90, worldDt, 5);
     for (const prop of props) {
+      if (prop.broken) continue;
       if (prop.cloth) {
         const target = prop.owner ? prop.pull : 0;
         prop.setPull(prop.edge, target, Math.min(1, dt * 12), prop.clothAnchor);
@@ -1156,6 +1368,17 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       if (prop.body.position.y < -.22 || Math.abs(prop.body.position.x) > 6 || prop.body.position.z > 2.2) resetProp(prop);
       prop.mesh.position.copy(prop.body.position);
       prop.mesh.quaternion.copy(prop.body.quaternion);
+    }
+    for (let i = fragments.length - 1; i >= 0; i--) {
+      const fragment = fragments[i];
+      fragment.life -= dt;
+      fragment.mesh.position.copy(fragment.body.position);
+      fragment.mesh.quaternion.copy(fragment.body.quaternion);
+      if (fragment.life > 0) continue;
+      world.removeBody(fragment.body);
+      fragment.mesh.removeFromParent();
+      fragment.mesh.geometry.dispose();
+      fragments.splice(i, 1);
     }
     physicalScene.tick(dt, view);
     animateMenu(dt);
@@ -1499,7 +1722,9 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     }
     const interactiveButtons = [...cards.values()].filter(card => card.visible && card.userData.action);
     const minigameButtons = [tutorialButton, skillHelp, skillCancel].filter(item => item.visible && item.parent?.visible);
-    const buttonHits = ray.intersectObjects([heading, ...minigameButtons,
+    const replay = current?.caption && (current.speechRef ||
+      current.gesture !== 'none' && current.caption !== current.beat?.presentation.line);
+    const buttonHits = ray.intersectObjects([...(replay ? [heading] : []), ...minigameButtons,
       ...interactiveButtons.flatMap(card => card.children)]);
     const button = buttonHits[0];
     if (!grab && button) {
@@ -1523,7 +1748,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       }
       return true;
     }
-    if (current?.qte && (ray.intersectObjects(qteCup.children, true)[0]?.distance < 3.8 ||
+    if (current?.qte && qteCup.visible && (ray.intersectObjects(qteCup.children, true)[0]?.distance < 3.8 ||
       directPoint?.distanceTo(qteCup.position) < .17)) {
       voice.choose('help');
       return true;
@@ -1541,8 +1766,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
     if (directPoint) {
       let nearest, best = Infinity;
       for (const prop of eligible) {
-        const distance = prop.grip_zones ? gripSurface(THREE, prop.body)(directPoint) :
-          directPoint.distanceTo(prop.mesh.position) - Math.max(...prop.size) / 2;
+        const distance = gripSurface(THREE, prop.body)(directPoint);
         if (distance >= best || distance >= .07) continue;
         best = distance;
         nearest = prop;
@@ -1582,7 +1806,7 @@ export async function createVenue(THREE, { venue, persona, candy, reducedEffects
       if (activate && failureScreen.ready) restart();
       return true;
     }
-    if (current?.qte && point.distanceTo(qteCup.position) < .17) {
+    if (current?.qte && qteCup.visible && point.distanceTo(qteCup.position) < .17) {
       if (activate) voice.choose('help');
       return true;
     }

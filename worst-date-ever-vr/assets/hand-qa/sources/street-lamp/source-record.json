@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "street-lamp",
+  "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/06-street-lamp.png",
+  "provider": "3dassets.dev",
+  "title": "Park Lamp Post (City Park and Playground)",
+  "page": "https://3dassets.dev/assets/city-park-and-playground-park-lamp-post-6771a338",
+  "download": "https://cdn.3dassets.dev/assets/33677/v1/model.glb",
+  "pack": "city-park-and-playground",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 10816,
+    "triangles": 188,
+    "vertices": 564,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.23999999463558197,
+        0,
+        -0.21998961878962692
+      ],
+      "max": [
+        0.23999999463558197,
+        4.96999979019165,
+        0.21998961878962692
+      ]
+    },
+    "sizeMeters": [
+      0.48,
+      4.97,
+      0.44
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/street-lamp/city-park-and-playground-park-lamp-post-6771a338.glb",
+    "sha256": "7bf3904e5ce27e2c50a23fc310da197ed8cac994b9f8c6287ddef47eeb43e962",
+    "bytes": 10816
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/street-lamp.glb",
+    "sha256": "7bf3904e5ce27e2c50a23fc310da197ed8cac994b9f8c6287ddef47eeb43e962",
+    "bytes": 10816
+  }
+}

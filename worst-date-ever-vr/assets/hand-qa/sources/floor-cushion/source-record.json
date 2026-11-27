@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "floor-cushion",
-  "manifest_reference": "assets/tripo/references/wde-02-picnic-core/03-floor-cushion.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/furniture/pouf/",
-    "slug": "pouf",
-    "category": "furniture",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/pouf/pouf.glb",
-    "license_url": "https://grab3d.com/dl/pouf/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/pouf/manifest.json"
+  "reference": "assets/tripo/references/wde-02-picnic-core/03-floor-cushion.png",
+  "provider": "3dassets.dev",
+  "title": "Pouffe Round (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24",
+  "download": "https://cdn.3dassets.dev/assets/38781/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/floor-cushion/pouf.glb",
-      "sha256": "b668ae4a8c8c75947bc1548204a002d1dfb2bc90e772e377d0d9c83825347854",
-      "bytes": 713752
+  "stats": {
+    "fileSize": 15656,
+    "triangles": 368,
+    "vertices": 716,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.3449999988079071,
+        7.48005821979425e-06,
+        -0.3449999988079071
+      ],
+      "max": [
+        0.3449999988079071,
+        0.37798837238109434,
+        0.3449999988079071
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/floor-cushion/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/floor-cushion/publisher-manifest.json",
-      "sha256": "5435adda30beabffdcc4d972480451a0e9172251909263320b3a9c301aeadd39",
-      "bytes": 1302
-    }
+    "sizeMeters": [
+      0.69,
+      0.378,
+      0.69
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/floor-cushion/bedroom-and-living-room-furniture-pouffe-round-fa2b1e24.glb",
+    "sha256": "d95eb5dbe77d7b86cb3d5db631b8bccac947086a306b51d665e7c798d845a9f1",
+    "bytes": 15656
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/floor-cushion.glb",
-    "sha256": "b668ae4a8c8c75947bc1548204a002d1dfb2bc90e772e377d0d9c83825347854",
-    "bytes": 713752,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 18416,
-    "texture_px": 2048,
-    "dimensions_m": "0.525 x 0.518 x 0.400",
-    "real_size": "knitted pouf / floor ottoman, diameter 0.52 m, height 0.40 m",
-    "notes": "soft rounded cylinder with chunky knit ribs with stitch relief in pink, sunken top centre with a fabric button, flat cream base rim; no moving parts"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "d95eb5dbe77d7b86cb3d5db631b8bccac947086a306b51d665e7c798d845a9f1",
+    "bytes": 15656
+  }
 }

@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "curtains",
+  "reference": "assets/tripo/references/wde-01-bedroom-core/09-curtains.png",
+  "provider": "3dassets.dev",
+  "title": "Curtains Linen Pair (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984",
+  "download": "https://cdn.3dassets.dev/assets/38813/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 39192,
+    "triangles": 832,
+    "vertices": 2010,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -1.062000036239624,
+        0,
+        -0.07996154783933851
+      ],
+      "max": [
+        1.062000036239624,
+        2.0120217493449406,
+        0.07996154783933851
+      ]
+    },
+    "sizeMeters": [
+      2.124,
+      2.012,
+      0.16
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/curtains/bedroom-and-living-room-furniture-curtains-linen-pair-d22db984.glb",
+    "sha256": "0d079a1e57dc76dfa3881a7a0c027c8ae3c7ae29c7c8dd557bcbc3ecd49f6245",
+    "bytes": 39192
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/curtains.glb",
+    "sha256": "0d079a1e57dc76dfa3881a7a0c027c8ae3c7ae29c7c8dd557bcbc3ecd49f6245",
+    "bytes": 39192
+  }
+}

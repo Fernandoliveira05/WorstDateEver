@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "dining-table",
+  "reference": "assets/tripo/references/wde-03-sushi-candidates/08-dining-table.png",
+  "provider": "3dassets.dev",
+  "title": "Two person cafe table (Cafe, Bakery and Coffee Bar)",
+  "page": "https://3dassets.dev/assets/bakery-and-cafe-cafe-table-2-person-038f8dc8",
+  "download": "https://cdn.3dassets.dev/assets/22200/v1/model.glb",
+  "pack": "bakery-and-cafe",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 41668,
+    "triangles": 816,
+    "vertices": 2448,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.3019999861717224,
+        0,
+        -0.3019999861717224
+      ],
+      "max": [
+        0.3019999861717224,
+        0.7500069346558016,
+        0.3019999861717224
+      ]
+    },
+    "sizeMeters": [
+      0.604,
+      0.75,
+      0.604
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/dining-table/bakery-and-cafe-cafe-table-2-person-038f8dc8.glb",
+    "sha256": "efa7d14d15e583ddeded2b625af874696e24bbb8e98af71a1ab73aaedb55b6b0",
+    "bytes": 41668
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/dining-table.glb",
+    "sha256": "efa7d14d15e583ddeded2b625af874696e24bbb8e98af71a1ab73aaedb55b6b0",
+    "bytes": 41668
+  }
+}

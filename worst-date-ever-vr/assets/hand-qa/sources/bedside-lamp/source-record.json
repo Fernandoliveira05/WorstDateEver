@@ -1,46 +1,58 @@
 {
-  "schema_version": "hand-qa-source/1",
+  "schema_version": "wde-source/1",
   "asset_id": "bedside-lamp",
-  "manifest_reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/08-bedside-lamp.png",
-  "source": {
-    "provider": "Grab3D",
-    "page": "https://grab3d.com/models/furniture/table-lamp/",
-    "slug": "table-lamp",
-    "category": "furniture",
-    "license": "CC0-1.0",
-    "download_url": "https://grab3d.com/dl/table-lamp/table-lamp.glb",
-    "license_url": "https://grab3d.com/dl/table-lamp/LICENSE.txt",
-    "manifest_url": "https://grab3d.com/dl/table-lamp/manifest.json"
+  "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/08-bedside-lamp.png",
+  "provider": "3dassets.dev",
+  "title": "Table Lamp Dome (Bedroom and Living Room Furniture)",
+  "page": "https://3dassets.dev/assets/bedroom-and-living-room-furniture-table-lamp-dome-0c974308",
+  "download": "https://cdn.3dassets.dev/assets/38799/v1/model.glb",
+  "pack": "bedroom-and-living-room-furniture",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
   },
-  "files": {
-    "source_glb": {
-      "path": "assets/hand-qa/sources/bedside-lamp/table-lamp.glb",
-      "sha256": "b3a1caad95f708f7d8469586ab74c6949ae48726318c9984a48333f65520f89b",
-      "bytes": 994120
+  "stats": {
+    "fileSize": 28884,
+    "triangles": 630,
+    "vertices": 1393,
+    "meshes": 3,
+    "materials": 3,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.1632000058889389,
+        0,
+        -0.16154643974143904
+      ],
+      "max": [
+        0.1632000058889389,
+        0.44999320928585934,
+        0.16154643974143904
+      ]
     },
-    "license": {
-      "path": "assets/hand-qa/sources/bedside-lamp/LICENSE.txt",
-      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
-      "bytes": 760
-    },
-    "publisher_manifest": {
-      "path": "assets/hand-qa/sources/bedside-lamp/publisher-manifest.json",
-      "sha256": "7f48e7f1ae90320a5b43456185f838fb5c4f259ae9bb5462f5135fb5b9e64933",
-      "bytes": 1331
-    }
+    "sizeMeters": [
+      0.326,
+      0.45,
+      0.323
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bedside-lamp/bedroom-and-living-room-furniture-table-lamp-dome-0c974308.glb",
+    "sha256": "f66836ccb5e1bc62dadc20fae5803d4c4f4233194aec4be5bc4eaa4537b62a98",
+    "bytes": 28884
   },
   "candidate": {
     "path": "assets/hand-qa/candidates/bedside-lamp.glb",
-    "sha256": "b3a1caad95f708f7d8469586ab74c6949ae48726318c9984a48333f65520f89b",
-    "bytes": 994120,
-    "adapted": false
-  },
-  "publisher": {
-    "triangles": 10220,
-    "texture_px": 2048,
-    "dimensions_m": "0.348 x 0.627 x 0.450",
-    "real_size": "table lamp, 0.45 m high, shade 0.34 m diameter, ceramic base 0.17 m",
-    "notes": "bulb is a separate unbaked emissive mesh; cream fabric shade with coral piping and visible inside; coral textile cord with inline switch"
-  },
-  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+    "sha256": "f66836ccb5e1bc62dadc20fae5803d4c4f4233194aec4be5bc4eaa4537b62a98",
+    "bytes": 28884
+  }
 }

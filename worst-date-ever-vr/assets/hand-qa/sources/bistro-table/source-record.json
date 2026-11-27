@@ -1,0 +1,58 @@
+{
+  "schema_version": "wde-source/1",
+  "asset_id": "bistro-table",
+  "reference": "assets/tripo/references/wde-04-bistro-candidates/01-bistro-table.png",
+  "provider": "3dassets.dev",
+  "title": "Outdoor bistro table (Cafe, Bakery and Coffee Bar)",
+  "page": "https://3dassets.dev/assets/bakery-and-cafe-bistro-table-outdoor-813deda1",
+  "download": "https://cdn.3dassets.dev/assets/22214/v1/model.glb",
+  "pack": "bakery-and-cafe",
+  "license": {
+    "slug": "cc0-1.0",
+    "name": "CC0 1.0 Universal",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attributionRequired": false
+  },
+  "stats": {
+    "fileSize": 51332,
+    "triangles": 1032,
+    "vertices": 3096,
+    "meshes": 2,
+    "materials": 2,
+    "textures": 0,
+    "animations": [],
+    "boundingBox": {
+      "min": [
+        -0.300017742233586,
+        0,
+        -0.29696795044483165
+      ],
+      "max": [
+        0.300017742233586,
+        0.7241487503051758,
+        0.29696795044483165
+      ]
+    },
+    "sizeMeters": [
+      0.6,
+      0.724,
+      0.594
+    ],
+    "hasDraco": false,
+    "hasMeshopt": false,
+    "hasKTX2": false,
+    "extensionsUsed": [
+      "KHR_mesh_quantization"
+    ]
+  },
+  "source_glb": {
+    "path": "assets/hand-qa/sources/bistro-table/bakery-and-cafe-bistro-table-outdoor-813deda1.glb",
+    "sha256": "253218e4f50ab43dbb47a193bcafb4d30faa1368198dd43dc80cd89723e0db7f",
+    "bytes": 51332
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/bistro-table.glb",
+    "sha256": "253218e4f50ab43dbb47a193bcafb4d30faa1368198dd43dc80cd89723e0db7f",
+    "bytes": 51332
+  }
+}
