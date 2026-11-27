@@ -1,5 +1,6 @@
 export function createNpcAnimation(THREE, actor, bones) {
-  const overlays = [bones.Head, bones.UpperArmL, bones.UpperArmR, bones.LowerArmL, bones.LowerArmR]
+  const overlays = [bones.Head, bones.Jaw, bones.Spine, bones.Chest,
+    bones.UpperArmL, bones.UpperArmR, bones.LowerArmL, bones.LowerArmR]
     .filter(Boolean).map(bone => [bone, bone.quaternion.clone()]);
   let saved = false;
 
@@ -10,8 +11,24 @@ export function createNpcAnimation(THREE, actor, bones) {
   }
 
   function capture() {
+    if (saved) return;
     for (const [bone, rotation] of overlays) rotation.copy(bone.quaternion);
     saved = true;
+  }
+
+  function mood(relationship, intent, emotion) {
+    const caution = THREE.MathUtils.clamp(Math.max(
+      (45 - relationship.patience) / 30,
+      (55 - relationship.safety) / 45,
+      intent === 'boundary' ? .55 : 0,
+      emotion === 'annoyed' ? .45 : 0
+    ), 0, 1);
+    if (!caution) return;
+    capture();
+    bones.Head?.rotateY(.19 * caution);
+    bones.Head?.rotateZ(.035 * caution);
+    bones.UpperArmL?.rotateX(-.045 * caution);
+    bones.UpperArmR?.rotateX(-.045 * caution);
   }
 
   function aim(bone, child, direction, blend) {
@@ -53,9 +70,10 @@ export function createNpcAnimation(THREE, actor, bones) {
     capture();
     const head = bones.Head;
     if (head) {
-      const tilt = { nod: [.17 * wave,0,0], laugh: [.13 + .06 * wave,0,.08],
-        look_away: [0,.44,.14], wave: [0,.07,.05], sip: [-.1,0,0],
-        shrug: [.04,.12,.17], impact: [-.23,.26 * direction,.31 * direction] }[kind];
+      const tilt = { nod: [.17 * wave,0,0], laugh: [.13 + .06 * wave,0,.08], startle: [-.16,.13,-.08],
+        look_away: [0,.44,.14], wave: [0,.07,.05], sip: [-.1,0,0], eat: [-.11 + .025 * wave,0,0],
+        shrug: [.04,.12,.17], reach: [-.08,0,.02], clap: [.08 * wave,0,.06 * wave],
+        impact: [-.23,.26 * direction,.31 * direction] }[kind];
       if (tilt) {
         head.rotateX(tilt[0] * fade);
         head.rotateY(tilt[1] * fade);
@@ -63,7 +81,29 @@ export function createNpcAnimation(THREE, actor, bones) {
       }
     }
     const world = vector => vector.applyQuaternion(actor.getWorldQuaternion(new THREE.Quaternion()));
-    if (kind === 'wave' && bones.UpperArmR) {
+    if (kind === 'startle') {
+      for (const side of ['L','R']) {
+        const shoulder = bones['UpperArm'+side];
+        if (!shoulder) continue;
+        poseArm(side, shoulder.getWorldPosition(new THREE.Vector3())
+          .add(world(new THREE.Vector3(side === 'L' ? .16 : -.16,.08,.27))), fade * .7);
+      }
+    } else if (kind === 'reach' && bones.UpperArmR) {
+      const target = bones.UpperArmR.getWorldPosition(new THREE.Vector3())
+        .add(world(new THREE.Vector3(-.12,.03,.43)));
+      poseArm('R', target, fade);
+    } else if (kind === 'eat' && head) {
+      poseArm('R', head.getWorldPosition(new THREE.Vector3())
+        .add(world(new THREE.Vector3(-.035,-.11,.17))), fade * .78);
+      bones.Jaw?.rotateX(.045 * Math.max(0, Math.sin(age * 13)) * fade);
+    } else if (kind === 'clap') {
+      for (const side of ['L','R']) {
+        const shoulder = bones['UpperArm'+side];
+        if (!shoulder) continue;
+        poseArm(side, shoulder.getWorldPosition(new THREE.Vector3())
+          .add(world(new THREE.Vector3(side === 'L' ? .16 : -.16,.17,.34 + .035 * wave))), fade);
+      }
+    } else if (kind === 'wave' && bones.UpperArmR) {
       const target = bones.UpperArmR.getWorldPosition(new THREE.Vector3())
         .add(world(new THREE.Vector3(-.17 + wave * .085,.32,.17)));
       poseArm('R', target, fade);
@@ -79,5 +119,27 @@ export function createNpcAnimation(THREE, actor, bones) {
     }
   }
 
-  return { reset, gesture };
+  function dance(age, amount = .6, stumble = 0) {
+    capture();
+    const pulse = Math.sin(age * Math.PI * 2 / .69);
+    const opposite = Math.sin(age * Math.PI * 2 / .69 + Math.PI);
+    const energy = Math.max(.12, amount * (1 - stumble * .48));
+    bones.Spine?.rotateZ(pulse * .055 * energy);
+    bones.Spine?.rotateY(opposite * .07 * energy);
+    bones.Chest?.rotateX(Math.abs(pulse) * .04 * energy - stumble * .055);
+    bones.Head?.rotateZ(opposite * .065 * energy + stumble * .035);
+    bones.Head?.rotateX(Math.abs(pulse) * .035 * energy);
+    const world = vector => vector.applyQuaternion(actor.getWorldQuaternion(new THREE.Quaternion()));
+    for (const side of ['L','R']) {
+      const shoulder = bones['UpperArm'+side];
+      if (!shoulder) continue;
+      const phase = side === 'L' ? pulse : opposite;
+      poseArm(side, shoulder.getWorldPosition(new THREE.Vector3())
+        .add(world(new THREE.Vector3(side === 'L' ? .18 : -.18,
+          .06 + Math.max(0, phase) * .19 * energy - stumble * .08,
+          .31 + Math.max(0, phase) * .09))), .55 + energy * .30);
+    }
+  }
+
+  return { reset, gesture, dance, mood };
 }
