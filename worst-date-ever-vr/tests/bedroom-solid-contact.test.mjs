@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Quaternion, Vector3 } from 'three';
-import { Body, Box, Vec3, World } from '../vendor/cannon-es/dist/cannon-es.js';
+import { Body, Box, Vec3, World } from 'cannon-es';
 import { createSolidContact } from '../src/bedroom-solid-contact.js';
 
 function box(world, x, y, z, half, type) {

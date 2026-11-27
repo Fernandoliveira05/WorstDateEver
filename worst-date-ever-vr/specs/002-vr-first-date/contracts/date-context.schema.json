@@ -81,6 +81,7 @@
                   "enum": [
                     "announce",
                     "animate",
+                    "qte",
                     "choice_window",
                     "resolve",
                     "cooldown"
@@ -123,6 +124,7 @@
                 "enum": [
                   "seated",
                   "walking",
+                  "leaving",
                   "away",
                   "restroom",
                   "eating",
@@ -153,6 +155,16 @@
                 "maximum": 90
               }
             }
+          }
+        },
+        "menu": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["page", "held"],
+          "properties": {
+            "page": { "type": "integer", "minimum": 0 },
+            "held": { "type": "boolean" },
+            "waiterNearby": { "type": "boolean" }
           }
         },
         "held": {

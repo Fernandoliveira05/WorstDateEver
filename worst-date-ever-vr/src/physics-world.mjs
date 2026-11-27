@@ -1,4 +1,4 @@
-import * as CANNON from '../vendor/cannon-es/dist/cannon-es.js';
+import * as CANNON from 'cannon-es';
 
 export const PHYSICS_STEP = 1 / 90;
 export const MAX_SUB_STEPS = 4;

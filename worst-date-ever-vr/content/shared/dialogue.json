@@ -1,14 +1,110 @@
 {
   "choices": [
-    {"id":"honest","label":"Confessar o nervosismo","delta":[6,-4,3,0],"gesture":"nod"},
-    {"id":"joke","label":"Fazer uma piada","delta":[3,1,1,0],"gesture":"laugh"},
-    {"id":"brag","label":"Tentar impressionar","delta":[-5,8,-7,0],"gesture":"look_away"}
+    {"id":"honest","label":"Responder com sinceridade","delta":[9,-6,5,2],"gesture":"nod"},
+    {"id":"joke","label":"Levar com bom humor","delta":[6,-2,3,1],"gesture":"laugh"},
+    {"id":"brag","label":"Tentar impressionar","delta":[-8,10,-9,-4],"gesture":"look_away"}
   ],
-  "lines": [
-    {"id":"caio","honest":"Ainda bem. Eu trouxe um livro pra parecer ocupado.","joke":"Vou citar essa piada como se fosse do Sartre.","brag":"Interessante. Você sempre fala de si na terceira pessoa?"},
-    {"id":"rafa","honest":"Eu também. Dei três voltas no quarteirão antes de entrar.","joke":"Essa foi boa. Vou contar no grupo e dizer que foi minha.","brag":"Putz. Por um segundo achei que eu tinha entrado numa reunião de vendas."},
-    {"id":"bia","honest":"Obrigada por falar. Eu ensaiei até o meu jeito de sentar.","joke":"Pronto. Agora eu tenho uma história boa pra contar amanhã.","brag":"Vou te dar uns segundos pra ouvir o que você acabou de dizer."},
-    {"id":"luiza","honest":"Relaxa. No primeiro rodeio eu também quase desisti na porteira.","joke":"Essa eu vou contar no churrasco. Com crédito, talvez.","brag":"Bonito o discurso. Você ensaiou ou saiu no susto?"}
+  "conversations": [
+    {
+      "id":"caio",
+      "turns":[
+        {"options":[
+          {"id":"honest","label":"“Quero conversar. Só estou um pouco nervoso.”","reply":"Ainda bem que você falou. Eu trouxe um livro só pra parecer ocupado. O que você anda lendo?"},
+          {"id":"joke","label":"“Depende. O cardápio conta como livro?”","reply":"Conta, mas só se tiver um bom plot twist na sobremesa. O que prende sua atenção ultimamente?"},
+          {"id":"brag","label":"“Leio muito. Minha estante ocupa uma parede inteira.”","reply":"Uma parede inteira é bastante cenário. Qual desses livros você realmente releria?"}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Ultimamente, releio mais mensagens antigas.”","reply":"Isso foi específico demais pra ser só uma resposta. Seu fim de semana também costuma ser assim, meio nostálgico?"},
+          {"id":"joke","label":"“Ainda estou preso no capítulo da sobremesa.”","reply":"Persistente. Eu respeito. E fora daqui, o que você faz quando quer desligar a cabeça?"},
+          {"id":"brag","label":"“Filosofia, política, ficção... leio de tudo.”","reply":"Você acabou de organizar uma livraria inteira em três palavras. Mas o que você faz quando não está tentando produzir?"}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Caminho sem rumo e deixo o celular no bolso.”","reply":"Isso parece simples e ótimo. Talvez eu precise aprender a ficar em silêncio sem transformar tudo em tese."},
+          {"id":"joke","label":"“Finjo que vou caminhar e acabo procurando comida.”","reply":"Finalmente uma corrente filosófica que eu consigo seguir. Ainda mais se terminar em pão de queijo."},
+          {"id":"brag","label":"“Sempre tenho algum projeto importante acontecendo.”","reply":"Você sabe que pode descansar aqui, né? Não precisa me entregar um currículo no primeiro encontro."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Estou gostando de conversar sem precisar fingir.”","reply":"Eu também. Quando ninguém tenta parecer brilhante, a conversa fica bem mais interessante."},
+          {"id":"joke","label":"“Até agora, zero citações obrigatórias. Excelente.”","reply":"Eu estava guardando uma do Sartre para a sobremesa, mas posso cancelar."},
+          {"id":"brag","label":"“Normalmente eu conduzo melhor esse tipo de conversa.”","reply":"Que bom que hoje você resolveu experimentar ouvir um pouco também."}
+        ]}
+      ]
+    },
+    {
+      "id":"rafa",
+      "turns":[
+        {"options":[
+          {"id":"honest","label":"“Também quase voltei pra casa no caminho.”","reply":"Sério? Eu dei três voltas no quarteirão antes de entrar. Primeiro encontro sempre te deixa assim?"},
+          {"id":"joke","label":"“O trânsito queria impedir nosso destino.”","reply":"Claramente o universo tem alguma coisa contra aplicativo de namoro. Como você costuma relaxar depois de um dia desses?"},
+          {"id":"brag","label":"“Com meu carro eu teria chegado bem mais rápido.”","reply":"Putz. Por um segundo achei que eu tinha entrado numa conversa de concessionária. O que você faz pra desligar?"}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Música alta e um tempo sem falar com ninguém.”","reply":"Entendo demais. Eu faço uma playlist e digo que é pra academia. Quase nunca é. Qual música te entrega?"},
+          {"id":"joke","label":"“Reclamo por cinco minutos e chamo isso de terapia.”","reply":"Eu faço dez e cobro de mim mesmo. Mas funciona. O que mais te faz rir de verdade?"},
+          {"id":"brag","label":"“Eu não paro. Sempre estou fazendo alguma coisa.”","reply":"Isso parece menos energia e mais fuga com agenda cheia. Você consegue ter um sábado sem plano?"}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Consigo, mas bate culpa por não produzir.”","reply":"Nossa, sim. Eu finjo que descanso e fico conferindo notificação. Pelo menos hoje eu consegui guardar o celular."},
+          {"id":"joke","label":"“Meu grande plano é escolher onde pedir comida.”","reply":"Decisão de alto risco. Se escolher mal, perde a noite inteira. Até agora sua escolha de lugar foi boa."},
+          {"id":"brag","label":"“Meu sábado costuma estar lotado de compromissos.”","reply":"Você fala da agenda como se ela fosse uma pessoa importante. Espero que ela não fique com ciúme desse encontro."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Estou mais à vontade agora do que quando cheguei.”","reply":"Eu também. O trânsito já parece uma desculpa de outra vida."},
+          {"id":"joke","label":"“Sobrevivemos ao trânsito e à conversa inicial.”","reply":"Uma dupla invencível. Agora só falta sobreviver à conta."},
+          {"id":"brag","label":"“Eu sabia que conseguiria deixar o encontro interessante.”","reply":"Você quase conseguiu dizer isso sem estragar o momento. Quase."}
+        ]}
+      ]
+    },
+    {
+      "id":"bia",
+      "turns":[
+        {"options":[
+          {"id":"honest","label":"“Eu ensaiei o que dizer e esqueci tudo agora.”","reply":"Obrigada por admitir. Eu ensaiei até o jeito de sentar. O que você queria ter dito primeiro?"},
+          {"id":"joke","label":"“Minha melhor qualidade é escolher lugares bonitinhos.”","reply":"Essa foi boa. Vou avaliar a comida antes de confirmar sua melhor qualidade. O que mais eu deveria saber?"},
+          {"id":"brag","label":"“É difícil resumir. Eu tenho muita coisa acontecendo.”","reply":"Vou te dar alguns segundos pra ouvir o que acabou de dizer. Me conta uma coisa real, então."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Eu fico inseguro quando quero causar boa impressão.”","reply":"Isso é bem mais interessante do que uma lista de qualidades. Eu também reparo em cada detalhe quando estou nervosa."},
+          {"id":"joke","label":"“Eu sempre derrubo alguma coisa em encontros.”","reply":"Ótimo, agora vou vigiar esse copo a noite inteira. Qual foi seu pior desastre até hoje?"},
+          {"id":"brag","label":"“Normalmente as pessoas ficam impressionadas rápido.”","reply":"Talvez elas só não tenham encontrado uma pausa pra responder. Aqui você pode respirar."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Uma vez chamei a pessoa pelo nome errado.”","reply":"Não! Isso é terrível. E perfeito. Agora qualquer coisa que acontecer hoje vai parecer pequena."},
+          {"id":"joke","label":"“Ainda não aconteceu. Talvez seja este.”","reply":"Pronto, agora eu tenho uma história boa mesmo antes da sobremesa. Gosto do seu comprometimento com o caos."},
+          {"id":"brag","label":"“Nunca tive um encontro realmente ruim.”","reply":"Essa confiança toda praticamente convocou o desastre. Eu não diria isso perto do garçom."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Estou gostando porque não preciso parecer perfeito.”","reply":"Ainda bem. Perfeição rende foto; conversa boa precisa de um pouco de bagunça."},
+          {"id":"joke","label":"“A nota do encontro subiu depois da história vergonhosa.”","reply":"Sabia. Humilhação bem contada é praticamente uma linguagem do amor."},
+          {"id":"brag","label":"“Acho que estou indo muito bem até agora.”","reply":"Você estava, até decidir fazer a própria avaliação em voz alta."}
+        ]}
+      ]
+    },
+    {
+      "id":"luiza",
+      "turns":[
+        {"options":[
+          {"id":"honest","label":"“Eu estava nervoso, então nem pensei no pedido.”","reply":"Relaxa. Já quase desisti de entrar em lugar muito mais assustador. O que você pediria sem pensar duas vezes?"},
+          {"id":"joke","label":"“Algo que não exija elegância para comer.”","reply":"Boa regra. Se sujar a roupa, a gente finge que faz parte da experiência. Você cozinha alguma coisa?"},
+          {"id":"brag","label":"“Pode escolher. Eu conheço bastante de comida.”","reply":"Bonito o discurso. Então quero ver você escolher sem transformar o cardápio numa palestra."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Faço uma receita só, mas faço com carinho.”","reply":"Uma receita boa já resolve muita coisa. Lá em casa todo mundo cozinha junto e ninguém segue a medida certa."},
+          {"id":"joke","label":"“Se esquentar comida conta, sou especialista.”","reply":"Conta sim. Tem gente que consegue errar até nisso. Como é um domingo bom pra você?"},
+          {"id":"brag","label":"“Quando eu cozinho, sempre pedem a receita.”","reply":"Agora eu vou precisar provar antes de acreditar. O que você faz quando não está impressionando convidados?"}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Família, comida demorada e nenhuma pressa.”","reply":"Aí você falou minha língua. Domingo bom termina com todo mundo repetindo a mesma história e rindo igual."},
+          {"id":"joke","label":"“Dormir até esquecer que segunda-feira existe.”","reply":"Perfeito. Depois acorda, come de novo e volta a fingir que o calendário não manda em ninguém."},
+          {"id":"brag","label":"“Eu sempre arrumo algum programa melhor.”","reply":"Às vezes o programa melhor é justamente não precisar provar que está se divertindo."}
+        ]},
+        {"options":[
+          {"id":"honest","label":"“Estou gostando. Parece uma conversa de verdade.”","reply":"Também achei. Começou travado, mas agora está parecendo prosa depois de festa."},
+          {"id":"joke","label":"“Ainda dá tempo de fugir a cavalo?”","reply":"Dá, mas agora você vai ter que me levar junto. Eu já pedi comida."},
+          {"id":"brag","label":"“Eu costumo deixar uma ótima primeira impressão.”","reply":"Modéstia passou longe, mas pelo menos você falou olhando nos meus olhos."}
+        ]}
+      ]
+    }
   ],
   "beats": [
     {"id":"water_spill","line":"O garçom tentou servir água sem largar a bandeja.","cue":"Opa. A mesa também estava com sede.","prop":"cup","action":"help"},
@@ -16,7 +112,10 @@
     {"id":"loud_guest","line":"Um cliente dá uma gargalhada que atravessa o salão.","cue":"Dá pra ouvir a fofoca inteira daqui.","prop":"","action":""},
     {"id":"bathroom_mishap","line":"A porta do banheiro emperra com alguém do lado de dentro.","cue":"Você ouviu um pedido de socorro ou foi a descarga?","prop":"","action":""},
     {"id":"dropped_menu","line":"O cardápio escorrega para o chão.","cue":"Agora é torcer pra que o chão não peça sobremesa.","prop":"menu","action":"grab"},
-    {"id":"awkward_friend","line":"Uma pessoa acena para vocês da mesa ao lado.","cue":"Conhece essa pessoa? Tá acenando há um tempo.","prop":"","action":""}
+    {"id":"awkward_friend","personaId":"caio","line":"Um professor da escola reconhece Caio e vem cumprimentá-lo.","cue":"Ele parece conhecer uma versão do Caio que ainda não apareceu na conversa.","prop":"","action":""},
+    {"id":"awkward_friend","personaId":"rafa","line":"Um amigo de Rafa aparece no restaurante e o chama por um apelido antigo.","cue":"O amigo olha para vocês como se tivesse interrompido uma história importante.","prop":"","action":""},
+    {"id":"awkward_friend","personaId":"bia","line":"Uma conhecida reconhece Bia das redes sociais e se aproxima da mesa.","cue":"Bia sorri, mas parece tentar lembrar exatamente de onde conhece a pessoa.","prop":"","action":""},
+    {"id":"awkward_friend","personaId":"luiza","line":"Um amigo de Goiânia reconhece Luiza no bar e vem falar com ela.","cue":"Ele chega com intimidade suficiente para deixar várias histórias no ar.","prop":"","action":""}
   ],
   "outcomes": [
     {"id":"good","line":"Deu certo. Até sobrou assunto para outro encontro."},

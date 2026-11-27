@@ -45,6 +45,7 @@ export function createDateCoordinator(THREE, io) {
     try {
       const persona = personas.personas.find(person => person.id === payload.matchId);
       const venue = venues.venues.find(item => item.matchId === payload.matchId);
+      if (!persona || !venue) throw new Error('Não há personagem ou salão cadastrado para ' + payload.matchId + '.');
       attempt = [payload.matchId, payload.avatarGender, payload.preference, payload.substance].join(':');
       let checkpoint;
       try {
@@ -66,8 +67,9 @@ export function createDateCoordinator(THREE, io) {
       } };
     } catch (error) {
       if (pending === operation) {
-        console.error('Primeiro encontro', error);
-        io.show('O salão não abriu. Tente partir outra vez pelo celular.');
+        console.error('Primeiro encontro: falha ao preparar o salão.', error);
+        const detail = String(error?.message ?? error ?? 'erro desconhecido').slice(0, 140);
+        io.show('O salão não abriu (' + detail + '). Confira o console e tente novamente pelo celular.');
       }
     } finally { if (pending === operation) pending = null; }
   }
@@ -109,12 +111,19 @@ export function createDateCoordinator(THREE, io) {
       if (!fade.visible) cut = null;
     }
     if (stage && !cut) {
-      director.tick(dt, !voice.state().busy);
+      director.tick(dt, !voice.state().busy && !stage.isInteracting());
       const view = director.view();
       if (!view.canSpeak && voice.state().busy) voice.cancel();
       stage.tick(dt, view);
-      const key = [view.session.phase, view.session.turnSequence, view.beat?.phase, view.session.activeEventId,
-        view.session.completedEventIds.length, view.revision].join(':');
+      if (view.qteReactionPending && view.canSpeak && voice.state().ready && !voice.state().busy &&
+        voice.initiate(true)) director.markQteReacted();
+      else if (view.wantsInitiative && voice.state().ready && !voice.state().busy && !stage.isInteracting()) {
+        director.deferInitiative(10);
+        voice.initiate();
+      }
+      const updated = director.view();
+      const key = [updated.session.phase, updated.session.turnSequence, updated.beat?.phase,
+        updated.session.activeEventId, updated.session.completedEventIds.length, updated.revision].join(':');
       if (key !== previousCheckpoint) {
         previousCheckpoint = key;
         try { localStorage.setItem(draftKey, JSON.stringify({ attempt, snapshot: director.snapshot() })); }

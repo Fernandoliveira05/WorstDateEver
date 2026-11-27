@@ -1,4 +1,4 @@
-import { Box, Sphere } from '../vendor/cannon-es/dist/cannon-es.js';
+import { Box, Sphere } from 'cannon-es';
 
 // Hand basis: +X toward the thumb, +Z toward the wrist. +Y is palmar on
 // the right hand and dorsal on the left.

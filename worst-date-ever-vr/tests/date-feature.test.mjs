@@ -30,7 +30,7 @@ test('date can only talk after arrival + sit',()=>{
 });
 test('bounded relationship changes',()=>{
   let s=createDateSession(exit,'s');
-  assert.equal(applyApprovedDelta(s,{interest:10}).relationship.interest,60);
+  assert.equal(applyApprovedDelta(s,{interest:10}).relationship.interest,52);
   assert.throws(()=>applyApprovedDelta(s,{interest:999}));
 });
 test('seeded event selection is replayable and inactive before date arrives',()=>{
@@ -46,7 +46,7 @@ test('event resolution only accepts authored choices',()=>{
   const e={id:'water_spill',venueIds:['sushi'],choices:[{id:'help',contextSummary:'ajudou',relationshipDelta:{interest:2}}],summaryTemplate:'The player {choice}'};
   assert.throws(()=>resolveEvent(s,e,'attack'));
   const result=resolveEvent(s,e,'help');
-  assert.equal(result.session.relationship.interest,52);
+  assert.equal(result.session.relationship.interest,44);
   assert.equal(result.contextSummary,'The player ajudou');
   assert.throws(()=>resolveEvent(result.session,e,'help'));
 });

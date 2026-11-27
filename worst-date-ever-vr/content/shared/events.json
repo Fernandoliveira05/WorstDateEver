@@ -4,6 +4,9 @@
     {
       "id": "water_spill",
       "category": "major",
+      "visual": "water_spill",
+      "minElapsedSeconds": 70,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -11,33 +14,34 @@
         "bar"
       ],
       "weight": 3,
-      "cooldownSeconds": 45,
+      "cooldownSeconds": 120,
       "prerequisites": [
         "date_seated"
       ],
       "choices": [
         {
           "id": "help",
-          "label": "Ajudar o garçom",
+          "label": "Segurar o copo",
           "relationshipDelta": {
-            "interest": 2,
-            "awkwardness": -1
+            "interest": 6,
+            "awkwardness": -3
           },
-          "contextSummary": "ajudou a limpar"
+          "contextSummary": "segurou o copo antes que a água caísse"
         },
         {
-          "id": "laugh",
-          "label": "Rir do acidente",
+          "id": "protect",
+          "label": "Proteger o date",
           "relationshipDelta": {
-            "awkwardness": 2
+            "interest": 4,
+            "safety": 4
           },
-          "contextSummary": "riu do acidente"
+          "contextSummary": "protegeu o date enquanto a água caiu na mesa"
         },
         {
           "id": "ignore",
-          "label": "Fingir que não viu",
-          "relationshipDelta": {},
-          "contextSummary": "ignorou a situação"
+          "label": "Não fazer nada",
+          "relationshipDelta": { "interest": -4, "awkwardness": 5, "safety": -3 },
+          "contextSummary": "não reagiu e a água respingou no date"
         }
       ],
       "summaryTemplate": "O garçom derrubou água perto da mesa, e o jogador {choice}."
@@ -45,6 +49,10 @@
     {
       "id": "wrong_order",
       "category": "minor",
+      "visual": "wrong_order",
+      "personaIds": ["rafa", "bia"],
+      "minElapsedSeconds": 65,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -52,7 +60,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 105,
       "prerequisites": [
         "date_seated"
       ],
@@ -61,7 +69,8 @@
           "id": "clarify",
           "label": "Avisar com educação",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 4,
+            "patience": 2
           },
           "contextSummary": "corrigiu o pedido gentilmente"
         },
@@ -69,7 +78,7 @@
           "id": "accept",
           "label": "Aceitar o pedido errado",
           "relationshipDelta": {
-            "awkwardness": 1
+            "awkwardness": 3
           },
           "contextSummary": "aceitou o pedido errado"
         }
@@ -79,6 +88,11 @@
     {
       "id": "loud_guest",
       "category": "minor",
+      "visual": "loud_guest",
+      "personaIds": ["luiza", "rafa"],
+      "minElapsedSeconds": 75,
+      "minConversationTurns": 2,
+      "relationshipCondition": { "patience": { "min": 30 } },
       "venueIds": [
         "cafe",
         "sushi",
@@ -86,7 +100,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 100,
       "prerequisites": [
         "date_seated"
       ],
@@ -95,14 +109,15 @@
           "id": "joke",
           "label": "Fazer piada",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 4,
+            "awkwardness": -2
           },
           "contextSummary": "fez uma piada sobre o barulho"
         },
         {
           "id": "ignore",
           "label": "Continuar conversando",
-          "relationshipDelta": {},
+          "relationshipDelta": { "interest": 2 },
           "contextSummary": "continuou a conversa"
         }
       ],
@@ -111,6 +126,10 @@
     {
       "id": "bathroom_mishap",
       "category": "minor",
+      "visual": "bathroom_mishap",
+      "personaIds": ["caio", "bia"],
+      "minElapsedSeconds": 80,
+      "minConversationTurns": 2,
       "venueIds": [
         "cafe",
         "sushi",
@@ -118,7 +137,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 110,
       "prerequisites": [
         "date_seated"
       ],
@@ -127,14 +146,15 @@
           "id": "help",
           "label": "Segurar a porta",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "safety": 3
           },
           "contextSummary": "segurou a porta do banheiro"
         },
         {
           "id": "ignore",
           "label": "Não se envolver",
-          "relationshipDelta": {},
+          "relationshipDelta": { "interest": -2, "awkwardness": 3 },
           "contextSummary": "não se envolveu"
         }
       ],
@@ -143,6 +163,9 @@
     {
       "id": "dropped_menu",
       "category": "minor",
+      "visual": "dropped_menu",
+      "minElapsedSeconds": 60,
+      "minConversationTurns": 1,
       "venueIds": [
         "cafe",
         "sushi",
@@ -150,7 +173,7 @@
         "bar"
       ],
       "weight": 2,
-      "cooldownSeconds": 20,
+      "cooldownSeconds": 95,
       "prerequisites": [
         "date_seated"
       ],
@@ -159,7 +182,8 @@
           "id": "grab",
           "label": "Pegar o cardápio",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "awkwardness": -3
           },
           "contextSummary": "pegou o cardápio"
         },
@@ -167,7 +191,8 @@
           "id": "ignore",
           "label": "Deixar cair",
           "relationshipDelta": {
-            "awkwardness": 1
+            "interest": -3,
+            "awkwardness": 4
           },
           "contextSummary": "deixou o cardápio no chão"
         }
@@ -177,6 +202,11 @@
     {
       "id": "awkward_friend",
       "category": "major",
+      "visual": "awkward_friend",
+      "minElapsedSeconds": 85,
+      "minConversationTurns": 2,
+      "relationshipCondition": { "safety": { "min": 50 } },
+      "blockedAfterActions": ["impact_hard"],
       "venueIds": [
         "cafe",
         "sushi",
@@ -184,7 +214,7 @@
         "bar"
       ],
       "weight": 1,
-      "cooldownSeconds": 45,
+      "cooldownSeconds": 135,
       "prerequisites": [
         "date_seated"
       ],
@@ -193,7 +223,8 @@
           "id": "introduce",
           "label": "Apresentar a pessoa",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "awkwardness": -2
           },
           "contextSummary": "apresentou a pessoa"
         },
@@ -201,7 +232,8 @@
           "id": "change_topic",
           "label": "Mudar de assunto",
           "relationshipDelta": {
-            "awkwardness": 2
+            "interest": -3,
+            "awkwardness": 5
           },
           "contextSummary": "mudou de assunto"
         }

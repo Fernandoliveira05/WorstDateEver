@@ -1,5 +1,5 @@
 import { Quaternion, Ray, Vector3, Box3 } from 'three';
-import * as CANNON from '../vendor/cannon-es/dist/cannon-es.js';
+import * as CANNON from 'cannon-es';
 
 const basis = [new Vector3(1, 0, 0), new Vector3(0, 1, 0), new Vector3(0, 0, 1)];
 const colliderMargin = .0012;

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "spreads": [
+    { "id": "starters-drinks", "categories": ["starters", "drinks"] },
+    { "id": "mains-desserts", "categories": ["mains", "desserts"] }
+  ],
+  "venues": {
+    "cafe": [
+      { "id": "cafe-pao-queijo", "category": "starters", "name": "Pão de queijo", "description": "Quentinho, com requeijão da casa.", "aliases": ["pão de queijo", "pao de queijo"] },
+      { "id": "cafe-torrada", "category": "starters", "name": "Torrada de cogumelos", "description": "Cogumelos, ervas e pão tostado.", "aliases": ["torrada de cogumelos", "cogumelos"] },
+      { "id": "cafe-kombucha", "category": "drinks", "name": "Kombucha da casa", "description": "Gengibre e frutas vermelhas.", "aliases": ["kombucha", "kombucha da casa"] },
+      { "id": "cafe-cafe-gelado", "category": "drinks", "name": "Café gelado", "description": "Café coado, leite e gelo.", "aliases": ["café gelado", "cafe gelado"] },
+      { "id": "cafe-tostada", "category": "mains", "name": "Tostada de abacate", "description": "Abacate, tomate e limão.", "aliases": ["tostada de abacate", "abacate"] },
+      { "id": "cafe-quiche", "category": "mains", "name": "Quiche de alho-poró", "description": "Fatia da casa com salada.", "aliases": ["quiche", "quiche de alho-poró", "quiche de alho poro"] },
+      { "id": "cafe-bolo", "category": "desserts", "name": "Bolo de cenoura", "description": "Cobertura de chocolate meio amargo.", "aliases": ["bolo de cenoura"] },
+      { "id": "cafe-torta", "category": "desserts", "name": "Torta de limão", "description": "Creme cítrico e merengue.", "aliases": ["torta de limão", "torta de limao"] }
+    ],
+    "sushi": [
+      { "id": "sushi-edamame", "category": "starters", "name": "Edamame", "description": "Vagens mornas com sal marinho.", "aliases": ["edamame"] },
+      { "id": "sushi-sunomono", "category": "starters", "name": "Sunomono", "description": "Pepino, gergelim e molho suave.", "aliases": ["sunomono"] },
+      { "id": "sushi-cha-verde", "category": "drinks", "name": "Chá verde gelado", "description": "Leve e sem açúcar.", "aliases": ["chá verde", "cha verde"] },
+      { "id": "sushi-limonada", "category": "drinks", "name": "Limonada de yuzu", "description": "Cítrica, com um toque floral.", "aliases": ["limonada de yuzu", "yuzu"] },
+      { "id": "sushi-omakase", "category": "mains", "name": "Omakase da noite", "description": "Seleção do chef, 12 peças.", "aliases": ["omakase", "omakase da noite"] },
+      { "id": "sushi-combinado", "category": "mains", "name": "Combinado clássico", "description": "Salmão, atum e opções vegetarianas.", "aliases": ["combinado clássico", "combinado classico", "combinado"] },
+      { "id": "sushi-mochi", "category": "desserts", "name": "Mochi de morango", "description": "Duas unidades geladas.", "aliases": ["mochi", "mochi de morango"] },
+      { "id": "sushi-tempura-doce", "category": "desserts", "name": "Banana tempurá", "description": "Banana quente e sorvete.", "aliases": ["banana tempurá", "banana tempura"] }
+    ],
+    "bistro": [
+      { "id": "bistro-bruschetta", "category": "starters", "name": "Bruschetta da casa", "description": "Tomate, manjericão e pão tostado.", "aliases": ["bruschetta", "bruschetta da casa"] },
+      { "id": "bistro-caprese", "category": "starters", "name": "Caprese pequena", "description": "Tomate, muçarela e manjericão.", "aliases": ["caprese", "caprese pequena"] },
+      { "id": "bistro-limonada", "category": "drinks", "name": "Limonada artesanal", "description": "Limão siciliano e água com gás.", "aliases": ["limonada", "limonada artesanal"] },
+      { "id": "bistro-cha", "category": "drinks", "name": "Chá de hibisco", "description": "Gelado, com laranja.", "aliases": ["chá de hibisco", "cha de hibisco", "hibisco"] },
+      { "id": "bistro-risoto", "category": "mains", "name": "Risoto de cogumelos", "description": "Parmesão, ervas e cogumelos.", "aliases": ["risoto", "risoto de cogumelos"] },
+      { "id": "bistro-massa", "category": "mains", "name": "Nhoque ao sugo", "description": "Nhoque de batata e molho da casa.", "aliases": ["nhoque", "nhoque ao sugo"] },
+      { "id": "bistro-tiramisu", "category": "desserts", "name": "Tiramisù", "description": "Café, cacau e creme leve.", "aliases": ["tiramisu", "tiramisù"] },
+      { "id": "bistro-panna", "category": "desserts", "name": "Panna cotta", "description": "Baunilha e calda de frutas.", "aliases": ["panna cotta"] }
+    ],
+    "bar": [
+      { "id": "bar-mandioca", "category": "starters", "name": "Mandioca crocante", "description": "Com molho de ervas.", "aliases": ["mandioca", "mandioca crocante"] },
+      { "id": "bar-pastel", "category": "starters", "name": "Pastel de queijo", "description": "Três unidades, massa fina.", "aliases": ["pastel", "pastel de queijo"] },
+      { "id": "bar-cerveja", "category": "drinks", "name": "Cerveja da casa", "description": "Pilsen, bem gelada.", "aliases": ["cerveja", "cerveja da casa"] },
+      { "id": "bar-soda", "category": "drinks", "name": "Soda de limão", "description": "Sem álcool, com hortelã.", "aliases": ["soda", "soda de limão", "soda de limao"] },
+      { "id": "bar-espetinho", "category": "mains", "name": "Espetinho misto", "description": "Carne, cebola e farofa.", "aliases": ["espetinho", "espetinho misto"] },
+      { "id": "bar-queijo-coalho", "category": "mains", "name": "Queijo coalho", "description": "Grelhado com melaço suave.", "aliases": ["queijo coalho"] },
+      { "id": "bar-pudim", "category": "desserts", "name": "Pudim de leite", "description": "Calda de caramelo da casa.", "aliases": ["pudim", "pudim de leite"] },
+      { "id": "bar-doce-leite", "category": "desserts", "name": "Doce de leite", "description": "Com queijo meia-cura.", "aliases": ["doce de leite"] }
+    ]
+  },
+  "categoryLabels": { "starters": "Entradas", "drinks": "Bebidas", "mains": "Pratos", "desserts": "Sobremesas" }
+}
