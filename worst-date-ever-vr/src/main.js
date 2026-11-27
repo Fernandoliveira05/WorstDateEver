@@ -105,6 +105,9 @@ function setup(scene, root, data, benchmark) {
   const look = camera.components['look-controls'];
   let narrationUntil = 0;
   let elapsed = 0;
+  const skillKeys = { left: false, right: false, up: false, down: false };
+  const danceHands = { left: false, right: false };
+  const danceCuts = { up: false, down: false, left: false, right: false };
   let immersive = false;
   let desktopGesture;
   let desktopMenuPress;
@@ -817,12 +820,23 @@ function setup(scene, root, data, benchmark) {
           grabbed = pressAt(id, true, grip.orientation);
         if (grabbed) control.action = 1;
       } else if (pressed[0] && !previous[0]) {
-        if (!activateXrMenu(menuHit)) {
+        if (activateXrMenu(menuHit)) {
+          control.action = 0;
+        } else if (venue?.skillPlaying() && !venue.dancePlaying()) venue.skillInput(side);
+        else {
           const handPickup = !venue && !screenHit && source?.hand && aimedAtPickup();
           if (screenHit ? pressPhoneRay(id, screenHit) : pressAt(id, Boolean(handPickup), grip.orientation))
             control.action = 0;
         }
       }
+      if (venue?.dancePlaying() && grip) {
+        const previousGrip = control.skillGripPosition;
+        if (pressed[0] && previous[0] && previousGrip) {
+          const delta = grip.position.clone().sub(previousGrip);
+          venue.skillSlash(side, delta.x, delta.y, delta.z);
+        }
+        control.skillGripPosition = grip.position.clone();
+      } else control.skillGripPosition = null;
     }
     control.buttons = pressed;
     if (venue) {
@@ -854,10 +868,10 @@ function setup(scene, root, data, benchmark) {
     }
     if (side === 'right' && venue) {
       const held = Boolean(gamepad?.buttons[4]?.pressed);
-      if (held && !control.voiceHeld) date.voice().toggle();
+      if (held && !control.voiceHeld && !venue.isInteracting()) date.voice().toggle();
       control.voiceHeld = held;
       const gestureHeld = Boolean(gamepad?.buttons[5]?.pressed);
-      if (gestureHeld && !control.gestureHeld) {
+      if (gestureHeld && !control.gestureHeld && !venue.isInteracting()) {
         middleFingerUntil = elapsed + 1.25;
         date.voice().choose('middle_finger');
       }
@@ -1078,8 +1092,12 @@ function setup(scene, root, data, benchmark) {
     } else if (Math.abs(turn) < .26) snapHeld = false;
   }
 
+  let seatedSkillTime;
   function seatedInput(stage) {
     handPose.update();
+    stage.skillAxis(controls.left.stick.x, controls.left.stick.y,
+      Math.min(.05, Math.max(.001, elapsed - (seatedSkillTime ?? elapsed))));
+    seatedSkillTime = elapsed;
     for (const side of ['left', 'right']) {
       const hand = handPose.getHand(side);
       controllerInput(side, stage, !hand.active);
@@ -1135,22 +1153,51 @@ function setup(scene, root, data, benchmark) {
       const pan = context.createStereoPanner();
       const gain = context.createGain();
       const oscillator = context.createOscillator();
+      const filter = context.createBiquadFilter();
       const now = context.currentTime;
       const chime = kind === 'entrance';
+      const qteActive = Boolean(date?.getView()?.qte);
+      const qteCue = kind.startsWith('qte_');
+      const interactionCue = kind.startsWith('interaction_');
       const mint = kind === 'mint';
-      const level = mint ? (requestedReduced ? .012 : .026) : kind === 'ambience' || kind === 'step' ? .028 : .09;
+      const level = mint ? (requestedReduced ? .012 : .026) : qteCue ? kind === 'qte_start' ? .12 : .055 :
+        kind === 'interaction_pulse' ? .065 : kind === 'interaction_downbeat' ? .12 : interactionCue ? .075 :
+        (kind === 'ambience' || kind === 'step' ? .028 : .09) * (qteActive ? .36 : 1);
+      const duration = kind === 'qte_start' ? .82 : kind === 'qte_end' ? .42 :
+        kind === 'interaction_perfect' ? .34 : kind === 'interaction_combo' ? .40 :
+          kind === 'interaction_warning' ? .19 : kind === 'interaction_countdown' ? .14 :
+        kind === 'interaction_drop' ? .38 : kind === 'interaction_success' ? .4 : .25;
       pan.pan.value = THREE.MathUtils.clamp(offset.x / Math.max(offset.length(), .1), -1, 1);
-      oscillator.type = kind === 'ambience' ? 'triangle' : 'sine';
-      oscillator.frequency.setValueAtTime(mint ? 580 : chime ? 780 : kind === 'ambience' ? 190 : kind === 'step' ? 96 : 490, now);
-      oscillator.frequency.exponentialRampToValueAtTime(mint ? 463 : chime ? 520 : 135, now + .2);
+      oscillator.type = kind === 'ambience' || kind === 'qte_start' || kind === 'interaction_drop' ||
+        kind === 'interaction_warning' ? 'triangle' : 'sine';
+      oscillator.frequency.setValueAtTime(mint ? 580 : kind === 'qte_start' ? 230 : kind === 'qte_end' ? 360 :
+        kind === 'qte_tick' ? 620 : kind === 'interaction_clink' ? 1100 :
+        kind === 'interaction_drop' ? 320 : kind === 'interaction_hit' ? 700 :
+        kind === 'interaction_perfect' ? 960 : kind === 'interaction_combo' ? 740 :
+        kind === 'interaction_warning' ? 160 : kind === 'interaction_countdown' ? 520 :
+        kind === 'interaction_pulse' ? 118 : kind === 'interaction_downbeat' ? 88 :
+        kind === 'interaction_beat' ? 260 : kind === 'interaction_toss' ? 410 :
+        kind === 'interaction_success' ? 760 : kind === 'interaction_fail' ? 180 :
+        kind === 'interaction_bite' ? 420 : chime ? 780 : kind === 'ambience' ? 190 : kind === 'step' ? 96 : 490, now);
+      oscillator.frequency.exponentialRampToValueAtTime(mint ? 463 : kind === 'qte_start' ? 76 :
+        kind === 'qte_end' ? 690 : kind === 'qte_tick' ? 420 :
+        kind === 'interaction_clink' ? 700 : kind === 'interaction_success' ? 1180 :
+        kind === 'interaction_perfect' ? 1480 : kind === 'interaction_combo' ? 1120 :
+        kind === 'interaction_warning' ? 100 : kind === 'interaction_countdown' ? 380 :
+        kind === 'interaction_pulse' ? 72 : kind === 'interaction_downbeat' ? 48 :
+        kind === 'interaction_drop' || kind === 'interaction_fail' ? 85 :
+        kind === 'interaction_beat' ? 180 : kind === 'interaction_toss' ? 300 :
+        chime ? 520 : 135, now + duration);
+      filter.type = 'lowpass';
+      filter.frequency.value = qteActive && !qteCue ? 650 : 12000;
       gain.gain.setValueAtTime(.001, now);
       gain.gain.exponentialRampToValueAtTime(level / (1 + .15 * offset.length()), now + .03);
-      gain.gain.exponentialRampToValueAtTime(.001, now + .23);
-      oscillator.connect(gain).connect(pan).connect(context.destination);
+      gain.gain.exponentialRampToValueAtTime(.001, now + duration);
+      oscillator.connect(gain).connect(filter).connect(pan).connect(context.destination);
       echoRoomSound(context, pan, effect.echo);
       oscillator.start(now);
-      oscillator.stop(now + .25);
-      oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); pan.disconnect(); };
+      oscillator.stop(now + duration + .02);
+      oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); filter.disconnect(); pan.disconnect(); };
     } catch { /* The room is still playable with audio disabled. */ }
   }
 
@@ -1163,6 +1210,8 @@ function setup(scene, root, data, benchmark) {
     menuHover = null;
     date.tick(delta);
     if (date.active()) {
+      if (!immersive) date.active().skillAxis(Number(skillKeys.right) - Number(skillKeys.left),
+        Number(skillKeys.down) - Number(skillKeys.up), delta, false);
       venueMetrics?.collect(performance.now());
       if (immersive) {
         if (pendingSeat && scene.frame) { pendingSeat = false; date.recenter(); }
@@ -1170,8 +1219,8 @@ function setup(scene, root, data, benchmark) {
         seatedInput(date.active());
         const gaze = menu.gaze(viewer(), hasXRPointer(), delta);
         menu.hover(menuHover ?? gaze);
-        poseAvatar(delta);
       } else menu.follow(viewer(), false);
+      poseAvatar(delta);
       return;
     }
     if (immersive) moveXR(delta);
@@ -1238,6 +1287,11 @@ function setup(scene, root, data, benchmark) {
 
   function poseAvatar(delta) {
     const venue = date.active();
+    const menuHands = venue?.menuHands();
+    if (menuHands) {
+      avatar.tick(viewer(), menuHands, delta, true);
+      return;
+    }
     const poses = {}, rayTargets = {};
     for (const side of ['left', 'right']) {
       const current = controls[side].avatarPose;
@@ -1344,11 +1398,38 @@ function setup(scene, root, data, benchmark) {
   readButton.addEventListener('click', readPhone);
   document.getElementById('changeTime').addEventListener('click', phone.cycleWindow);
   window.addEventListener('keydown', event => {
-    if (event.defaultPrevented || event.repeat) return;
+    if (event.defaultPrevented) return;
+    const handKey = { KeyA: 'left', KeyD: 'right' }[event.code];
+    const cutKey = { KeyW: 'up', KeyS: 'down', ArrowUp: 'up', ArrowDown: 'down',
+      ArrowLeft: 'left', ArrowRight: 'right' }[event.code];
+    if (handKey) danceHands[handKey] = true;
+    if (cutKey) danceCuts[cutKey] = true;
+    if (date.active() && ['KeyA','ArrowLeft','KeyD','ArrowRight','KeyW','ArrowUp','KeyS','ArrowDown'].includes(event.code)) {
+      if (['KeyA','ArrowLeft'].includes(event.code)) skillKeys.left = true;
+      else if (['KeyD','ArrowRight'].includes(event.code)) skillKeys.right = true;
+      else if (['KeyW','ArrowUp'].includes(event.code)) skillKeys.up = true;
+      else skillKeys.down = true;
+    }
+    if (event.repeat) return;
     if (date.active()) {
+      if (['PageUp', 'PageDown'].includes(event.code) &&
+          date.active().turnMenuPage(event.code === 'PageDown' ? 1 : -1)) event.preventDefault();
+      if (date.getView()?.qte && ['Digit1','Digit2','Digit3'].includes(event.code)) {
+        const choice = date.getView().choices[Number(event.code.at(-1)) - 1];
+        if (choice) date.voice().choose(choice.id);
+      }
+      if (event.code === 'Escape' && date.active().isInteracting()) date.active().cancelInteraction();
+      if (event.code === 'Enter') date.active().skillConfirm();
+      if (event.code === 'KeyH') date.active().skillHelp();
+      if (date.active().dancePlaying?.() && (handKey || cutKey)) {
+        const side = danceHands.left ? 'left' : danceHands.right ? 'right' : null;
+        const cut = cutKey ?? (danceCuts.up ? 'up' : danceCuts.down ? 'down' :
+          danceCuts.left ? 'left' : danceCuts.right ? 'right' : null);
+        if (side && cut) date.active().skillInput(side, cut);
+      }
       if (event.code === 'KeyR') date.recenter();
-      if (event.code === 'KeyV') date.voice().toggle();
-      if (event.code === 'KeyG') date.voice().choose('middle_finger');
+      if (event.code === 'KeyV' && !date.active().isInteracting()) date.voice().toggle();
+      if (event.code === 'KeyG' && !date.active().isInteracting()) date.voice().choose('middle_finger');
       if (event.code === 'KeyT') date.active().replaySpeech();
       return;
     }
@@ -1362,8 +1443,20 @@ function setup(scene, root, data, benchmark) {
     if (event.code === 'KeyR') scenePhysics.recover(scenePhysics.props.get(data.phone.id));
     if (event.code === 'KeyQ') readPhone();
   });
+  window.addEventListener('keyup', event => {
+    const handKey = { KeyA: 'left', KeyD: 'right' }[event.code];
+    const cutKey = { KeyW: 'up', KeyS: 'down', ArrowUp: 'up', ArrowDown: 'down',
+      ArrowLeft: 'left', ArrowRight: 'right' }[event.code];
+    if (handKey) danceHands[handKey] = false;
+    if (cutKey) danceCuts[cutKey] = false;
+    if (['KeyA','ArrowLeft'].includes(event.code)) skillKeys.left = false;
+    if (['KeyD','ArrowRight'].includes(event.code)) skillKeys.right = false;
+    if (['KeyW','ArrowUp'].includes(event.code)) skillKeys.up = false;
+    if (['KeyS','ArrowDown'].includes(event.code)) skillKeys.down = false;
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
+      date.active()?.cancelInteraction();
       date.voice()?.cancel();
       phone.cancelSpeech();
       leavePhone();
@@ -1379,6 +1472,7 @@ function setup(scene, root, data, benchmark) {
     bedroomMaterial: prefix => [...prepared].find(material => material.name.startsWith(prefix) && material.map), show, announce: venueSound,
     reset: phone.reset, reducedEffects: () => requestedReduced,
     onGesture() { middleFingerUntil = elapsed + 1.25; },
+    isVr() { return immersive; },
     viewerPosition() { return viewer().getWorldPosition(new THREE.Vector3()); },
     viewerDirection() { return new THREE.Vector3(0, 0, -1).applyQuaternion(viewer().getWorldQuaternion(new THREE.Quaternion())); },
     change(stage) {

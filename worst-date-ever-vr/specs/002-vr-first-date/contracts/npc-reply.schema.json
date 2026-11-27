@@ -109,6 +109,11 @@
       "type": ["string", "null"],
       "maxLength": 64
     },
+    "orderItemId": {
+      "type": ["string", "null"],
+      "maxLength": 64,
+      "description": "Server-validated menu item selected explicitly by the player"
+    },
     "ttsRef": {
       "type": [
         "string",

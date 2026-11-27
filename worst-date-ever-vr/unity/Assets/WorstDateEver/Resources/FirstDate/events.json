@@ -21,26 +21,27 @@
       "choices": [
         {
           "id": "help",
-          "label": "Ajudar a limpar",
+          "label": "Segurar o copo",
           "relationshipDelta": {
-            "interest": 2,
-            "awkwardness": -1
+            "interest": 6,
+            "awkwardness": -3
           },
-          "contextSummary": "ajudou a limpar"
+          "contextSummary": "segurou o copo antes que a água caísse"
         },
         {
-          "id": "laugh",
-          "label": "Rir do acidente",
+          "id": "protect",
+          "label": "Proteger o date",
           "relationshipDelta": {
-            "awkwardness": 2
+            "interest": 4,
+            "safety": 4
           },
-          "contextSummary": "riu do acidente"
+          "contextSummary": "protegeu o date enquanto a água caiu na mesa"
         },
         {
           "id": "ignore",
-          "label": "Fingir que não viu",
-          "relationshipDelta": {},
-          "contextSummary": "ignorou a situação"
+          "label": "Não fazer nada",
+          "relationshipDelta": { "interest": -4, "awkwardness": 5, "safety": -3 },
+          "contextSummary": "não reagiu e a água respingou no date"
         }
       ],
       "summaryTemplate": "Uma bebida derramou durante o encontro, e o jogador {choice}."
@@ -68,7 +69,8 @@
           "id": "clarify",
           "label": "Avisar com educação",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 4,
+            "patience": 2
           },
           "contextSummary": "corrigiu o pedido gentilmente"
         },
@@ -76,7 +78,7 @@
           "id": "accept",
           "label": "Aceitar o pedido errado",
           "relationshipDelta": {
-            "awkwardness": 1
+            "awkwardness": 3
           },
           "contextSummary": "aceitou o pedido errado"
         }
@@ -107,14 +109,15 @@
           "id": "joke",
           "label": "Fazer piada",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 4,
+            "awkwardness": -2
           },
           "contextSummary": "fez uma piada sobre o barulho"
         },
         {
           "id": "ignore",
           "label": "Continuar conversando",
-          "relationshipDelta": {},
+          "relationshipDelta": { "interest": 2 },
           "contextSummary": "continuou a conversa"
         }
       ],
@@ -143,14 +146,15 @@
           "id": "help",
           "label": "Segurar a porta",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "safety": 3
           },
           "contextSummary": "segurou a porta do banheiro"
         },
         {
           "id": "ignore",
           "label": "Não se envolver",
-          "relationshipDelta": {},
+          "relationshipDelta": { "interest": -2, "awkwardness": 3 },
           "contextSummary": "não se envolveu"
         }
       ],
@@ -178,20 +182,22 @@
           "id": "grab",
           "label": "Pegar o que caiu",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "awkwardness": -3
           },
-          "contextSummary": "pegou o item que caiu"
+          "contextSummary": "pegou o cardápio"
         },
         {
           "id": "ignore",
           "label": "Deixar cair",
           "relationshipDelta": {
-            "awkwardness": 1
+            "interest": -3,
+            "awkwardness": 4
           },
           "contextSummary": "deixou o cardápio no chão"
         }
       ],
-      "summaryTemplate": "Um item caiu e o jogador {choice}."
+      "summaryTemplate": "O cardápio caiu e o jogador {choice}."
     },
     {
       "id": "awkward_friend",
@@ -217,7 +223,8 @@
           "id": "introduce",
           "label": "Apresentar a pessoa",
           "relationshipDelta": {
-            "interest": 1
+            "interest": 5,
+            "awkwardness": -2
           },
           "contextSummary": "apresentou a pessoa"
         },
@@ -225,7 +232,8 @@
           "id": "change_topic",
           "label": "Mudar de assunto",
           "relationshipDelta": {
-            "awkwardness": 2
+            "interest": -3,
+            "awkwardness": 5
           },
           "contextSummary": "mudou de assunto"
         }

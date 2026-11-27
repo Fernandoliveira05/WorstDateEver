@@ -1,0 +1,232 @@
+{
+  "toast": {
+    "success": [
+      "Aí sim. Um brinde a uma noite que ainda pode surpreender.",
+      "Gostei do gesto. Saúde!",
+      "Tá, esse brinde eu aceito com gosto.",
+      "Você escolheu um bom momento para isso. Saúde.",
+      "Olha só, até que combinou com a gente. Saúde!",
+      "Um brinde a não derrubar nada pelo caminho.",
+      "Agora sim a noite começou direito.",
+      "Esse foi um convite difícil de recusar. Saúde.",
+      "Eu precisava de um brinde desses hoje.",
+      "Boa. Vamos ver onde essa noite vai dar.",
+      "Gostei da iniciativa. Saúde para nós.",
+      "Pronto, você ganhou meu brinde. Aproveita."
+    ],
+    "failure": [
+      "Agora não. Melhor baixar o copo.",
+      "Acho que um brinde não resolve esse clima.",
+      "Vou passar esse, tá?",
+      "Não me parece a hora certa para comemorar.",
+      "Talvez a gente converse antes de brindar.",
+      "Guarda esse brinde para outro momento.",
+      "Hoje eu não tô no clima de erguer o copo.",
+      "Eu vi a intenção, mas prefiro não brindar.",
+      "Vamos deixar o copo na mesa por enquanto.",
+      "Não quero fingir que tá tudo ótimo.",
+      "Esse brinde chegou meio fora de hora.",
+      "Pode abaixar. Eu não vou acompanhar."
+    ]
+  },
+  "balance": {
+    "success": [
+      "Como é que esse copo ficou aí? Isso me impressionou.",
+      "Tá bom, isso exigiu mais controle do que eu esperava.",
+      "Você conseguiu mesmo. Eu não apostava nisso.",
+      "O copo nem tremeu no final. Respeito.",
+      "Eu queria rir, mas acabei admirando a precisão.",
+      "Isso foi estranhamente elegante.",
+      "Tá, esse truque merece aplauso.",
+      "Nem uma gota no chão. Considera isso uma vitória.",
+      "Você fez parecer fácil, e eu sei que não é.",
+      "Eu fiquei esperando a queda e ela não veio.",
+      "Esse equilíbrio foi melhor do que muito encontro por aí.",
+      "Pronto, agora eu tenho uma história boa para contar."
+    ],
+    "partial": [
+      "Quase caiu, mas você trouxe o copo de volta.",
+      "Eu achei que ia escorregar. Boa recuperação.",
+      "Essa tremida no final me deu um susto.",
+      "Foi por pouco, mas o copo ficou de pé.",
+      "Você salvou o truque na última correção.",
+      "Eu já estava estendendo a mão para pegar o copo.",
+      "Não foi perfeito, mas foi divertido de ver.",
+      "Aquela oscilada tornou tudo mais emocionante.",
+      "Você quase perdeu. O quase é importante aqui.",
+      "Confesso que prendi a respiração no final.",
+      "O copo saiu dançando, mas não caiu.",
+      "Deu trabalho, hein? Pelo menos terminou inteiro."
+    ],
+    "failure": [
+      "O copo tentou avisar que ia cair.",
+      "Ai! Pelo menos ele caiu na mesa.",
+      "Eu vi a tragédia chegando em câmera lenta.",
+      "O truque durou pouco, mas a confiança era enorme.",
+      "Tudo bem. A mesa sobreviveu.",
+      "Essa aterrissagem não estava no plano, né?",
+      "O copo desistiu antes de você.",
+      "Eu devia ter afastado meu prato primeiro.",
+      "A tentativa foi corajosa. O pouso, nem tanto.",
+      "Pelo barulho, acho que o restaurante inteiro percebeu.",
+      "Você chegou perto. A gravidade chegou mais perto.",
+      "Vamos deixar esse copo em paz um instante."
+    ]
+  },
+  "juggle": {
+    "success": [
+      "Você pegou todas? Tá, eu não esperava por isso.",
+      "Foi bonito de ver. As frutas concordam.",
+      "Agora eu quero saber onde você aprendeu isso.",
+      "Nenhuma fruta no chão. Isso merece respeito.",
+      "Você fez malabares na mesa e funcionou. Inacreditável.",
+      "Eu quase esqueci que a gente tá num encontro.",
+      "Esse final foi tão limpo que até me deu inveja.",
+      "Tá bom, foi impressionante de verdade.",
+      "Eu acompanhei cada lançamento. Você não perdeu nenhum.",
+      "Se a conversa falhar, você já tem um número pronto.",
+      "De onde saiu essa habilidade escondida?",
+      "Eu já esperava um desastre. Você me surpreendeu."
+    ],
+    "partial": [
+      "Uma fruta quase escapou, mas você salvou o número.",
+      "Teve um momento em que achei que ia dar ruim.",
+      "A última recepção foi apertada. Eu vi.",
+      "Não foi impecável, mas segurou a apresentação.",
+      "Você se recuperou bem daquela fruta torta.",
+      "Foi quase um desastre e acabou virando show.",
+      "Eu já estava procurando a fruta no chão.",
+      "Essa correção no meio foi a melhor parte.",
+      "Você perdeu o ritmo por um segundo, só por um segundo.",
+      "Até as frutas pareceram surpresas com a recuperação.",
+      "Eu gostei mais da salvação do que do truque.",
+      "Foi torto, mas terminou com todas as frutas na mão."
+    ],
+    "failure": [
+      "Ai, a fruta! Ela foi mais longe que eu pensei.",
+      "Essa última tinha planos próprios.",
+      "Acho que a mesa acabou de ganhar uma sobremesa surpresa.",
+      "Você viu para onde a outra foi? Eu perdi de vista.",
+      "O começo parecia promissor. O chão discordou.",
+      "Foi um caos pequeno, mas bem produzido.",
+      "Pelo menos nenhuma fruta caiu no meu colo.",
+      "Tá, eu ri. Desculpa. Foi impossível segurar.",
+      "A terceira fruta entrou em greve.",
+      "Eu fiquei torcendo, juro. A gravidade não.",
+      "Se alguém perguntar, foi uma apresentação experimental.",
+      "Você deixou uma trilha de frutas pela mesa."
+    ]
+  },
+  "offer_food": {
+    "success": [
+      "Valeu. Eu queria provar justamente esse pedaço.",
+      "Essa foi uma boa escolha. Gostei.",
+      "Você reparou que eu estava olhando para o prato, né?",
+      "Tá gostoso. Ainda bem que você ofereceu.",
+      "Eu aceito mais um pedacinho, mas só depois.",
+      "Que gentileza. Agora fiquei curiosa pelo resto.",
+      "Você dividiu a melhor parte. Eu vi.",
+      "Esse sabor me ganhou. Valeu.",
+      "Boa. Era exatamente isso que eu queria experimentar.",
+      "Eu não ia pedir, mas ainda bem que você ofereceu.",
+      "Ponto para você pela escolha do prato.",
+      "Gostei de dividir isso com você."
+    ],
+    "failure": [
+      "Valeu, mas eu prefiro ficar com o meu prato.",
+      "Vou passar. Esse não é muito a minha cara.",
+      "Agradeço, mas não quero provar agora.",
+      "Pode guardar esse pedaço para você.",
+      "Não, obrigada. O cheiro já me disse o suficiente.",
+      "Eu sei que você quis agradar, mas vou recusar.",
+      "Melhor não. Hoje meu paladar tá exigente.",
+      "Acho que esse prato não combina comigo.",
+      "Valeu por oferecer, mas não tô a fim.",
+      "Você pode ficar com a porção inteira, sem culpa.",
+      "Vou confiar no seu gosto, mas sem experimentar.",
+      "Deixa eu dizer não antes que o garfo chegue mais perto."
+    ]
+  },
+  "dance": {
+    "success": [
+      "Eu entrei no ritmo sem perceber. Ficou ótimo.",
+      "Tá, essa sequência foi boa de verdade.",
+      "Você conseguiu dançar sem sair da cadeira. Talento raro.",
+      "Eu estava tentando acompanhar suas mãos. Não deu.",
+      "Essa batida combinou com você.",
+      "Foi divertido. Eu faria a próxima junto.",
+      "Olha só, você acertou até o final.",
+      "Eu ri porque gostei, não porque ficou estranho.",
+      "Isso melhorou a noite em três segundos.",
+      "Você pareceu se divertir. Eu também.",
+      "A mesa virou pista de dança por um instante.",
+      "Se tocar outra música, vou cobrar uma segunda rodada."
+    ],
+    "partial": [
+      "Você perdeu uma batida, mas voltou bonito.",
+      "Teve um passo fora do tempo. O resto encaixou.",
+      "Eu gostei mais da recuperação que do começo.",
+      "Foi uma dança com uma pequena surpresa no meio.",
+      "Quase saiu do ritmo, mas achou a música de novo.",
+      "Você improvisou bem naquela batida errada.",
+      "O tropeço ficou até charmoso.",
+      "Eu vi você se acertando no meio da música.",
+      "Não foi perfeito, mas foi gostoso de ver.",
+      "A última parte compensou aquela escorregada.",
+      "Você perdeu o tempo e encontrou de novo.",
+      "Se isso foi improviso, funcionou."
+    ],
+    "failure": [
+      "Essa batida passou correndo por você.",
+      "Eu gostei da coragem. O ritmo ficou para depois.",
+      "Acho que suas mãos ouviram músicas diferentes.",
+      "Essa parte foi improviso, né? Por favor diz que foi.",
+      "Eu não sabia que dava para tropeçar sentado.",
+      "O último movimento teve personalidade própria.",
+      "Tá tudo bem, ninguém pediu uma apresentação profissional.",
+      "A cadeira segurou a coreografia inteira.",
+      "Eu quase acompanhei, mas você mudou de batida.",
+      "Foi desajeitado de um jeito memorável.",
+      "Se essa era a versão lenta, tenho medo da rápida.",
+      "Você perdeu o tempo, mas ganhou uma boa história."
+    ]
+  },
+  "eat": {
+    "success": ["Boa escolha. Vou deixar você aproveitar enquanto penso no que pedir depois.", "Comer também é parte importante de um encontro.", "Esse prato merece toda a sua atenção por alguns segundos.", "A conversa continua depois da primeira garfada.", "Espero que esteja tão bom quanto parecia no cardápio."],
+    "failure": ["Acho que a comida venceu a disputa pela sua atenção.", "Tudo bem, a primeira garfada às vezes exige coragem."]
+  },
+  "personaExtras": {
+    "caio": {
+      "toast": { "success": ["Um brinde ao acaso. Eu ensaiei essa frase, confesso.", "Saúde. Que a conversa seja menos previsível que o cardápio."], "failure": ["Não quero transformar um brinde em argumento, mas o momento importa.", "Vou recusar. Um gesto bonito também pode chegar cedo demais."] },
+      "balance": { "success": ["Isso foi quase uma tese sobre autocontrole. Quase.", "Confesso que o copo me prendeu mais que meu último livro."], "failure": ["A gravidade venceu o debate sem deixar réplica.", "Eu teria chamado isso de performance, mas o copo discordou."] },
+      "juggle": { "success": ["Essa foi uma defesa convincente do improviso.", "Eu ia fazer uma metáfora, mas você pegou todas as frutas."], "failure": ["A fruta escapou como uma conclusão apressada.", "Eu adoraria interpretar isso, mas primeiro vamos pegar a fruta."] },
+      "offer_food": { "success": ["Obrigado por dividir. E sim, eu conferi os ingredientes.", "Esse pedaço fez mais pela conversa que minha teoria anterior."], "failure": ["Vou passar; esse ingrediente não entra na minha dieta.", "Obrigado, mas prefiro não abrir uma discussão ética com o garfo no ar."] },
+      "eat": { "success": ["Eu respeito quem sabe fazer uma pausa para comer.", "A escolha foi coerente com o contexto. Desculpa, isso soou como uma análise."] , "failure": ["A conversa estava tão boa que até a comida ficou de lado."] },
+      "dance": { "success": ["Eu tentaria analisar o ritmo, mas prefiro só aproveitar.", "Sua coreografia desarmou meu discurso por um minuto."], "failure": ["A intenção foi linda. A métrica ficou abstrata.", "Essa dança teve mais liberdade que compasso, e tudo bem."] }
+    },
+    "rafa": {
+      "toast": { "success": ["Aí, sim. Esse brinde merece foto, mas eu vou guardar o celular.", "Saúde! Agora parece que a noite engrenou."], "failure": ["Foi mal, hoje eu não tô nessa vibe de brinde.", "Pera aí. Primeiro a gente acerta o clima, depois ergue o copo."] },
+      "balance": { "success": ["Caraca, você dominou esse copo.", "Tá, essa habilidade eu queria ter na próxima festa."], "failure": ["Nossa, essa queda foi mais rápida que meu reflexo.", "Eu aposto que na segunda você acerta. Mas não hoje."] },
+      "juggle": { "success": ["Caraca! Isso foi nível competição.", "Tá bom, ganhou. Eu não faço melhor nem treinando."], "failure": ["Opa, a fruta fugiu da competição.", "Eu ia dar nota dez, mas a mesa pediu revisão."] },
+      "offer_food": { "success": ["Boa, esse pedaço é o melhor do prato.", "Valeu. Você mandou bem na escolha."], "failure": ["Passo, valeu. Tô de boa com o meu.", "Sem chance, esse prato não me convenceu."] },
+      "eat": { "success": ["Aí sim, comer antes que esfrie é estratégia.", "Boa. Eu ia fazer o mesmo depois de fingir que não tava com fome."] , "failure": ["Vai comer depois? Só não deixa o prato esfriar à toa."] },
+      "dance": { "success": ["Aí sim, dança de cadeira com categoria.", "Você ganhou essa rodada. Sem discussão."], "failure": ["Eu queria acompanhar, mas nem a batida te achou.", "Foi ousado. Vamos chamar de remix."] }
+    },
+    "bia": {
+      "toast": { "success": ["Ai, isso ficou fofo. Saúde, vai.", "Olha você fazendo o momento render. Gostei."], "failure": ["Não, amor. Esse brinde tá muito fora de timing.", "Eu não vou posar para um brinde que não tô sentindo." ] },
+      "balance": { "success": ["Pera, você conseguiu? Isso ficou muito bom.", "Eu já estava preparada para o vídeo do desastre. Você venceu."], "failure": ["Meu Deus, o copo escolheu o drama.", "Eu sabia que ia cair, mas não achei que fosse tão teatral."] },
+      "juggle": { "success": ["Tá lindo, mas onde você escondeu esse talento?", "Eu juro que achei que uma fruta ia parar no meu cabelo."], "failure": ["Amor, a fruta foi embora antes de mim.", "Não acredito que você tentou isso na mesa. Tô rindo muito."] },
+      "offer_food": { "success": ["Tá, isso é bom. Você acertou meu gosto.", "Obrigada. Esse pedacinho salvou o prato."], "failure": ["Não, obrigada. Esse prato e eu não temos química.", "Ai, eu passo. Não faz essa cara, é só comida."] },
+      "eat": { "success": ["Gostei que você escolheu sem fazer uma apresentação do prato.", "Come primeiro; depois eu quero saber se era bom mesmo."] , "failure": ["Vai deixar a comida esfriar? Aí depois não vale reclamar."] },
+      "dance": { "success": ["Isso ficou adorável, sério.", "Eu fingia que não tava olhando, mas vi tudo."], "failure": ["Amor, suas mãos brigaram com a música.", "Ai, eu tô com vergonha e rindo ao mesmo tempo."] }
+    },
+    "luiza": {
+      "toast": { "success": ["Agora sim! Saúde, meu bem.", "Esse brinde eu aceito com gosto. Saúde!"], "failure": ["Hoje não, viu? Vamos conversar primeiro.", "Segura esse brinde mais um pouco que eu ainda não entrei no clima."] },
+      "balance": { "success": ["Uai, esse copo ficou em pé mesmo!", "Se fosse no rodeio, você levava troféu por equilíbrio."], "failure": ["Eita, o copo foi direto para a mesa.", "Esse aí não aguentou nem uma volta completa."] },
+      "juggle": { "success": ["Eita! Pegou as três. Gostei de ver.", "Isso foi bonito que só. Faz de novo outro dia."], "failure": ["Opa! Uma fruta saiu passear.", "Eu gostei da tentativa, mesmo com a fruta escapando."] },
+      "offer_food": { "success": ["Opa, isso tá bom demais. Obrigada.", "Você dividiu comigo? Agora eu gostei de verdade."], "failure": ["Obrigada, mas esse pedaço eu deixo pra você.", "Hoje eu passo, viu? Meu estômago pediu outra coisa."] },
+      "eat": { "success": ["Aí, bom demais quando a comida chega na hora certa.", "Come tranquilo, que eu vou escolhendo a próxima história."] , "failure": ["Uai, vai deixar esse prato esperando? Daqui a pouco esfria."] },
+      "dance": { "success": ["Agora pronto, até eu quero dançar sentada.", "Essa batida foi boa demais!"], "failure": ["Eita, o ritmo tropeçou, mas eu ri junto.", "Foi tortinho e divertido. Eu gostei de ver."] }
+    }
+  }
+}

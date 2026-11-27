@@ -95,7 +95,7 @@ export function createAvatar(THREE, root, load) {
     aim(arm.lower, actual, grip, a.addScaledVector(line, distance));
   }
 
-  function tick(camera, grips, delta) {
+  function tick(camera, grips, delta, showHands = immersive) {
     camera.getWorldPosition(headPosition);
     camera.getWorldDirection(eyeVector);
     floor.set(headPosition.x, 0, headPosition.z);
@@ -123,7 +123,7 @@ export function createAvatar(THREE, root, load) {
     for (const [index, side] of ['left','right'].entries()) {
       const pose = grips[side];
       bendArm(current.arms[index], pose?.position);
-      const visible = immersive && pose && headPosition.distanceToSquared(pose.position) >= .13 ** 2;
+      const visible = showHands && pose && headPosition.distanceToSquared(pose.position) >= .13 ** 2;
       fingertips[side] = current.hands[index]?.update(pose, visible);
     }
     return fingertips;

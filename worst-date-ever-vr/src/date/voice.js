@@ -4,14 +4,21 @@ import workletURL from './pcm-worklet.js?url';
 const messages = {
   silence: 'A gravação chegou sem fala clara. Fale mais perto do microfone.',
   provider: 'O serviço de voz falhou. Tente outra vez ou escolha uma frase.',
-  reply: 'O personagem não conseguiu responder. Tente outra vez.',
+  timeout: 'A resposta demorou mais que o esperado. Tente outra vez.',
   permission: 'Permita o microfone nas permissões deste site e tente outra vez.',
   device: 'Nenhum microfone encontrado. Confira a entrada de áudio do navegador.',
-  network: 'A conexão com o serviço de voz caiu. Tente outra vez.'
+  network: 'A conexão com o serviço de voz caiu. Tente outra vez.',
+  transcription: 'O serviço não conseguiu transcrever a fala.',
+  dialogue: 'A resposta da personagem falhou. Sua fala foi captada; tente enviar novamente.',
+  context: 'A sessão de conversa ficou dessincronizada. Tente falar novamente.',
+  sequence: 'A sessão de voz expirou. A próxima tentativa abrirá uma sessão nova.',
+  limit: 'O serviço de voz está ocupado. Aguarde um instante e tente novamente.',
+  reply: 'A personagem não conseguiu formar uma resposta válida. Tente novamente.'
 };
 
 export function createDateVoice({ handoff, director, observe }) {
   let active, ticket, consented = false, message = '', recording = false, level = 0;
+  let menuHeld = false, menuPaused = false;
   const base = new URL(import.meta.env.VITE_DATE_VOICE_URL || '/', location.href);
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const remoteReady = window.isSecureContext && Boolean(navigator.mediaDevices?.getUserMedia && window.AudioWorkletNode);
@@ -31,6 +38,7 @@ export function createDateVoice({ handoff, director, observe }) {
     const turn = active;
     active = null;
     if (turn) {
+      if (turn.menu && !keepTicket && status) menuPaused = true;
       if (!keepTicket) ticket = null;
       clearTimeout(turn.timeout);
       clearTimeout(turn.replyTimer);
@@ -44,7 +52,7 @@ export function createDateVoice({ handoff, director, observe }) {
     message = status;
   }
 
-  function cancel() { consented = false; endTurn(); }
+  function cancel() { consented = false; menuPaused = menuHeld; endTurn(); }
 
   function packet(turn, type, fields = {}) {
     turn.ws.send(JSON.stringify({ type, sessionId: turn.sessionId, turnId: turn.wire, ...fields }));
@@ -61,7 +69,7 @@ export function createDateVoice({ handoff, director, observe }) {
     if (turn.ended && !turn.sentEnd) {
       turn.sentEnd = true;
       packet(turn, 'audio.end');
-      turn.replyTimer = setTimeout(() => endTurn(messages.network), 16000);
+      turn.replyTimer = setTimeout(() => endTurn(messages.timeout), 70000);
     }
   }
 
@@ -74,7 +82,13 @@ export function createDateVoice({ handoff, director, observe }) {
     closeCapture(turn);
     if (turn.samples < 3200) { endTurn('Fale por um instante antes de enviar.'); return; }
     message = 'Transcrevendo…';
-    flush(turn);
+    if (turn.menu) {
+      turn.world = observe?.();
+      turn.timeout = setTimeout(() => {
+        if (active === turn && !turn.started) endTurn(messages.network);
+      }, 20000);
+      void connect(turn).catch(error => { if (active === turn) endTurn(error.message || messages.network); });
+    } else flush(turn);
   }
 
   async function connect(turn) {
@@ -89,7 +103,9 @@ export function createDateVoice({ handoff, director, observe }) {
           if (active === turn) endTurn('Pressione Falar novamente para usar a transcrição do navegador.');
           return;
         }
-        throw new Error('Voice service unavailable');
+        throw new Error(response.status === 429 ? messages.limit :
+        response.status === 403 ? 'Este endereço não está autorizado no backend de voz.' :
+          response.status === 503 ? 'Backend de voz indisponível ou sem provedor configurado.' : messages.network);
       }
       const credentials = await response.json();
       if (active !== turn) return;
@@ -108,10 +124,18 @@ export function createDateVoice({ handoff, director, observe }) {
       try {
         const reply = JSON.parse(event.data);
         if (reply.sessionId !== turn.sessionId || reply.turnId !== turn.wire) return;
-        if (reply.type === 'voice.error') { endTurn(messages[reply.reason] ?? messages.provider); return; }
-        if (reply.type === 'transcript.final') {
-          turn.transcript = reply.text;
-          message = 'Você: ' + reply.text.slice(0,145);
+        if (reply.type === 'voice.error') {
+          const canRetry = ['silence', 'transcription', 'timeout', 'reply'].includes(reply.reason) &&
+            reply.nextTurnId === turn.wire + 1;
+          if (canRetry) ticket.next = reply.nextTurnId;
+          if (turn.menu) menuPaused = true;
+          endTurn(messages[reply.reason] ?? messages.provider, canRetry);
+          return;
+        }
+        if (reply.type === 'transcript.final') { turn.transcript = reply.text; message = 'Você: ' + reply.text.slice(0,145); return; }
+        if (reply.type === 'order.accepted') {
+          if (director.acceptOrder(turn.sequence, reply.itemId, `${turn.sessionId}:${turn.wire}`))
+            message = 'Pedido anotado · ' + reply.name;
           return;
         }
         if (reply.type === 'npc.reply' && reply.reply?.sessionId === turn.sessionId &&
@@ -124,8 +148,8 @@ export function createDateVoice({ handoff, director, observe }) {
     };
     await new Promise((resolve, reject) => {
       ws.addEventListener('open', resolve, { once: true });
-      ws.addEventListener('close', reject, { once: true });
-      ws.addEventListener('error', reject, { once: true });
+      ws.addEventListener('close', () => reject(new Error(messages.network)), { once: true });
+      ws.addEventListener('error', () => reject(new Error(messages.network)), { once: true });
     });
     if (active !== turn) return;
     packet(turn, 'date.context', { actions: turn.actions, ...(turn.world ? { world: turn.world } : {}) });
@@ -134,7 +158,7 @@ export function createDateVoice({ handoff, director, observe }) {
       turn.started = true;
       turn.sentEnd = true;
       clearTimeout(turn.timeout);
-      turn.replyTimer = setTimeout(() => endTurn(messages.network), 16000);
+      turn.replyTimer = setTimeout(() => endTurn(messages.timeout), 45000);
       return;
     }
     packet(turn, 'audio.start', { format: { encoding: 'pcm_s16le', sampleRateHz: 16000, channels: 1 } });
@@ -143,15 +167,15 @@ export function createDateVoice({ handoff, director, observe }) {
     flush(turn);
   }
 
-  async function begin() {
+  async function begin(menu = false) {
     if (!ready || active || !director.view().canSpeak) return;
-    if (!consented) {
+    if (!menu && !consented) {
       consented = true;
       message = 'O áudio vai à transcrição. Pressione A, V ou Falar para gravar.';
       return;
     }
     const view = director.view();
-    if (browserVoice && Recognition) {
+    if (!menu && browserVoice && Recognition) {
       const recognition = new Recognition();
       recognition.lang = 'pt-BR';
       recognition.continuous = false;
@@ -175,8 +199,8 @@ export function createDateVoice({ handoff, director, observe }) {
       } catch { endTurn(messages.device); }
       return;
     }
-    const turn = { mode: 'audio', sequence: view.session.turnSequence, actions: view.actions, world: observe?.(), abort: new AbortController(),
-      frames: [], samples: 0 };
+    const turn = { mode: 'audio', menu, sequence: view.session.turnSequence, actions: view.actions,
+      world: observe?.(), abort: new AbortController(), frames: [], samples: 0, voiced: 0, quiet: 0 };
     active = turn;
     message = 'Abrindo o microfone…';
     turn.timeout = setTimeout(() => {
@@ -208,6 +232,20 @@ export function createDateVoice({ handoff, director, observe }) {
         for (const sample of frame) power += (sample / 32768) ** 2;
         const rms = Math.sqrt(power / frame.length);
         level = Math.max(level * .94, Math.min(5, Math.ceil(Math.max(0, Math.log10(rms + .00001) + 3) * 1.75)));
+        if (turn.menu) {
+          turn.frames.push(data);
+          if (rms >= .012) {
+            turn.voiced += frame.length;
+            turn.quiet = 0;
+          } else turn.quiet += frame.length;
+          if (turn.voiced < 1280 && turn.frames.length > 15) {
+            turn.frames.shift();
+            if (turn.quiet >= 4800) turn.voiced = 0;
+          }
+          turn.samples = turn.frames.length * frame.length;
+          if (turn.voiced >= 1280 && (turn.quiet >= 25600 || turn.samples >= 256000)) stop();
+          return;
+        }
         turn.samples += frame.length;
         turn.frames.push(data);
         flush(turn);
@@ -215,18 +253,38 @@ export function createDateVoice({ handoff, director, observe }) {
       const mute = turn.context.createGain();
       mute.gain.value = 0;
       turn.context.createMediaStreamSource(stream).connect(turn.processor).connect(mute).connect(turn.context.destination);
-      turn.recordTimer = setTimeout(stop, 10000);
       recording = true;
-      message = 'Gravando · A, V ou Parar para enviar';
-      void connect(turn).catch(() => { if (active === turn) endTurn(messages.network); });
+      if (menu) {
+        clearTimeout(turn.timeout);
+        message = 'Microfone aberto · diga o nome do item';
+      } else {
+        turn.recordTimer = setTimeout(stop, 10000);
+        message = 'Gravando · A, V ou Parar para enviar';
+        void connect(turn).catch(error => { if (active === turn) endTurn(error.message || messages.network); });
+      }
     } catch (error) {
       if (active === turn) endTurn(error.name === 'NotAllowedError' ? messages.permission : messages.device);
     }
   }
 
-  function initiate() {
-    if (browserVoice) return false;
-    if (!ready || active || !director.view().wantsInitiative) return false;
+  function setMenuHeld(held, canOpen = true) {
+    menuHeld = held;
+    menuPaused = false;
+    if (held) {
+      if (active?.mode === 'initiative') endTurn();
+      if (canOpen) resumeMenu();
+    } else if (active?.menu && !active.ended) {
+      if (recording && active.voiced >= 1280 && active.samples >= 6400) stop();
+      else endTurn();
+    }
+  }
+
+  function resumeMenu() {
+    if (menuHeld && !menuPaused && !active) void begin(true);
+  }
+
+  function initiate(force = false) {
+    if (browserVoice || !ready || active || menuHeld || !(force ? director.view().canSpeak : director.view().wantsInitiative)) return false;
     const view = director.view();
     const turn = { mode: 'initiative', sequence: view.session.turnSequence, actions: view.actions,
       world: observe?.(), abort: new AbortController(), frames: [], samples: 0 };
@@ -238,9 +296,15 @@ export function createDateVoice({ handoff, director, observe }) {
   }
 
   return {
-    state: () => ({ ready, recording, consented, message, level: Math.ceil(level), busy: Boolean(active) }),
+    state: () => ({ ready, recording, consented, message, level: Math.ceil(level), busy: Boolean(active),
+      menuRecording: recording && active?.menu, menuPaused }),
+    setMenuHeld, resumeMenu,
     toggle: () => active ? stop() : void begin(),
     begin, stop, cancel, initiate,
+    physical(actionId, mechanical) {
+      if (active) return null;
+      return director.physical(actionId, mechanical);
+    },
     choose(id) {
       if (director.choose(id)) endTurn();
     }

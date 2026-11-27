@@ -43,7 +43,7 @@ test('each candy opens a conversational choice, survives the ending and supports
     const ending = d.view();
     assert.equal(ending.session.candy ?? null, id);
     if (id) assert.match(ending.caption, /lembrar/);
-    d.tick(4.6);
+    d.tick(10);
     assert.equal(d.view().session.phase, 'completed');
     const restored = createDateDirector({ ...entry, candy: id }, { ...options, checkpoint: d.snapshot() });
     assert.equal(restored.view().caption, ending.caption);

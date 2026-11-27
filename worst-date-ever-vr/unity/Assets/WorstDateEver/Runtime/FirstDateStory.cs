@@ -82,7 +82,7 @@ namespace WorstDateEver
             public int schemaVersion = 1, eventSeed, turnSequence;
             public string sessionId, matchId, venueId, phase = "waiting", arrivalState = "not_started", activeEventId;
             public string[] completedEventIds = Array.Empty<string>();
-            public Delta relationship = new() { interest = 50, awkwardness = 20, patience = 70, safety = 100 };
+            public Delta relationship = new() { interest = 42, awkwardness = 24, patience = 58, safety = 65 };
         }
 
         [Serializable] public sealed class Checkpoint
@@ -261,8 +261,8 @@ namespace WorstDateEver
             if (id == "finish" && Time >= conversationReadyAt && TalkTurns >= 3 && State.completedEventIds.Length > 0)
             {
                 var relation = State.relationship;
-                Outcome = relation.interest <= 38 || relation.awkwardness >= 48 || relation.patience < 40 || relation.safety < 60 ? "disaster" :
-                    relation.interest >= 63 && relation.awkwardness <= 26 ? "good" : "awkward";
+                Outcome = relation.interest <= 32 || relation.awkwardness >= 66 || relation.patience < 30 || relation.safety < 35 ? "disaster" :
+                    relation.interest >= 62 && relation.awkwardness <= 30 && relation.patience >= 45 && relation.safety >= 50 ? "good" : "awkward";
                 Caption = dialogue.outcomes.First(outcome => outcome.id == Outcome).line;
                 SetPhase("ending", "seated");
                 endAt = Time + 4.5f;

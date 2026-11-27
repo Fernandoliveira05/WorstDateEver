@@ -8,10 +8,10 @@
       "expectedEvent": "water_spill",
       "expectedOutcome": "good",
       "expectedRelationship": {
-        "interest": 70,
-        "awkwardness": 7,
-        "patience": 79,
-        "safety": 100
+        "interest": 66,
+        "awkwardness": 9,
+        "patience": 67,
+        "safety": 65
       }
     },
     {
@@ -22,10 +22,10 @@
       "expectedEvent": "wrong_order",
       "expectedOutcome": "disaster",
       "expectedRelationship": {
-        "interest": 36,
-        "awkwardness": 44,
-        "patience": 49,
-        "safety": 100
+        "interest": 31,
+        "awkwardness": 48,
+        "patience": 39,
+        "safety": 65
       }
     },
     {
@@ -36,10 +36,10 @@
       "expectedEvent": "water_spill",
       "expectedOutcome": "awkward",
       "expectedRelationship": {
-        "interest": 61,
-        "awkwardness": 22,
-        "patience": 73,
-        "safety": 100
+        "interest": 57,
+        "awkwardness": 24,
+        "patience": 61,
+        "safety": 65
       }
     },
     {
@@ -50,10 +50,10 @@
       "expectedEvent": "dropped_menu",
       "expectedOutcome": "good",
       "expectedRelationship": {
-        "interest": 69,
-        "awkwardness": 8,
-        "patience": 79,
-        "safety": 100
+        "interest": 65,
+        "awkwardness": 9,
+        "patience": 67,
+        "safety": 65
       }
     }
   ]

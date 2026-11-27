@@ -1,8 +1,8 @@
 {
   "choices": [
-    {"id":"honest","label":"Responder com sinceridade","delta":[6,-4,3,0],"gesture":"nod"},
-    {"id":"joke","label":"Levar com bom humor","delta":[3,1,1,0],"gesture":"laugh"},
-    {"id":"brag","label":"Tentar impressionar","delta":[-5,8,-7,0],"gesture":"look_away"}
+    {"id":"honest","label":"Responder com sinceridade","delta":[9,-6,5,2],"gesture":"nod"},
+    {"id":"joke","label":"Levar com bom humor","delta":[6,-2,3,1],"gesture":"laugh"},
+    {"id":"brag","label":"Tentar impressionar","delta":[-8,10,-9,-4],"gesture":"look_away"}
   ],
   "conversations": [
     {
