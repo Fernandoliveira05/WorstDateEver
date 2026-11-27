@@ -1,0 +1,47 @@
+{
+ "slug": "juice-bottle",
+ "triangles": 7286,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "juice-bottle.glb",
+   "bytes": 766208
+  },
+  "blend": {
+   "name": "juice-bottle.blend",
+   "bytes": 721308
+  },
+  "fbx": {
+   "name": "juice-bottle.fbx",
+   "bytes": 1256460
+  },
+  "obj": {
+   "name": "juice-bottle-obj.zip",
+   "bytes": 733992
+  },
+  "usdz": {
+   "name": "juice-bottle.usdz",
+   "bytes": 1131458
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.252 x 0.194 x 0.271",
+  "triangles": 7286,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-25",
+  "real_size": "set of three juice bottles, 27, 24 and 21 cm high, about 30 cm wide",
+  "notes": "glass juice bottles with orange, apple and berry juice (alpha blended glass and juice, not baked), ribbed screw caps, labels with fruit pictograms (orange slice, apple, strawberry) and neck bands, no text. An orange and an apple from the Cozy Fruit & Vegetables Kit in front. Front faces -Y.",
+  "set": "Cozy Supermarket & Grocery Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

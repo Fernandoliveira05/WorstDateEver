@@ -2,7 +2,7 @@
 export const profiles = Object.freeze([
   {
     id: 'caio', name: 'Caio', gender: 'male', age: 27,
-    archetype: 'Esquerdomacho', location: 'Cafeteria', color: '#7ba891',
+    archetype: 'Esquerdo-macho', location: 'Piquenique no parque', color: '#7ba891',
     bio: 'Filosofia, livros, kombucha e discursos apaixonados.'
   },
   {

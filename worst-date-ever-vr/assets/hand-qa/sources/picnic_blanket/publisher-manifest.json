@@ -1,0 +1,47 @@
+{
+ "slug": "picnic-blanket",
+ "triangles": 19600,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "picnic-blanket.glb",
+   "bytes": 1214524
+  },
+  "blend": {
+   "name": "picnic-blanket.blend",
+   "bytes": 1207494
+  },
+  "fbx": {
+   "name": "picnic-blanket.fbx",
+   "bytes": 2158700
+  },
+  "obj": {
+   "name": "picnic-blanket-obj.zip",
+   "bytes": 1127551
+  },
+  "usdz": {
+   "name": "picnic-blanket.usdz",
+   "bytes": 1918218
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "1.509 x 1.509 x 0.196",
+  "triangles": 19600,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-20",
+  "real_size": "picnic blanket, 1.5 x 1.5 m, with picnic items (two plates with sandwiches and fruit, bread on a board, bowl of apples, two enamel mugs, thermos, folded throw)",
+  "notes": "front faces -Y; forest green and sage gingham blanket with soft folds and a turned over front left corner; items rest on the blanket and are slightly oversized for readability; no text",
+  "set": "Cozy Camping & Outdoor Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

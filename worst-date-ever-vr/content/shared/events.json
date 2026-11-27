@@ -21,7 +21,7 @@
       "choices": [
         {
           "id": "help",
-          "label": "Ajudar o garçom",
+          "label": "Ajudar a limpar",
           "relationshipDelta": {
             "interest": 2,
             "awkwardness": -1
@@ -43,7 +43,7 @@
           "contextSummary": "ignorou a situação"
         }
       ],
-      "summaryTemplate": "O garçom derrubou água perto da mesa, e o jogador {choice}."
+      "summaryTemplate": "Uma bebida derramou durante o encontro, e o jogador {choice}."
     },
     {
       "id": "wrong_order",
@@ -176,11 +176,11 @@
       "choices": [
         {
           "id": "grab",
-          "label": "Pegar o cardápio",
+          "label": "Pegar o que caiu",
           "relationshipDelta": {
             "interest": 1
           },
-          "contextSummary": "pegou o cardápio"
+          "contextSummary": "pegou o item que caiu"
         },
         {
           "id": "ignore",
@@ -191,7 +191,7 @@
           "contextSummary": "deixou o cardápio no chão"
         }
       ],
-      "summaryTemplate": "Um cardápio caiu e o jogador {choice}."
+      "summaryTemplate": "Um item caiu e o jogador {choice}."
     },
     {
       "id": "awkward_friend",

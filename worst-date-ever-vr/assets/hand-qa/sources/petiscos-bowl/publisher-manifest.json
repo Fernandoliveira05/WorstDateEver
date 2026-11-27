@@ -1,0 +1,47 @@
+{
+ "slug": "mixing-bowl",
+ "triangles": 6912,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "mixing-bowl.glb",
+   "bytes": 476304
+  },
+  "blend": {
+   "name": "mixing-bowl.blend",
+   "bytes": 427759
+  },
+  "fbx": {
+   "name": "mixing-bowl.fbx",
+   "bytes": 813004
+  },
+  "obj": {
+   "name": "mixing-bowl-obj.zip",
+   "bytes": 325304
+  },
+  "usdz": {
+   "name": "mixing-bowl.usdz",
+   "bytes": 748047
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.277 x 0.260 x 0.118",
+  "triangles": 6912,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "real_size": "mixing bowl, 26 cm diameter, 12 cm high, approx. 3.5 l",
+  "notes": "stoneware bowl, lavender glaze with a white band, cream glaze inside, foot ring, small pouring lip at +X; no text",
+  "set": "Cozy Kitchen & Food Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

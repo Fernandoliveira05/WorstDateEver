@@ -1,0 +1,47 @@
+{
+  "schema_version": "hand-qa-source/1",
+  "asset_id": "hot-sauce",
+  "manifest_reference": "assets/tripo/references/wde-05-barzinho-candidates/05-hot-sauce.png",
+  "source": {
+    "provider": "Grab3D",
+    "page": "https://grab3d.com/models/food/condiment-bottles/",
+    "slug": "condiment-bottles",
+    "category": "food",
+    "license": "CC0-1.0",
+    "download_url": "https://grab3d.com/dl/condiment-bottles/condiment-bottles.glb",
+    "license_url": "https://grab3d.com/dl/condiment-bottles/LICENSE.txt",
+    "manifest_url": "https://grab3d.com/dl/condiment-bottles/manifest.json"
+  },
+  "files": {
+    "source_glb": {
+      "path": "assets/hand-qa/sources/hot-sauce/condiment-bottles.glb",
+      "sha256": "d840e9990f8d9fea76a4e99c5770ea780b076bdc0d3b01211911a0a3d871b78f",
+      "bytes": 840624
+    },
+    "license": {
+      "path": "assets/hand-qa/sources/hot-sauce/LICENSE.txt",
+      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
+      "bytes": 760
+    },
+    "publisher_manifest": {
+      "path": "assets/hand-qa/sources/hot-sauce/publisher-manifest.json",
+      "sha256": "fcc99e6b3a313b45e50d677b7e8dfae1bc36600b269de5dd9ad82dee2d8fe08e",
+      "bytes": 1502
+    }
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/hot-sauce.glb",
+    "sha256": "55fec8a2c86446f6da506a9cc853978c0a3159ce3e132d0fc8423131a5ab4144",
+    "bytes": 591084,
+    "adapted": true,
+    "split_record": "assets/hand-qa/sources/hot-sauce/split-record.json"
+  },
+  "publisher": {
+    "triangles": 12274,
+    "texture_px": 2048,
+    "dimensions_m": "0.133 x 0.135 x 0.247",
+    "real_size": "condiment caddy with two squeeze bottles, approx. 14 x 16 x 25 cm (bottles 21 cm)",
+    "notes": "red ketchup and yellow mustard squeeze bottles without labels or text, ribbed screw rings, cone nozzles with cream tip caps, chrome wire caddy with oval base plate, holding rings and a centre handle loop, mint ramekin with glossy mayonnaise"
+  },
+  "note": "Extracted one object from a merged Grab3D set. Benchmark candidate only; not a Tripo output."
+}

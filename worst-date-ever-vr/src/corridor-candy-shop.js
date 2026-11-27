@@ -51,7 +51,6 @@ export function buildCandyShop(THREE, corridor, data, at, { box, shape, interior
   }
   label(.69, .137, 0, 1.824, 'Doces da madrugada', '', '#8a4433');
   label(.36, .066, 0, .910, 'Retire o doce');
-  label(.25, .064, 0, .538, 'Ir ao encontro');
 
   const light = new THREE.PointLight(0xffae66, 3.4, 4.7, 2);
   light.position.set(0, 1.15, .56);
@@ -90,9 +89,6 @@ export function buildCandyShop(THREE, corridor, data, at, { box, shape, interior
     data.props.push({ id: prop.name, name: candy.name, candy: id, mass: .055, startsHidden: true,
       shapes: [{ size: [.108, .044, .048], position: [0, 0, 0], rotation: [0, 0, 0, 1], friction: .67, bounce: .1 }] });
   }
-  const exit = rounded([.27, .076, .052], [0, .537, .222], plum, .012);
-  exit.userData.shopAction = 'depart';
-  buttons.push(exit);
 
   for (const [y, height, depth, x] of [[1.15, 1.62, .56, -.11], [.235, .46, .72, -.02], [.710, .026, .18, .32]]) {
     const point = machine.localToWorld(new THREE.Vector3(0, y, x));

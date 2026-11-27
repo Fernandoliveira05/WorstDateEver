@@ -1,0 +1,103 @@
+{
+  "asset_id": "beer-mug",
+  "source": "/home/archvarius/Desktop/projects/Faculdade/WorstDateEver/worst-date-ever-vr/assets/hand-qa/sources/beer-mug/camping-mug.glb",
+  "source_sha256": "b9a629867ce6643c1146735da6e562c369e4be71c8f195eeb23c503c7be02e2c",
+  "output": "/home/archvarius/Desktop/projects/Faculdade/WorstDateEver/worst-date-ever-vr/assets/hand-qa/candidates/beer-mug.glb",
+  "output_sha256": "36ffaa356b40abf1285158f8c8a2227b98b04aab5115b7180c904399273dd32d",
+  "bytes": 544940,
+  "triangles": 3024,
+  "bounds_m": {
+    "min": [
+      -0.05929,
+      -0.06379,
+      0.0
+    ],
+    "max": [
+      0.05329,
+      0.03137,
+      0.08707
+    ],
+    "dimensions": [
+      0.11258,
+      0.09516,
+      0.08707
+    ]
+  },
+  "selected_islands": 5,
+  "islands": [
+    {
+      "faces": 1944,
+      "center": [
+        0.055,
+        0.06121,
+        0.04354
+      ],
+      "dims": [
+        0.09516,
+        0.09516,
+        0.08707
+      ]
+    },
+    {
+      "faces": 144,
+      "center": [
+        0.055,
+        0.06121,
+        0.0651
+      ],
+      "dims": [
+        0.08668,
+        0.08668,
+        0.0062
+      ]
+    },
+    {
+      "faces": 696,
+      "center": [
+        0.10681,
+        0.04237,
+        0.04463
+      ],
+      "dims": [
+        0.02639,
+        0.02099,
+        0.05233
+      ]
+    },
+    {
+      "faces": 120,
+      "center": [
+        0.047,
+        0.05621,
+        0.072
+      ],
+      "dims": [
+        0.01792,
+        0.01857,
+        0.01539
+      ]
+    },
+    {
+      "faces": 120,
+      "center": [
+        0.065,
+        0.07121,
+        0.072
+      ],
+      "dims": [
+        0.01798,
+        0.01724,
+        0.01539
+      ]
+    }
+  ],
+  "selection": {
+    "target": [
+      0.055,
+      0.061
+    ],
+    "radius": 0.06,
+    "min_x": null
+  },
+  "object": "camping-mug_body"
+}

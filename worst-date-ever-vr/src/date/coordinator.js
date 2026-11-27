@@ -65,6 +65,8 @@ export function createDateCoordinator(THREE, io) {
         stage = ready;
         io.change(stage.group);
         recenter();
+        // Place actors and presence-dependent props before the first visible frame.
+        stage.tick(0, director.view());
       } };
     } catch (error) {
       if (pending === operation) {
@@ -87,7 +89,7 @@ export function createDateCoordinator(THREE, io) {
   }
 
   function recenter() {
-    if (stage) io.seat(stage.player);
+    if (stage) io.seat(stage.player, stage.seatHeight);
   }
 
   function restart() {

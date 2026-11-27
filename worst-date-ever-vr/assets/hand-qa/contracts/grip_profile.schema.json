@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Worst Date Ever grip anchors and poses per actual mesh",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["asset_id", "mesh_hash", "calibration_status", "grip_zones", "interaction_states", "supports_regrip", "input_modes"],
+  "properties": {
+    "asset_id": {"type": "string"},
+    "mesh_hash": {"type": "string"},
+    "calibration_status": {"enum": ["UNCONFIGURED", "CALIBRATED", "QUEST_VERIFIED"]},
+    "grip_zones": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["zone_id", "bone_or_mesh", "type", "left_hand_allowed", "right_hand_allowed", "local_position_m", "local_normal", "local_tangent", "approach_half_angle_deg", "finger_pose", "two_hand_role"],
+        "properties": {
+          "zone_id": {"type": "string"}, "bone_or_mesh": {"type": "string"},
+          "type": {"enum": ["surface", "edge", "handle", "strap", "shaft", "knob", "button", "palm_under"]},
+          "left_hand_allowed": {"type": "boolean"}, "right_hand_allowed": {"type": "boolean"},
+          "local_position_m": {"$ref": "#/$defs/vec3"}, "local_normal": {"$ref": "#/$defs/vec3"},
+          "local_tangent": {"$ref": "#/$defs/vec3"},
+          "approach_half_angle_deg": {"type": "number", "minimum": 0, "maximum": 180},
+          "finger_pose": {"enum": ["power", "pinch", "precision", "handle_hook", "palm_support", "soft_pinch", "poke", "flat_edge"]},
+          "two_hand_role": {"enum": ["none", "primary", "secondary", "either"]}
+        }
+      }
+    },
+    "interaction_states": {"type": "array", "items": {"type": "string"}},
+    "supports_regrip": {"type": "boolean"},
+    "input_modes": {"type": "array", "items": {"enum": ["left_controller", "right_controller", "left_tracked_hand", "right_tracked_hand"]}}
+  },
+  "$defs": {"vec3": {"type": "array", "prefixItems": [{"type": "number"},{"type": "number"},{"type": "number"}], "minItems": 3, "maxItems": 3}}
+}

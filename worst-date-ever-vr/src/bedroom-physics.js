@@ -2,7 +2,7 @@ import * as CANNON from 'cannon-es';
 import { createPhysicsWorld, makeKinematic, releaseDynamic } from './physics-world.mjs';
 import { softMaterial } from './bedroom-soft-materials.js';
 import { createSolidContact } from './bedroom-solid-contact.js';
-import { objectGrip, gripSurface } from './grip-pose.mjs';
+import { authoredGrip, objectGrip, gripSurface, twoHandPose } from './grip-pose.mjs';
 import { createPullCord } from './bedroom-cord.js';
 import { buildKeyboard } from './bedroom-keyboard.js';
 import { extractFurniture } from './bedroom-furniture.js';
@@ -383,14 +383,37 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
   function gripKind(prop) {
     if (prop.def.fractures) return prop.def.shapes[0].size[1] < .045 ? 'plate' : 'mug';
     if (prop.def.heavy) return 'power';
-    if (prop.pull || Math.min(...prop.def.shapes[0].size) < .038) return 'pinch';
+    if (prop.pull?.tray) return 'drawer';
+    const size = prop.def.shapes[0].size;
+    if (prop.pull || Math.min(...size) < .038 || Math.max(...size) <= .075) return 'pinch';
     return 'wrap';
+  }
+
+  function otherHand(prop, id) {
+    if (prop.pull || prop.soft || prop.def.candy || prop.def.id === data.phone.id ||
+        !prop.def.shapes.some(({ size }) => Math.max(...size) >= .17)) return null;
+    const side = id?.split('-').at(-1);
+    const ownerSide = prop.held.split('-').at(-1);
+    if (!['left', 'right'].includes(side) || !['left', 'right'].includes(ownerSide) || side === ownerSide) return null;
+    const other = hand.get(prop.held);
+    return other && !other.remote && !other.partner ? other : null;
+  }
+
+  function rebaseHold(hold) {
+    const { position, quaternion } = hold.prop.body;
+    const inverse = hold.orientation.clone().invert();
+    hold.offset.copy(position).sub(hold.point).applyQuaternion(inverse);
+    hold.rotation.copy(inverse).multiply(new THREE.Quaternion().copy(quaternion));
+    hold.gripOffset = null;
+    hold.anchorOffset = hold.grip.anchor.clone().applyQuaternion(quaternion).add(position)
+      .sub(hold.point).applyQuaternion(inverse);
   }
 
   function grab(id, location, orientation, prop, { contact = location, from = location, remote = false } = {}) {
     if (!prop?.active || hand.has(id) || prop.soft?.held || !outsideDrawer(prop, from)) return false;
     const kind = gripKind(prop);
-    if (prop.held && (kind !== 'plate' || remote || hand.get(prop.held)?.remote)) return false;
+    const other = prop.held && !remote && otherHand(prop, id);
+    if (prop.held && !other) return false;
     const orient = orientation.clone().invert();
     const pos = new THREE.Vector3().copy(prop.body.position);
     const rot = new THREE.Quaternion().copy(prop.body.quaternion);
@@ -402,14 +425,18 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
       const forward = new THREE.Vector3(0, 0, -1).applyQuaternion(basis);
       basis.premultiply(new THREE.Quaternion().setFromUnitVectors(forward, facing.clone().negate()));
     }
-    const grip = objectGrip(THREE, prop.body, kind, anchorProbe, basis, side);
-    const held = { prop, start: location.clone(), point: location.clone(), orientation: orientation.clone(),
+    const grip = (prop.def.gripZones && authoredGrip(THREE, prop.body, prop.def.gripZones,
+      anchorProbe, from, basis, side, Boolean(other))) ?? objectGrip(THREE, prop.body, kind, anchorProbe, basis, side);
+    const held = { id, prop, start: location.clone(), point: location.clone(), orientation: orientation.clone(),
       offset: pos.clone().sub(location).applyQuaternion(orient), rotation: orient.clone().multiply(rot), grip, remote };
-    if (prop.held) {
-      const other = hand.get(prop.held);
-      if (!other || other.grip.anchor.distanceTo(grip.anchor) < .09 ||
-        [...hand.values()].filter(item => item.prop === prop).length > 1) return false;
+    if (other) {
+      if (other.grip.anchor.distanceToSquared(grip.anchor) < .09 ** 2 || other.point.distanceToSquared(location) < .08 ** 2)
+        return false;
       held.support = true;
+      held.partner = other;
+      other.partner = held;
+      rebaseHold(other);
+      rebaseHold(held);
       hand.set(id, held);
       return true;
     }
@@ -446,8 +473,9 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
       const wrist = pose.position.clone().sub(held.fixedPosition).applyQuaternion(correction).add(position);
       const reached = wrist.distanceToSquared(pose.position) <= .27 ** 2;
       return reached ? { ...pose, heldBody: prop.body, preset: 'phone',
-        position: wrist, orientation: correction.multiply(held.phoneBasis) } : pose;
+        position: pose.anchored ? pose.position : wrist, orientation: correction.multiply(held.phoneBasis) } : pose;
     }
+    if (pose.anchored || (pose.tracked && grip.zone)) return { ...pose, heldBody: prop.body, preset: grip.profile };
     const wrist = grip.position.clone().applyQuaternion(rotation).add(position);
     return wrist.distanceToSquared(pose.position) <= .19 ** 2 ? { ...pose, heldBody: prop.body, preset: grip.profile,
       position: wrist, orientation: rotation.multiply(grip.orientation) } : pose;
@@ -480,15 +508,12 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
     if (!held) return false;
     hand.delete(id);
     const { prop } = held;
-    if (held.support) return true;
-    const next = [...hand.entries()].find(([, item]) => item.prop === prop);
-    if (next) {
-      const [owner, replacement] = next;
-      const inverse = replacement.orientation.clone().invert();
+    if (held.partner) {
+      const replacement = held.partner;
+      replacement.partner = null;
       replacement.support = false;
-      replacement.offset.copy(prop.body.position).sub(replacement.point).applyQuaternion(inverse);
-      replacement.rotation.copy(inverse.multiply(new THREE.Quaternion().copy(prop.body.quaternion)));
-      prop.held = owner;
+      rebaseHold(replacement);
+      if (!held.support) prop.held = replacement.id;
       return true;
     }
     prop.held = false;
@@ -509,7 +534,7 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
       world.addBody(prop.body);
       resetPropPose(prop);
     } else {
-      if (prop.held) release(prop.held, false);
+      while (prop.held) release(prop.held, false);
       world.removeBody(prop.body);
     }
     prop.active = prop.object.visible = active;
@@ -812,19 +837,14 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
         continue;
       }
       if (held.gripOffset) held.offset.lerp(held.gripOffset, .19);
-      const target = held.fixedPosition ?? held.offset.clone().applyQuaternion(held.orientation).add(held.point);
-      const ideal = held.fixedOrientation ?? held.orientation.clone().multiply(held.rotation);
-      if (held.grip.profile === 'rim' || held.grip.profile === 'support') {
-        const extra = [...hand.values()].find(item => item.prop === prop && item.support);
-        if (extra) {
-          const span = extra.grip.anchor.clone().sub(held.grip.anchor).applyQuaternion(ideal);
-          const desired = extra.point.clone().sub(held.point);
-          if (desired.lengthSq() > .007) {
-            ideal.premultiply(new THREE.Quaternion().setFromUnitVectors(span.normalize(), desired.normalize()));
-            const middle = held.grip.anchor.clone().lerp(extra.grip.anchor, .5).applyQuaternion(ideal);
-            target.copy(held.point).lerp(extra.point, .5).sub(middle);
-          }
-        }
+      let target = held.fixedPosition ?? held.offset.clone().applyQuaternion(held.orientation).add(held.point);
+      let ideal = held.fixedOrientation ?? held.orientation.clone().multiply(held.rotation);
+      if (held.partner) {
+        const sample = item => ({ anchor: item.grip.anchor,
+          point: item.anchorOffset.clone().applyQuaternion(item.orientation).add(item.point) });
+        const shared = twoHandPose(THREE, sample(held), sample(held.partner), ideal);
+        target = shared.position;
+        ideal = shared.orientation;
       }
       if (prop.def.heavy) {
         const current = new THREE.Quaternion().copy(prop.body.quaternion);
@@ -995,10 +1015,10 @@ export function createBedroomPhysics(THREE, worldRoot, data, node, event, viewer
     return nearest;
   }
 
-  function nearest(point, radius = .12, palm = point) {
+  function nearest(point, radius = .12, palm = point, id) {
     let best, distance = radius;
     for (const prop of props.values()) {
-      if (!prop.active || (prop.held && gripKind(prop) !== 'plate') || prop.soft?.held || !prop.object.visible) continue;
+      if (!prop.active || (prop.held && !otherHand(prop, id)) || prop.soft?.held || !prop.object.visible) continue;
       const surface = gripSurface(THREE, prop.body);
       const gap = Math.min(surface(point), surface(palm) + .015);
       if (gap >= distance || !outsideDrawer(prop, point)) continue;

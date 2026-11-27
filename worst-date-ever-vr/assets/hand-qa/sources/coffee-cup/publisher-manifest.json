@@ -1,0 +1,47 @@
+{
+ "slug": "tea-cup",
+ "triangles": 11900,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "tea-cup.glb",
+   "bytes": 1056556
+  },
+  "blend": {
+   "name": "tea-cup.blend",
+   "bytes": 853559
+  },
+  "fbx": {
+   "name": "tea-cup.fbx",
+   "bytes": 1785388
+  },
+  "obj": {
+   "name": "tea-cup-obj.zip",
+   "bytes": 873988
+  },
+  "usdz": {
+   "name": "tea-cup.usdz",
+   "bytes": 1641490
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.147 x 0.147 x 0.069",
+  "triangles": 11900,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-25",
+  "real_size": "tea cup with saucer, cup 9 cm rim diameter, saucer 14.5 cm, approx. 15 x 15 x 7 cm",
+  "notes": "pink porcelain cup with white polka dots (matches the teapot), cream glaze inside, ear handle at +X, filled with black tea; tea bag inside with its string over the rim and a plain mint tag hanging outside (no text); pink saucer with white rim and dots; 'tea-cup_teacup' (cup with tea and bag) is a separate object with its origin at the centre of its foot (lift along +Z)",
+  "set": "Cozy Kitchen & Food Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

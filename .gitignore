@@ -4,3 +4,18 @@ node_modules/
 .caddy/
 caddy_data/
 caddy_config/
+
+# Local copies of the supplied design packet and reference exports.
+/AGENT_TASK_COPY_PASTE.md
+/GUIDE.md
+/HAND_INTERACTION_MATRIX.csv
+/SCREENSHOT_VISION_EVALUATOR.md
+/SOURCE_PACKS_BY_SCENE.md
+/bedroom-guide-v2.png
+/index.html
+/models/
+/prop_catalog.json
+/worst-date-ever-ai-asset-sourcing-hand-qa.zip
+/worst-date-ever-first-date-speckit-patch.zip
+__pycache__/
+*.pyc

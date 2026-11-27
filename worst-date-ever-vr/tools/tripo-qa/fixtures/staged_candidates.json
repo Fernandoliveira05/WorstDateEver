@@ -1,0 +1,46 @@
+{
+  "schema_version": "tripo-qa-staged-candidates/1",
+  "note": "Existing hand-QA benchmark GLBs mapped to Tripo manifest references. These are NOT Tripo outputs and were not produced from the reference art. QA results describe these staged files only. Paths are project-relative.",
+  "candidates": {
+    "woven-basket": {
+      "path": "assets/hand-qa/candidates/picnic_basket.glb",
+      "catalog_id": "picnic_basket",
+      "expected_sha256": "71c22f10128b5d9638669a7cf576eaec4760457b67044baaba909eecaecdc1fb",
+      "license": "CC0-1.0",
+      "license_source": "assets/hand-qa/sources/picnic_basket/LICENSE.txt",
+      "source_page": "https://grab3d.com/models/food/picnic-basket/"
+    },
+    "checked-blanket": {
+      "path": "assets/hand-qa/candidates/picnic_blanket.glb",
+      "catalog_id": "picnic_blanket",
+      "expected_sha256": "c4075fec5b0f4986c966d10a0ba4d98fc03a69e55ec19f93e39c557a25bbe7d4",
+      "license": "CC0-1.0",
+      "license_source": "assets/hand-qa/sources/picnic_blanket/LICENSE.txt",
+      "source_page": "https://grab3d.com/models/props/picnic-blanket/"
+    },
+    "kombucha-bottle": {
+      "path": "assets/hand-qa/candidates/picnic_kombucha.glb",
+      "catalog_id": "picnic_kombucha",
+      "expected_sha256": "6f92ffbe6ba6ebf7f8fe16ea945ba9019ada567278c9c68bbf01d84c3731548a",
+      "license": "CC0-1.0",
+      "license_source": "assets/hand-qa/sources/picnic_kombucha/LICENSE.txt",
+      "source_page": ""
+    },
+    "vegan-sandwich": {
+      "path": "assets/hand-qa/candidates/picnic_sandwich.glb",
+      "catalog_id": "picnic_sandwich",
+      "expected_sha256": "63379ae1743492ce35de61cf132d2a17b219401e6f18645fbf5d1e6119b35f3f",
+      "license": "CC0-1.0",
+      "license_source": "assets/hand-qa/sources/picnic_sandwich/LICENSE.txt",
+      "source_page": "https://grab3d.com/models/food/sandwich/"
+    },
+    "iclona": {
+      "path": "assets/hand-qa/evidence/PROP-013/webxr-rework-6/phone.glb",
+      "catalog_id": "PROP-013",
+      "expected_sha256": "bf30ff301b22795d3a05c76ad4be6bff6cba174213544f41d05a5882b61e19d4",
+      "license": "PENDING_DOWNLOADED_LICENSE",
+      "license_source": "",
+      "source_page": "https://grab3d.com/models/electronics/smartphone/"
+    }
+  }
+}

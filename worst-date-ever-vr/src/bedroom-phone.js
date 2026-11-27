@@ -1,6 +1,7 @@
 import { candyById } from './candies.mjs';
 import { PHASES, STORAGE_KEY, initialState, transition, validateSave } from './game-machine.mjs';
 import { eligibleProfiles, profiles } from './profiles.mjs';
+import { guidedPhoneButton } from './phone-interaction.mjs';
 
 const WIDTH = 420;
 const HEIGHT = 800;
@@ -68,7 +69,7 @@ export function loadBedroomStory() {
   return initialState();
 }
 
-export function createPhone(THREE, model, data, asset, notify, artwork) {
+export function createPhone(THREE, model, data, asset, notify, artwork, onStartDate) {
   const canvas = document.createElement('canvas');
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
@@ -99,6 +100,15 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   let gesture = null;
   let speech = null;
   let voiceAction = 0;
+  let focus = -1, focusOwner;
+
+  function clearGuide(id) {
+    if (id !== undefined && id !== focusOwner) return;
+    if (focus === -1) return;
+    focus = -1;
+    focusOwner = undefined;
+    draw();
+  }
 
   function save() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* Hosting may disable storage. */ }
@@ -110,6 +120,8 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
     const next = transition(state, { type, value });
     if (next !== state) {
       state = type === 'RESET' ? next : { ...state, ...next };
+      focus = -1;
+      focusOwner = undefined;
       cancelSpeech();
       reply = '';
       save();
@@ -137,11 +149,6 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   function reset() { cancelSpeech(); home = true; dispatch('RESET'); }
 
   function eatCandy(id) { return dispatch('EAT_CANDY', id); }
-
-  function depart() {
-    if (state.phase === PHASES.PREP) dispatch('CHOOSE_SUBSTANCE', items[state.prep || 0][0]);
-    else if (state.phase === PHASES.EXIT) notify(state, null, true);
-  }
 
   function windowTime() {
     return state.windowTime ?? (['wait', 'prep', 'exit', 'aftermath'].includes(state.phase) ? 2 : 0);
@@ -286,7 +293,7 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   function button(label, fn, x, y, w, h, color = teal, ink = pearl, size = 23) {
     box(x, y, w, h, color);
     text(label, x + w / 2, y + h / 2, size, ink, 700, 'center');
-    hits.push({ x, y, w, h, fn });
+    hits.push({ x, y, w, h, fn, anchorX: x + w / 2, anchorY: y + h / 2 });
   }
 
   function backdrop() {
@@ -351,11 +358,11 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   }
 
   function launcher() {
-    const open = () => { home = false; draw(); };
+    const open = () => { home = false; focus = -1; focusOwner = undefined; draw(); };
     box(109, 138, 202, 191, '#39243e', 40);
     heartMark(203, 158, 143);
     title('Deu Ruim', 210, 379, 54);
-    hits.push({ x: 83, y: 124, w: 254, h: 291, fn: open });
+    hits.push({ x: 83, y: 124, w: 254, h: 291, fn: open, anchorX: 210, anchorY: 237 });
     button('Abrir', open, 44, 446, 332, 62, rose, dark, 27);
     button('Janela · ' + ['Entardecer', 'Dia', 'Noite'][windowTime()], cycleWindow, 44, 578, 332, 58);
     button(state.reducedIntensity ? 'Efeitos · Suaves' : 'Efeitos · Padrão', toggleEffects,
@@ -384,7 +391,7 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
       ctx.stroke();
     }
     if (label) text(label, cx, cy + 63, 18, pearl, 720, 'center');
-    hits.push({ x: cx - 51, y: cy - 47, w: 102, h: label ? 125 : 94, fn });
+    hits.push({ x: cx - 51, y: cy - 47, w: 102, h: label ? 125 : 94, fn, anchorX: cx, anchorY: cy });
   }
 
   function browse() {
@@ -410,7 +417,7 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   }
 
   function app() {
-    const goHome = () => { cancelSpeech(); home = true; draw(); };
+    const goHome = () => { cancelSpeech(); home = true; focus = -1; focusOwner = undefined; draw(); };
     if (state.phase !== PHASES.INTRO) {
       button('‹', goHome, 22, 62, 55, 50, '#422641', pearl, 35);
       title('Deu Ruim', 214, 87, 36);
@@ -461,13 +468,13 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
         copy('Leve algo até a bandeja ou siga com a escolha atual.', 30, 242, 355, 24, pearl);
         text(items[state.prep || 0][1], 210, 387, 29, pearl, 700, 'center');
         button('TROCAR ROUPA', appearance, 23, 516, 374, 62, rose, dark);
-        button('PRONTO', depart, 23, 616, 374, 64);
+        button('PRONTO', () => dispatch('CHOOSE_SUBSTANCE', items[state.prep || 0][0]), 23, 616, 374, 64);
         break;
       case PHASES.EXIT:
         text('O encontro espera.', 210, 247, 32, pearl, 790, 'center');
         const candy = candyById(state.candy);
-        text(candy ? candy.name : 'Sem doce · máquina no corredor', 210, 310, 21, pearl, 650, 'center');
-        button('PARTIR', depart, 23, 531, 374, 65);
+        text(candy ? candy.name : 'Sem doce · opcional', 210, 310, 21, pearl, 650, 'center');
+        button('IR AO ENCONTRO', () => onStartDate(state), 23, 531, 374, 65);
         button('RECOMEÇAR', reset, 23, 620, 374, 65);
         break;
       default:
@@ -487,6 +494,21 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
     backdrop();
     if (home) launcher();
     else app();
+    const selected = hits[focus];
+    if (selected) {
+      const { x, y, w, h } = selected;
+      ctx.save();
+      ctx.strokeStyle = '#fff0b7';
+      ctx.shadowColor = '#ffad8c';
+      ctx.shadowBlur = 15;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.roundRect(x - 3, y - 3, w + 6, h + 6, 13);
+      ctx.stroke();
+      ctx.fillStyle = '#fff1b620';
+      ctx.fill();
+      ctx.restore();
+    }
     statusBar();
     box(132, 762, 156, 6, pearl, 3);
     ctx.restore();
@@ -498,6 +520,27 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
     const x = (local.x / data.size[0] + .5) * WIDTH;
     const y = (.5 - local.y / data.size[1]) * HEIGHT;
     return { x, y, z: local.z, inside: x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT };
+  }
+
+  function guide(id, at) {
+    const next = at ? guidedPhoneButton(at, hits, focusOwner === id ? focus : -1) : -1;
+    if (next < 0) { clearGuide(id); return null; }
+    if (next !== focus || id !== focusOwner) {
+      focus = next;
+      focusOwner = id;
+      draw();
+    }
+    const { anchorX: x, anchorY: y } = hits[next];
+    return screen.localToWorld(new THREE.Vector3((x / WIDTH - .5) * data.size[0],
+      (.5 - y / HEIGHT) * data.size[1], 0));
+  }
+
+  function pokeTarget(id, at) {
+    const current = focusOwner === id ? focus : -1;
+    const target = guidedPhoneButton(at, hits, current);
+    if (target < 0) return { ...at, inside: at.x >= 0 && at.x < WIDTH && at.y >= 0 && at.y < HEIGHT };
+    const { anchorX: x, anchorY: y } = hits[target];
+    return { x, y, inside: true };
   }
 
   function press(id, at) {
@@ -539,6 +582,6 @@ export function createPhone(THREE, model, data, asset, notify, artwork) {
   artwork.then(({ heart }) => { images.heart = heart; draw(); }).catch(console.warn);
   for (const [id, name] of Object.entries(portrait)) load(id, `Characters/${name}-Portrait.png`);
   draw();
-  return { screen, position, press, touch, drag, release, getState: () => state, windowTime, cycleWindow, toggleEffects, selectItem,
-    appearance, depart, eatCandy, reset, cancelSpeech, draw };
+  return { screen, position, guide, clearGuide, pokeTarget, press, touch, drag, release, getState: () => state, windowTime, cycleWindow, toggleEffects, selectItem,
+    appearance, eatCandy, reset, cancelSpeech, draw };
 }

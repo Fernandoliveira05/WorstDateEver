@@ -1,0 +1,47 @@
+{
+  "schema_version": "hand-qa-source/1",
+  "asset_id": "beer-mug",
+  "manifest_reference": "assets/tripo/references/wde-05-barzinho-candidates/01-beer-mug.png",
+  "source": {
+    "provider": "Grab3D",
+    "page": "https://grab3d.com/models/props/camping-mug/",
+    "slug": "camping-mug",
+    "category": "props",
+    "license": "CC0-1.0",
+    "download_url": "https://grab3d.com/dl/camping-mug/camping-mug.glb",
+    "license_url": "https://grab3d.com/dl/camping-mug/LICENSE.txt",
+    "manifest_url": "https://grab3d.com/dl/camping-mug/manifest.json"
+  },
+  "files": {
+    "source_glb": {
+      "path": "assets/hand-qa/sources/beer-mug/camping-mug.glb",
+      "sha256": "b9a629867ce6643c1146735da6e562c369e4be71c8f195eeb23c503c7be02e2c",
+      "bytes": 703448
+    },
+    "license": {
+      "path": "assets/hand-qa/sources/beer-mug/LICENSE.txt",
+      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
+      "bytes": 760
+    },
+    "publisher_manifest": {
+      "path": "assets/hand-qa/sources/beer-mug/publisher-manifest.json",
+      "sha256": "f4c38d8dc6c1d09944751086960cffbb1c5b5fcd54f5caedd21b45256775a498",
+      "bytes": 1427
+    }
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/beer-mug.glb",
+    "sha256": "36ffaa356b40abf1285158f8c8a2227b98b04aab5115b7180c904399273dd32d",
+    "bytes": 544940,
+    "adapted": true,
+    "split_record": "assets/hand-qa/sources/beer-mug/split-record.json"
+  },
+  "publisher": {
+    "triangles": 8304,
+    "texture_px": 2048,
+    "dimensions_m": "0.240 x 0.218 x 0.087",
+    "real_size": "set of three enamel camping mugs, each approx. 9 cm high and 9 cm wide (set approx. 22 x 20 x 9 cm)",
+    "notes": "front faces -Y; speckled enamel mugs in cream, coral and sky blue with dark rolled rims and body coloured handles, cream inside; the coral mug holds cocoa with two marshmallows; no text"
+  },
+  "note": "Extracted one object from a merged Grab3D set. Benchmark candidate only; not a Tripo output."
+}

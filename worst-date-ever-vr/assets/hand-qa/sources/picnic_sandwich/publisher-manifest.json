@@ -1,0 +1,47 @@
+{
+ "slug": "sandwich",
+ "triangles": 11256,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "sandwich.glb",
+   "bytes": 1326948
+  },
+  "blend": {
+   "name": "sandwich.blend",
+   "bytes": 1285870
+  },
+  "fbx": {
+   "name": "sandwich.fbx",
+   "bytes": 2261612
+  },
+  "obj": {
+   "name": "sandwich-obj.zip",
+   "bytes": 1374297
+  },
+  "usdz": {
+   "name": "sandwich.usdz",
+   "bytes": 2003804
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.245 x 0.112 x 0.079",
+  "triangles": 11256,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "real_size": "club sandwich cut diagonally, two halves, approx. 25 x 11 x 8 cm",
+  "notes": "three golden toasted slices with light crumb at the cut, wavy lettuce, tomato slices, cheese with softly drooping corners and pink ham; a wooden toothpick with a coloured ball in each half; both cut faces point to the front; the right half 'sandwich_right' is a separate object (origin at its bottom centre) so it can be picked up; no text",
+  "set": "Cozy Kitchen & Food Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

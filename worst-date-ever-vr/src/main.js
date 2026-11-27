@@ -14,6 +14,7 @@ import { createScenery } from './bedroom-scenery.js';
 import { createAvatar } from './bedroom-avatar.js';
 import { trackedHandBasis } from './avatar-hands.js';
 import { phoneGrip } from './grip-pose.mjs';
+import { phonePokeCrossing } from './phone-interaction.mjs';
 import { organizeBedroomObjects } from './scene-objects.js';
 import { createCurtain } from './bedroom-curtain.js';
 import { createVenueMetrics } from './date/metrics.js';
@@ -56,7 +57,15 @@ AFRAME.registerComponent('wde-bedroom', {
         }),
         loadScene()
       ]);
-      this.bedroom = setup(scene, model.scene, metadata);
+      let benchmark;
+      if (import.meta.env.DEV) {
+        const asset = new URLSearchParams(location.search).get('assetQA');
+        if (asset) {
+          const { prepareBenchmark } = await import('../tools/hand-qa/stage.js');
+          benchmark = await prepareBenchmark(loader, model.scene, metadata, asset);
+        }
+      }
+      this.bedroom = setup(scene, model.scene, metadata, benchmark);
       loading.hidden = true;
       scene.emit('bedroom-ready');
     } catch (error) {
@@ -72,7 +81,7 @@ AFRAME.registerComponent('wde-bedroom', {
   }
 });
 
-function setup(scene, root, data) {
+function setup(scene, root, data, benchmark) {
   const room = document.getElementById('room');
   const camera = document.getElementById('camera');
   const rig = document.getElementById('rig');
@@ -184,7 +193,7 @@ function setup(scene, root, data) {
     for (const light of defaultFill) light.object3D.visible = visible;
   }
   const avatar = createAvatar(THREE, scene.object3D, loaderModels);
-  const phone = createPhone(THREE, node(data.phone.id), data.phone, assets, updateStory, brandArt);
+  const phone = createPhone(THREE, node(data.phone.id), data.phone, assets, updateStory, brandArt, state => { void date?.start(state); });
   const menu = createGameMenu(THREE, scene, brandArt, {
     cycleWindow: phone.cycleWindow, toggleEffects: phone.toggleEffects,
     quit: () => { void scene.xrSession?.end().catch(console.warn); }
@@ -277,7 +286,7 @@ function setup(scene, root, data) {
     if (kind === 'door-locked') show('A porta só abre à noite.');
     if (kind === 'door') {
       upgrade.scare(elapsed, forceHaunt);
-      show(phase === 'exit' ? 'O encontro me espera. Vou até o fim do corredor.' :
+      show(phase === 'exit' ? 'Posso buscar um doce ou iniciar o encontro pelo celular.' :
         'Tem alguma coisa estranha nesse corredor.');
     }
     if (kind === 'outfit') {
@@ -305,12 +314,8 @@ function setup(scene, root, data) {
     upgrade.setReducedEffects(requestedReduced);
   }
 
-  function updateStory(state, reply, retry = false) {
+  function updateStory(state, reply) {
     if (state.phase !== 'exit') date?.cancelStart();
-    else if (retry) {
-      if (upgrade.atExit(viewer().getWorldPosition(new THREE.Vector3()))) void date?.start(state);
-      else show('Siga pelo corredor até a máquina. Lá você pode partir com ou sem doce.', 6);
-    }
     menu.settings({ windowTime: phone.windowTime(), reducedIntensity: state.reducedIntensity });
     const byStory = ['wait', 'prep', 'exit', 'aftermath'].includes(state.phase) ? 2 : 0;
     requestedTime = forceHaunt ? 2 : state.windowTime ?? byStory;
@@ -328,7 +333,7 @@ function setup(scene, root, data) {
         sound.play(true, .19);
       }
       if (state.phase === 'wait') show('Já escureceu. Tá quase na hora.');
-      if (state.phase === 'exit') show('O encontro me espera. Posso partir perto da máquina no corredor.', 6);
+      if (state.phase === 'exit') show('Inicie o encontro pelo celular. Se quiser um doce, vá até a máquina no corredor.', 6);
       if (state.phase === 'aftermath') show('A noite saiu do plano.');
       phase = state.phase;
     }
@@ -345,12 +350,7 @@ function setup(scene, root, data) {
   function shopAction(action) {
     const position = viewer().getWorldPosition(new THREE.Vector3());
     const state = phone.getState();
-    if (!upgrade.atExit(position) || scenery.time !== 2) return false;
-    if (action === 'depart') {
-      if (state.phase === 'exit') phone.depart();
-      else show('Combine o encontro pelo celular antes de partir.', 4);
-      return true;
-    }
+    if (!upgrade.atCandyMachine(position) || scenery.time !== 2) return false;
     const candy = candyById(action);
     if (!candy) return false;
     if (state.candy) {
@@ -465,17 +465,23 @@ function setup(scene, root, data) {
   }
 
   function phoneTarget(id, point) {
-    if (!canTouchPhone(id)) return null;
+    if (!canTouchPhone(id)) return phone.guide(id, null);
+    const at = phone.position(point);
+    const close = at.z >= -.025 && at.z <= .21;
+    const direct = close && !id.startsWith('controller-');
+    const project = () => phone.screen.localToWorld(phone.screen.worldToLocal(point.clone()).setZ(0));
+    if (direct && at.inside) return phone.guide(id, at) ?? project();
     const aimed = pointOnScreen();
-    if (aimed && phone.position(aimed).inside && aimed.distanceTo(ray.ray.origin) < .88) return aimed;
-    const local = phone.screen.worldToLocal(point.clone());
-    if (local.z < -.024) return null;
-    const [width, height] = data.phone.size;
-    const projected = new THREE.Vector3(
-      THREE.MathUtils.clamp(local.x, .001 - width / 2, width / 2 - .001),
-      THREE.MathUtils.clamp(local.y, .001 - height / 2, height / 2 - .001), 0);
-    if (local.distanceTo(projected) > .24) return null;
-    return phone.screen.localToWorld(projected);
+    if (direct) {
+      const guided = phone.guide(id, at);
+      if (guided) return guided;
+    }
+    if (aimed && aimed.distanceTo(ray.ray.origin) < .88) {
+      const aim = phone.position(aimed);
+      const guided = phone.guide(id, aim);
+      if (guided || aim.inside) return guided ?? aimed;
+    }
+    return close && at.inside ? phone.guide(id, at) ?? project() : phone.guide(id, null);
   }
 
   function samplePhoneTip(id, tip) {
@@ -487,7 +493,7 @@ function setup(scene, root, data) {
     const at = phone.position(tip);
     const prior = phoneTips.get(id);
     const armed = at.z > .034 || Boolean(prior?.armed);
-    phoneTips.set(id, { point: tip.clone(), armed });
+    phoneTips.set(id, { point: tip.clone(), at, armed });
     if (handPokes.has(id)) {
       if (at.z > .027 || at.z < -.075) {
         phone.release(id, handPokes.get(id), at.z > .027);
@@ -498,13 +504,13 @@ function setup(scene, root, data) {
       }
       return;
     }
-    if (!prior?.armed || at.z > .014 || at.z < -.09 || prior.point.distanceToSquared(tip) > .18 ** 2) return;
-    const before = phone.position(prior.point);
-    const contact = before.z > .014 ?
-      phone.position(prior.point.clone().lerp(tip, (before.z - .014) / (before.z - at.z))) : at;
-    if (contact.inside) {
+    if (!prior?.armed || at.z > .014 || prior.point.distanceToSquared(tip) > .18 ** 2) return;
+    const normal = new THREE.Vector3(0, 0, 1).applyQuaternion(phone.screen.getWorldQuaternion(new THREE.Quaternion()));
+    const contact = phonePokeCrossing(prior.at, at, prior.point.clone().sub(tip).dot(normal));
+    if (contact) {
       phoneTips.get(id).armed = false;
-      if (phone.touch(id, contact)) handPokes.set(id, contact);
+      const target = phone.pokeTarget(id, contact);
+      if (phone.touch(id, target)) handPokes.set(id, target);
     }
   }
 
@@ -753,9 +759,11 @@ function setup(scene, root, data) {
     const gamepad = source?.gamepad;
     const trigger = gamepad?.buttons[0]?.pressed ? Math.max(.6, gamepad.buttons[0].value ?? 0) : gamepad?.buttons[0]?.value ?? 0;
     const squeeze = gamepad?.buttons[1]?.pressed ? Math.max(.6, gamepad.buttons[1].value ?? 0) : gamepad?.buttons[1]?.value ?? 0;
-    control.avatarPose = grip ? { position: grip.position, orientation: grip.orientation, trigger, squeeze } : null;
+    control.avatarPose = grip ? { position: grip.position, orientation: grip.orientation, trigger, squeeze,
+      anchored: grip.hasGrip && !source?.hand } : null;
     control.pointerTarget = control.menuPoint = null;
     if (!aim || !grip) {
+      phone.clearGuide(id);
       displayRay(control, null);
       if (control.action != null) finish(id, false, false);
       venue?.handContact(id, null);
@@ -778,6 +786,7 @@ function setup(scene, root, data) {
       menuHover ??= menuHit;
       control.menuPoint = menuHit.point;
     }
+    if (menuHit || venue) phone.clearGuide(id);
     const screenHit = !menuHit && !venue && phoneTarget(id, aim.position);
     displayRay(control, aim, menuHit?.distance ?? 2.2);
     if (screenHit) {
@@ -798,8 +807,9 @@ function setup(scene, root, data) {
     if (control.action == null) {
       let grabbed;
       if (pressed[1] && !previous[1]) {
-        if (venue) grabbed = venue.press(id, ray, grip.orientation, grip.position, true);
-        else if (scenePhysics.grab(id, grip.position, grip.orientation, scenePhysics.nearest(grip.position, .10))) {
+        if (venue) grabbed = venue.press(id, ray, grip.orientation, grip.contact, true, grip.position);
+        else if (scenePhysics.grab(id, grip.contact, grip.orientation, scenePhysics.nearest(grip.contact, .10, grip.position, id),
+          { from: grip.position })) {
           inputs.set(id, { distance: 0 });
           grabbed = true;
         }
@@ -816,24 +826,26 @@ function setup(scene, root, data) {
     }
     control.buttons = pressed;
     if (venue) {
-      venue.move(id, ray, grip.orientation, grip.position);
-      venue.handContact(id, grip.position.clone().addScaledVector(ray.ray.direction, .065));
+      venue.move(id, ray, grip.orientation, grip.contact);
+      venue.handContact(id, grip.contact);
     }
     else {
-      const current = grip.position.clone().addScaledVector(ray.ray.direction, .055);
+      const current = grip.contact;
       let doorContact;
       if (control.contactPoint && !scenePhysics.hand.has(id)) {
         const touched = contactBedroom(control.contactPoint, current, control.contactTime, .035);
         doorContact = scenePhysics.pushDoor(current, control.doorPoint ?? control.contactPoint, .042, Boolean(control.doorPoint));
-        if (touched && !doorContact) control.avatarPose.position = grip.position.clone().add(touched.sub(current));
+        if (touched && !doorContact && !control.avatarPose.anchored)
+          control.avatarPose.position = grip.position.clone().add(touched.sub(current));
       }
       control.doorPoint = doorContact;
-      if (doorContact) control.avatarPose.position = grip.position.clone().add(doorContact.clone().sub(current));
+      if (doorContact && !control.avatarPose.anchored)
+        control.avatarPose.position = grip.position.clone().add(doorContact.clone().sub(current));
       control.contactPoint = current;
       control.contactTime = elapsed;
       const hold = inputs.get(id);
       if (hold) scenePhysics.updateGrab(id, hold.distance ? ray.ray.at(hold.distance, new THREE.Vector3()) :
-        grip.position, grip.orientation);
+        grip.contact, grip.orientation);
     }
     if (side === 'right' && !venue) {
       const pressed = Boolean(gamepad?.buttons[5]?.pressed);
@@ -851,7 +863,7 @@ function setup(scene, root, data) {
       }
       control.gestureHeld = gestureHeld;
     }
-    return grip.position;
+    return grip.contact;
   }
 
   function handAim(tip, control, screenHit, ownDirection, menuHit) {
@@ -917,6 +929,7 @@ function setup(scene, root, data) {
       control.marker.visible = false;
       controllerInput(side, null, !webHand.active);
       if (!webHand.active) {
+        phone.clearGuide(side);
         const seen = trackedHands.get(side);
         if (seen !== undefined && elapsed - seen > HAND_TRACKING_GRACE) {
           if (inputs.has(side) || phoneRays.has(side)) finish(side, false, false);
@@ -956,6 +969,7 @@ function setup(scene, root, data) {
       const selectEdge = nativeSelect && !control.handSelect;
       control.handSelect = nativeSelect;
       if (menuHit) menuHover ??= menuHit;
+      if (menuHit) phone.clearGuide(side);
       control.menuPoint = menuHit?.point;
       if (!menuHit && nativeAim) pointRay(THREE, ray, nativeAim);
       const nativeScreen = !menuHit && nativeAim && phoneTarget(side, indexTipWorld);
@@ -971,7 +985,8 @@ function setup(scene, root, data) {
         !phoneRays.has(side) && !inputs.has(side)) {
         const palm = wristPosition.clone().lerp(pinchPosition, .55);
         if (screenHit) pressPhoneRay(side, screenHit);
-        else if (webHand.justPinched && !scenePhysics.grab(side, pinchPosition, orientation, scenePhysics.nearest(pinchPosition, .073, palm)) && aiming) {
+        else if (webHand.justPinched && !scenePhysics.grab(side, pinchPosition, orientation,
+          scenePhysics.nearest(pinchPosition, .073, palm, side), { from: palm }) && aiming) {
           if (!pressAt(side, true, orientation) && aiming.spot) control.landing = aiming.spot;
         }
       }
@@ -1096,7 +1111,7 @@ function setup(scene, root, data) {
       const menuSelected = (hand.justPinched || (nativeSelect && !control.handSelect)) && activateXrMenu(menuHit);
       control.handSelect = nativeSelect;
       if (!menuSelected && hand.justPinched && !dateKeys.has(side))
-        stage.press(side, ray, rotation, hand.pinchPosition, false);
+        stage.press(side, ray, rotation, hand.pinchPosition, false, hand.wristPosition);
       if (hand.pinched) stage.move(side, ray, rotation, hand.pinchPosition);
       else {
         stage.release(side);
@@ -1176,6 +1191,7 @@ function setup(scene, root, data) {
     }
     applyPhoneGrip();
     scenePhysics.tick(delta);
+    benchmark?.tick?.(scenePhysics, delta);
     scenery.tick(delta);
     const position = viewer().getWorldPosition(new THREE.Vector3());
     if (scenery.time !== requestedTime && !upgrade.corridorContains(position)) applyRoomTime(position);
@@ -1211,8 +1227,11 @@ function setup(scene, root, data) {
       if (!pose) continue;
       const basis = pose.tracked ? trackedHandBasis(THREE, pose.tracked) : pose.orientation;
       if (!basis) continue;
-      const eye = viewer().getWorldPosition(new THREE.Vector3());
-      const fixed = phoneGrip(THREE, pose.position, basis, side, eye);
+      const view = viewer();
+      const eye = view.getWorldPosition(new THREE.Vector3());
+      const eyeUp = new THREE.Vector3(0, 1, 0).applyQuaternion(view.getWorldQuaternion(new THREE.Quaternion()));
+      const fixed = phoneGrip(THREE, pose.position, basis, side, eye, eyeUp,
+        new THREE.Vector3().copy(phone.body.position));
       scenePhysics.fixGrip(id, fixed.position, fixed.orientation, fixed.basis);
     }
   }
@@ -1226,7 +1245,7 @@ function setup(scene, root, data) {
       if (!pose) continue;
       const id = pose.tracked ? side : 'controller-' + side;
       const gesture = side === 'right' && elapsed < middleFingerUntil ? 'middle_finger' : null;
-      poses[side] = venue ? { ...pose, heldBody: venue.heldBody(id), gesture } :
+      poses[side] = venue ? venue.heldPose(id, { ...pose, gesture }) :
         scenePhysics.handOnObject(id, pose);
       if (!venue && !poses[side].heldBody) {
         const phoneHit = controls[side].pointerTarget;
@@ -1253,9 +1272,9 @@ function setup(scene, root, data) {
         samplePhoneTip('controller-' + side, control.avatarPose ? origin : null);
       if (!origin || !control.line.visible) continue;
       if (poses[side]?.heldBody) { displayRay(control, null); continue; }
-      control.line.position.copy(origin);
+      if (!poses[side]?.anchored) control.line.position.copy(origin);
       if (!rayTargets[side]) continue;
-      const direction = rayTargets[side].sub(origin);
+      const direction = rayTargets[side].sub(control.line.position);
       control.line.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, -1), direction.clone().normalize());
       control.line.scale.z = direction.length();
     }
@@ -1312,6 +1331,7 @@ function setup(scene, root, data) {
     for (const id of phoneRays.keys()) phone.release(id, { inside: false }, false);
     phoneRays.clear();
     phoneTips.clear();
+    phone.clearGuide();
     for (const id of handPokes.keys()) phone.release(id, { inside: false }, false);
     handPokes.clear();
     phone.cancelSpeech();
@@ -1370,6 +1390,7 @@ function setup(scene, root, data) {
         for (const id of handPokes.keys()) phone.release(id, { inside: false }, false);
         phoneRays.clear();
         phoneTips.clear();
+        phone.clearGuide();
         inputs.clear();
         handPokes.clear();
         previous.clear();
@@ -1404,9 +1425,9 @@ function setup(scene, root, data) {
       sound.setRoomActive(!stage);
       document.body.classList.toggle('first-date', Boolean(stage));
     },
-    seat(position) {
+    seat(position, height) {
       if (!immersive) {
-        locateDesktop(position.clone().setY(1.43), new THREE.Vector3(0, -.10, -1).normalize());
+        locateDesktop(position.clone().setY(height), new THREE.Vector3(0, height < 1 ? -.21 : -.10, -1).normalize());
         return;
       }
       const head = viewer();
@@ -1415,7 +1436,7 @@ function setup(scene, root, data) {
       const forward = head.getWorldDirection(new THREE.Vector3()).setY(0).normalize();
       if (forward.lengthSq() > .01) rigObject.rotateY(Math.atan2(forward.x, -forward.z));
       // Tracking remains native. Calibrate the parent rig around the viewer.
-      const goal = position.clone().setY(1.43);
+      const goal = position.clone().setY(height);
       rigObject.position.add(goal.sub(rigObject.localToWorld(headLocal)));
     }
   });
@@ -1423,7 +1444,7 @@ function setup(scene, root, data) {
   menu.show();
   menu.follow(viewer(), false);
   if (phone.getState().phase === 'intro') show('Preciso arrumar uma namorada. Deixa eu ver o que tem no meu celular.', 9);
-  return { tick, phone, scenery, scenePhysics, root, node, date, avatar, menu };
+  return { tick, phone, scenery, scenePhysics, root, node, date, avatar, menu, benchmark };
 }
 
 function makeCaption(THREE, camera) {

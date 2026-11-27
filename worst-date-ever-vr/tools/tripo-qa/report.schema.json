@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tripo-qa-report.schema.json",
+  "title": "Tripo generated-asset QA report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "asset_id",
+    "model",
+    "reference",
+    "captures_json",
+    "renderer",
+    "contact_sheet",
+    "geometry",
+    "evidence",
+    "scores",
+    "score_source",
+    "reviewer",
+    "review_coverage",
+    "defects",
+    "missing_evidence",
+    "decision",
+    "next_actions",
+    "acceptance",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {"const": "tripo-qa-report/1"},
+    "asset_id": {"type": "string", "minLength": 1},
+    "model": {"$ref": "#/$defs/file"},
+    "reference": {"oneOf": [{"$ref": "#/$defs/file"}, {"type": "null"}]},
+    "captures_json": {"$ref": "#/$defs/file"},
+    "renderer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["engine", "blender_version", "resolution", "projection", "angles"],
+      "properties": {
+        "engine": {"type": ["string", "null"]},
+        "blender_version": {"type": ["string", "null"]},
+        "resolution": {"type": "integer", "minimum": 256},
+        "projection": {"type": "string"},
+        "angles": {"type": "array", "items": {"type": "string"}, "minItems": 8}
+      }
+    },
+    "contact_sheet": {"oneOf": [{"$ref": "#/$defs/file"}, {"type": "null"}]},
+    "geometry": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "path_relative", "sha256", "summary"],
+          "properties": {
+            "path": {"type": "string"},
+            "path_relative": {"type": "string"},
+            "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "summary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "dimensions_m",
+                "max_dimension",
+                "triangles",
+                "vertices",
+                "mesh_objects",
+                "unique_materials",
+                "images",
+                "non_manifold_edges",
+                "boundary_edges",
+                "degenerate_faces"
+              ],
+              "properties": {
+                "dimensions_m": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+                "max_dimension": {"type": "number"},
+                "triangles": {"type": "integer", "minimum": 0},
+                "vertices": {"type": "integer", "minimum": 0},
+                "mesh_objects": {"type": "integer", "minimum": 0},
+                "unique_materials": {"type": "integer", "minimum": 0},
+                "images": {"type": "integer", "minimum": 0},
+                "non_manifold_edges": {"type": "integer", "minimum": 0},
+                "boundary_edges": {"type": "integer", "minimum": 0},
+                "degenerate_faces": {"type": "integer", "minimum": 0}
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "angle",
+          "filename",
+          "path",
+          "path_relative",
+          "sha256",
+          "width",
+          "height",
+          "mean_luma",
+          "stddev_luma",
+          "is_reviewable"
+        ],
+        "properties": {
+          "angle": {"type": "string"},
+          "filename": {"type": "string"},
+          "path": {"type": "string"},
+          "path_relative": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "width": {"type": "integer", "minimum": 1},
+          "height": {"type": "integer", "minimum": 1},
+          "mean_luma": {"type": "number"},
+          "stddev_luma": {"type": "number"},
+          "is_reviewable": {"type": "boolean"}
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "silhouette",
+        "materials",
+        "detail",
+        "scale",
+        "topology_artifacts",
+        "completeness",
+        "style_match"
+      ],
+      "properties": {
+        "silhouette": {"$ref": "#/$defs/score"},
+        "materials": {"$ref": "#/$defs/score"},
+        "detail": {"$ref": "#/$defs/score"},
+        "scale": {"$ref": "#/$defs/score"},
+        "topology_artifacts": {"$ref": "#/$defs/score"},
+        "completeness": {"$ref": "#/$defs/score"},
+        "style_match": {"$ref": "#/$defs/score"}
+      }
+    },
+    "score_source": {"enum": ["none", "manual", "vision_model"]},
+    "reviewer": {"type": ["string", "null"]},
+    "review_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_images", "attested_images", "complete", "note"],
+      "properties": {
+        "required_images": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "attested_images": {"type": "array", "items": {"type": "string"}},
+        "complete": {"type": "boolean"},
+        "note": {"type": "string"}
+      }
+    },
+    "defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["image", "region", "severity", "defect", "fix"],
+        "properties": {
+          "image": {"type": "string", "minLength": 1},
+          "region": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["minor", "major", "blocking"]},
+          "defect": {"type": "string", "minLength": 1},
+          "fix": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "missing_evidence": {"type": "array", "items": {"type": "string"}},
+    "decision": {
+      "enum": [
+        "REJECT",
+        "REWORK",
+        "MISSING_EVIDENCE",
+        "VISION_PASS_PENDING_HUMAN",
+        "APPROVED_BY_HUMAN"
+      ]
+    },
+    "next_actions": {"type": "array", "items": {"type": "string"}},
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "minimum_score_per_axis",
+        "reference_required",
+        "all_eight_views_required",
+        "distinct_views_required",
+        "blocking_defect_rejects",
+        "maximum_decision"
+      ],
+      "properties": {
+        "axes": {"type": "array", "items": {"type": "string"}, "minItems": 7},
+        "minimum_score_per_axis": {"type": "integer", "minimum": 1, "maximum": 5},
+        "reference_required": {"type": "boolean"},
+        "all_eight_views_required": {"type": "boolean"},
+        "distinct_views_required": {"type": "boolean"},
+        "blocking_defect_rejects": {"type": "boolean"},
+        "maximum_decision": {"type": "string"}
+      }
+    },
+    "notes": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "path_relative", "sha256", "bytes"],
+      "properties": {
+        "path": {"type": "string"},
+        "path_relative": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "bytes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "score": {"oneOf": [{"type": "integer", "minimum": 1, "maximum": 5}, {"type": "null"}]}
+  }
+}

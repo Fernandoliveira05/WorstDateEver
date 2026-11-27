@@ -357,7 +357,7 @@ export function upgradeBedroom(THREE, root, original, node) {
       return (Math.abs(x - corridorX) < .74 && z > 3.34 && z < 5.76) ||
         (x > corridorEnd && x < -2.23 && Math.abs(z - hallZ) < .72);
     },
-    atExit({ x, z }) { return Math.abs(z - hallZ) < .52 && x > corridorEnd && x < corridorEnd + 1.48; },
+    atCandyMachine({ x, z }) { return Math.abs(z - hallZ) < .52 && x > corridorEnd && x < corridorEnd + 1.48; },
     tick(delta, elapsed, phoneIdle, player, doorBlocks) {
       bedside.tick(elapsed);
       additions.tick(delta, elapsed);

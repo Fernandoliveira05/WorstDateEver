@@ -82,6 +82,15 @@ test('browser matches the golden scenarios used by Unity', () => {
   }
 });
 
+test('Caio retains the saved venue ID and uses picnic presentation and props', () => {
+  const caio = content('venues').venues.find(venue => venue.matchId === 'caio');
+  assert.equal(caio.id, 'cafe');
+  assert.equal(caio.sceneVariant, 'picnic');
+  assert.equal(caio.ambientTheme, 'park');
+  const picnicBeats = dialogue.beats.filter(beat => beat.personaId === 'caio' && beat.prop);
+  assert.deepEqual(picnicBeats.map(beat => beat.prop), ['picnic_kombucha', 'picnic_sandwich']);
+});
+
 test('an active date restores its beat and deterministic event sequence', () => {
   const options = { sessionId: 'resume', seed: 1917, catalog, persona: personas[1], dialogue, eventConfig: fastEvents };
   const first = createDateDirector(entry, options);

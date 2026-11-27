@@ -15,12 +15,17 @@ test('controller model uses grip independently from the pointing ray', () => {
     frame: { getPose: space => ({ transform: space }) }
   };
   const both = controllerSpaces(THREE, scene, rig, { gripSpace, targetRaySpace }, 'right');
-  assert.ok(both.position.distanceTo(new THREE.Vector3(.7, 1.245, 1.8)) < 1e-7);
+  const left = controllerSpaces(THREE, scene, rig, { gripSpace, targetRaySpace }, 'left');
+  assert.ok(both.contact.distanceTo(new THREE.Vector3(.7, 1.2, 1.8)) < 1e-7);
+  assert.ok(both.position.distanceTo(new THREE.Vector3(.7, 1.308, 1.777)) < 1e-7);
+  assert.ok(left.position.distanceTo(new THREE.Vector3(.7, 1.308, 1.823)) < 1e-7);
+  assert.equal(both.hasGrip, true);
   const ray = new THREE.Raycaster();
   pointRay(THREE, ray, both.aim);
   assert.ok(ray.ray.origin.distanceTo(new THREE.Vector3(.5, 1.2, 1.9)) < 1e-7);
   const fallback = controllerSpaces(THREE, scene, rig, { targetRaySpace }, 'left');
   assert.ok(fallback.position.distanceTo(new THREE.Vector3(.59, 1.182, 1.9)) < 1e-7);
+  assert.equal(fallback.hasGrip, false);
 });
 
 test('hand geometry selects wrist and finger influences and keeps other body faces out', () => {
@@ -32,7 +37,7 @@ test('hand geometry selects wrist and finger influences and keeps other body fac
   ], 4));
   geometry.setAttribute('skinWeight', new THREE.Float32BufferAttribute(
     Array.from({length:6}, () => [1,0,0,0]).flat(), 4));
-  geometry.setIndex([0,1,2, 3,4,5]);
+  geometry.setIndex([0,1,2, 3,4,5, 0,1,3]);
   assert.deepEqual(handTriangles(geometry, [torso,wrist,finger], wrist), [0,1,2]);
 });
 

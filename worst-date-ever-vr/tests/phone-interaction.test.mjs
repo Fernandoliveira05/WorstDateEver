@@ -4,13 +4,32 @@ import {
   TAP_DEBOUNCE_MS,
   TAP_REARM_MS,
   createTapGate,
+  guidedPhoneButton,
   hitTestTapTargets,
   isPointInsideBox,
   isTapContact,
   nearestPinchTarget,
+  phonePokeCrossing,
   resetTapGate,
   updateTapGate
 } from '../src/phone-interaction.mjs';
+
+test('a guided button holds its focus through jitter and releases between rows', () => {
+  const buttons = [{ x: 24, y: 100, w: 170, h: 50 }, { x: 220, y: 100, w: 170, h: 50 }];
+  assert.equal(guidedPhoneButton({ x: 202, y: 124 }, buttons), 0);
+  assert.equal(guidedPhoneButton({ x: 212, y: 124 }, buttons, 0), 0);
+  assert.equal(guidedPhoneButton({ x: 225, y: 124 }, buttons, 0), 1);
+  assert.equal(guidedPhoneButton({ x: 225, y: 180 }, buttons, 1), -1);
+});
+
+test('a forward fingertip poke crosses the touch plane while sideways motion does not', () => {
+  const before = { x: 211, y: 479, z: .024 };
+  const after = { x: 213, y: 481, z: .004 };
+  assert.deepEqual(phonePokeCrossing(before, after, .02), { x: 212, y: 480 });
+  assert.equal(phonePokeCrossing(before, after, 0), null);
+  assert.equal(phonePokeCrossing(after, before, .02), null);
+  assert.equal(phonePokeCrossing(before, { ...after, z: .017 }, .01), null);
+});
 
 test('a single index contact emits one tap', () => {
   const gate = createTapGate();
@@ -76,4 +95,69 @@ test('nearest pinch target respects radius and returns the closest one', () => {
     { id: 'outside', position: { x: 0.3, y: 0, z: 0 }, radius: 0.1 }
   ];
   assert.equal(nearestPinchTarget(point, candidates).id, 'near');
+});
+
+test('the phone starts a date only after prep and accepts either candy choice', async t => {
+  const { Group, Vector3, CanvasTexture, Mesh, PlaneGeometry, MeshBasicMaterial, SRGBColorSpace } = await import('three');
+  const { createPhone } = await import('../src/bedroom-phone.js');
+  const { PHASES, initialState } = await import('../src/game-machine.mjs');
+  const noop = () => {};
+  const context = new Proxy({
+    createLinearGradient: () => ({ addColorStop: noop }),
+    measureText: text => ({ width: text.length * 10 })
+  }, { get: (target, key) => target[key] ?? noop });
+  const globals = ['document', 'localStorage', 'Image'].map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]);
+  t.after(() => {
+    for (const [key, descriptor] of globals) {
+      if (descriptor) Object.defineProperty(globalThis, key, descriptor);
+      else delete globalThis[key];
+    }
+  });
+  const ready = { ...initialState(), phase: PHASES.PREP, avatarGender: 'male', preference: 'all', matchId: 'caio' };
+  Object.defineProperties(globalThis, {
+    document: { configurable: true, value: { createElement: () => ({ getContext: () => context }) } },
+    localStorage: { configurable: true, value: { getItem: () => JSON.stringify(ready), setItem: noop } },
+    Image: { configurable: true, value: class {} }
+  });
+  const THREE = { Group, Vector3, CanvasTexture, Mesh, PlaneGeometry, MeshBasicMaterial, SRGBColorSpace };
+  for (const candy of [null, 'pacoca']) {
+    const departures = [];
+    const phone = createPhone(THREE, new Group(), { size: [.1, .2], screen: [0, 0, 0] }, path => path,
+      noop, Promise.resolve({}), state => departures.push(state));
+    const tap = y => phone.touch('test', { x: 210, y, inside: true });
+    tap(477);
+    tap(563);
+    assert.deepEqual(departures, []);
+    tap(648);
+    assert.equal(phone.getState().phase, PHASES.EXIT);
+    if (candy) assert.equal(phone.eatCandy(candy), true);
+    assert.deepEqual(departures, []);
+    tap(563);
+    assert.equal(departures.length, 1);
+    assert.equal(departures[0].matchId, 'caio');
+    assert.equal(departures[0].candy, candy);
+  }
+});
+
+test('the corridor vending machine exposes only candy selection buttons', async () => {
+  const THREE = await import('three');
+  const { candies } = await import('../src/candies.mjs');
+  const { buildCandyShop } = await import('../src/corridor-candy-shop.js');
+  const room = new THREE.Group();
+  const corridor = new THREE.Group();
+  room.add(corridor);
+  const data = { colliders: [], props: [] };
+  function shape(parent, geometry, material, at) {
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.fromArray(at);
+    parent.add(mesh);
+    return mesh;
+  }
+  const machine = buildCandyShop(THREE, corridor, data, [0, 0, 0], {
+    shape,
+    box: (parent, size, at, material) => shape(parent, new THREE.BoxGeometry(...size), material, at),
+    interior: color => new THREE.MeshBasicMaterial({ color })
+  });
+  assert.deepEqual(machine.buttons.map(button => button.userData.shopAction), Object.keys(candies));
+  assert.deepEqual(data.props.map(prop => prop.candy), Object.keys(candies));
 });

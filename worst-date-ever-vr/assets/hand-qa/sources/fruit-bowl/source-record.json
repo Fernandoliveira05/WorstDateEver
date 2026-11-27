@@ -1,0 +1,46 @@
+{
+  "schema_version": "hand-qa-source/1",
+  "asset_id": "fruit-bowl",
+  "manifest_reference": "assets/tripo/references/wde-02-picnic-core/06-fruit-bowl.png",
+  "source": {
+    "provider": "Grab3D",
+    "page": "https://grab3d.com/models/food/cherry-bowl/",
+    "slug": "cherry-bowl",
+    "category": "food",
+    "license": "CC0-1.0",
+    "download_url": "https://grab3d.com/dl/cherry-bowl/cherry-bowl.glb",
+    "license_url": "https://grab3d.com/dl/cherry-bowl/LICENSE.txt",
+    "manifest_url": "https://grab3d.com/dl/cherry-bowl/manifest.json"
+  },
+  "files": {
+    "source_glb": {
+      "path": "assets/hand-qa/sources/fruit-bowl/cherry-bowl.glb",
+      "sha256": "23e6f35b52a910a4278d9d170be6d506ebbc5213658895e76f1affc080d9acc7",
+      "bytes": 1079188
+    },
+    "license": {
+      "path": "assets/hand-qa/sources/fruit-bowl/LICENSE.txt",
+      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
+      "bytes": 760
+    },
+    "publisher_manifest": {
+      "path": "assets/hand-qa/sources/fruit-bowl/publisher-manifest.json",
+      "sha256": "c53a261c0e74fc30c988b1db88b789986b2ecae0ca270f0f1602eac7db849cdf",
+      "bytes": 1489
+    }
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/fruit-bowl.glb",
+    "sha256": "23e6f35b52a910a4278d9d170be6d506ebbc5213658895e76f1affc080d9acc7",
+    "bytes": 1079188,
+    "adapted": false
+  },
+  "publisher": {
+    "triangles": 15984,
+    "texture_px": 2048,
+    "dimensions_m": "0.138 x 0.175 x 0.124",
+    "real_size": "bowl of cherries, approx. 14 x 17 x 12 cm, bowl 14 cm wide, each cherry 2.3 cm",
+    "notes": "shallow mint glazed ceramic bowl with a light rim heaped with glossy deep red cherries (heart shaped fruit, stem dimple, fine side seam) on curved single stems, two cherry leaves on top, two cherries lying in front with their stems resting on the table. No text."
+  },
+  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+}

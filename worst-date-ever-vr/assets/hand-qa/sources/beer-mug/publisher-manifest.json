@@ -1,0 +1,47 @@
+{
+ "slug": "camping-mug",
+ "triangles": 8304,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "camping-mug.glb",
+   "bytes": 703448
+  },
+  "blend": {
+   "name": "camping-mug.blend",
+   "bytes": 670680
+  },
+  "fbx": {
+   "name": "camping-mug.fbx",
+   "bytes": 1170444
+  },
+  "obj": {
+   "name": "camping-mug-obj.zip",
+   "bytes": 608105
+  },
+  "usdz": {
+   "name": "camping-mug.usdz",
+   "bytes": 1054930
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.240 x 0.218 x 0.087",
+  "triangles": 8304,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-20",
+  "real_size": "set of three enamel camping mugs, each approx. 9 cm high and 9 cm wide (set approx. 22 x 20 x 9 cm)",
+  "notes": "front faces -Y; speckled enamel mugs in cream, coral and sky blue with dark rolled rims and body coloured handles, cream inside; the coral mug holds cocoa with two marshmallows; no text",
+  "set": "Cozy Camping & Outdoor Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

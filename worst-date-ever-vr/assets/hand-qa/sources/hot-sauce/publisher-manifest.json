@@ -1,0 +1,47 @@
+{
+ "slug": "condiment-bottles",
+ "triangles": 12274,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "condiment-bottles.glb",
+   "bytes": 840624
+  },
+  "blend": {
+   "name": "condiment-bottles.blend",
+   "bytes": 806427
+  },
+  "fbx": {
+   "name": "condiment-bottles.fbx",
+   "bytes": 1627180
+  },
+  "obj": {
+   "name": "condiment-bottles-obj.zip",
+   "bytes": 927829
+  },
+  "usdz": {
+   "name": "condiment-bottles.usdz",
+   "bytes": 1496378
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.133 x 0.135 x 0.247",
+  "triangles": 12274,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-25",
+  "real_size": "condiment caddy with two squeeze bottles, approx. 14 x 16 x 25 cm (bottles 21 cm)",
+  "notes": "red ketchup and yellow mustard squeeze bottles without labels or text, ribbed screw rings, cone nozzles with cream tip caps, chrome wire caddy with oval base plate, holding rings and a centre handle loop, mint ramekin with glossy mayonnaise",
+  "set": "Cozy Fast Food & Diner Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}
