@@ -1,0 +1,47 @@
+{
+ "slug": "cake-slice",
+ "triangles": 8908,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "cake-slice.glb",
+   "bytes": 934776
+  },
+  "blend": {
+   "name": "cake-slice.blend",
+   "bytes": 924398
+  },
+  "fbx": {
+   "name": "cake-slice.fbx",
+   "bytes": 1521676
+  },
+  "obj": {
+   "name": "cake-slice-obj.zip",
+   "bytes": 951875
+  },
+  "usdz": {
+   "name": "cake-slice.usdz",
+   "bytes": 1387419
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.196 x 0.193 x 0.133",
+  "triangles": 8908,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-18",
+  "real_size": "slice of layer cake on a dessert plate, approx. 20 x 19 x 13 cm",
+  "notes": "three light sponge layers, two cream layers and cherry jam, pink buttercream top with a cream rosette and a strawberry; white plate with mint rim and a cake fork",
+  "set": "Cozy Sweets Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

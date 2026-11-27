@@ -1,0 +1,47 @@
+{
+ "slug": "open-book",
+ "triangles": 5376,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "open-book.glb",
+   "bytes": 752784
+  },
+  "blend": {
+   "name": "open-book.blend",
+   "bytes": 645777
+  },
+  "fbx": {
+   "name": "open-book.fbx",
+   "bytes": 1252700
+  },
+  "obj": {
+   "name": "open-book-obj.zip",
+   "bytes": 717912
+  },
+  "usdz": {
+   "name": "open-book.usdz",
+   "bytes": 1157732
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.302 x 0.242 x 0.021",
+  "triangles": 5376,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-18",
+  "real_size": "open hardcover book, 30 x 22 cm",
+  "notes": "lies open and flat, curved page blocks, abstract ink line bars instead of text, small landscape illustration, gold corner caps, bookmark ribbon hanging over the front edge; no text",
+  "set": "Cozy Curiosities Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

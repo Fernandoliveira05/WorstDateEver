@@ -10,7 +10,7 @@ export function kneePoint(THREE, hip, ankle, upper, lower, forward) {
   return hip.clone().addScaledVector(line, along).addScaledVector(pole, bend);
 }
 
-export function createSeatPose(THREE, actor, bones) {
+export function createSeatPose(THREE, actor, bones, seatTop = cushionTop) {
   const legs = ['L','R'].map(side => ({
     thigh: bones['UpperLeg' + side], shin: bones['LowerLeg' + side], foot: bones['Foot' + side]
   })).filter(leg => leg.thigh && leg.shin && leg.foot);
@@ -56,7 +56,7 @@ export function createSeatPose(THREE, actor, bones) {
     const forward = new THREE.Vector3(0,0,1).applyQuaternion(rotation(actor));
     const hipY = legs.reduce((sum, leg) => sum + position(leg.thigh).y, 0) / legs.length;
     const ankleHeights = legs.map(leg => THREE.MathUtils.clamp(position(leg.foot).y, .05, .115));
-    const lowerBy = (hipY - (cushionTop + .075)) * amount;
+    const lowerBy = (hipY - (seatTop + .075)) * amount;
     actor.position.y -= lowerBy;
     actor.updateWorldMatrix(true, true);
     for (const [index, { thigh, shin, foot, end }] of legs.entries()) {

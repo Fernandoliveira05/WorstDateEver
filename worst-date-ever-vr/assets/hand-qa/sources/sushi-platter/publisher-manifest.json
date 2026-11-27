@@ -1,0 +1,47 @@
+{
+ "slug": "sushi-set",
+ "triangles": 12420,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "sushi-set.glb",
+   "bytes": 917824
+  },
+  "blend": {
+   "name": "sushi-set.blend",
+   "bytes": 966788
+  },
+  "fbx": {
+   "name": "sushi-set.fbx",
+   "bytes": 1571100
+  },
+  "obj": {
+   "name": "sushi-set-obj.zip",
+   "bytes": 909269
+  },
+  "usdz": {
+   "name": "sushi-set.usdz",
+   "bytes": 1422944
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.300 x 0.140 x 0.063",
+  "triangles": 12420,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "real_size": "sushi set on a wooden geta board, approx. 30 x 14 x 6 cm",
+  "notes": "honey-wood board on two feet; three salmon nigiri with light fat lines, one tamago nigiri with a nori band, four maki (two salmon, two cucumber), pink pickled ginger, a swirl of wasabi and a pair of chopsticks along the front edge; no text",
+  "set": "Cozy Kitchen & Food Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

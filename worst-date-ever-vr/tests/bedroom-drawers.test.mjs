@@ -45,7 +45,21 @@ test('a drawer front, tray and handle stay together when opened after idling', (
 
   advance(4);
   const grip = handle.getWorldPosition(new THREE.Vector3());
+  const inside = grip.clone().add(new THREE.Vector3(0, 0, .06));
+  const outside = grip.clone().add(new THREE.Vector3(0, 0, -.10));
+  const orientation = new THREE.Quaternion();
+  assert.equal(physics.nearest(inside), undefined);
+  assert.equal(physics.click(prop, inside), false);
+  assert.equal(physics.grab('hand', inside, orientation, prop), false);
+  assert.equal(physics.grab('hand', grip, orientation, prop, { from: inside, remote: true }), false);
+  assert.ok(physics.grab('hand', grip, orientation, prop, { from: outside, remote: true }));
+  const trackedPose = { position: outside, orientation };
+  assert.equal(physics.handOnObject('hand', trackedPose), trackedPose);
+  assert.ok(physics.rayTarget('hand').z < grip.z);
+  physics.release('hand', false);
+  assert.equal(physics.rayTarget('hand'), null);
   assert.ok(physics.grab('hand', grip, new THREE.Quaternion(), prop));
+  assert.ok(physics.handOnObject('hand', trackedPose).position.z < grip.z);
   physics.updateGrab('hand', grip.clone().add(new THREE.Vector3(0, 0, .36)), new THREE.Quaternion());
   advance(1);
   physics.release('hand', false);

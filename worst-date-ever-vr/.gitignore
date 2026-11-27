@@ -4,3 +4,14 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Regenerated asset QA evidence and caches.
+assets/hand-qa/evidence/
+assets/hand-qa/catalog-status.csv
+assets/hand-qa/current-inventory.json
+assets/hand-qa/inspection-gallery.html
+assets/hand-qa/manifest.json
+assets/hand-qa/sources/**/*.glb
+assets/tripo/generated/
+assets/tripo/preflight.json
+assets/tripo/qa/

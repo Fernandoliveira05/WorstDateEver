@@ -1,0 +1,47 @@
+{
+ "slug": "bucket",
+ "triangles": 13128,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "bucket.glb",
+   "bytes": 706544
+  },
+  "blend": {
+   "name": "bucket.blend",
+   "bytes": 666263
+  },
+  "fbx": {
+   "name": "bucket.fbx",
+   "bytes": 1354284
+  },
+  "obj": {
+   "name": "bucket-obj.zip",
+   "bytes": 618162
+  },
+  "usdz": {
+   "name": "bucket.usdz",
+   "bytes": 1233332
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.323 x 0.372 x 0.320",
+  "triangles": 13128,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-25",
+  "real_size": "galvanised bucket, approx. 33 cm wide, 28 cm high (without handle), 10 litres",
+  "notes": "front faces -Y; zinc bucket with rolled rim, two beads, foot ring, riveted ears and a wire bail with a warm wooden grip resting on the rim, filled almost to the brim with clear sky blue water (separate transparent object 'bucket_water', not baked) and a small coral enamel dipper hooked over the back rim; no text; no movable parts",
+  "set": "Cozy Camping & Outdoor Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

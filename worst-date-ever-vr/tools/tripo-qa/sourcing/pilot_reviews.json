@@ -1,0 +1,441 @@
+{
+  "schema_version": "tripo-qa-pilot-reviews/1",
+  "note": "Preliminary contact-sheet review of the five sourced pilot assets. Decisions remain MISSING_EVIDENCE until every full-resolution capture and physical Quest validation are done. Scores are provisional.",
+  "assets": {
+    "hardcover-book": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "cover edges / fingertips",
+          "severity": "minor",
+          "defect": "v1 had 13-46 mm fingertip gaps and no contact; v2 fingers now contact the front cover, but the hand presses the cover rather than pinching the edge, and some views still cross the cover silhouette.",
+          "fix": "Author a true edge pinch (wrist at the cover edge, fingers wrapping the top/bottom) or accept the cover-press grip only after full-resolution visual review."
+        },
+        {
+          "image": "isolated",
+          "region": "materials",
+          "severity": "major",
+          "defect": "Sourced book is blue with gold trim and a gem; the reference is a plain dusty-red hardcover.",
+          "fix": "Recolor the cover and trim, or source a closer red hardcover."
+        },
+        {
+          "image": "isolated",
+          "region": "mesh",
+          "severity": "minor",
+          "defect": "Blender probe reports 372 degenerate faces even though no non-manifold edges were found.",
+          "fix": "Merge/clean degenerate faces before any production export."
+        }
+      ],
+      "next_actions": [
+        "Clean degenerate faces and re-export the candidate.",
+        "Recolor or replace the cover to match the reference.",
+        "Inspect every 48 approach PNG at full resolution, then test on Quest."
+      ]
+    },
+    "sushi-platter": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 2,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "platter edge / sushi toppings",
+          "severity": "major",
+          "defect": "The palm and fingers cover much of the sushi and appear to cross the board/topping silhouettes; the board edge is not consistently supported.",
+          "fix": "Use a precision edge grip with a lower approach, keep fingers below the board top, and add side clearance."
+        },
+        {
+          "image": "right-30",
+          "region": "hand pose",
+          "severity": "major",
+          "defect": "The grip collapses over the platter rather than lifting from the board edge, hiding the food and risking content instability.",
+          "fix": "Retarget anchors to the two short board ends and reduce finger flexion; recapture all 48 views."
+        }
+      ],
+      "next_actions": [
+        "Revise grip anchors to the board ends/underside and recapture.",
+        "Review platter tilt with contents stable in a second pass.",
+        "Test on Quest with tracked hands."
+      ]
+    },
+    "floor-cushion": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 4,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-30",
+          "region": "knitted shoulder and fingertips",
+          "severity": "major",
+          "defect": "In the revised shoulder grip the hand remains visible at azimuth 225, and all 48 ray hits are within 11 mm of their authored anchor. The remaining overlap near the thumb and fingertips leaves exact contact unresolved.",
+          "fix": "Check the individual finger pads from opposing close views of the shoulder."
+        },
+        {
+          "image": "right-0",
+          "region": "curled fingers on the near shoulder",
+          "severity": "major",
+          "defect": "Each wrist stays fixed against the selected shoulder zone across elevation. The static knitted surface remains uncompressed, so some poses still read as fingers perched on the edge.",
+          "fix": "Author localized knit compression and verify finger contact during a grab and release."
+        }
+      ],
+      "next_actions": [
+        "Check exact fingertip clearance and deformable shoulder contact before any venue placement."
+      ]
+    },
+    "cake-slice": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 2,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "right-30",
+          "region": "plate rim / cake",
+          "severity": "major",
+          "defect": "The hand sits across the plate rim and cake; the plate underside is not visibly supported and fingers may intersect the plate.",
+          "fix": "Move anchors to the plate underside at the rim, use a palm-under profile, and lower the approach."
+        },
+        {
+          "image": "isolated",
+          "region": "materials",
+          "severity": "major",
+          "defect": "Sourced dessert is a light sponge slice with pink buttercream; the reference is a chocolate slice with a cherry.",
+          "fix": "Recolor or source a chocolate cake slice with the reference garnish."
+        }
+      ],
+      "next_actions": [
+        "Rework the plate grip and recapture.",
+        "Replace/recolor the cake to match the reference."
+      ]
+    },
+    "coffee-cup": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 2,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "cup opening / handle",
+          "severity": "major",
+          "defect": "The palm crosses the cup opening and fingers appear to pass through the cup wall; the handle is selected in only 2 of 48 approaches.",
+          "fix": "Make the handle zone primary with outward clearance, remove body zones that place the palm over the opening, and recapture."
+        },
+        {
+          "image": "isolated",
+          "region": "materials",
+          "severity": "major",
+          "defect": "Sourced cup is pink with white polka dots; the reference is a plain cream cup and saucer.",
+          "fix": "Recolor the porcelain or source a plain cream cup."
+        }
+      ],
+      "next_actions": [
+        "Rework the handle/rim zones and recapture; verify the handle grip from all approach directions.",
+        "Recolor or replace the cup."
+      ]
+    },
+    "fruit-bowl": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "bowl rim / hand",
+          "severity": "major",
+          "defect": "The hand hovers above and left of the rim; fingertips remain 1-3 cm off the bowl and do not close on the rim.",
+          "fix": "Scale the 14 cm source bowl toward the ~25 cm reference size and move rim anchors onto the actual rim surface."
+        },
+        {
+          "image": "isolated",
+          "region": "materials / scale",
+          "severity": "major",
+          "defect": "Sourced mint bowl with red cherries is half the intended size and differs from the cream bowl with purple grapes/strawberries.",
+          "fix": "Scale to reference dimensions, then recolor/replace contents; otherwise use a composed bowl."
+        }
+      ],
+      "next_actions": [
+        "Scale the bowl and contents to the reference size, revisit rim anchors, then recapture."
+      ]
+    },
+    "flower-vase": {
+      "scores": {
+        "silhouette": 4,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 4,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "vase neck / hand",
+          "severity": "minor",
+          "defect": "Fingers reach the neck but the thumb remains several centimetres away; the grip reads as a side press rather than a closed cylinder grasp.",
+          "fix": "Add neck anchors with inward clearance and verify thumb opposition."
+        },
+        {
+          "image": "isolated",
+          "region": "materials",
+          "severity": "major",
+          "defect": "Sourced blue vase with tulips/daisies differs from the cream vase with pink flowers.",
+          "fix": "Recolor the vase and replace the bouquet, or source a closer cream/pink set."
+        }
+      ],
+      "next_actions": [
+        "Tune neck/body grip and recolor/replace the bouquet."
+      ]
+    },
+    "menu": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "page surface / edge",
+          "severity": "major",
+          "defect": "The hand presses the open pages; only one fingertip reaches the surface while the others hover, and this is not an edge pinch suitable for a closed menu book.",
+          "fix": "Use a closed-book source or author a flat-edge pinch and verify all fingertips."
+        },
+        {
+          "image": "isolated",
+          "region": "shape / materials",
+          "severity": "major",
+          "defect": "Sourced model is an open illustrated hardcover, not the closed plum menu book in the reference.",
+          "fix": "Source a closed menu book or build one from the existing hardcover candidate."
+        }
+      ],
+      "next_actions": [
+        "Replace the open book with a closed menu-book source before scoring this reference."
+      ]
+    },
+    "petiscos-bowl": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 2,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "bowl rim / hand",
+          "severity": "major",
+          "defect": "Only the index fingertip reaches the rim; the other fingers and thumb stay outside, and the empty bowl does not match the filled snack bowl.",
+          "fix": "Use a filled snack-bowl source and author a rim/underside plate grip."
+        },
+        {
+          "image": "isolated",
+          "region": "materials / contents",
+          "severity": "major",
+          "defect": "Sourced lavender mixing bowl is empty; reference is a deep magenta bowl filled with orange snacks.",
+          "fix": "Source a closer filled bowl or compose contents and recolor."
+        }
+      ],
+      "next_actions": [
+        "Replace with a filled snack-bowl source and rework the rim grip."
+      ]
+    },
+    "beer-mug": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 2,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 3,
+        "finger_contact": 2,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "right-0",
+          "region": "handle and finger pads",
+          "severity": "major",
+          "defect": "The handle is now selected in 16 of 48 approaches, including the opposing close-ups for both hands. The finger row partially surrounds the handle, but visible gaps by the thumb and overlapping fingers leave secure contact unproven.",
+          "fix": "Refine thumb opposition and verify finger clearance through the handle from front and rear."
+        },
+        {
+          "image": "isolated",
+          "region": "materials / shape",
+          "severity": "major",
+          "defect": "Sourced enamel camping mug is opaque and has no glass/foam; reference is a glass beer mug with foam.",
+          "fix": "Source a glass mug with foam or author foam/glass materials."
+        }
+      ],
+      "next_actions": [
+        "Verify the handle after correcting remaining gaps, then evaluate a venue-matched mesh before any integration."
+      ]
+    },
+    "hot-sauce": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "bottle body / fingers",
+          "severity": "minor",
+          "defect": "The hand wraps the bottle but the thumb side and fingertip contact are not fully visible; the label/neck read is weak.",
+          "fix": "Verify full-resolution contact and add a neck grip for pouring."
+        },
+        {
+          "image": "isolated",
+          "region": "materials / label",
+          "severity": "major",
+          "defect": "Sourced red squeeze bottle has no chili label and is not the reference hot-sauce bottle.",
+          "fix": "Recolor/add a label or source a closer bottle."
+        }
+      ],
+      "next_actions": [
+        "Add a neck/pour grip and label/material pass, then recapture."
+      ]
+    },
+    "bedside-lamp": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 3,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "lamp stem / shade",
+          "severity": "major",
+          "defect": "The hand reaches the stem but the huge shade dominates the view; the source is a full table lamp with a loose cord, not the compact bedside mushroom lamp.",
+          "fix": "Source a compact bedside lamp and add a constrained rotary grip/state."
+        },
+        {
+          "image": "isolated",
+          "region": "materials / form",
+          "severity": "major",
+          "defect": "Cream/coral table lamp with cord differs from the pink mushroom lamp reference.",
+          "fix": "Replace or recolor to the reference form."
+        }
+      ],
+      "next_actions": [
+        "Replace with a compact bedside lamp; author rotary state before scoring."
+      ]
+    },
+    "beer-bucket": {
+      "scores": {
+        "silhouette": 3,
+        "materials": 3,
+        "detail": 4,
+        "vr_readability": 4,
+        "visible_integrity": 4,
+        "grip_alignment": 3,
+        "finger_contact": 3,
+        "handedness": 4,
+        "pose_stability": 3,
+        "functional_states": null
+      },
+      "defects": [
+        {
+          "image": "left-0",
+          "region": "bucket side / bail",
+          "severity": "minor",
+          "defect": "The hand contacts the bucket side cleanly, but the bail handle is not used and the source is a water-filled galvanised bucket rather than an ice bucket.",
+          "fix": "Add a bail-handle grip and replace the water/contents with ice; verify weight."
+        }
+      ],
+      "next_actions": [
+        "Test the bail-handle lift and replace contents/visuals."
+      ]
+    }
+  }
+}

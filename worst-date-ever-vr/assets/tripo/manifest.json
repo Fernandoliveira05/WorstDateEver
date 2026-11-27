@@ -1,0 +1,1393 @@
+{
+  "schemaVersion": 1,
+  "style": "cozy Brazilian dating-comedy VR game prop, rounded toy-like silhouette, matte materials, muted teal cream lavender warm wood and rosy accents, clean game-ready topology, single object, no text, no background, no shadow",
+  "items": [
+    {
+      "id": "bed",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/01-bed.png",
+      "category": "3d",
+      "prompt_hint": "01 bed",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/01-bed"
+      }
+    },
+    {
+      "id": "wardrobe",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/02-wardrobe.png",
+      "category": "3d",
+      "prompt_hint": "02 wardrobe",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/02-wardrobe"
+      }
+    },
+    {
+      "id": "desk",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/03-desk.png",
+      "category": "3d",
+      "prompt_hint": "03 desk",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/03-desk"
+      }
+    },
+    {
+      "id": "desk-chair",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/04-desk-chair.png",
+      "category": "3d",
+      "prompt_hint": "04 desk chair",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/04-desk-chair"
+      }
+    },
+    {
+      "id": "iclona",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/05-iclona.png",
+      "category": "3d",
+      "prompt_hint": "05 iclona",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/05-iclona"
+      }
+    },
+    {
+      "id": "standing-fan",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/06-standing-fan.png",
+      "category": "3d",
+      "prompt_hint": "06 standing fan",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/06-standing-fan"
+      }
+    },
+    {
+      "id": "fan-pull-cord",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/07-fan-pull-cord.png",
+      "category": "3d",
+      "prompt_hint": "wall-mounted fan pull cord with a small wooden handle",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/07-fan-pull-cord"
+      }
+    },
+    {
+      "id": "window",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/08-window.png",
+      "category": "3d",
+      "prompt_hint": "closed bedroom window with a simple wooden frame",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/08-window"
+      }
+    },
+    {
+      "id": "curtains",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/09-curtains.png",
+      "category": "3d",
+      "prompt_hint": "09 curtains",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/09-curtains"
+      }
+    },
+    {
+      "id": "rug",
+      "scene": "bedroom",
+      "pack": "wde-01-bedroom-core",
+      "reference": "assets/tripo/references/wde-01-bedroom-core/10-rug.png",
+      "category": "3d",
+      "prompt_hint": "10 rug",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bedroom/10-rug"
+      }
+    },
+    {
+      "id": "woven-basket",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/01-woven-basket.png",
+      "category": "3d",
+      "prompt_hint": "01 woven basket",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/01-woven-basket"
+      }
+    },
+    {
+      "id": "checked-blanket",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/02-checked-blanket.png",
+      "category": "3d",
+      "prompt_hint": "folded checked picnic blanket, soft woven cloth",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/02-checked-blanket"
+      }
+    },
+    {
+      "id": "floor-cushion",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/03-floor-cushion.png",
+      "category": "3d",
+      "prompt_hint": "03 floor cushion",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/03-floor-cushion"
+      }
+    },
+    {
+      "id": "kombucha-bottle",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/04-kombucha-bottle.png",
+      "category": "3d",
+      "prompt_hint": "04 kombucha bottle",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/04-kombucha-bottle"
+      }
+    },
+    {
+      "id": "vegan-sandwich",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/05-vegan-sandwich.png",
+      "category": "3d",
+      "prompt_hint": "vegan picnic sandwich on a small plate",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/05-vegan-sandwich"
+      }
+    },
+    {
+      "id": "fruit-bowl",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/06-fruit-bowl.png",
+      "category": "3d",
+      "prompt_hint": "06 fruit bowl",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/06-fruit-bowl"
+      }
+    },
+    {
+      "id": "hardcover-book",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/07-hardcover-book.png",
+      "category": "3d",
+      "prompt_hint": "07 hardcover book",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/07-hardcover-book"
+      }
+    },
+    {
+      "id": "park-bench",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/08-park-bench.png",
+      "category": "3d",
+      "prompt_hint": "08 park bench",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/08-park-bench"
+      }
+    },
+    {
+      "id": "green-canopy-tree",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/09-green-canopy-tree.png",
+      "category": "3d",
+      "prompt_hint": "rounded low-poly green canopy park tree",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/09-green-canopy-tree"
+      }
+    },
+    {
+      "id": "pink-flowering-tree",
+      "scene": "picnic",
+      "pack": "wde-02-picnic-core",
+      "reference": "assets/tripo/references/wde-02-picnic-core/10-pink-flowering-tree.png",
+      "category": "3d",
+      "prompt_hint": "rounded low-poly pink flowering park tree",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/picnic/10-pink-flowering-tree"
+      }
+    },
+    {
+      "id": "sushi-platter",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/01-sushi-platter.png",
+      "category": "3d",
+      "prompt_hint": "01 sushi platter",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/01-sushi-platter"
+      }
+    },
+    {
+      "id": "salmon-nigiri",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/02-salmon-nigiri.png",
+      "category": "3d",
+      "prompt_hint": "02 salmon nigiri",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/02-salmon-nigiri"
+      }
+    },
+    {
+      "id": "maki-rolls",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/03-maki-rolls.png",
+      "category": "3d",
+      "prompt_hint": "03 maki rolls",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/03-maki-rolls"
+      }
+    },
+    {
+      "id": "shoyu-dish",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/04-shoyu-dish.png",
+      "category": "3d",
+      "prompt_hint": "04 shoyu dish",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/04-shoyu-dish"
+      }
+    },
+    {
+      "id": "chopsticks",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/05-chopsticks.png",
+      "category": "3d",
+      "prompt_hint": "05 chopsticks",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/05-chopsticks"
+      }
+    },
+    {
+      "id": "sake-flask",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/06-sake-flask.png",
+      "category": "3d",
+      "prompt_hint": "06 sake flask",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/06-sake-flask"
+      }
+    },
+    {
+      "id": "sake-cup",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/07-sake-cup.png",
+      "category": "3d",
+      "prompt_hint": "07 sake cup",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/07-sake-cup"
+      }
+    },
+    {
+      "id": "dining-table",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/08-dining-table.png",
+      "category": "3d",
+      "prompt_hint": "08 dining table",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/08-dining-table"
+      }
+    },
+    {
+      "id": "dining-chair",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/09-dining-chair.png",
+      "category": "3d",
+      "prompt_hint": "09 dining chair",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/09-dining-chair"
+      }
+    },
+    {
+      "id": "paper-lantern",
+      "scene": "sushi",
+      "pack": "wde-03-sushi-candidates",
+      "reference": "assets/tripo/references/wde-03-sushi-candidates/10-paper-lantern.png",
+      "category": "3d",
+      "prompt_hint": "10 paper lantern",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/sushi/10-paper-lantern"
+      }
+    },
+    {
+      "id": "bistro-table",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/01-bistro-table.png",
+      "category": "3d",
+      "prompt_hint": "01 bistro table",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/01-bistro-table"
+      }
+    },
+    {
+      "id": "upholstered-chair",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/02-upholstered-chair.png",
+      "category": "3d",
+      "prompt_hint": "02 upholstered chair",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/02-upholstered-chair"
+      }
+    },
+    {
+      "id": "booth",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/03-booth.png",
+      "category": "3d",
+      "prompt_hint": "03 booth",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/03-booth"
+      }
+    },
+    {
+      "id": "menu",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/04-menu.png",
+      "category": "3d",
+      "prompt_hint": "04 menu",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/04-menu"
+      }
+    },
+    {
+      "id": "candle",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/05-candle.png",
+      "category": "3d",
+      "prompt_hint": "05 candle",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/05-candle"
+      }
+    },
+    {
+      "id": "wine-glass",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/06-wine-glass.png",
+      "category": "3d",
+      "prompt_hint": "06 wine glass",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/06-wine-glass"
+      }
+    },
+    {
+      "id": "water-glass",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/07-water-glass.png",
+      "category": "3d",
+      "prompt_hint": "07 water glass",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/07-water-glass"
+      }
+    },
+    {
+      "id": "coffee-cup",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/08-coffee-cup.png",
+      "category": "3d",
+      "prompt_hint": "08 coffee cup",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/08-coffee-cup"
+      }
+    },
+    {
+      "id": "cake-slice",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/09-cake-slice.png",
+      "category": "3d",
+      "prompt_hint": "09 cake slice",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/09-cake-slice"
+      }
+    },
+    {
+      "id": "flower-vase",
+      "scene": "bistro",
+      "pack": "wde-04-bistro-candidates",
+      "reference": "assets/tripo/references/wde-04-bistro-candidates/10-flower-vase.png",
+      "category": "3d",
+      "prompt_hint": "10 flower vase",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bistro/10-flower-vase"
+      }
+    },
+    {
+      "id": "beer-mug",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/01-beer-mug.png",
+      "category": "3d",
+      "prompt_hint": "oversized frothy beer mug with a handle",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/01-beer-mug"
+      }
+    },
+    {
+      "id": "beer-bucket",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/02-beer-bucket.png",
+      "category": "3d",
+      "prompt_hint": "02 beer bucket",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/02-beer-bucket"
+      }
+    },
+    {
+      "id": "petiscos-bowl",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/03-petiscos-bowl.png",
+      "category": "3d",
+      "prompt_hint": "03 petiscos bowl",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/03-petiscos-bowl"
+      }
+    },
+    {
+      "id": "peanuts-bowl",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/04-peanuts-bowl.png",
+      "category": "3d",
+      "prompt_hint": "04 peanuts bowl",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/04-peanuts-bowl"
+      }
+    },
+    {
+      "id": "hot-sauce",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/05-hot-sauce.png",
+      "category": "3d",
+      "prompt_hint": "05 hot sauce",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/05-hot-sauce"
+      }
+    },
+    {
+      "id": "coaster",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/06-coaster.png",
+      "category": "3d",
+      "prompt_hint": "06 coaster",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/06-coaster"
+      }
+    },
+    {
+      "id": "bar-stool",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/07-bar-stool.png",
+      "category": "3d",
+      "prompt_hint": "07 bar stool",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/07-bar-stool"
+      }
+    },
+    {
+      "id": "round-table",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/08-round-table.png",
+      "category": "3d",
+      "prompt_hint": "08 round table",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/08-round-table"
+      }
+    },
+    {
+      "id": "bar-counter",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/09-bar-counter.png",
+      "category": "3d",
+      "prompt_hint": "09 bar counter",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/09-bar-counter"
+      }
+    },
+    {
+      "id": "jukebox",
+      "scene": "bar",
+      "pack": "wde-05-barzinho-candidates",
+      "reference": "assets/tripo/references/wde-05-barzinho-candidates/10-jukebox.png",
+      "category": "3d",
+      "prompt_hint": "10 jukebox",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/bar/10-jukebox"
+      }
+    },
+    {
+      "id": "bush",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/01-bush.png",
+      "category": "3d",
+      "prompt_hint": "01 bush",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/01-bush"
+      }
+    },
+    {
+      "id": "hedge",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/02-hedge.png",
+      "category": "3d",
+      "prompt_hint": "02 hedge",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/02-hedge"
+      }
+    },
+    {
+      "id": "grass-clump",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/03-grass-clump.png",
+      "category": "3d",
+      "prompt_hint": "03 grass clump",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/03-grass-clump"
+      }
+    },
+    {
+      "id": "flower-patch",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/04-flower-patch.png",
+      "category": "3d",
+      "prompt_hint": "04 flower patch",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/04-flower-patch"
+      }
+    },
+    {
+      "id": "fallen-leaves",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/05-fallen-leaves.png",
+      "category": "decal",
+      "prompt_hint": "scattered fallen leaves",
+      "tripo": null
+    },
+    {
+      "id": "street-lamp",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/06-street-lamp.png",
+      "category": "3d",
+      "prompt_hint": "06 street lamp",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/06-street-lamp"
+      }
+    },
+    {
+      "id": "park-path",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/07-park-path.png",
+      "category": "texture",
+      "prompt_hint": "flat sandy park path surface",
+      "tripo": null
+    },
+    {
+      "id": "kiosk",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/08-kiosk.png",
+      "category": "3d",
+      "prompt_hint": "08 kiosk",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/08-kiosk"
+      }
+    },
+    {
+      "id": "trash-bin",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/09-trash-bin.png",
+      "category": "3d",
+      "prompt_hint": "09 trash bin",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/09-trash-bin"
+      }
+    },
+    {
+      "id": "bike-rack",
+      "scene": "park",
+      "pack": "wde-06-park-outdoor-candidates",
+      "reference": "assets/tripo/references/wde-06-park-outdoor-candidates/10-bike-rack.png",
+      "category": "3d",
+      "prompt_hint": "10 bike rack",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/park/10-bike-rack"
+      }
+    },
+    {
+      "id": "day-sky",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/01-day-sky.png",
+      "category": "sky",
+      "prompt_hint": "clear blue day sky",
+      "tripo": null
+    },
+    {
+      "id": "sunset-sky",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/02-sunset-sky.png",
+      "category": "sky",
+      "prompt_hint": "warm pink and orange sunset sky",
+      "tripo": null
+    },
+    {
+      "id": "night-sky",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/03-night-sky.png",
+      "category": "missing",
+      "prompt_hint": "night sky reference is an empty file",
+      "tripo": null
+    },
+    {
+      "id": "clouds",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/04-clouds.png",
+      "category": "sky",
+      "prompt_hint": "soft low-poly cloud cluster",
+      "tripo": null
+    },
+    {
+      "id": "dirt-path",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/05-dirt-path.png",
+      "category": "texture",
+      "prompt_hint": "sandy dirt path surface",
+      "tripo": null
+    },
+    {
+      "id": "cobblestone",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/06-cobblestone.png",
+      "category": "texture",
+      "prompt_hint": "rounded cobblestone paving surface",
+      "tripo": null
+    },
+    {
+      "id": "curb",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/07-curb.png",
+      "category": "3d",
+      "prompt_hint": "07 curb",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/environment/07-curb"
+      }
+    },
+    {
+      "id": "tree-planter",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/08-tree-planter.png",
+      "category": "3d",
+      "prompt_hint": "08 tree planter",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/environment/08-tree-planter"
+      }
+    },
+    {
+      "id": "park-sign",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/09-park-sign.png",
+      "category": "3d",
+      "prompt_hint": "09 park sign",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/environment/09-park-sign"
+      }
+    },
+    {
+      "id": "mushrooms",
+      "scene": "environment",
+      "pack": "wde-07-sky-floors-lighting-candidates",
+      "reference": "assets/tripo/references/wde-07-sky-floors-lighting-candidates/10-mushrooms.png",
+      "category": "3d",
+      "prompt_hint": "10 mushrooms",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/environment/10-mushrooms"
+      }
+    },
+    {
+      "id": "bedroom-wall",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/01-bedroom-wall.png",
+      "category": "texture",
+      "prompt_hint": "pink bedroom wall panel",
+      "tripo": null
+    },
+    {
+      "id": "sushi-wall",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/02-sushi-wall.png",
+      "category": "texture",
+      "prompt_hint": "sushi restaurant wall panel",
+      "tripo": null
+    },
+    {
+      "id": "bistro-wall",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/03-bistro-wall.png",
+      "category": "texture",
+      "prompt_hint": "bistro wall panel",
+      "tripo": null
+    },
+    {
+      "id": "brick-wall",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/04-brick-wall.png",
+      "category": "texture",
+      "prompt_hint": "warm brick wall panel",
+      "tripo": null
+    },
+    {
+      "id": "wood-floor",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/05-wood-floor.png",
+      "category": "texture",
+      "prompt_hint": "light wood floor surface",
+      "tripo": null
+    },
+    {
+      "id": "restaurant-wood-floor",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/06-restaurant-wood-floor.png",
+      "category": "texture",
+      "prompt_hint": "restaurant wood floor surface",
+      "tripo": null
+    },
+    {
+      "id": "paper-lantern",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/07-paper-lantern.png",
+      "category": "3d",
+      "prompt_hint": "pink paper lantern with a sakura motif",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/architecture/07-paper-lantern"
+      }
+    },
+    {
+      "id": "bedside-lamp",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/08-bedside-lamp.png",
+      "category": "3d",
+      "prompt_hint": "08 bedside lamp",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/architecture/08-bedside-lamp"
+      }
+    },
+    {
+      "id": "string-lights",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/09-string-lights.png",
+      "category": "3d",
+      "prompt_hint": "festoon string lights with warm bulbs",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/architecture/09-string-lights"
+      }
+    },
+    {
+      "id": "neon-sign",
+      "scene": "architecture",
+      "pack": "wde-08-architecture-lighting-candidates",
+      "reference": "assets/tripo/references/wde-08-architecture-lighting-candidates/10-neon-sign.png",
+      "category": "3d",
+      "prompt_hint": "pink double-heart neon sign",
+      "tripo": {
+        "for": "game-mobile",
+        "model": "v3.1-20260211",
+        "params": {
+          "auto_size": true,
+          "texture_alignment": "original_image",
+          "smart_low_poly": true,
+          "face_limit": 8000
+        },
+        "output": "assets/tripo/generated/architecture/10-neon-sign"
+      }
+    }
+  ],
+  "summary": {
+    "3d": 66,
+    "texture": 9,
+    "sky": 3,
+    "decal": 1,
+    "missing": 1
+  }
+}

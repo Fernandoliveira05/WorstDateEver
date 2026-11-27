@@ -1,0 +1,136 @@
+{
+  "schema_version": "tripo-qa-grab3d/1",
+  "note": "Pilot internet sourcing from Grab3D (CC0-1.0, direct download, no login). Each entry maps a Tripo reference id to an existing model. Sourced models are benchmark candidates, not Tripo outputs and not production-approved.",
+  "assets": {
+    "floor-cushion": {
+      "slug": "pouf",
+      "category": "furniture",
+      "page": "https://grab3d.com/models/furniture/pouf/",
+      "download": "https://grab3d.com/dl/pouf/pouf.glb",
+      "license_url": "https://grab3d.com/dl/pouf/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/pouf/manifest.json",
+      "adapt": "copy",
+      "grip": "soft_pinch"
+    },
+    "hardcover-book": {
+      "slug": "book",
+      "category": "props",
+      "page": "https://grab3d.com/models/props/book/",
+      "download": "https://grab3d.com/dl/book/book.glb",
+      "license_url": "https://grab3d.com/dl/book/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/book/manifest.json",
+      "adapt": "copy",
+      "grip": "flat_edge"
+    },
+    "sushi-platter": {
+      "slug": "sushi-set",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/sushi-set/",
+      "download": "https://grab3d.com/dl/sushi-set/sushi-set.glb",
+      "license_url": "https://grab3d.com/dl/sushi-set/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/sushi-set/manifest.json",
+      "adapt": "copy",
+      "grip": "flat_edge"
+    },
+    "cake-slice": {
+      "slug": "cake-slice",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/cake-slice/",
+      "download": "https://grab3d.com/dl/cake-slice/cake-slice.glb",
+      "license_url": "https://grab3d.com/dl/cake-slice/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/cake-slice/manifest.json",
+      "adapt": "copy",
+      "grip": "precision"
+    },
+    "coffee-cup": {
+      "slug": "tea-cup",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/tea-cup/",
+      "download": "https://grab3d.com/dl/tea-cup/tea-cup.glb",
+      "license_url": "https://grab3d.com/dl/tea-cup/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/tea-cup/manifest.json",
+      "adapt": "copy",
+      "grip": "handle_hook"
+    },
+    "fruit-bowl": {
+      "slug": "cherry-bowl",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/cherry-bowl/",
+      "download": "https://grab3d.com/dl/cherry-bowl/cherry-bowl.glb",
+      "license_url": "https://grab3d.com/dl/cherry-bowl/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/cherry-bowl/manifest.json",
+      "adapt": "copy",
+      "grip": "precision"
+    },
+    "flower-vase": {
+      "slug": "vase",
+      "category": "furniture",
+      "page": "https://grab3d.com/models/furniture/vase/",
+      "download": "https://grab3d.com/dl/vase/vase.glb",
+      "license_url": "https://grab3d.com/dl/vase/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/vase/manifest.json",
+      "adapt": "copy",
+      "grip": "precision"
+    },
+    "menu": {
+      "slug": "open-book",
+      "category": "props",
+      "page": "https://grab3d.com/models/props/open-book/",
+      "download": "https://grab3d.com/dl/open-book/open-book.glb",
+      "license_url": "https://grab3d.com/dl/open-book/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/open-book/manifest.json",
+      "adapt": "copy",
+      "grip": "flat_edge"
+    },
+    "petiscos-bowl": {
+      "slug": "mixing-bowl",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/mixing-bowl/",
+      "download": "https://grab3d.com/dl/mixing-bowl/mixing-bowl.glb",
+      "license_url": "https://grab3d.com/dl/mixing-bowl/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/mixing-bowl/manifest.json",
+      "adapt": "copy",
+      "grip": "precision"
+    },
+    "beer-mug": {
+      "slug": "camping-mug",
+      "category": "props",
+      "page": "https://grab3d.com/models/props/camping-mug/",
+      "download": "https://grab3d.com/dl/camping-mug/camping-mug.glb",
+      "license_url": "https://grab3d.com/dl/camping-mug/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/camping-mug/manifest.json",
+      "adapt": "split",
+      "grip": "handle_hook"
+    },
+    "hot-sauce": {
+      "slug": "condiment-bottles",
+      "category": "food",
+      "page": "https://grab3d.com/models/food/condiment-bottles/",
+      "download": "https://grab3d.com/dl/condiment-bottles/condiment-bottles.glb",
+      "license_url": "https://grab3d.com/dl/condiment-bottles/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/condiment-bottles/manifest.json",
+      "adapt": "split",
+      "grip": "power"
+    },
+    "bedside-lamp": {
+      "slug": "table-lamp",
+      "category": "furniture",
+      "page": "https://grab3d.com/models/furniture/table-lamp/",
+      "download": "https://grab3d.com/dl/table-lamp/table-lamp.glb",
+      "license_url": "https://grab3d.com/dl/table-lamp/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/table-lamp/manifest.json",
+      "adapt": "copy",
+      "grip": "power"
+    },
+    "beer-bucket": {
+      "slug": "bucket",
+      "category": "props",
+      "page": "https://grab3d.com/models/props/bucket/",
+      "download": "https://grab3d.com/dl/bucket/bucket.glb",
+      "license_url": "https://grab3d.com/dl/bucket/LICENSE.txt",
+      "manifest_url": "https://grab3d.com/dl/bucket/manifest.json",
+      "adapt": "copy",
+      "grip": "handle_hook"
+    }
+  }
+}

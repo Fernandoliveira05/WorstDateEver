@@ -44,7 +44,7 @@
           "contextSummary": "não reagiu e a água respingou no date"
         }
       ],
-      "summaryTemplate": "O garçom derrubou água perto da mesa, e o jogador {choice}."
+      "summaryTemplate": "Uma bebida derramou durante o encontro, e o jogador {choice}."
     },
     {
       "id": "wrong_order",
@@ -180,7 +180,7 @@
       "choices": [
         {
           "id": "grab",
-          "label": "Pegar o cardápio",
+          "label": "Pegar o que caiu",
           "relationshipDelta": {
             "interest": 5,
             "awkwardness": -3
@@ -197,7 +197,7 @@
           "contextSummary": "deixou o cardápio no chão"
         }
       ],
-      "summaryTemplate": "Um cardápio caiu e o jogador {choice}."
+      "summaryTemplate": "O cardápio caiu e o jogador {choice}."
     },
     {
       "id": "awkward_friend",

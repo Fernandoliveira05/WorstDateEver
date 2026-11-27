@@ -1,0 +1,32 @@
+{
+  "reviewer": "smoke-fixture-not-a-real-review",
+  "reviewed_images": [
+    "front",
+    "back",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "three_quarter_left",
+    "three_quarter_right"
+  ],
+  "scores": {
+    "silhouette": 2,
+    "materials": 2,
+    "detail": 2,
+    "scale": 2,
+    "topology_artifacts": 2,
+    "completeness": 2,
+    "style_match": 2
+  },
+  "defects": [
+    {
+      "image": "front",
+      "region": "whole asset",
+      "severity": "minor",
+      "defect": "Deliberate fixture defect used only to exercise report generation.",
+      "fix": "Replace this fixture with a real review; it is not a verdict on the asset."
+    }
+  ],
+  "notes": "SMOKE FIXTURE ONLY. All-2 scores force a REJECT so the scored path, schema, and decision thresholds can be tested without claiming a pass. Do not use this as an asset verdict."
+}

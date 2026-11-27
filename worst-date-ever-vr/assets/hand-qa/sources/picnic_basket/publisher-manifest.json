@@ -1,0 +1,47 @@
+{
+ "slug": "picnic-basket",
+ "triangles": 18884,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "picnic-basket.glb",
+   "bytes": 1748576
+  },
+  "blend": {
+   "name": "picnic-basket.blend",
+   "bytes": 1343583
+  },
+  "fbx": {
+   "name": "picnic-basket.fbx",
+   "bytes": 2884508
+  },
+  "obj": {
+   "name": "picnic-basket-obj.zip",
+   "bytes": 1420635
+  },
+  "usdz": {
+   "name": "picnic-basket.usdz",
+   "bytes": 2711089
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.466 x 0.313 x 0.366",
+  "triangles": 18884,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "real_size": "wicker picnic basket, approx. 44 x 30 x 36 cm incl. handle",
+  "notes": "front faces -Y; woven wicker bands around stakes, wrapped rim, fixed honey-wood handle over the middle, two wooden lids hinged on the centre line: 'picnic-basket_lid_front' (rotate around local X, negative angle opens) and 'picnic-basket_lid_back' (positive angle opens), up to about 75 degrees; red-and-white gingham cloth hanging over the front rim; no text",
+  "set": "Cozy Kitchen & Food Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

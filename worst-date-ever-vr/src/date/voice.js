@@ -1,3 +1,4 @@
+import { localSpokenReply } from '../candies.mjs';
 import workletURL from './pcm-worklet.js?url';
 
 const messages = {
@@ -19,7 +20,10 @@ export function createDateVoice({ handoff, director, observe }) {
   let active, ticket, consented = false, message = '', recording = false, level = 0;
   let menuHeld = false, menuPaused = false;
   const base = new URL(import.meta.env.VITE_DATE_VOICE_URL || '/', location.href);
-  const ready = window.isSecureContext && Boolean(navigator.mediaDevices?.getUserMedia && window.AudioWorkletNode);
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const remoteReady = window.isSecureContext && Boolean(navigator.mediaDevices?.getUserMedia && window.AudioWorkletNode);
+  const ready = remoteReady || Boolean(Recognition && window.isSecureContext);
+  let browserVoice = !remoteReady && Boolean(Recognition);
 
   function closeCapture(turn) {
     clearTimeout(turn.recordTimer);
@@ -39,6 +43,7 @@ export function createDateVoice({ handoff, director, observe }) {
       clearTimeout(turn.timeout);
       clearTimeout(turn.replyTimer);
       closeCapture(turn);
+      turn.recognition?.abort();
       turn.abort.abort();
       if (turn.ws?.readyState === WebSocket.OPEN && turn.started && !turn.sentEnd)
         turn.ws.send(JSON.stringify({ type: 'audio.cancel', sessionId: turn.sessionId, turnId: turn.wire }));
@@ -71,6 +76,7 @@ export function createDateVoice({ handoff, director, observe }) {
   function stop() {
     const turn = active;
     if (!turn || turn.ended) return;
+    if (turn.recognition) { turn.recognition.stop(); return; }
     if (!recording) { endTurn('Microfone desligado.'); return; }
     turn.ended = true;
     closeCapture(turn);
@@ -91,9 +97,16 @@ export function createDateVoice({ handoff, director, observe }) {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(handoff), signal: turn.abort.signal
       });
-      if (!response.ok) throw new Error(response.status === 429 ? messages.limit :
+      if (!response.ok) {
+        if (Recognition && (response.status === 404 || response.status >= 500)) {
+          browserVoice = true;
+          if (active === turn) endTurn('Pressione Falar novamente para usar a transcrição do navegador.');
+          return;
+        }
+        throw new Error(response.status === 429 ? messages.limit :
         response.status === 403 ? 'Este endereço não está autorizado no backend de voz.' :
           response.status === 503 ? 'Backend de voz indisponível ou sem provedor configurado.' : messages.network);
+      }
       const credentials = await response.json();
       if (active !== turn) return;
       ticket = { ...credentials, next: 1 };
@@ -119,7 +132,7 @@ export function createDateVoice({ handoff, director, observe }) {
           endTurn(messages[reply.reason] ?? messages.provider, canRetry);
           return;
         }
-        if (reply.type === 'transcript.final') { message = 'Você: ' + reply.text.slice(0,145); return; }
+        if (reply.type === 'transcript.final') { turn.transcript = reply.text; message = 'Você: ' + reply.text.slice(0,145); return; }
         if (reply.type === 'order.accepted') {
           if (director.acceptOrder(turn.sequence, reply.itemId, `${turn.sessionId}:${turn.wire}`))
             message = 'Pedido anotado · ' + reply.name;
@@ -127,7 +140,7 @@ export function createDateVoice({ handoff, director, observe }) {
         }
         if (reply.type === 'npc.reply' && reply.reply?.sessionId === turn.sessionId &&
           reply.reply?.personaId === handoff.matchId && reply.reply.turnId === turn.wire &&
-          director.remote(turn.sequence, reply.reply)) {
+          director.remote(turn.sequence, reply.reply, turn.transcript)) {
           ticket.next++;
           endTurn(message, true);
         } else endTurn(messages.reply);
@@ -162,6 +175,30 @@ export function createDateVoice({ handoff, director, observe }) {
       return;
     }
     const view = director.view();
+    if (!menu && browserVoice && Recognition) {
+      const recognition = new Recognition();
+      recognition.lang = 'pt-BR';
+      recognition.continuous = false;
+      const turn = { mode: 'browser', recognition, abort: new AbortController() };
+      active = turn;
+      recognition.onresult = event => {
+        if (active !== turn) return;
+        const said = event.results[0][0].transcript;
+        const reply = localSpokenReply(handoff.candy, handoff.matchId, view.session.relationship, said, view.memorable);
+        if (reply) director.remote(view.session.turnSequence, reply, said);
+        endTurn('Você: ' + said.slice(0,145));
+      };
+      recognition.onerror = event => {
+        if (active === turn) endTurn(event.error === 'not-allowed' ? messages.permission : messages.device);
+      };
+      recognition.onend = () => { if (active === turn) endTurn(messages.silence); };
+      try {
+        recognition.start();
+        recording = true;
+        message = 'Ouvindo…';
+      } catch { endTurn(messages.device); }
+      return;
+    }
     const turn = { mode: 'audio', menu, sequence: view.session.turnSequence, actions: view.actions,
       world: observe?.(), abort: new AbortController(), frames: [], samples: 0, voiced: 0, quiet: 0 };
     active = turn;
@@ -247,7 +284,7 @@ export function createDateVoice({ handoff, director, observe }) {
   }
 
   function initiate(force = false) {
-    if (!ready || active || menuHeld || !(force ? director.view().canSpeak : director.view().wantsInitiative)) return false;
+    if (browserVoice || !ready || active || menuHeld || !(force ? director.view().canSpeak : director.view().wantsInitiative)) return false;
     const view = director.view();
     const turn = { mode: 'initiative', sequence: view.session.turnSequence, actions: view.actions,
       world: observe?.(), abort: new AbortController(), frames: [], samples: 0 };

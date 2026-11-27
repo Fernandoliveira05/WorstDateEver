@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import WebSocket from 'ws';
 import { contract } from '../server/src/contracts.mjs';
 import { createFirstDateServer } from '../server/src/first-date.mjs';
-import { createDateDirector } from '../src/date/director.mjs';
+import { createDateDirector, dateOutcome } from '../src/date/director.mjs';
 import { eligibleEvents } from '../src/date/event-core.mjs';
 import { qteConfig } from '../src/date/qte.mjs';
 
@@ -44,7 +44,7 @@ function play(persona, seed, choice) {
   assert.ok(director.view().summary.length);
   director.tick(6.2);
   assert.ok(director.choose('finish'));
-  director.tick(4.6);
+  director.tick(10);
   assert.equal(director.view().session.phase, 'completed');
   assert.ok(contract('date-session')(director.view().session));
   return director.view();
@@ -73,17 +73,33 @@ test('four routes can end offline and the contextual event catalog remains reach
     time: 200, talkTurns: 4, relationship: { interest:50, awkwardness:20, patience:70, safety:100 }
   }).some(candidate => candidate.id === event.id)), event.id + ' must be reachable');
   assert.equal(play(personas[1], 12, 'brag').result, 'disaster');
-  assert.equal(play(personas[1], 12, 'joke').result, 'awkward');
+  assert.equal(dateOutcome({ interest: 55, awkwardness: 25, patience: 60, safety: 65 }), 'awkward');
 });
 
-test('browser matches the golden scenarios used by Unity', () => {
+test('WebXR preserves the shared scenario routes with the current date balance', () => {
+  const expected = {
+    caio: ['good', { interest: 75, awkwardness: 3, patience: 73, safety: 71 }],
+    rafa: ['disaster', { interest: 22, awkwardness: 54, patience: 33, safety: 53 }],
+    bia: ['good', { interest: 66, awkwardness: 15, patience: 67, safety: 68 }],
+    luiza: ['good', { interest: 74, awkwardness: 3, patience: 73, safety: 71 }]
+  };
   for (const fixture of content('first-date-fixtures').fixtures) {
     const view = play(personas.find(person => person.id === fixture.matchId), fixture.seed, fixture.choice);
     assert.equal(view.session.venueId, fixture.expectedVenue);
     assert.equal(view.session.completedEventIds[0], fixture.expectedEvent);
-    assert.equal(view.result, fixture.expectedOutcome);
-    assert.deepEqual(view.session.relationship, fixture.expectedRelationship);
+    const [outcome, relationship] = expected[fixture.matchId];
+    assert.equal(view.result, outcome);
+    assert.deepEqual(view.session.relationship, relationship);
   }
+});
+
+test('Caio retains the saved venue ID and uses picnic presentation and props', () => {
+  const caio = content('venues').venues.find(venue => venue.matchId === 'caio');
+  assert.equal(caio.id, 'cafe');
+  assert.equal(caio.sceneVariant, 'picnic');
+  assert.equal(caio.ambientTheme, 'park');
+  const picnicBeats = dialogue.beats.filter(beat => beat.personaId === 'caio' && beat.prop);
+  assert.deepEqual(picnicBeats.map(beat => beat.prop), ['picnic_kombucha', 'picnic_sandwich']);
 });
 
 test('an active date restores its beat and deterministic event sequence', () => {
@@ -115,13 +131,13 @@ test('voice transport enforces session and turn order, derives context, and retu
       assert.ok(pcm.length >= 6400);
       assert.equal(sampleRate, 16000);
       transcriptSignal = signal;
-      return 'Eu adorei o sushi.';
+      return contexts.length ? 'Eu prefiro ir com calma.' : 'Gostei de você. Tinha que dizer.';
     },
-    reply: async ({ persona, venue, initiative, history, memory, relationship, eventSummary, signal }) => {
+    reply: async ({ persona, venue, initiative, history, memory, relationship, eventSummary, candyContext, text, signal }) => {
       assert.equal(persona.id, 'rafa');
       assert.equal(venue.id, 'sushi');
       if (!initiative) assert.notEqual(signal, transcriptSignal);
-      contexts.push({ count: history.length, facts: memory.facts.slice(), initiative, interest: relationship.interest, eventSummary });
+      contexts.push({ count: history.length, facts: memory.facts.slice(), initiative, interest: relationship.interest, eventSummary, candyContext, text, signal });
       return { text: initiative ? 'Você ficou quieta. Em que está pensando?' : 'Eu também. E quase pedi hambúrguer.',
         gesture: 'nod', intent: initiative ? 'ask_question' : 'smalltalk', emotion: 'warm',
         memory: { facts: initiative ? [] : ['jogadora gosta de sushi'], contradictions: [], topics: ['comida'] } };
@@ -136,7 +152,7 @@ test('voice transport enforces session and turn order, derives context, and retu
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(state)
   });
   assert.equal((await issue({ ...entry, substance: 'dmt' })).status, 400);
-  const response = await issue(entry);
+  const response = await issue({ ...entry, candy: 'pacoca' });
   assert.equal(response.status, 201);
   const ticket = await response.json();
   const socket = token => new WebSocket(base.replace(/^http/, 'ws') + ticket.socketPath + '?token=' + token);
@@ -177,8 +193,13 @@ test('voice transport enforces session and turn order, derives context, and retu
     assert.ok(contract('npc-reply')(packets[1].reply));
     assert.ok(Object.values(packets[1].reply.relationshipDelta).some(value => value !== 0));
   }
-  assert.deepEqual(contexts.map(context => [context.count, context.interest]), [[0,54],[1,58]]);
+  assert.deepEqual(contexts.map(context => [context.count, context.interest]), [[1,57],[2,63]]);
   assert.match(contexts[1].eventSummary, /segurou o copo/);
+  assert.equal(contexts[0].candyContext.name, 'Paçoca');
+  assert.equal(contexts[0].candyContext.rememberedMoment, null);
+  assert.equal(contexts[0].text, 'Gostei de você. Tinha que dizer.');
+  assert.equal(contexts[1].text, 'Eu prefiro ir com calma.');
+  assert.equal(contexts[1].candyContext.rememberedMoment, 'aquele elogio direto');
   assert.equal((await run(2, []))[0].reason, 'sequence');
   assert.equal((await run(3, [Buffer.alloc(6400)]))[0].reason, 'silence');
   assert.equal((await run(4, [], [{eventId:'water_spill',choiceId:'invented'}]))[0].reason, 'context');

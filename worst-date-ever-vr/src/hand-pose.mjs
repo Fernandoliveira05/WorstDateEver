@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { currentXrFrame } from './xr-input.js';
 
 // WebXR hand joint order used by XRHand and A-Frame 1.8.
 export const HAND_JOINTS = [
@@ -119,7 +120,7 @@ function resolveJointSpaces(hand, target) {
   if (complete) { return true; }
 
   const byName = new Map();
-  for (const joint of hand.values()) {
+  for (const joint of hand.values?.() ?? []) {
     if (joint?.jointName) { byName.set(joint.jointName, joint); }
   }
   complete = true;
@@ -176,7 +177,7 @@ export class HandPosePipeline {
 
   update() {
     const sceneEl = this.sceneEl;
-    const frame = sceneEl.frame;
+    const frame = currentXrFrame(sceneEl);
     const renderer = sceneEl.renderer;
     const referenceSpace = renderer?.xr?.getReferenceSpace?.() ?? null;
 
@@ -223,7 +224,7 @@ export class HandPosePipeline {
 
       let source = null;
       for (const candidate of inputSources) {
-        if (candidate.handedness === state.name && candidate.hand?.values) {
+        if (candidate.handedness === state.name && candidate.hand) {
           source = candidate;
           break;
         }
@@ -245,14 +246,21 @@ export class HandPosePipeline {
 
       // fillPoses/fillJointRadii preserve the order of the supplied joint
       // spaces, so both the pose and radius buffers map to HAND_JOINTS.
-      const batched = frame.fillPoses?.(state.jointSpaces, referenceSpace, state.jointPoses) &&
-        state.jointPoses.every(Number.isFinite);
+      let batched = false;
+      try {
+        batched = frame.fillPoses?.(state.jointSpaces, referenceSpace, state.jointPoses) &&
+          state.jointPoses.every(Number.isFinite);
+      } catch { /* Fall back to the individual joint operation. */ }
       if (batched) {
-        if (!frame.fillJointRadii?.(state.jointSpaces, state.jointRadii)) state.jointRadii.fill(.008);
+        try {
+          if (!frame.fillJointRadii?.(state.jointSpaces, state.jointRadii)) state.jointRadii.fill(.008);
+        } catch { state.jointRadii.fill(.008); }
       } else {
         const sampled = state.jointSpaces.every((joint, i) => {
-          const pose = frame.getJointPose?.(joint, referenceSpace);
-          if (!pose?.transform.matrix.every(Number.isFinite)) return false;
+          let pose;
+          try { pose = frame.getJointPose?.(joint, referenceSpace); }
+          catch { return false; }
+          if (!pose?.transform?.matrix?.every(Number.isFinite)) return false;
           state.jointPoses.set(pose.transform.matrix, i * 16);
           state.jointRadii[i] = pose.radius ?? .008;
           return true;

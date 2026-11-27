@@ -1,0 +1,177 @@
+[
+  {
+    "ids": "PROP-001 PROP-011",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-style.js",
+    "locator": "addBedAndShelf",
+    "notes": "Bed and shelf details are assembled in the room. Exact concept variants still need individual review."
+  },
+  {
+    "ids": "PROP-002 PROP-003 PROP-004 PROP-005",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "public/assets/bedroom/scene.json",
+    "locator": "drawers",
+    "notes": "Furniture drawer mechanisms exist. Complete silhouettes, finishes and all requested states need review."
+  },
+  {
+    "ids": "PROP-006",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-furniture.js",
+    "locator": "desk-chair",
+    "notes": "Chair is extracted as a movable heavy object."
+  },
+  {
+    "ids": "PROP-007 PROP-008 PROP-009",
+    "presence": "EXISTING_RUNTIME",
+    "file": "public/assets/bedroom/scene.json",
+    "locator": "door, curtains, window.panes",
+    "notes": "Export identifies the door, curtains and window panes. Individual appearance and interaction QA are pending."
+  },
+  {
+    "ids": "PROP-012 PROP-014 PROP-015 PROP-020 PROP-021",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-props.js",
+    "locator": "laundry-basket, Notebook dobrável, desk-headphones, desk-water-bottle, Luminária de lava",
+    "notes": "Existing game assemblies. Confirm concept materials, grip contact and functional states separately."
+  },
+  {
+    "ids": "PROP-016",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/bedroom-upgrade.js",
+    "locator": "const fan",
+    "notes": "Ceiling fan is the current implementation of the standing-fan requirement."
+  },
+  {
+    "ids": "PROP-017",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-upgrade.js",
+    "locator": "data.pulls, const pull",
+    "notes": "Physical pull cord is attached to the ceiling fan."
+  },
+  {
+    "ids": "PROP-018 PROP-019",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-nightstand.js",
+    "locator": "bedside-clock, Abajur de cúpula canelada",
+    "notes": "Current clock and bedside lamp assemblies are authored in the runtime."
+  },
+  {
+    "ids": "PROP-023 PROP-030 PROP-046",
+    "presence": "EXISTING_RUNTIME",
+    "file": "public/assets/bedroom/scene.json",
+    "locator": "mirror, wde_43, wde_78",
+    "notes": "Mirror, folded hoodie and ceramic mug are exported. Specific concept features still need review."
+  },
+  {
+    "ids": "PROP-028 PROP-029 PROP-031 PROP-032 PROP-033",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/bedroom-style.js",
+    "locator": "addBedAndShelf, cover",
+    "notes": "The bedroom has pillow and bedding geometry. The requested individual shapes, patterns and handling need verification."
+  },
+  {
+    "ids": "PROP-057",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "public/assets/bedroom/scene.json",
+    "locator": "wde_131",
+    "notes": "Hardcover notebook exists in the export. Spiral binding is a separate visual requirement."
+  },
+  {
+    "ids": "PROP-059 PROP-060",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-style.js",
+    "locator": "styleBedroom",
+    "notes": "Current room wall finishes and wood flooring use the exported room surfaces."
+  },
+  {
+    "ids": "PROP-061 PROP-062 PROP-063 building_hallway_module hallway_wall_lamp hallway_door_frame",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-upgrade.js",
+    "locator": "Corredor, Figura na curva, corridor doors and fixtures",
+    "notes": "Night corridor, runner, creature and corridor fixtures exist. Geometry, visibility and dark-scene QA are pending."
+  },
+  {
+    "ids": "PROP-027 hallway_runner_floor",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/bedroom-upgrade.js",
+    "locator": "wdeShopLight, doorway runner",
+    "notes": "Current corridor uses vending-machine light and a doorway runner. Check equivalent coverage against the original fixture and flooring requirements."
+  },
+  {
+    "ids": "picnic_picnic_cushion picnic_tree picnic_bench picnic_kiosk park_tree_large park_tree_small park_blossom_tree park_shrub park_flower_patch park_walkway_straight park_bench_set park_kiosk_shell park_kiosk_awning park_kiosk_menu_board park_kiosk_counter park_signage park_public_toilet_exterior",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/picnic.js",
+    "locator": "buildPicnicPark",
+    "notes": "Park scenery is assembled from runtime geometry. Dedicated catalog models, detailing and inspection are still due."
+  },
+  {
+    "ids": "picnic_path park_walkway_curve",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/picnic.js",
+    "locator": "buildPicnicPark, path",
+    "notes": "The playable path is built from straight segments. Required curved shape needs its own match."
+  },
+  {
+    "ids": "park_ground_plane park_lawn_section",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/venue.js",
+    "locator": "picnic ground solidBox",
+    "notes": "One lawn-colored slab covers the playable park. Ground and lawn treatments still need review."
+  },
+  {
+    "ids": "sushi_table sushi_chair sushi_sushi_plate sushi_chopsticks sushi_tea_cup sushi_menu sushi_entrance_door sushi_restroom_door sushi_waiter_tray",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/venue.js",
+    "locator": "sushi branch, layout props, chair, door, tray",
+    "notes": "Uses a shared interior and borrowed room props. Chopsticks are decorative sticks outside the grabbable prop list."
+  },
+  {
+    "ids": "bistro_round_table bistro_menu_book bistro_water_glass bistro_plate_dinner bistro_chair bistro_restroom_door bistro_entrance_door",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/venue.js",
+    "locator": "bistro theme, layout props, chair, door",
+    "notes": "Uses shared tables, chairs and doors. Borrowed cup, plate and notebook are stand-ins for the scene-specific items."
+  },
+  {
+    "ids": "bar_bar_table bar_bar_chair bar_beer_mug bar_menu bar_counter bar_backbar_bottles bar_restroom_door bar_entrance_door bar_barman_tray",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/date/venue.js",
+    "locator": "bar theme, shared counter, layout props, chair, door, tray",
+    "notes": "Uses the shared date interior. Generic ceramic mug, notebook and counter props still need scene-specific matches."
+  },
+  {
+    "ids": "shared_npc_date shared_ambient_patron shared_world_sign shared_subtitle_panel shared_seat_anchor shared_ambient_audio shared_mic_indicator",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/date/venue.js",
+    "locator": "layout.seats, actors, switchSign, heading, audioCue, voiceState",
+    "notes": "Date characters, background patrons, world signage, seat anchors, positional ambience, recording feedback and dialogue surfaces exist."
+  },
+  {
+    "ids": "shared_transition_fader",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/date/coordinator.js",
+    "locator": "fade",
+    "notes": "Comfort fade is attached to the camera."
+  },
+  {
+    "ids": "city_parked_car city_distant_traffic_lod",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/bedroom-scenery.js",
+    "locator": "data.cars",
+    "notes": "Moving street cars exist in the bedroom backdrop. Parked props and a dedicated distant LOD still need verification."
+  },
+  {
+    "ids": "city_storefront_module city_window_module city_upper_floor_facade city_skyscraper_distant",
+    "presence": "PARTIAL_OR_SUBSTITUTE",
+    "file": "src/bedroom-scenery.js",
+    "locator": "ShopGlass, Neighborhood meshes",
+    "notes": "The exported neighborhood serves as the bedroom backdrop. Reusable modules, individual landmarks and route usage still need mapping."
+  },
+  {
+    "ids": "day_sky_dome night_sky_dome",
+    "presence": "EXISTING_RUNTIME",
+    "file": "src/bedroom-scenery.js",
+    "locator": "GoldenSky",
+    "notes": "The sky shader switches between time-of-day presentations."
+  }
+]

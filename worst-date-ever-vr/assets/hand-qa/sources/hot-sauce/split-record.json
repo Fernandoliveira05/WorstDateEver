@@ -1,0 +1,103 @@
+{
+  "asset_id": "hot-sauce",
+  "source": "/home/archvarius/Desktop/projects/Faculdade/WorstDateEver/worst-date-ever-vr/assets/hand-qa/sources/hot-sauce/condiment-bottles.glb",
+  "source_sha256": "d840e9990f8d9fea76a4e99c5770ea780b076bdc0d3b01211911a0a3d871b78f",
+  "output": "/home/archvarius/Desktop/projects/Faculdade/WorstDateEver/worst-date-ever-vr/assets/hand-qa/candidates/hot-sauce.glb",
+  "output_sha256": "55fec8a2c86446f6da506a9cc853978c0a3159ce3e132d0fc8423131a5ab4144",
+  "bytes": 591084,
+  "triangles": 3832,
+  "bounds_m": {
+    "min": [
+      -0.03,
+      -0.0643,
+      0.0
+    ],
+    "max": [
+      0.03,
+      -0.0043,
+      0.21386
+    ],
+    "dimensions": [
+      0.06,
+      0.06,
+      0.21386
+    ]
+  },
+  "selected_islands": 5,
+  "islands": [
+    {
+      "faces": 880,
+      "center": [
+        -0.033,
+        0.0343,
+        0.04511
+      ],
+      "dims": [
+        0.06,
+        0.06,
+        0.0791
+      ]
+    },
+    {
+      "faces": 1664,
+      "center": [
+        -0.033,
+        0.0343,
+        0.08278
+      ],
+      "dims": [
+        0.05216,
+        0.05216,
+        0.16556
+      ]
+    },
+    {
+      "faces": 640,
+      "center": [
+        -0.033,
+        0.0343,
+        0.17006
+      ],
+      "dims": [
+        0.03136,
+        0.03136,
+        0.014
+      ]
+    },
+    {
+      "faces": 360,
+      "center": [
+        -0.033,
+        0.0343,
+        0.19161
+      ],
+      "dims": [
+        0.02017,
+        0.02017,
+        0.03246
+      ]
+    },
+    {
+      "faces": 288,
+      "center": [
+        -0.033,
+        0.0343,
+        0.20843
+      ],
+      "dims": [
+        0.01137,
+        0.01137,
+        0.01088
+      ]
+    }
+  ],
+  "selection": {
+    "target": [
+      -0.033,
+      0.0343
+    ],
+    "radius": 0.02,
+    "min_x": null
+  },
+  "object": "condiment-bottles_body"
+}

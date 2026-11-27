@@ -1,0 +1,1266 @@
+[
+  {
+    "id": "PROP-001",
+    "name": "Wooden bed",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      5,
+      5,
+      357,
+      357
+    ],
+    "interaction": "Sit/lie; grab nearby bedding; use bedside phone",
+    "gameplay": "Player spawn and resting interaction",
+    "implementation": "anchored + seat",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-001_wooden-bed.png"
+  },
+  {
+    "id": "PROP-002",
+    "name": "Teal nightstand",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      367,
+      5,
+      719,
+      357
+    ],
+    "interaction": "Pull drawer; store/retrieve small items",
+    "gameplay": "Hidden object or comedy prop reveal",
+    "implementation": "hinged/slider",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-002_teal-nightstand.png"
+  },
+  {
+    "id": "PROP-003",
+    "name": "Two-door teal wardrobe",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      729,
+      5,
+      1081,
+      357
+    ],
+    "interaction": "Open both doors; slide bottom drawer; pick outfit",
+    "gameplay": "Changes avatar outfit before date",
+    "implementation": "hinged/slider",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-003_two-door-teal-wardrobe.png"
+  },
+  {
+    "id": "PROP-004",
+    "name": "Wooden/teal desk",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      1091,
+      5,
+      1443,
+      357
+    ],
+    "interaction": "Place items; knock objects; read notes",
+    "gameplay": "Main date-preparation workspace",
+    "implementation": "anchored + prop sockets",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-004_wooden-teal-desk.png"
+  },
+  {
+    "id": "PROP-005",
+    "name": "Three-drawer teal dresser",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      5,
+      367,
+      357,
+      719
+    ],
+    "interaction": "Pull drawers; rummage and inspect contents",
+    "gameplay": "Uncovers outfit or silly keepsake",
+    "implementation": "slider",
+    "priority": "P1",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-005_three-drawer-teal-dresser.png"
+  },
+  {
+    "id": "PROP-006",
+    "name": "Teal chair",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      367,
+      367,
+      719,
+      719
+    ],
+    "interaction": "Grab to move; sit; bump against desk",
+    "gameplay": "Comfort and physical comedy",
+    "implementation": "kinematic + seat",
+    "priority": "P1",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-006_teal-chair.png"
+  },
+  {
+    "id": "PROP-007",
+    "name": "Cream bedroom door",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      729,
+      367,
+      1081,
+      719
+    ],
+    "interaction": "Press handle; open/close (night only)",
+    "gameplay": "Night horror corridor reveal",
+    "implementation": "hinge + scripted lock",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-007_cream-bedroom-door.png"
+  },
+  {
+    "id": "PROP-008",
+    "name": "Wood-framed window",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      1091,
+      367,
+      1443,
+      719
+    ],
+    "interaction": "Lean/look out; optionally crack window",
+    "gameplay": "Shows Brazilian city and day/night",
+    "implementation": "constrained + ambient",
+    "priority": "P1",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-008_wood-framed-window.png"
+  },
+  {
+    "id": "PROP-009",
+    "name": "Cream curtains with brass rod",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      5,
+      729,
+      357,
+      1081
+    ],
+    "interaction": "Grab fabric edge; pull open or shut; brush",
+    "gameplay": "Light control, tactile reaction",
+    "implementation": "bones/slider",
+    "priority": "P0",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-009_cream-curtains-with-brass-rod.png"
+  },
+  {
+    "id": "PROP-010",
+    "name": "Floral shag rug",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      367,
+      729,
+      719,
+      1081
+    ],
+    "interaction": "Walk over; nudge light objects on it",
+    "gameplay": "Footstep ambience and hidden clutter",
+    "implementation": "static collider",
+    "priority": "P2",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-010_floral-shag-rug.png"
+  },
+  {
+    "id": "PROP-011",
+    "name": "Honey-wood wall shelf",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      729,
+      729,
+      1081,
+      1081
+    ],
+    "interaction": "Grab books or objects off; knock down an item",
+    "gameplay": "Environmental storytelling",
+    "implementation": "static + grab children",
+    "priority": "P1",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-011_honey-wood-wall-shelf.png"
+  },
+  {
+    "id": "PROP-012",
+    "name": "Pink laundry basket",
+    "category": "Furniture & set pieces",
+    "source": "a_clean_high_quality_3d_stylized_product_asset_sh.png",
+    "box": [
+      1091,
+      729,
+      1443,
+      1081
+    ],
+    "interaction": "Grab, carry, drop clothing into basket",
+    "gameplay": "Dress-up cleanup gag",
+    "implementation": "rigidbody",
+    "priority": "P1",
+    "reference_type": "isolated concept render",
+    "image_path": "assets/PROP-012_pink-laundry-basket.png"
+  },
+  {
+    "id": "PROP-013",
+    "name": "Pink iClona phone",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      540,
+      680,
+      755,
+      825
+    ],
+    "interaction": "Grab, tilt, tap, swipe Deu Ruim profiles, receive match notification",
+    "gameplay": "Primary narrative and match progression",
+    "implementation": "grabbable + world-space UI",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-013_pink-iclona-phone.png"
+  },
+  {
+    "id": "PROP-014",
+    "name": "Heart-sticker laptop",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1360,
+      705,
+      1660,
+      848
+    ],
+    "interaction": "Open lid, tap keys, inspect browser",
+    "gameplay": "Extra jokes and story hints",
+    "implementation": "hinged + UI",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-014_heart-sticker-laptop.png"
+  },
+  {
+    "id": "PROP-015",
+    "name": "Pink headphones",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1470,
+      540,
+      1670,
+      710
+    ],
+    "interaction": "Grab, wear, remove, throw",
+    "gameplay": "Audio gag and mood selection",
+    "implementation": "grabbable/equip",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-015_pink-headphones.png"
+  },
+  {
+    "id": "PROP-016",
+    "name": "Standing fan",
+    "category": "Electronics & lighting",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1060,
+      275,
+      1340,
+      792
+    ],
+    "interaction": "Toggle, rotate head, pull cord, adjust oscillation",
+    "gameplay": "Changes moving air, sound and curtains",
+    "implementation": "articulated + states",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-016_standing-fan.png"
+  },
+  {
+    "id": "PROP-017",
+    "name": "Fan pull cord",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      650,
+      478,
+      705,
+      559
+    ],
+    "interaction": "Pull to cycle fan speed",
+    "gameplay": "Comic jingle or abrupt gust",
+    "implementation": "rope + trigger",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-017_fan-pull-cord.png"
+  },
+  {
+    "id": "PROP-018",
+    "name": "Bedside mushroom lamp",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      267,
+      414,
+      421,
+      595
+    ],
+    "interaction": "Tap switch; pick up if unplugged",
+    "gameplay": "Warm/cold mood change",
+    "implementation": "toggle + rigidbody",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-018_bedside-mushroom-lamp.png"
+  },
+  {
+    "id": "PROP-019",
+    "name": "Pink analog alarm clock",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      385,
+      502,
+      463,
+      595
+    ],
+    "interaction": "Grab, shake, push bell/button",
+    "gameplay": "Two-hours-later transition and alarm gag",
+    "implementation": "grabbable + toggle",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-019_pink-analog-alarm-clock.png"
+  },
+  {
+    "id": "PROP-020",
+    "name": "Purple heart water bottle",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      453,
+      430,
+      535,
+      595
+    ],
+    "interaction": "Grab, unscrew cap, pretend to drink, knock over",
+    "gameplay": "Anxiety and water spill gag",
+    "implementation": "rigidbody + animation",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-020_purple-heart-water-bottle.png"
+  },
+  {
+    "id": "PROP-021",
+    "name": "Pink lava lamp",
+    "category": "Electronics & lighting",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      954,
+      330,
+      1057,
+      561
+    ],
+    "interaction": "Flip switch; observe moving blobs",
+    "gameplay": "Light cue and spooky silhouettes",
+    "implementation": "toggle + shader",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-021_pink-lava-lamp.png"
+  },
+  {
+    "id": "PROP-022",
+    "name": "Amber ceiling pendant lamp",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      808,
+      0,
+      1070,
+      145
+    ],
+    "interaction": "Toggle wall switch; observe illumination",
+    "gameplay": "Day/night lighting mood",
+    "implementation": "static + light state",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-022_amber-ceiling-pendant-lamp.png"
+  },
+  {
+    "id": "PROP-023",
+    "name": "Illuminated vanity mirror",
+    "category": "Electronics & lighting",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      833,
+      355,
+      927,
+      460
+    ],
+    "interaction": "Touch button; rotate mirror; inspect appearance",
+    "gameplay": "Dress-up / avatar appearance",
+    "implementation": "pivot + toggle",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-023_illuminated-vanity-mirror.png"
+  },
+  {
+    "id": "PROP-024",
+    "name": "Adjustable desk lamp",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1052,
+      366,
+      1197,
+      570
+    ],
+    "interaction": "Rotate head; tap power",
+    "gameplay": "Cast silhouettes / horror foreshadowing",
+    "implementation": "armature + toggle",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-024_adjustable-desk-lamp.png"
+  },
+  {
+    "id": "PROP-025",
+    "name": "Retro CRT television",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      991,
+      0,
+      1178,
+      193
+    ],
+    "interaction": "Press buttons, switch channels, static",
+    "gameplay": "Absurd background programming and jump cue",
+    "implementation": "toggle + video texture",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-025_retro-crt-television.png"
+  },
+  {
+    "id": "PROP-026",
+    "name": "Small wall light switch",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1205,
+      353,
+      1261,
+      420
+    ],
+    "interaction": "Click on/off",
+    "gameplay": "Bedroom lights and corridor contrast",
+    "implementation": "toggle",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-026_small-wall-light-switch.png"
+  },
+  {
+    "id": "PROP-027",
+    "name": "Corridor amber bulb",
+    "category": "Electronics & lighting",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1386,
+      191,
+      1463,
+      264
+    ],
+    "interaction": "Observe from threshold; flicker script",
+    "gameplay": "Nighttime suspense",
+    "implementation": "scripted",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-027_corridor-amber-bulb.png"
+  },
+  {
+    "id": "PROP-028",
+    "name": "Pink heart pillow",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      0,
+      520,
+      325,
+      655
+    ],
+    "interaction": "Grab, squeeze, throw, place on bed",
+    "gameplay": "Comedic pillow bonk",
+    "implementation": "soft proxy physics",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-028_pink-heart-pillow.png"
+  },
+  {
+    "id": "PROP-029",
+    "name": "White daisy cushion",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      45,
+      573,
+      260,
+      727
+    ],
+    "interaction": "Grab, squeeze, throw",
+    "gameplay": "Playful physics toy",
+    "implementation": "soft proxy physics",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-029_white-daisy-cushion.png"
+  },
+  {
+    "id": "PROP-030",
+    "name": "Teal hoodie / sweater",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      98,
+      660,
+      457,
+      925
+    ],
+    "interaction": "Grab, toss, wear via outfit socket",
+    "gameplay": "Outfit preparation",
+    "implementation": "cloth proxy + outfit swap",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-030_teal-hoodie-sweater.png"
+  },
+  {
+    "id": "PROP-031",
+    "name": "Pink checkered bedspread",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      160,
+      602,
+      910,
+      936
+    ],
+    "interaction": "Tug corners, uncover objects",
+    "gameplay": "Phone discovery and room mess",
+    "implementation": "cloth bones",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-031_pink-checkered-bedspread.png"
+  },
+  {
+    "id": "PROP-032",
+    "name": "Floral duvet",
+    "category": "Textiles & clothing",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      0,
+      681,
+      880,
+      940
+    ],
+    "interaction": "Tug, fold, fluff, hide items",
+    "gameplay": "Casual comfort and physical chaos",
+    "implementation": "cloth bones",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-032_floral-duvet.png"
+  },
+  {
+    "id": "PROP-033",
+    "name": "Dusty rose throw blanket",
+    "category": "Textiles & clothing",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      240,
+      592,
+      935,
+      805
+    ],
+    "interaction": "Grab, pull, drape over bed/chair",
+    "gameplay": "Outfit mess / comedy",
+    "implementation": "simplified cloth",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-033_dusty-rose-throw-blanket.png"
+  },
+  {
+    "id": "PROP-034",
+    "name": "Flower-print tote bag",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1376,
+      302,
+      1528,
+      524
+    ],
+    "interaction": "Unhook, carry, inspect inside",
+    "gameplay": "Random pre-date accessory",
+    "implementation": "grabbable + attachment",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-034_flower-print-tote-bag.png"
+  },
+  {
+    "id": "PROP-035",
+    "name": "Flip-flops / slippers",
+    "category": "Textiles & clothing",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1470,
+      717,
+      1647,
+      814
+    ],
+    "interaction": "Grab, wear or throw",
+    "gameplay": "Packing gag and floor clutter",
+    "implementation": "grabbable/equip",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-035_flip-flops-slippers.png"
+  },
+  {
+    "id": "PROP-036",
+    "name": "Purple garment on chair",
+    "category": "Textiles & clothing",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      810,
+      545,
+      925,
+      735
+    ],
+    "interaction": "Grab, toss, equip",
+    "gameplay": "Outfit choice option",
+    "implementation": "grabbable + outfit",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-036_purple-garment-on-chair.png"
+  },
+  {
+    "id": "PROP-037",
+    "name": "Laundry pile in hamper",
+    "category": "Textiles & clothing",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1015,
+      504,
+      1130,
+      670
+    ],
+    "interaction": "Move garments, drop into bin",
+    "gameplay": "Optional tidying gag",
+    "implementation": "grab children",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-037_laundry-pile-in-hamper.png"
+  },
+  {
+    "id": "PROP-038",
+    "name": "Trailing pothos houseplant",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      0,
+      0,
+      234,
+      347
+    ],
+    "interaction": "Touch leaves; grab pot; knock it over",
+    "gameplay": "Physical reactions and soil spill",
+    "implementation": "bones + anchored pot",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-038_trailing-pothos-houseplant.png"
+  },
+  {
+    "id": "PROP-039",
+    "name": "Wardrobe-top hanging plant",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      995,
+      16,
+      1173,
+      405
+    ],
+    "interaction": "Brush leaves; tug a strand",
+    "gameplay": "Plant sways when fan activates",
+    "implementation": "secondary animation",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-039_wardrobe-top-hanging-plant.png"
+  },
+  {
+    "id": "PROP-040",
+    "name": "Sunset Rio poster",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      611,
+      92,
+      748,
+      346
+    ],
+    "interaction": "Inspect; pull from frame or knock askew",
+    "gameplay": "Brazilian visual storytelling",
+    "implementation": "mounted + hinge",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-040_sunset-rio-poster.png"
+  },
+  {
+    "id": "PROP-041",
+    "name": "Cat portrait",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      744,
+      208,
+      815,
+      335
+    ],
+    "interaction": "Grab frame, rotate or knock off wall",
+    "gameplay": "Physical-comedy wall art",
+    "implementation": "mounted -> rigidbody",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-041_cat-portrait.png"
+  },
+  {
+    "id": "PROP-042",
+    "name": "Framed heart print",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      727,
+      329,
+      794,
+      426
+    ],
+    "interaction": "Remove from hook; rotate, inspect",
+    "gameplay": "Dating motif / minor hidden clue",
+    "implementation": "mounted -> rigidbody",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-042_framed-heart-print.png"
+  },
+  {
+    "id": "PROP-043",
+    "name": "Photo-strip / Polaroids",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      690,
+      203,
+      735,
+      341
+    ],
+    "interaction": "Grab, flip, inspect close up",
+    "gameplay": "Clues and humor about the protagonist life",
+    "implementation": "grabbable + inspect UI",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-043_photo-strip-polaroids.png"
+  },
+  {
+    "id": "PROP-044",
+    "name": "Gold door hooks",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1343,
+      241,
+      1458,
+      320
+    ],
+    "interaction": "Hang / remove bag and accessories",
+    "gameplay": "Physical storage interaction",
+    "implementation": "static sockets",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-044_gold-door-hooks.png"
+  },
+  {
+    "id": "PROP-045",
+    "name": "Pink storage basket on wardrobe",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      847,
+      113,
+      1000,
+      202
+    ],
+    "interaction": "Lift down, open, rummage",
+    "gameplay": "Find silly forgotten objects",
+    "implementation": "rigidbody + inventory",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-045_pink-storage-basket-on-wardrobe.png"
+  },
+  {
+    "id": "PROP-046",
+    "name": "Heart-pattern mug",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      236,
+      436,
+      368,
+      593
+    ],
+    "interaction": "Grab, tilt, place, spill",
+    "gameplay": "Coffee spill joke",
+    "implementation": "rigidbody + simulated liquid",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-046_heart-pattern-mug.png"
+  },
+  {
+    "id": "PROP-047",
+    "name": "Makeup brush holder",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      694,
+      394,
+      773,
+      502
+    ],
+    "interaction": "Pick up brushes; use mirror",
+    "gameplay": "Date preparation",
+    "implementation": "individual small grabs",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-047_makeup-brush-holder.png"
+  },
+  {
+    "id": "PROP-048",
+    "name": "Perfume and skincare bottles",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      761,
+      406,
+      844,
+      503
+    ],
+    "interaction": "Grab, twist cap, spray",
+    "gameplay": "Pre-date anxiety, reaction or joke",
+    "implementation": "grabbable + particle",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-048_perfume-and-skincare-bottles.png"
+  },
+  {
+    "id": "PROP-049",
+    "name": "Pen cup with markers",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1562,
+      747,
+      1671,
+      941
+    ],
+    "interaction": "Pick up pens, scribble or knock cup over",
+    "gameplay": "Notes/physical comedy",
+    "implementation": "individual small grabs",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-049_pen-cup-with-markers.png"
+  },
+  {
+    "id": "PROP-050",
+    "name": "Yellow sticky note pad",
+    "category": "Decor & small props",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1467,
+      801,
+      1594,
+      880
+    ],
+    "interaction": "Peel and stick notes",
+    "gameplay": "Reminders and hidden dialogue",
+    "implementation": "grab + decal",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-050_yellow-sticky-note-pad.png"
+  },
+  {
+    "id": "PROP-051",
+    "name": "Stack of books",
+    "category": "Decor & small props",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      405,
+      382,
+      513,
+      500
+    ],
+    "interaction": "Pick up, stack, read cover, drop",
+    "gameplay": "Book-falling gag",
+    "implementation": "rigidbodies",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-051_stack-of-books.png"
+  },
+  {
+    "id": "PROP-052",
+    "name": "Wire memo / photo board",
+    "category": "Decor & small props",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      874,
+      237,
+      1107,
+      485
+    ],
+    "interaction": "Rearrange notes/photos; inspect clues",
+    "gameplay": "Player history and foreshadowing",
+    "implementation": "static + pin attachments",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-052_wire-memo-photo-board.png"
+  },
+  {
+    "id": "PROP-053",
+    "name": "Lucky cat figurine",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      915,
+      114,
+      1001,
+      215
+    ],
+    "interaction": "Tap its paw, pick up, put on shelf",
+    "gameplay": "Absurd small animation",
+    "implementation": "grabbable + animation",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-053_lucky-cat-figurine.png"
+  },
+  {
+    "id": "PROP-054",
+    "name": "Stickers on teal dresser",
+    "category": "Decor & small props",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      492,
+      594,
+      685,
+      753
+    ],
+    "interaction": "Inspect, peel / reposition",
+    "gameplay": "Personalization of room",
+    "implementation": "decal toggle",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-054_stickers-on-teal-dresser.png"
+  },
+  {
+    "id": "PROP-055",
+    "name": "Rio landscape photo wall",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1155,
+      42,
+      1328,
+      208
+    ],
+    "interaction": "Look close; remove frame / change angle",
+    "gameplay": "Local setting and environmental clues",
+    "implementation": "mounted -> rigidbody",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-055_rio-landscape-photo-wall.png"
+  },
+  {
+    "id": "PROP-056",
+    "name": "Little beach picture frame",
+    "category": "Decor & small props",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1275,
+      308,
+      1376,
+      422
+    ],
+    "interaction": "Inspect, tilt, knock down",
+    "gameplay": "Room characterization",
+    "implementation": "mounted -> rigidbody",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-056_little-beach-picture-frame.png"
+  },
+  {
+    "id": "PROP-057",
+    "name": "Spiral notebook",
+    "category": "Decor & small props",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1498,
+      846,
+      1672,
+      937
+    ],
+    "interaction": "Pick up, turn pages, write",
+    "gameplay": "Pre-date checklist or panic journal",
+    "implementation": "grabbable + page UI",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-057_spiral-notebook.png"
+  },
+  {
+    "id": "PROP-058",
+    "name": "Wastepaper bin",
+    "category": "Decor & small props",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1040,
+      694,
+      1145,
+      870
+    ],
+    "interaction": "Grab trash, drop items inside",
+    "gameplay": "Room cleanup, miss / hit gag",
+    "implementation": "static + contents",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-058_wastepaper-bin.png"
+  },
+  {
+    "id": "PROP-059",
+    "name": "Wallpaper or wall trim",
+    "category": "Set dressing & horror",
+    "source": "a_detailed_stylized_3d_toy_like_3d_rendered_c.png",
+    "box": [
+      1335,
+      449,
+      1435,
+      672
+    ],
+    "interaction": "Observe; respond to light and time shift",
+    "gameplay": "Bedroom mood; consistent style",
+    "implementation": "static",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-059_wallpaper-or-wall-trim.png"
+  },
+  {
+    "id": "PROP-060",
+    "name": "Honey wood floorboards",
+    "category": "Set dressing & horror",
+    "source": "a_stylized_colorful_3d_rendered_bedroom_scene_in.png",
+    "box": [
+      1050,
+      650,
+      1350,
+      729
+    ],
+    "interaction": "Walk and listen for creaks",
+    "gameplay": "Footstep texture / location cue",
+    "implementation": "static",
+    "priority": "P2",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-060_honey-wood-floorboards.png"
+  },
+  {
+    "id": "PROP-061",
+    "name": "Doorway into dark corridor",
+    "category": "Set dressing & horror",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1224,
+      0,
+      1670,
+      892
+    ],
+    "interaction": "Open from bedroom at night; peek or step closer",
+    "gameplay": "Horror transition without forcing headset",
+    "implementation": "hinge + nav transition",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-061_doorway-into-dark-corridor.png"
+  },
+  {
+    "id": "PROP-062",
+    "name": "Dark corridor runner",
+    "category": "Set dressing & horror",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1210,
+      578,
+      1391,
+      793
+    ],
+    "interaction": "Walk on; hear changing footsteps",
+    "gameplay": "Directional suspense",
+    "implementation": "static",
+    "priority": "P1",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-062_dark-corridor-runner.png"
+  },
+  {
+    "id": "PROP-063",
+    "name": "Big-eyed grinning creature",
+    "category": "Set dressing & horror",
+    "source": "a_stylized_3d_clay_like_low_poly_cartoon_rendered.png",
+    "box": [
+      1368,
+      298,
+      1520,
+      532
+    ],
+    "interaction": "Look toward it; it vanishes; piano sting",
+    "gameplay": "Optional scare event, no forced camera motion",
+    "implementation": "scripted NPC",
+    "priority": "P0",
+    "reference_type": "scene crop",
+    "image_path": "assets/PROP-063_big-eyed-grinning-creature.png"
+  },
+  {
+    "id": "PROP-064",
+    "name": "Game controller",
+    "category": "Electronics & devices",
+    "source": null,
+    "box": null,
+    "interaction": "Pick up; press buttons; drop on bed",
+    "gameplay": "Optional microgame, dialogue joke and tactile button testing",
+    "implementation": "grab + button input",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-065",
+    "name": "Backpack",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Pick up; open zip; stash objects",
+    "gameplay": "Before-date packing, hidden prop reveal",
+    "implementation": "grab + constrained zipper + inventory",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-066",
+    "name": "Sneakers",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Pick up; pair; equip at closet",
+    "gameplay": "Outfit selection and physical comedy",
+    "implementation": "grab + snap sockets",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-067",
+    "name": "Cap",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Wear, remove, throw, inspect in mirror",
+    "gameplay": "Gender-neutral outfit customization",
+    "implementation": "grab + wearable",
+    "priority": "P2",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-068",
+    "name": "Glasses",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Pick up, wear, clean, inspect",
+    "gameplay": "Date prep and visual gag",
+    "implementation": "grab + wearable",
+    "priority": "P2",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-069",
+    "name": "Skateboard",
+    "category": "Décor & small props",
+    "source": null,
+    "box": null,
+    "interaction": "Pick up, spin wheels, knock against wall",
+    "gameplay": "Humorous physical feedback; environmental character",
+    "implementation": "grab + physics",
+    "priority": "P2",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-070",
+    "name": "Small speaker",
+    "category": "Electronics & devices",
+    "source": null,
+    "box": null,
+    "interaction": "Toggle, change volume, pick up",
+    "gameplay": "Ambient music and dialogue interruptions",
+    "implementation": "grab + UI dial",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-071",
+    "name": "Folded shirts",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Unfold, throw, equip, store in drawer",
+    "gameplay": "Alternative outfits available to any avatar",
+    "implementation": "grabbable cloth proxy + outfit",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-072",
+    "name": "Toiletry pouch",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Unzip, open, put items in/out",
+    "gameplay": "Grooming and pre-date preparation",
+    "implementation": "grab + constrained zipper",
+    "priority": "P1",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  },
+  {
+    "id": "PROP-073",
+    "name": "Wristwatch",
+    "category": "Clothing & personal items",
+    "source": null,
+    "box": null,
+    "interaction": "Wear, tap, check time",
+    "gameplay": "Two-hours-later time cue, anxiety gag",
+    "implementation": "grab + wearable + clock",
+    "priority": "P2",
+    "reference_type": "optional addition — no isolated image",
+    "image_path": null
+  }
+]

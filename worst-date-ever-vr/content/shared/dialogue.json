@@ -10,7 +10,7 @@
       "turns":[
         {"options":[
           {"id":"honest","label":"“Quero conversar. Só estou um pouco nervoso.”","reply":"Ainda bem que você falou. Eu trouxe um livro só pra parecer ocupado. O que você anda lendo?"},
-          {"id":"joke","label":"“Depende. O cardápio conta como livro?”","reply":"Conta, mas só se tiver um bom plot twist na sobremesa. O que prende sua atenção ultimamente?"},
+          {"id":"joke","label":"“Depende. O rótulo da kombucha conta como livro?”","reply":"Conta, mas só se a lista de ingredientes tiver um bom plot twist. O que prende sua atenção ultimamente?"},
           {"id":"brag","label":"“Leio muito. Minha estante ocupa uma parede inteira.”","reply":"Uma parede inteira é bastante cenário. Qual desses livros você realmente releria?"}
         ]},
         {"options":[
@@ -107,11 +107,13 @@
     }
   ],
   "beats": [
+    {"id":"water_spill","personaId":"caio","line":"A garrafa de kombucha tomba na toalha.","cue":"Até a kombucha quis participar da conversa.","prop":"picnic_kombucha","action":"help"},
     {"id":"water_spill","line":"O garçom tentou servir água sem largar a bandeja.","cue":"Opa. A mesa também estava com sede.","prop":"cup","action":"help"},
     {"id":"wrong_order","line":"O garçom trouxe algo que ninguém pediu.","cue":"Tenho quase certeza de que esse prato pertence a outra mesa.","prop":"plate","action":"clarify"},
     {"id":"loud_guest","line":"Um cliente dá uma gargalhada que atravessa o salão.","cue":"Dá pra ouvir a fofoca inteira daqui.","prop":"","action":""},
     {"id":"bathroom_mishap","line":"A porta do banheiro emperra com alguém do lado de dentro.","cue":"Você ouviu um pedido de socorro ou foi a descarga?","prop":"","action":""},
     {"id":"dropped_menu","line":"O cardápio escorrega para o chão.","cue":"Agora é torcer pra que o chão não peça sobremesa.","prop":"menu","action":"grab"},
+    {"id":"dropped_menu","personaId":"caio","line":"O sanduíche escorrega da toalha.","cue":"Se sair do papel, passa a ser lanche das formigas.","prop":"picnic_sandwich","action":"grab"},
     {"id":"awkward_friend","personaId":"caio","line":"Um professor da escola reconhece Caio e vem cumprimentá-lo.","cue":"Ele parece conhecer uma versão do Caio que ainda não apareceu na conversa.","prop":"","action":""},
     {"id":"awkward_friend","personaId":"rafa","line":"Um amigo de Rafa aparece no restaurante e o chama por um apelido antigo.","cue":"O amigo olha para vocês como se tivesse interrompido uma história importante.","prop":"","action":""},
     {"id":"awkward_friend","personaId":"bia","line":"Uma conhecida reconhece Bia das redes sociais e se aproxima da mesa.","cue":"Bia sorri, mas parece tentar lembrar exatamente de onde conhece a pessoa.","prop":"","action":""},

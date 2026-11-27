@@ -1,3 +1,4 @@
+import { candyAtmosphere } from '../candies.mjs';
 import { createNpcSpeech } from './npc-speech.js';
 import { impactClass, sweptContact } from './impact.js';
 import { createNpcClocks } from './npc-clock.js';
@@ -9,13 +10,16 @@ import { createPhysicsWorld, makeKinematic, releaseDynamic } from '../physics-wo
 import layout from '../../content/shared/venue-layout.json';
 import { objectGroup } from '../scene-objects.js';
 import { INTERACTION_STYLE, arcSlots, cardWidth, cardCorners, gazeShowsMenu } from './interaction-arc.mjs';
+import { authoredGrip, heldGripPose, gripSurface } from '../grip-pose.mjs';
+import { blanketPull } from '../asset-registry.mjs';
+import { buildPicnicPark, loadPicnicSpread } from './picnic.js';
 import { EVENT_VISUAL_STYLE, eventArcPlacement, eventCueState } from './event-presentation.mjs';
 import { qteConfig, qteMenuAnchor, qteMenuSlots } from './qte.mjs';
 import { FRIEND_VISIT, friendVisitMotion } from './event-visitor.mjs';
 import { SKILL_UI, actionCategories, availablePhysicalActions, fixedSkillAnchor } from './physical-interactions.mjs';
 import { createPhysicalScene } from './physical-scene.js';
 import { SKILL_TUTORIALS } from './skill-tutorial.mjs';
-import menuCatalog from '../../content/shared/menu-items.json';
+import menuCatalog from '../../content/shared/menu-items.json' with { type: 'json' };
 import { seededRandom } from './event-core.mjs';
 
 const hudFont = '"WDE DM Sans", "Avenir Next", Arial, sans-serif';
@@ -32,15 +36,17 @@ function loadHudFont() {
 }
 
 const themes = {
-  cafe: { wall: 0xc69b79, seat: 0x637f6c, title: 'CAFÉ · FILTRO & PROSA', sky: 0xf2bea2 },
+  picnic: { wall: 0xd0ac83, seat: 0xb26b83, title: 'PIQUENIQUE NO PARQUE', sky: 0xb8d8e3 },
   sushi: { wall: 0x966d76, seat: 0x963d46, title: 'SUSHI · KOI TORTO', sky: 0x5b638a },
   bistro: { wall: 0x998276, seat: 0x6e803f, title: 'BISTRÔ · A MESA É NOSSA', sky: 0x54526e },
   bar: { wall: 0x817492, seat: 0x64557c, title: 'BAR · ÚLTIMO PEDIDO', sky: 0x3d4270 }
 };
 
-export async function createVenue(THREE, { venue, persona, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection, isVr = () => false }) {
+export async function createVenue(THREE, { venue, persona, candy, reducedEffects = () => false, load, camera, bedroomNode, bedroomMaterial, announce, recenter, restart, voice, react, onGesture, viewerPosition, viewerDirection, isVr = () => false }) {
   await loadHudFont();
-  const theme = themes[venue.id];
+  const picnic = venue.sceneVariant === 'picnic';
+  const theme = themes[venue.sceneVariant] ?? themes[venue.id];
+  const spread = picnic ? await loadPicnicSpread() : [];
   const speech = createNpcSpeech(persona.id);
   const group = new THREE.Group();
   group.name = 'date-' + venue.id;
@@ -58,8 +64,8 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   const brass = mat(0xc09059, .45);
   const metal = mat(0x39303a, .6);
   const ceramic = mat(0xf3e2c5, .37);
-  const floor = mat(0x92695b);
-  const boards = bedroomMaterial('Surface-Floorboards-')?.map;
+  const floor = mat(picnic ? 0x7b9c55 : 0x92695b);
+  const boards = !picnic && bedroomMaterial('Surface-Floorboards-')?.map;
   if (boards) { floor.map = boards.clone(); floor.map.repeat.set(4, 5); floor.map.needsUpdate = true; }
   const upholstery = mat(theme.seat);
   upholstery.map = bedroomMaterial('Surface-Weave-')?.map ?? null;
@@ -106,37 +112,49 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   light.shadow.normalBias = .026;
   light.shadow.bias = -.00014;
   lights.add(light);
-  solidBox([11.5, .1, 10], [0, -.05, -3.15], floor);
-  box([11.5, .12, 10], [0, 3.3, -3.15], mat(0x6f555c));
-  box([11.5, 3.3, .18], [0, 1.65, 1.84], wall);
-  for (let i = 0; i <= 20; i++)
-    box([11.4, .002, .012], [0, .006, 1.77 - i * .48], wood);
-  for (const x of [-5.55, 5.55]) {
-    solidBox([.18, 3.3, 10], [x, 1.65, -3.15], wall);
-    box([.24, .18, 10], [x, .1, -3.15], wood);
-    for (const z of [-.8, -3.4, -6.1]) {
-      box([.26, 3.1, .14], [x, 1.57, z], wood);
-      box([.045, .85, 1.16], [x - Math.sign(x) * .1, .59, z + .71], upholstery);
-      box([.05, .058, 1.28], [x - Math.sign(x) * .12, 1.02, z + .71], wood);
+  const lampFill = [];
+  if (picnic) {
+    solidBox([22, .1, 22], [0, -.05, -3.15], floor);
+    buildPicnicPark(THREE, { box, cylinder, sphere, mat, architecture, upholstery, wood });
+  } else {
+    solidBox([11.5, .1, 10], [0, -.05, -3.15], floor);
+    box([11.5, .12, 10], [0, 3.3, -3.15], mat(0x6f555c));
+    box([11.5, 3.3, .18], [0, 1.65, 1.84], wall);
+    for (let i = 0; i <= 20; i++)
+      box([11.4, .002, .012], [0, .006, 1.77 - i * .48], wood);
+    for (const x of [-5.55, 5.55]) {
+      solidBox([.18, 3.3, 10], [x, 1.65, -3.15], wall);
+      box([.24, .18, 10], [x, .1, -3.15], wood);
+      for (const z of [-.8, -3.4, -6.1]) {
+        box([.26, 3.1, .14], [x, 1.57, z], wood);
+        box([.045, .85, 1.16], [x - Math.sign(x) * .1, .59, z + .71], upholstery);
+        box([.05, .058, 1.28], [x - Math.sign(x) * .12, 1.02, z + .71], wood);
+      }
     }
-  }
-  solidBox([11.2, 1.01, .17], [0, .505, -7.9], wood);
-  box([11.2, .53, .17], [0, 3.05, -7.9], wall);
-  const windowLight = new THREE.MeshBasicMaterial({ color: theme.sky });
-  box([11.2, 1.82, .07], [0, 1.93, -7.96], windowLight);
-  for (let x = -5.5; x <= 5.5; x += 1.1)
-    box([.065, 1.91, .18], [x, 1.94, -7.84], wood);
-  for (let i = 0; i < 25; i++) {
-    const x = (i * 2.73) % 10.7 - 5.35;
-    const height = .16 + (i * .567) % .84;
-    box([.16 + (i * .17) % .42, height, .04], [x, 1.02 + height / 2, -7.88],
-      i % 2 ? mat(0x54485d) : mat(0x63536c));
-  }
-  for (let x = -3.8; x <= 3.8; x += 3.8) {
-    box([.035, .7, .035], [x, 2.93, -2.6], metal);
-    cylinder([.39, .14, .39], [x, 2.55, -2.6], brass);
-    cylinder([.33, .015, .33], [x, 2.477, -2.6],
-      new THREE.MeshBasicMaterial({ color: 0xffd38e }));
+    solidBox([11.2, 1.01, .17], [0, .505, -7.9], wood);
+    box([11.2, .53, .17], [0, 3.05, -7.9], wall);
+    const windowLight = new THREE.MeshBasicMaterial({ color: theme.sky });
+    box([11.2, 1.82, .07], [0, 1.93, -7.96], windowLight);
+    for (let x = -5.5; x <= 5.5; x += 1.1)
+      box([.065, 1.91, .18], [x, 1.94, -7.84], wood);
+    for (let i = 0; i < 25; i++) {
+      const x = (i * 2.73) % 10.7 - 5.35;
+      const height = .16 + (i * .567) % .84;
+      box([.16 + (i * .17) % .42, height, .04], [x, 1.02 + height / 2, -7.88],
+        i % 2 ? mat(0x54485d) : mat(0x63536c));
+    }
+    for (let x = -3.8; x <= 3.8; x += 3.8) {
+      box([.035, .7, .035], [x, 2.93, -2.6], metal);
+      cylinder([.39, .14, .39], [x, 2.55, -2.6], brass);
+      const bulb = new THREE.MeshBasicMaterial({ color: 0xffd38e });
+      cylinder([.33, .015, .33], [x, 2.477, -2.6], bulb);
+      if (candy === 'morango') {
+        const spill = new THREE.PointLight(0xf48aa9, .64, 3.6, 2);
+        spill.position.set(x, 2.28, -2.6);
+        lights.add(spill);
+        lampFill.push({ bulb, spill });
+      }
+    }
   }
 
   const door = (x, z, color, rotation = 0) => {
@@ -149,21 +167,25 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     sphere([.038, .038, .038], [.83, 1.04, .062], brass, pivot);
     return pivot;
   };
-  const restroom = door(-5.35, -6.03, 0x695263, Math.PI / 2);
-  const entrance = door(3.72, -7.72, 0x70434b);
+  const restroomYaw = picnic ? 0 : Math.PI / 2;
+  const restroom = picnic ? door(-5.71, -5.55, 0x695263) : door(-5.35, -6.03, 0x695263, restroomYaw);
+  if (picnic) restroom.scale.setScalar(.82);
+  const entrance = picnic ? new THREE.Group() : door(3.72, -7.72, 0x70434b);
   const switchSign = textPlane(THREE, .40, .15, 'WC', 208, 72);
-  switchSign.position.set(-5.18, 2.34, -6.51);
-  switchSign.rotation.y = Math.PI / 2;
+  switchSign.position.set(...(picnic ? [-5.35, 1.80, -5.48] : [-5.18, 2.34, -6.51]));
+  switchSign.rotation.y = restroomYaw;
   group.add(switchSign);
-  const sign = textPlane(THREE, 2.15, .28, theme.title, 1024, 125);
-  sign.position.set(-.15, 2.96, -7.76);
+  const sign = textPlane(THREE, picnic ? 1 : 2.15, .28, picnic ? 'QUIOSQUE' : theme.title, 1024, 125);
+  sign.position.set(...(picnic ? [4.75, 1.23, -6.10] : [-.15, 2.96, -7.76]));
   group.add(sign);
 
-  solidBox([1.32, 1.1, 1.72], [4.76, .55, -3.57], wood);
-  box([1.37, .055, 1.79], [4.76, 1.12, -3.57], ceramic);
-  for (let i = 0; i < 5; i++) {
-    cylinder([.066, .16 + i % 2 * .08, .066], [4.84 + i * .1, 1.23, -3.72], mat(i % 2 ? 0x799075 : 0xae5e45));
-    cylinder([.034, .06, .034], [4.84 + i * .1, 1.35, -3.72], brass);
+  if (!picnic) {
+    solidBox([1.32, 1.1, 1.72], [4.76, .55, -3.57], wood);
+    box([1.37, .055, 1.79], [4.76, 1.12, -3.57], ceramic);
+    for (let i = 0; i < 5; i++) {
+      cylinder([.066, .16 + i % 2 * .08, .066], [4.84 + i * .1, 1.23, -3.72], mat(i % 2 ? 0x799075 : 0xae5e45));
+      cylinder([.034, .06, .034], [4.84 + i * .1, 1.35, -3.72], brass);
+    }
   }
 
   function chair(x, z, yaw, name) {
@@ -179,7 +201,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       box([.05, .53, .047], [px, .65, .20], wood, root);
     }
   }
-  for (const [x, , z] of layout.tables) {
+  for (const [x, , z] of picnic ? [] : layout.tables) {
     solidBox([1.28, .07, 1.02], [x, .75, z], wood);
     cylinder([.11, .72, .11], [x, .36, z], metal);
     cylinder([.31, .035, .31], [x, .024, z], brass);
@@ -190,7 +212,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   }
 
   const seats = Object.fromEntries(layout.seats.map(seat => [seat.id, seat]));
-  for (const { position: [x, , z], yaw, id } of layout.seats) chair(x, z, yaw + Math.PI, id);
+  if (!picnic) for (const { position: [x, , z], yaw, id } of layout.seats) chair(x, z, yaw + Math.PI, id);
 
   if (venue.id === 'sushi') {
     for (let i = 0; i < 11; i++) {
@@ -211,7 +233,9 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   }
 
   const original = { cup: 'wde_78', plate: 'wde_106' };
-  const props = layout.props.map(({ id, position, size }) => {
+  const picnicStations = { cup: [-.40,.11,.40], plate: [.13,.045,-.27], menu: [.59,.043,.16] };
+  const props = layout.props.map(({ id, position: tablePosition, size }) => {
+    const position = picnic ? picnicStations[id] ?? tablePosition : tablePosition;
     const mesh = new THREE.Group();
     if (id === 'menu') {
       tableProps.add(mesh);
@@ -254,6 +278,19 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     return { id, mesh, position, size, body: physicsBox(size, position, id === 'plate' ? .34 : .24) };
   });
 
+  for (const model of spread) {
+    const cloth = model.cloth;
+    const body = new CANNON.Body({ mass: cloth ? 0 : model.mass, position: new CANNON.Vec3(...model.position),
+      linearDamping: .35, angularDamping: .4 });
+    for (const { size, position } of model.shapes)
+      body.addShape(new CANNON.Box(new CANNON.Vec3(...size.map(value => value / 2))), new CANNON.Vec3(...position));
+    body.userData = { ...body.userData, cloth: Boolean(cloth) };
+    world.addBody(body);
+    tableProps.add(model.model);
+    props.push({ ...model, mesh: model.model, body, cloth, pull: 0,
+      bottom: Math.min(...model.shapes.map(shape => shape.position[1] - shape.size[1] / 2)),
+      size: new THREE.Box3().setFromObject(model.model).getSize(new THREE.Vector3()).toArray() });
+  }
   const propsById = Object.fromEntries(props.map(prop => [prop.id, prop]));
   const menuState = { page: 0, held: false };
   const menuProp = propsById.menu;
@@ -413,7 +450,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       if (clip) clips[key] = mixer.clipAction(clip);
     }
     const bones = Object.fromEntries(collectBones(scene).map(bone => [bone.name.replaceAll(/[^a-zA-Z]/g, ''), bone]));
-    return { actor, mixer, clips, bones, isWaiter: index === 5, seatPose: createSeatPose(THREE, actor, bones),
+    return { actor, mixer, clips, bones, isWaiter: index === 5, seatPose: createSeatPose(THREE, actor, bones, picnic && index === 0 ? .12 : undefined),
       animation: createNpcAnimation(THREE, actor, bones) };
   };
   const actors = loaded.slice(0, characterNames.length).map(makeActor);
@@ -704,7 +741,24 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   let renderedTime = 0;
   const hitTarget = new THREE.Vector3();
 
-  function audioCue(kind, source) { announce(kind, source); }
+  function audioCue(kind, source) { announce(kind, source, candyAtmosphere(candy, reducedEffects())); }
+
+  let previousEffects;
+  function updateCandyLighting() {
+    if (!candy) return;
+    const reduced = reducedEffects();
+    if (reduced === previousEffects) return;
+    previousEffects = reduced;
+    const effect = candyAtmosphere(candy, reduced);
+    light.color.setHex(0xffdcc0).lerp(new THREE.Color(0xffb765), .57 * effect.amber)
+      .lerp(new THREE.Color(0xfff4e7), .66 * effect.clarity);
+    light.intensity = 2.1 + .28 * effect.amber + .09 * effect.clarity;
+    for (const { bulb, spill } of lampFill) {
+      bulb.color.setHex(0xffd38e).lerp(new THREE.Color(0xff9bbd), .80 * effect.rose);
+      spill.intensity = .78 * effect.rose;
+    }
+  }
+  updateCandyLighting();
   function tintWorld(amount, settings) {
     if (Math.abs(amount - lastWorldTint) < .005) return;
     lastWorldTint = amount;
@@ -739,6 +793,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
   }
 
   function tick(dt, view) {
+    updateCandyLighting();
     current = view;
     tickSeconds = dt;
     const worldDt = view.worldDelta ?? dt;
@@ -847,7 +902,6 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     actors[2].actor.userData.activity = duties[1].active ? 'eating' : 'seated';
     actors[3].actor.userData.activity = duties[2].active ? 'talking' : 'seated';
     actors[4].actor.userData.activity = !duties[3].active ? 'away' : duties[3].age < 5 || duties[3].age > 12 ? 'walking' : 'seated';
-    actors[5].actor.userData.activity = duties[4].active ? 'serving' : 'waiting';
     const visitorState = friendVisitMotion(beat, t);
     eventVisitor.actor.userData.activity = visitorState.visible ?
       visitorState.arriving || visitorState.leaving && visitorState.progress > 0 ? 'walking' : 'waiting' : 'away';
@@ -941,16 +995,23 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
           (1 - THREE.MathUtils.smoothstep(t - beat.resolvedAt, 3.2, 4.5)) :
         bathroomBeat ? Math.sin(eventAge * 19) * .12 * doorJolt :
           bathroomTime >= 9 && bathroomTime < 11 || bathroomTime >= 14 && bathroomTime < 16 ? -.75 : 0;
-    restroom.rotation.y = Math.PI / 2 + bathroomAngle;
+    restroom.rotation.y = restroomYaw + bathroomAngle;
     const bath = bathroomTime < 6 ? 0 : bathroomTime < 11 ? (bathroomTime - 6) / 5 :
       bathroomTime < 14 ? 1 : Math.max(0, 1 - (bathroomTime - 14) / 5);
     const bathSit = bathroomTime < 6 ? THREE.MathUtils.clamp(6 - bathroomTime, 0, 1) :
       THREE.MathUtils.clamp(bathroomTime - 19, 0, 1);
-    updateActor(actors[1], layout.restroomRoute, bath, (bath > 0 && bath < 1), bathSit, worldDt, seats.restroom_guest.yaw, bathroomTime >= 14);
+    updateActor(actors[1], layout.restroomRoute, bath, (bath > 0 && bath < 1), picnic ? 0 : bathSit,
+      worldDt, seats.restroom_guest.yaw, bathroomTime >= 14);
     actors[1].actor.visible = bath !== 1;
     for (const [index, name] of [[2, 'chat_near'], [3, 'chat_far']]) {
       const seat = seats[name];
-      updateActor(actors[index], [seat.position], 0, false, 1, worldDt, seat.yaw);
+      if (picnic) {
+        const direction = index === 2 ? 1 : -1;
+        const progress = (t + index * 6) % 21 / 21;
+        updateActor(actors[index], [[-6 * direction, 0, -3.18], [6 * direction, 0, -3.54]],
+          progress, true, 0, worldDt, seat.yaw);
+        actors[index].actor.userData.activity = 'walking';
+      } else updateActor(actors[index], [seat.position], 0, false, 1, worldDt, seat.yaw);
       if (duties[index - 1].active && beat?.phase !== 'animate' && beat?.phase !== 'choice_window')
         actors[index].animation.gesture(index === 2 ? 'sip' : 'nod', duties[index-1].age);
     }
@@ -959,7 +1020,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     const guest = entry < 5 ? entry / 5 : entry > 12 ? Math.max(0, 1 - (entry - 12) / 6) : 1;
     const guestSit = THREE.MathUtils.clamp(Math.min(entry - 5, 12 - entry), 0, 1);
     actors[4].actor.visible = entryDuty.active;
-    if (entryDuty.active) updateActor(actors[4], layout.entranceRoute, guest, guest > 0 && guest < 1, guestSit, worldDt,
+    if (entryDuty.active) updateActor(actors[4], layout.entranceRoute, guest, guest > 0 && guest < 1, picnic ? 0 : guestSit, worldDt,
       seats.entry_guest.yaw, entry > 12);
     eventVisitor.actor.visible = visitorState.visible;
     if (visitorState.visible) {
@@ -986,6 +1047,8 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     const servingProgress = THREE.MathUtils.smoothstep(eventAge, .1, 2.7);
     const servingRoute = waiterAtDate ? [waiterEventStart.toArray(), [-1.15,0,-.64]] : layout.waiterRoute;
     const tableMotion = updateTableService(t, worldDt, view.orders);
+    server.actor.visible = !picnic || Boolean(tableMotion) || waiterAtDate;
+    server.actor.userData.activity = tableMotion || waiterAtDate ? 'serving' : server.actor.visible ? 'waiting' : 'away';
     const carryingOrder = tableMotion?.phase === 'returning' || tableMotion?.phase === 'presenting' && !tableMotion.delivered;
     const eventTray = waiterAtDate && eventVisual === 'water_spill';
     tray.visible = carryingOrder || eventTray;
@@ -1032,14 +1095,19 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     if (beat && (beat.phase === 'animate' || qteActive && eventVisual !== 'water_spill') &&
       lastBeat !== beat.definition.id) {
       lastBeat = beat.definition.id;
-      const emitter = eventVisual === 'loud_guest' ? actors[2].actor.position :
+      const emitter = picnic && eventVisual === 'water_spill' ? propsById.picnic_kombucha.mesh.position :
+        eventVisual === 'loud_guest' ? actors[2].actor.position :
         eventVisual === 'bathroom_mishap' ? restroom.position :
           eventVisual === 'awkward_friend' ? eventVisitor.actor.position : actors[5].actor.position;
       audioCue(eventVisual, emitter);
       if (beat.presentation.prop) {
         const prop = propsById[beat.presentation.prop];
-        resetProp(prop);
-        if (!prop.owner && eventVisual === 'dropped_menu') prop.body.velocity.set(0, .17, 1.27);
+        if (prop) {
+          resetProp(prop);
+          if (!prop.owner && eventVisual === 'dropped_menu') prop.body.velocity.set(0, .17, 1.27);
+          if (picnic && !prop.owner && eventVisual === 'water_spill')
+            prop.body.angularVelocity.set(0, 0, 7);
+        }
       }
     }
     if (eventVisual === 'dropped_menu' && beat.phase === 'resolve' && beat.choiceId === 'grab' &&
@@ -1054,13 +1122,17 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       splash[i].visible = water && (flying || eventAge >= 3.45);
       const flight = THREE.MathUtils.clamp((eventAge - 2 - i * .055) / .75, 0, 1);
       const angle = i * 2.4;
-      splash[i].position.set(-.32 + Math.cos(angle) * (.035 + flight * .14),
-        flying ? .82 + Math.sin(Math.PI * flight) * (.09 + i * .008) : .793,
-        (beat?.choiceId === 'protect' ? .08 : -.25) + Math.sin(angle) * (.035 + flight * .15));
+      splash[i].position.set((picnic ? .25 : -.32) + Math.cos(angle) * (.035 + flight * .14),
+        (picnic ? .031 : .793) + (flying ? .027 + Math.sin(Math.PI * flight) * (.09 + i * .008) : 0),
+        (picnic ? .27 : beat?.choiceId === 'protect' ? .08 : -.25) + Math.sin(angle) * (.035 + flight * .15));
     }
-    if (renderedTime < 1 && t >= 1) audioCue('entrance', date.actor.position);
+    if (renderedTime < 1 && t >= 1) {
+      audioCue('entrance', date.actor.position);
+      if (candy === 'hortela') audioCue('mint', date.actor.position);
+    }
     if (moving && Math.floor(t * 2) !== Math.floor(renderedTime * 2)) audioCue('step', date.actor.position);
-    if (Math.floor(t / 6) > Math.floor(renderedTime / 6)) audioCue('ambience', actors[5].actor.position);
+    if (Math.floor(t / 6) > Math.floor(renderedTime / 6))
+      audioCue('ambience', actors[picnic ? 2 : 5].actor.position);
     renderedTime = t;
 
     for (const { character, body } of ambientTargets) {
@@ -1077,6 +1149,10 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     }
     world.step(1 / 90, worldDt, 5);
     for (const prop of props) {
+      if (prop.cloth) {
+        const target = prop.owner ? prop.pull : 0;
+        prop.setPull(prop.edge, target, Math.min(1, dt * 12), prop.clothAnchor);
+      }
       if (prop.body.position.y < -.22 || Math.abs(prop.body.position.x) > 6 || prop.body.position.z > 2.2) resetProp(prop);
       prop.mesh.position.copy(prop.body.position);
       prop.mesh.quaternion.copy(prop.body.quaternion);
@@ -1384,14 +1460,20 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     return state;
   }
 
-  function pickup(id, prop, point, rotation, distance) {
+  function pickup(id, prop, point, rotation, distance, from = point) {
     if (!prop || prop.owner || holds.has(id) || prop === menuProp && menuReturning) return false;
     prop.owner = id;
     prop.releasedAt = null;
     const offset = new THREE.Vector3().copy(prop.body.position).sub(point).applyQuaternion(rotation.clone().invert());
     const q = rotation.clone().invert().multiply(new THREE.Quaternion().copy(prop.body.quaternion));
-    holds.set(id, { prop, offset, q, distance });
-    makeKinematic(prop.body);
+    const side = id.endsWith('left') ? 'left' : 'right';
+    const grip = prop.grip_zones && authoredGrip(THREE, prop.body, prop.grip_zones, point, from, rotation, side);
+    holds.set(id, { prop, offset, q, distance, grip, start: point.clone() });
+    if (prop.cloth) {
+      prop.pull = 0;
+      prop.edge = grip?.zone;
+      prop.clothAnchor = grip?.anchor;
+    } else makeKinematic(prop.body);
     if (prop.id === 'menu') {
       menuState.held = true;
       prop.body.velocity.setZero();
@@ -1410,7 +1492,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     return true;
   }
 
-  function press(id, ray, rotation, directPoint, grab) {
+  function press(id, ray, rotation, directPoint, grab, wrist = ray.ray.origin) {
     if (failureScreen.visible) {
       if (failureScreen.ready && !grab) restart();
       return true;
@@ -1447,21 +1529,30 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       return true;
     }
     const eligible = props.filter(prop => !prop.owner);
+    const hit = ray.intersectObjects(eligible.map(prop => prop.mesh), true)[0];
+    if (!grab && hit && hit.distance <= 3.8) {
+      const basket = propsById.picnic_basket;
+      if (basket?.lids.some(lid => lid === hit.object || lid.children.includes(hit.object))) {
+        basket.open = !basket.open;
+        basket.setOpen(Number(basket.open));
+        return true;
+      }
+    }
     if (directPoint) {
       let nearest, best = Infinity;
       for (const prop of eligible) {
-        const distance = directPoint.distanceTo(prop.mesh.position);
-        if (distance >= best || distance >= Math.max(...prop.size) / 2 + .07) continue;
+        const distance = prop.grip_zones ? gripSurface(THREE, prop.body)(directPoint) :
+          directPoint.distanceTo(prop.mesh.position) - Math.max(...prop.size) / 2;
+        if (distance >= best || distance >= .07) continue;
         best = distance;
         nearest = prop;
       }
-      if (pickup(id, nearest, directPoint, rotation, 0)) return true;
+      if (pickup(id, nearest, directPoint, rotation, 0, wrist)) return true;
     }
-    const hit = ray.intersectObjects(eligible.map(prop => prop.mesh), true)[0];
     if (!hit || hit.distance > 3.8) return false;
     let object = hit.object;
     while (object.parent !== tableProps) object = object.parent;
-    return pickup(id, eligible.find(prop => prop.mesh === object), hit.point, rotation, hit.distance);
+    return pickup(id, eligible.find(prop => prop.mesh === object), hit.point, rotation, hit.distance, ray.ray.origin);
   }
 
   function focus(ray) {
@@ -1544,15 +1635,19 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       held.menuLastX = horizontal;
       return;
     }
-    const target = (distance ? ray.ray.at(distance, new THREE.Vector3()) : directPoint.clone())
-      .add(offset.clone().applyQuaternion(rotation));
+    const point = distance ? ray.ray.at(distance, new THREE.Vector3()) : directPoint.clone();
+    if (prop.cloth) {
+      prop.pull = blanketPull(THREE, prop.body, held.grip, point.sub(held.start));
+      return;
+    }
+    const target = point.add(offset.clone().applyQuaternion(rotation));
     const old = new THREE.Vector3().copy(prop.body.position);
     // Keep the plate and mug above the solid table while they are held.
     for (const { position: [x, y, z], size: [w, h, depth] } of solids) {
       if (Math.abs(target.x - x) < w / 2 + prop.size[0] / 2 &&
         Math.abs(target.z - z) < depth / 2 + prop.size[2] / 2 &&
-        old.y >= y + h / 2 && target.y < y + h / 2 + prop.size[1] / 2)
-        target.y = y + h / 2 + prop.size[1] / 2 + .001;
+        old.y >= y + h / 2 && target.y < y + h / 2 - (prop.bottom ?? -prop.size[1] / 2))
+        target.y = y + h / 2 - (prop.bottom ?? -prop.size[1] / 2) + .001;
     }
     prop.body.position.copy(target);
     const velocity = target.clone().sub(old).multiplyScalar(1 / Math.max(.008, tickSeconds)).clampLength(0, 7);
@@ -1575,6 +1670,7 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
       return;
     }
     held.prop.owner = null;
+    if (held.prop.cloth) return;
     held.prop.releasedAt = throwIt ? current?.time : null;
     releaseDynamic(held.prop.body);
     if (throwIt && held.speed) held.prop.body.velocity.set(held.speed.x, held.speed.y, held.speed.z);
@@ -1645,7 +1741,13 @@ export async function createVenue(THREE, { venue, persona, load, camera, bedroom
     skillConfirm: () => physicalScene.confirm(), skillHelp: () => physicalScene.showTutorial(),
     skillPlaying: () => physicalScene.state()?.stage === 'playing',
     cancelInteraction: () => physicalScene.cancel(), isInteracting: () => Boolean(physicalScene.state()),
-    heldBody: id => holds.get(id)?.prop.body,
+    heldPose(id, pose) {
+      const hold = holds.get(id);
+      if (!hold || hold.distance) return pose;
+      const { prop, grip } = hold;
+      return heldGripPose(THREE, prop.body, prop.cloth ? prop.displaceGrip(grip) : grip, pose);
+    },
+    seatHeight: picnic ? .96 : 1.43,
     player: new THREE.Vector3(...seats.player_seat.position),
     dispose() {
       speech.stop();

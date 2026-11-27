@@ -119,11 +119,14 @@ export function createAvatar(THREE, root, load) {
     avatar.scale.setScalar(THREE.MathUtils.clamp(headPosition.y / 1.59, .75, 1.28));
     avatar.updateWorldMatrix(true, true);
     if (current.skull) current.skull.rotateX(THREE.MathUtils.clamp(eyeVector.y, -.65, .65) * .65);
+    const fingertips = {};
     for (const [index, side] of ['left','right'].entries()) {
       const pose = grips[side];
       bendArm(current.arms[index], pose?.position);
-      current.hands[index]?.update(pose, showHands);
+      const visible = showHands && pose && headPosition.distanceToSquared(pose.position) >= .13 ** 2;
+      fingertips[side] = current.hands[index]?.update(pose, visible);
     }
+    return fingertips;
   }
 
   function setImmersive(enabled) {

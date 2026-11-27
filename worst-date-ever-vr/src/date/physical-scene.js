@@ -2,7 +2,7 @@ import { createPhysicalChallenge, physicalSocialResult } from './physical-intera
 import { createMinigameVisuals } from './minigame-visuals.js';
 import { markTutorialSeen, tutorialSeen } from './skill-tutorial.mjs';
 import { makeKinematic, releaseDynamic } from '../physics-world.mjs';
-import menuCatalog from '../../content/shared/menu-items.json';
+import menuCatalog from '../../content/shared/menu-items.json' with { type: 'json' };
 import { createMenuFood } from './menu-food.js';
 
 const smooth = (THREE, x, a, b) => THREE.MathUtils.smoothstep(x, a, b);

@@ -70,6 +70,33 @@ export function hitTestTapTargets(x, y, targets) {
   return null;
 }
 
+// Button bounds and anchors are in screen pixels. Keep the current target
+// through a small overlap so tracking jitter cannot alternate adjacent buttons.
+export function guidedPhoneButton(point, buttons, previous = -1) {
+  const distance = button => Math.hypot(
+    Math.max(button.x - point.x, point.x - button.x - button.w, 0),
+    Math.max(button.y - point.y, point.y - button.y - button.h, 0));
+  if (buttons[previous] && distance(buttons[previous]) <= 20) return previous;
+  let selected = -1, closest = 12;
+  for (const [i, button] of buttons.entries()) {
+    const gap = distance(button);
+    if (gap < closest) {
+      selected = i;
+      closest = gap;
+    }
+  }
+  return selected;
+}
+
+export function phonePokeCrossing(before, at, advance) {
+  const depth = .014;
+  const travel = before.z - at.z;
+  if (before.z < depth || at.z > depth || at.z < -.065 || travel <= 0 ||
+      advance < travel * .25 || advance <= 0) return null;
+  const mix = (before.z - depth) / travel;
+  return { x: before.x + (at.x - before.x) * mix, y: before.y + (at.y - before.y) * mix };
+}
+
 export function isPointInsideBox(point, size, margin = 0) {
   return (
     Math.abs(point.x) <= size.width / 2 + margin &&

@@ -1,0 +1,46 @@
+{
+  "schema_version": "hand-qa-source/1",
+  "asset_id": "floor-cushion",
+  "manifest_reference": "assets/tripo/references/wde-02-picnic-core/03-floor-cushion.png",
+  "source": {
+    "provider": "Grab3D",
+    "page": "https://grab3d.com/models/furniture/pouf/",
+    "slug": "pouf",
+    "category": "furniture",
+    "license": "CC0-1.0",
+    "download_url": "https://grab3d.com/dl/pouf/pouf.glb",
+    "license_url": "https://grab3d.com/dl/pouf/LICENSE.txt",
+    "manifest_url": "https://grab3d.com/dl/pouf/manifest.json"
+  },
+  "files": {
+    "source_glb": {
+      "path": "assets/hand-qa/sources/floor-cushion/pouf.glb",
+      "sha256": "b668ae4a8c8c75947bc1548204a002d1dfb2bc90e772e377d0d9c83825347854",
+      "bytes": 713752
+    },
+    "license": {
+      "path": "assets/hand-qa/sources/floor-cushion/LICENSE.txt",
+      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
+      "bytes": 760
+    },
+    "publisher_manifest": {
+      "path": "assets/hand-qa/sources/floor-cushion/publisher-manifest.json",
+      "sha256": "5435adda30beabffdcc4d972480451a0e9172251909263320b3a9c301aeadd39",
+      "bytes": 1302
+    }
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/floor-cushion.glb",
+    "sha256": "b668ae4a8c8c75947bc1548204a002d1dfb2bc90e772e377d0d9c83825347854",
+    "bytes": 713752,
+    "adapted": false
+  },
+  "publisher": {
+    "triangles": 18416,
+    "texture_px": 2048,
+    "dimensions_m": "0.525 x 0.518 x 0.400",
+    "real_size": "knitted pouf / floor ottoman, diameter 0.52 m, height 0.40 m",
+    "notes": "soft rounded cylinder with chunky knit ribs with stitch relief in pink, sunken top centre with a fabric button, flat cream base rim; no moving parts"
+  },
+  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+}

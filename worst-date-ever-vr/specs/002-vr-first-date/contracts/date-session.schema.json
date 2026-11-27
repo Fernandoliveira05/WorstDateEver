@@ -15,6 +15,9 @@
     "relationship"
   ],
   "properties": {
+    "candy": {
+      "enum": [null, "pacoca", "tamarindo", "morango", "hortela"]
+    },
     "schemaVersion": {
       "const": 1
     },

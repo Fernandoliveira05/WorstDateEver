@@ -1,0 +1,46 @@
+{
+  "schema_version": "hand-qa-source/1",
+  "asset_id": "cake-slice",
+  "manifest_reference": "assets/tripo/references/wde-04-bistro-candidates/09-cake-slice.png",
+  "source": {
+    "provider": "Grab3D",
+    "page": "https://grab3d.com/models/food/cake-slice/",
+    "slug": "cake-slice",
+    "category": "food",
+    "license": "CC0-1.0",
+    "download_url": "https://grab3d.com/dl/cake-slice/cake-slice.glb",
+    "license_url": "https://grab3d.com/dl/cake-slice/LICENSE.txt",
+    "manifest_url": "https://grab3d.com/dl/cake-slice/manifest.json"
+  },
+  "files": {
+    "source_glb": {
+      "path": "assets/hand-qa/sources/cake-slice/cake-slice.glb",
+      "sha256": "421f6555c4a6ee9cf8df6dd4ac6510e366116f9e4b51278545c9fa0a91dcf893",
+      "bytes": 934776
+    },
+    "license": {
+      "path": "assets/hand-qa/sources/cake-slice/LICENSE.txt",
+      "sha256": "01908a56d6cada52704b20c5094c2aa16c9d8be6f124349c986764067abfd921",
+      "bytes": 760
+    },
+    "publisher_manifest": {
+      "path": "assets/hand-qa/sources/cake-slice/publisher-manifest.json",
+      "sha256": "686ed4c8b3cad468614a9b7ca82586133f34394d85ee8a4ec63e5f4a09fa6889",
+      "bytes": 1350
+    }
+  },
+  "candidate": {
+    "path": "assets/hand-qa/candidates/cake-slice.glb",
+    "sha256": "421f6555c4a6ee9cf8df6dd4ac6510e366116f9e4b51278545c9fa0a91dcf893",
+    "bytes": 934776,
+    "adapted": false
+  },
+  "publisher": {
+    "triangles": 8908,
+    "texture_px": 2048,
+    "dimensions_m": "0.196 x 0.193 x 0.133",
+    "real_size": "slice of layer cake on a dessert plate, approx. 20 x 19 x 13 cm",
+    "notes": "three light sponge layers, two cream layers and cherry jam, pink buttercream top with a cream rosette and a strawberry; white plate with mint rim and a cake fork"
+  },
+  "note": "Downloaded CC0 source; staged as a hand-QA benchmark candidate. Not a Tripo output and not production-approved."
+}

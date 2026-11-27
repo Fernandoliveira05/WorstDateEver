@@ -1,3 +1,4 @@
+import { candyAtmosphere } from './candies.mjs';
 import { Reflector } from 'three/addons/objects/Reflector.js';
 
 function meshOf(object) {
@@ -14,6 +15,10 @@ export function createScenery(THREE, root, data, node, loadModel) {
   let clock = 0;
   let frame = 0;
   let effectsReduced = false;
+  let candy;
+  const amberTint = new THREE.Color('#ffc388');
+  const roseTint = new THREE.Color('#f1aac9');
+  const clearTint = new THREE.Color('#d9ebfb');
 
   const ambient = new THREE.HemisphereLight(0xffe5c8, 0x766778, 1.3);
   root.add(ambient);
@@ -206,12 +211,13 @@ export function createScenery(THREE, root, data, node, loadModel) {
       reflected.layers.enable(26);
       return reflected;
     };
-    let lastFrame = -1;
+    let lastFrame = -1, lastCamera;
     reflection.onBeforeRender = function (renderer, sceneGraph, camera) {
       // Reflector changes the active framebuffer and viewport. Keep that
       // nested render outside the headset's stereo render pass.
-      if (renderer.xr.isPresenting || frame === lastFrame) return;
+      if (renderer.xr.isPresenting || (frame === lastFrame && camera === lastCamera)) return;
       lastFrame = frame;
+      lastCamera = camera;
       const { autoUpdate, needsUpdate } = renderer.shadowMap;
       renderer.shadowMap.autoUpdate = false;
       renderer.shadowMap.needsUpdate = false;
@@ -251,10 +257,18 @@ export function createScenery(THREE, root, data, node, loadModel) {
     lamps: { rear: car.rear.flatMap(id => colorMeshes(node(id))), front: car.front.flatMap(id => colorMeshes(node(id))) }
   }));
   const signals = data.signals.map(signal => signal.flatMap(id => colorMeshes(node(id))));
+  const street = root.getObjectByName('Neighborhood meshes');
+  const exterior = root.getObjectByName('Exterior effects');
+  const streetPeople = new THREE.Group();
+  streetPeople.name = 'Street pedestrians';
+  root.add(streetPeople);
+  function setCorridor(active) {
+    for (const part of [street, exterior, streetPeople]) if (part) part.visible = !active;
+  }
   const walkers = data.walkers.map(def => {
     const object = new THREE.Group();
     object.name = def.name;
-    root.add(object);
+    streetPeople.add(object);
     object.visible = false;
     const pedestrian = { ...def, path: route(THREE, def.route, false), object };
     loadModel(`Characters/${def.model}`).then(({ scene: model, animations }) => {
@@ -290,8 +304,11 @@ export function createScenery(THREE, root, data, node, loadModel) {
       material.uniforms.hour.value = time;
       material.uniforms.strength.value = reduced ? .37 : 1;
     }
-    ambient.color.copy(night ? moonlight : day ? daylight : afternoon);
-    ambient.intensity = night ? .56 : day ? 1.64 : 1.45;
+    const effect = candyAtmosphere(candy, reduced);
+    ambient.color.copy(night ? moonlight : day ? daylight : afternoon)
+      .lerp(amberTint, effect.amber * .29).lerp(roseTint, effect.rose * .22)
+      .lerp(clearTint, effect.clarity * .27);
+    ambient.intensity = (night ? .56 : day ? 1.64 : 1.45) + effect.amber * .10;
     for (const { light, def } of lights) {
       if (def.night) light.visible = night;
       if (def.name === 'Sol pela janela') {
@@ -363,10 +380,11 @@ export function createScenery(THREE, root, data, node, loadModel) {
 
   setTime(0, false);
   return {
-    tick, setTime, setImmersive, cars, walkers,
-    toggleLamp() {
-      const lamp = lightByName.get('Abajur');
-      if (lamp) lamp.visible = !lamp.visible;
+    tick, setTime, setImmersive, setCorridor, cars, walkers,
+    setCandy(next) {
+      if (candy === next) return;
+      candy = next;
+      setTime(time, effectsReduced);
     },
     setAftermath(active) {
       lightByName.get('Luz ambiente fria')?.color.set(active && !effectsReduced ? '#aa5689' : '#b5c6dc');

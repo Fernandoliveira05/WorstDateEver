@@ -1,0 +1,47 @@
+{
+ "slug": "table-lamp",
+ "triangles": 10220,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "table-lamp.glb",
+   "bytes": 994120
+  },
+  "blend": {
+   "name": "table-lamp.blend",
+   "bytes": 1007678
+  },
+  "fbx": {
+   "name": "table-lamp.fbx",
+   "bytes": 1704060
+  },
+  "obj": {
+   "name": "table-lamp-obj.zip",
+   "bytes": 1151170
+  },
+  "usdz": {
+   "name": "table-lamp.usdz",
+   "bytes": 1596707
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.348 x 0.627 x 0.450",
+  "triangles": 10220,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "set": "Cozy Home Kit",
+  "real_size": "table lamp, 0.45 m high, shade 0.34 m diameter, ceramic base 0.17 m",
+  "notes": "bulb is a separate unbaked emissive mesh; cream fabric shade with coral piping and visible inside; coral textile cord with inline switch"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

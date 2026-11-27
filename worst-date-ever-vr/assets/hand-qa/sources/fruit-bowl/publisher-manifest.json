@@ -1,0 +1,47 @@
+{
+ "slug": "cherry-bowl",
+ "triangles": 15984,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "cherry-bowl.glb",
+   "bytes": 1079188
+  },
+  "blend": {
+   "name": "cherry-bowl.blend",
+   "bytes": 1187388
+  },
+  "fbx": {
+   "name": "cherry-bowl.fbx",
+   "bytes": 1960156
+  },
+  "obj": {
+   "name": "cherry-bowl-obj.zip",
+   "bytes": 1140481
+  },
+  "usdz": {
+   "name": "cherry-bowl.usdz",
+   "bytes": 1712369
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.138 x 0.175 x 0.124",
+  "triangles": 15984,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-25",
+  "set": "Cozy Fruit & Vegetables Kit",
+  "real_size": "bowl of cherries, approx. 14 x 17 x 12 cm, bowl 14 cm wide, each cherry 2.3 cm",
+  "notes": "shallow mint glazed ceramic bowl with a light rim heaped with glossy deep red cherries (heart shaped fruit, stem dimple, fine side seam) on curved single stems, two cherry leaves on top, two cherries lying in front with their stems resting on the table. No text."
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

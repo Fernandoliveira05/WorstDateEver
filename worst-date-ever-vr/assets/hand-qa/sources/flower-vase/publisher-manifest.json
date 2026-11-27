@@ -1,0 +1,55 @@
+{
+ "slug": "vase",
+ "triangles": 27704,
+ "texture_px": 2048,
+ "triangles_light": 13852,
+ "texture_px_light": 1024,
+ "files": {
+  "glb": {
+   "name": "vase.glb",
+   "bytes": 2150132
+  },
+  "blend": {
+   "name": "vase.blend",
+   "bytes": 2313838
+  },
+  "fbx": {
+   "name": "vase.fbx",
+   "bytes": 3887004
+  },
+  "obj": {
+   "name": "vase-obj.zip",
+   "bytes": 2582029
+  },
+  "usdz": {
+   "name": "vase.usdz",
+   "bytes": 3473752
+  },
+  "glb_light": {
+   "name": "vase-light.glb",
+   "bytes": 959816
+  },
+  "fbx_light": {
+   "name": "vase-light.fbx",
+   "bytes": 2009644
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.243 x 0.216 x 0.494",
+  "triangles": 27704,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-09-26",
+  "set": "Cozy Home Kit",
+  "real_size": "ceramic vase 14.6 cm wide, 25 cm tall; with flowers about 45 cm tall",
+  "notes": "wheel-thrown vase shape with sky-blue glaze and unglazed foot ring; bouquet of 3 tulips and 2 daisies (merged with the vase into one baked mesh; stems end inside the hollow neck)"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}

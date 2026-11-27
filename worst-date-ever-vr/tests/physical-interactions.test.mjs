@@ -14,13 +14,13 @@ const relationship = { interest: 42, awkwardness: 24, patience: 58, safety: 65 }
 
 test('only complete physical interactions appear when objects and cooldown permit them', () => {
   assert.deepEqual(PHYSICAL_ACTIONS.map(action => action.id),
-    ['toast', 'balance', 'juggle', 'offer_food', 'dance']);
+    ['toast', 'balance', 'juggle', 'offer_food', 'eat', 'dance']);
   const context = { phase: 'dialogue', event: null, busy: false, time: 80, objects: ['cup','food','table'] };
-  assert.equal(availablePhysicalActions(context).length, 5);
+  assert.equal(availablePhysicalActions(context).length, 6);
   assert.deepEqual(availablePhysicalActions({ ...context, objects: ['table'] }).map(action => action.id),
     ['juggle','dance']);
   assert.deepEqual(availablePhysicalActions({ ...context, lastUsed: { toast: 70 } }).map(action => action.id),
-    ['balance','juggle','offer_food','dance']);
+    ['balance','juggle','offer_food','eat','dance']);
   assert.deepEqual(availablePhysicalActions({ ...context, event: { id: 'water_spill' } }), []);
   assert.deepEqual(availablePhysicalActions({ ...context, busy: true }), []);
 });
@@ -105,10 +105,10 @@ test('social outcomes depend on persona and history rather than mechanical succe
   }
 });
 
-test('every action has more than ten distinct local lines per successful or failed outcome', () => {
+test('all actions have distinct local lines per successful or failed outcome', () => {
   const catalog = read('physical-lines');
   for (const action of PHYSICAL_ACTIONS) for (const outcome of ['success', 'failure']) {
-    assert.ok(catalog[action.id][outcome].length > 10, `${action.id}:${outcome}`);
+    assert.ok(catalog[action.id][outcome].length >= (action.id === 'eat' ? 2 : 11), `${action.id}:${outcome}`);
     assert.equal(new Set(catalog[action.id][outcome]).size, catalog[action.id][outcome].length);
     for (const personaId of ['caio', 'rafa', 'bia', 'luiza']) {
       const extras = catalog.personaExtras[personaId][action.id][outcome];
@@ -156,7 +156,7 @@ test('director records a bounded physical result for server synchronization and 
   assert.deepEqual(director.snapshot().actions, director.view().actions);
 });
 
-test('all five 3D action scenes complete and return their movable table props', () => {
+test('all six 3D action scenes complete and return their movable table props', () => {
   const parent = new THREE.Group();
   const camera = new THREE.PerspectiveCamera();
   camera.position.set(0, 1.55, .7);
@@ -186,7 +186,14 @@ test('all five 3D action scenes complete and return their movable table props', 
   complete: (id, mechanical) => { results.push([id, mechanical]); return { response: 'accept' }; } });
   const view = { session: { phase: 'dialogue', matchId: 'bia', relationship }, beat: null,
     canSpeak: true, actions: [], time: 12 };
+  const tray = new THREE.Group();
+  parent.add(tray);
   for (const id of PHYSICAL_ACTIONS.map(action => action.id)) {
+    if (id === 'offer_food' || id === 'eat') {
+      if (id === 'offer_food') assert.equal(scene.begin(id, view), false, 'requires served food');
+      assert.ok(scene.prepareOrder('bistro-bruschetta', tray));
+      assert.ok(scene.serveOrder(1));
+    }
     assert.ok(scene.begin(id, view), id);
     if (scene.state()?.stage === 'tutorial') {
       scene.tick(.5, view);

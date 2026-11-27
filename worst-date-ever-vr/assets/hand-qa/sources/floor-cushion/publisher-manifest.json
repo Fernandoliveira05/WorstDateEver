@@ -1,0 +1,47 @@
+{
+ "slug": "pouf",
+ "triangles": 18416,
+ "texture_px": 2048,
+ "triangles_light": null,
+ "texture_px_light": null,
+ "files": {
+  "glb": {
+   "name": "pouf.glb",
+   "bytes": 713752
+  },
+  "blend": {
+   "name": "pouf.blend",
+   "bytes": 800514
+  },
+  "fbx": {
+   "name": "pouf.fbx",
+   "bytes": 1402444
+  },
+  "obj": {
+   "name": "pouf-obj.zip",
+   "bytes": 485465
+  },
+  "usdz": {
+   "name": "pouf.usdz",
+   "bytes": 1254575
+  }
+ },
+ "extras": {
+  "license": "CC0-1.0",
+  "source": "grab3d.com",
+  "dimensions_m": "0.525 x 0.518 x 0.400",
+  "triangles": 18416,
+  "textures": "PBR 2048px: base color, roughness, metallic, normal (baked)",
+  "generator": "Created by grab3d",
+  "created": "2026-10-07",
+  "real_size": "knitted pouf / floor ottoman, diameter 0.52 m, height 0.40 m",
+  "notes": "soft rounded cylinder with chunky knit ribs with stitch relief in pink, sunken top centre with a fabric button, flat cream base rim; no moving parts",
+  "set": "Cozy Interior Kit"
+ },
+ "origin": {
+  "method": "procedural",
+  "detail": "Built procedurally with Blender scripts. The scripts were written with the help of an AI coding assistant. No generative AI model produced the geometry or textures directly.",
+  "ai_content": false,
+  "ai_assisted_code": true
+ }
+}
